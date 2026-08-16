@@ -25,7 +25,7 @@ def rank(u):
   except Exception as e:print(s,e)
  def clean(x):
   x=dict(x);x.pop("r20",None);x.pop("r60",None);return x
- return {"short":[clean(x) for x in sorted(a,key=lambda x:x["score"],reverse=True)[:5]],"medium":[clean(x) for x in sorted(a,key=lambda x:x["r60"]*.45+x["score"]*.55,reverse=True)[:5]],"long":[clean(x) for x in sorted(a,key=lambda x:x["relative"]*.35+x["trend"]*.35+x["risk"]*.30,reverse=True)[:5]]}
+ return {"short":[clean(x) for x in sorted(a,key=lambda x:x["score"],reverse=True)[:10]],"medium":[clean(x) for x in sorted(a,key=lambda x:x["r60"]*.45+x["score"]*.55,reverse=True)[:10]],"long":[clean(x) for x in sorted(a,key=lambda x:x["relative"]*.35+x["trend"]*.35+x["risk"]*.30,reverse=True)[:10]]}
 out={"updated_at":datetime.now(JST).strftime("%Y-%m-%d %H:%M JST"),"japan":rank(JP),"usa":rank(US)}
 (R/"tenx_data.json").write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding="utf-8")
 try:h=json.loads((R/"tenx_history.json").read_text())
@@ -35,4 +35,4 @@ for m in ("japan","usa"):
  for q in ("short","medium","long"):
   for x in out[m][q]:
    if (today,m,q,x["code"]) not in seen:h.append({"date":today,"market":m,"horizon":q,"code":x["code"],"name":x["name"],"buy_price":x["price"],"shares":100})
-(R/"tenx_history.json").write_text(json.dumps(h[-900:],ensure_ascii=False,indent=2),encoding="utf-8")
+(R/"tenx_history.json").write_text(json.dumps(h[-1800:],ensure_ascii=False,indent=2),encoding="utf-8")

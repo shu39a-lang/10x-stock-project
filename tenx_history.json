@@ -268,5 +268,275 @@
     "name": "Netflix",
     "buy_price": 78.16,
     "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6758",
+    "name": "ソニーグループ",
+    "buy_price": 3912.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "5803",
+    "name": "フジクラ",
+    "buy_price": 5665.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7013",
+    "name": "IHI",
+    "buy_price": 3028.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "8306",
+    "name": "三菱UFJ FG",
+    "buy_price": 3686.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7203",
+    "name": "トヨタ自動車",
+    "buy_price": 3020.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "7013",
+    "name": "IHI",
+    "buy_price": 3028.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6758",
+    "name": "ソニーグループ",
+    "buy_price": 3912.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "7011",
+    "name": "三菱重工業",
+    "buy_price": 4254.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8306",
+    "name": "三菱UFJ FG",
+    "buy_price": 3686.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8035",
+    "name": "東京エレクトロン",
+    "buy_price": 59130.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "7011",
+    "name": "三菱重工業",
+    "buy_price": 4254.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "8306",
+    "name": "三菱UFJ FG",
+    "buy_price": 3686.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6857",
+    "name": "アドバンテスト",
+    "buy_price": 36870.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "5803",
+    "name": "フジクラ",
+    "buy_price": 5665.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "7203",
+    "name": "トヨタ自動車",
+    "buy_price": 3020.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "MU",
+    "name": "Micron",
+    "buy_price": 971.66,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "AMZN",
+    "name": "Amazon",
+    "buy_price": 262.65,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "AMD",
+    "name": "AMD",
+    "buy_price": 514.39,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "AVGO",
+    "name": "Broadcom",
+    "buy_price": 392.99,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "LLY",
+    "name": "Eli Lilly",
+    "buy_price": 1180.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "NVDA",
+    "name": "NVIDIA",
+    "buy_price": 225.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "ARM",
+    "name": "Arm Holdings",
+    "buy_price": 279.44,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "LLY",
+    "name": "Eli Lilly",
+    "buy_price": 1180.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "NFLX",
+    "name": "Netflix",
+    "buy_price": 78.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "AMZN",
+    "name": "Amazon",
+    "buy_price": 262.65,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "LLY",
+    "name": "Eli Lilly",
+    "buy_price": 1180.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "MU",
+    "name": "Micron",
+    "buy_price": 971.66,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "AMZN",
+    "name": "Amazon",
+    "buy_price": 262.65,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "AAPL",
+    "name": "Apple",
+    "buy_price": 305.93,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "AMD",
+    "name": "AMD",
+    "buy_price": 514.39,
+    "shares": 100
   }
 ]

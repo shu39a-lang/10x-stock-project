@@ -1,1 +1,272 @@
-[]
+[
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7974",
+    "name": "任天堂",
+    "buy_price": 8900.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6501",
+    "name": "日立製作所",
+    "buy_price": 5767.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6701",
+    "name": "NEC",
+    "buy_price": 5168.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6857",
+    "name": "アドバンテスト",
+    "buy_price": 36870.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7011",
+    "name": "三菱重工業",
+    "buy_price": 4254.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6857",
+    "name": "アドバンテスト",
+    "buy_price": 36870.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6701",
+    "name": "NEC",
+    "buy_price": 5168.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "5803",
+    "name": "フジクラ",
+    "buy_price": 5665.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "7974",
+    "name": "任天堂",
+    "buy_price": 8900.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6501",
+    "name": "日立製作所",
+    "buy_price": 5767.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6501",
+    "name": "日立製作所",
+    "buy_price": 5767.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6701",
+    "name": "NEC",
+    "buy_price": 5168.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6758",
+    "name": "ソニーグループ",
+    "buy_price": 3912.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "7974",
+    "name": "任天堂",
+    "buy_price": 8900.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "japan",
+    "horizon": "long",
+    "code": "7013",
+    "name": "IHI",
+    "buy_price": 3028.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "CRWD",
+    "name": "CrowdStrike",
+    "buy_price": 216.95,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "PLTR",
+    "name": "Palantir",
+    "buy_price": 174.04,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "MSFT",
+    "name": "Microsoft",
+    "buy_price": 495.4,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "NVDA",
+    "name": "NVIDIA",
+    "buy_price": 225.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "short",
+    "code": "NFLX",
+    "name": "Netflix",
+    "buy_price": 78.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "CRWD",
+    "name": "CrowdStrike",
+    "buy_price": 216.95,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "PLTR",
+    "name": "Palantir",
+    "buy_price": 174.04,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "MU",
+    "name": "Micron",
+    "buy_price": 971.66,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "MSFT",
+    "name": "Microsoft",
+    "buy_price": 495.4,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "AMD",
+    "name": "AMD",
+    "buy_price": 514.39,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "CRWD",
+    "name": "CrowdStrike",
+    "buy_price": 216.95,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "MSFT",
+    "name": "Microsoft",
+    "buy_price": 495.4,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "NVDA",
+    "name": "NVIDIA",
+    "buy_price": 225.16,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "PLTR",
+    "name": "Palantir",
+    "buy_price": 174.04,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-16",
+    "market": "usa",
+    "horizon": "long",
+    "code": "NFLX",
+    "name": "Netflix",
+    "buy_price": 78.16,
+    "shares": 100
+  }
+]

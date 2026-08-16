@@ -1,78 +1,49 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#05070b">
+<!doctype html><html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>元金10倍計画</title>
 <style>
-*{box-sizing:border-box}
-:root{--bg:#05070b;--panel:#0c1118;--line:#253040;--gold:#ffd54f;--muted:#8e99a8;--green:#45d483;--red:#ff6b6b;--jp:#ffffff;--jptext:#bc002d;--us:#263b7a}
-body{margin:0;background:linear-gradient(180deg,#030508,#070b11 35%,#05070b);color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-.app{max-width:960px;margin:auto;padding:14px 12px 40px}
-.hero{padding:8px 2px 14px}.kicker{color:var(--gold);font-size:15px;font-weight:900;letter-spacing:.08em}
-h1{font-size:34px;line-height:1.08;margin:5px 0 8px}.sub{color:#aab4c0;font-size:13px}
-.status{margin-top:12px;padding:10px 12px;background:#0b1119;border:1px solid #202b38;border-radius:13px;display:flex;justify-content:space-between;gap:10px;align-items:center}
-.updated{font-size:12px;color:#c8d0d9}.badge{font-size:11px;color:#86efac;background:#0d2b1b;border:1px solid #215b38;padding:5px 8px;border-radius:999px;font-weight:800}
-.sticky{position:sticky;top:0;z-index:20;background:rgba(5,7,11,.96);backdrop-filter:blur(10px);padding:8px 0 10px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px}.market{height:60px;border-radius:16px;border:2px solid transparent;font-size:22px;font-weight:900}
-.jp{background:var(--jp);color:var(--jptext)}.us{background:var(--us);color:#fff}.active{outline:3px solid var(--gold);outline-offset:1px}
-.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}.h{min-height:72px;background:#111822;color:#d6dde6;border:1px solid #2b3543;border-radius:14px;padding:8px 4px}
-.h b{display:block;font-size:19px;line-height:1.1}.h small{display:block;color:#9aa5b2;font-size:11px;margin-top:5px}
-.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:8px;margin:18px 2px 8px}.sectionhead h2{font-size:25px;margin:0}.sectionhead span{font-size:11px;color:var(--muted)}
-.cards{display:grid;grid-template-columns:1fr;gap:10px}.card{padding:13px;background:linear-gradient(180deg,#0d1219,#090d13);border:1px solid #222d3a;border-radius:16px}
-.topline{display:grid;grid-template-columns:40px 1fr auto;gap:9px;align-items:center}.rank{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#19212c;font-weight:900}
-.name{font-size:18px;font-weight:900}.code{font-size:11px;color:#8995a3;margin-top:2px}.price{text-align:right;font-weight:900;font-size:16px}.chg{font-size:12px;margin-top:3px}.up{color:var(--green)}.down{color:var(--red)}
-.scoreline{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #202936;margin-top:10px;padding-top:9px;font-size:13px}.signal{color:var(--gold);font-weight:900}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}.metrics span{background:#121923;border:1px solid #1d2632;border-radius:8px;text-align:center;padding:6px 3px;font-size:10px;color:#adb6c2}
-.chart{display:block;text-decoration:none;text-align:center;margin-top:9px;padding:10px;border-radius:10px;background:#11233a;color:#8fc6ff;border:1px solid #214b79;font-size:13px;font-weight:900}
-.panel{margin-top:18px;padding:14px;background:#0b1017;border:1px solid #222d3a;border-radius:16px}.panel h3{margin:0 0 10px;font-size:19px}.history{max-height:340px;overflow:auto}
-.hist{padding:9px 2px;border-bottom:1px solid #1d2630;font-size:12px;line-height:1.5}.note{font-size:11px;color:#909aa6;line-height:1.65}.empty{padding:28px;text-align:center;color:#737f8e}.foot{font-size:10px;color:#697482;text-align:center;margin:20px 4px}
-@media(min-width:760px){.app{padding:20px}.hero{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:end}.status{margin:0}.cards{grid-template-columns:1fr 1fr}}
-</style>
-</head>
-<body>
-<div class="app">
-<div class="hero"><div><div class="kicker">10X STOCK PROJECT</div><h1>元金10倍計画</h1><div class="sub">成長性・テクニカル・出来高などを総合評価して候補を抽出</div></div>
-<div class="status"><div id="updated" class="updated">データ読込中…</div><div class="badge">自動更新</div></div></div>
-
-<div class="sticky">
-<div class="tabs"><button id="jp" class="market jp active">🇯🇵 日本株</button><button id="us" class="market us">🇺🇸 米国株</button></div>
-<div class="hz">
-<button class="h active" data-h="short"><b>短期</b><small>〜6か月</small></button>
-<button class="h" data-h="medium"><b>中期</b><small>6か月〜1年</small></button>
-<button class="h" data-h="long"><b>長期</b><small>1年以上</small></button>
-</div></div>
-
-<div class="sectionhead"><h2 id="title">日本株・短期 TOP10</h2><span>候補ランキング</span></div>
-<div id="list" class="cards"></div>
-
-<div class="panel"><h3>100株 仮想購入記録</h3><div id="history" class="history"></div></div>
-<div class="panel"><h3>使い方</h3><div class="note">
-短期は値動き・モメンタム重視、中期はトレンド継続性、長期は成長性・相対強度・リスクを重視しています。<br>
-「チャートを見る」からTradingViewを開き、ローソク足・移動平均線・出来高などを確認できます。<br>
-本ページは候補抽出・検証用であり、利益や元金10倍を保証するものではありません。
-</div></div>
-<div class="foot">データ提供：Yahoo Finance系データ / 表示は参考情報です。投資判断はご自身で行ってください。</div>
+*{box-sizing:border-box}body{margin:0;background:#050910;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+.app{max-width:760px;margin:auto;padding:16px 12px 40px}.gold{color:#ffd54f;font-weight:900;letter-spacing:.06em}h1{font-size:38px;margin:4px 0 8px}
+.sub{color:#aab5c3;font-size:13px}.status{margin:14px 0;padding:12px;border:1px solid #263448;border-radius:14px;background:#0a121c;display:flex;justify-content:space-between;gap:10px}.auto{color:#75ec9c;font-weight:900}
+.sticky{position:sticky;top:0;z-index:10;background:rgba(5,9,16,.96);padding:8px 0}.markets,.hz{display:grid;gap:8px}.markets{grid-template-columns:1fr 1fr}.hz{grid-template-columns:repeat(3,1fr);margin-top:9px}
+button{font-family:inherit}.market{height:60px;border:0;border-radius:15px;font-size:22px;font-weight:900}.jp{background:#fff;color:#c20e2d}.us{background:#28479d;color:#fff}
+.h{height:70px;border-radius:14px;border:1px solid #2a394b;background:#101923;color:#fff}.h b{display:block;font-size:19px}.h small{display:block;color:#98a5b5;margin-top:5px}
+.active{outline:3px solid #ffd54f;outline-offset:1px}.title{font-size:26px;font-weight:900;margin:20px 2px 10px}.list{display:grid;gap:10px}
+.stock{background:#0b141e;border:1px solid #29384b;border-radius:16px;padding:13px}.r1{display:grid;grid-template-columns:42px 1fr 42px;gap:10px;align-items:center}
+.rank{width:40px;height:40px;border-radius:50%;background:#182433;display:grid;place-items:center;font-size:18px;font-weight:900}.stock:nth-child(1) .rank{background:#f5c928;color:#111}.stock:nth-child(2) .rank{background:#d8dde5;color:#111}.stock:nth-child(3) .rank{background:#d98933;color:#111}
+.name{font-size:20px;font-weight:900}.code{color:#96a3b3;font-size:12px;margin-top:3px}.chart{width:42px;height:42px;border-radius:9px;border:1px solid #2b425a;background:#101a25;display:grid;place-items:center;text-decoration:none;font-size:22px}
+.r2{display:grid;grid-template-columns:1.1fr 1fr 1fr auto;gap:8px;border-top:1px solid #223142;margin-top:11px;padding-top:10px;align-items:end}.m label{display:block;color:#8492a4;font-size:10px;margin-bottom:3px}.m strong{font-size:16px}
+.up{color:#42df7d}.down{color:#ff626c}.sig{padding:7px 9px;border-radius:8px;font-size:13px;font-weight:900;white-space:nowrap}.best{color:#ff646c;border:1px solid #c6373e}.good{color:#ffb33a;border:1px solid #96610c}.watch{color:#91f177;border:1px solid #4c9b35}
+.sim{margin-top:22px;border:1px solid #29384b;border-radius:16px;overflow:hidden;background:#09121b}.simh{padding:14px;background:#101a26}.simh h2{font-size:21px;margin:0}.simh div{font-size:11px;color:#98a6b6;margin-top:4px}
+.srow{padding:12px;border-top:1px solid #1f2d3d}.sname{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:900}.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.sc{background:#0f1924;border:1px solid #1f3043;border-radius:8px;padding:7px}.sc label{display:block;color:#7f8ea0;font-size:9px}.sc strong{font-size:12px}
+.total{margin:12px;padding:12px;border:1px solid #29435f;border-radius:11px;background:#111e2b;display:grid;grid-template-columns:1fr 1fr;gap:8px}.total span{font-size:11px;color:#9facbc}.total b{display:block;margin-top:3px;font-size:15px}
+.note{text-align:center;color:#6f7d8d;font-size:10px;line-height:1.6;margin:18px 5px}.empty{text-align:center;padding:24px;color:#788596}
+@media(min-width:700px){.list{grid-template-columns:1fr 1fr}}
+</style></head><body><div class="app">
+<div class="gold">10X STOCK PROJECT</div><h1>元金10倍計画</h1><div class="sub">成長性・テクニカル・出来高などを総合評価して候補を抽出</div>
+<div class="status"><div id="updated">最終更新：読込中…</div><div class="auto">自動更新</div></div>
+<div class="sticky"><div class="markets"><button id="jp" class="market jp active">🇯🇵 日本株</button><button id="us" class="market us">🇺🇸 米国株</button></div>
+<div class="hz"><button class="h active" data-h="short"><b>短期</b><small>〜6か月</small></button><button class="h" data-h="medium"><b>中期</b><small>6か月〜1年</small></button><button class="h" data-h="long"><b>長期</b><small>1年以上</small></button></div></div>
+<div id="title" class="title">日本株・短期 TOP10</div><div id="list" class="list"></div>
+<div class="sim"><div class="simh"><h2>100株 仮想購入シミュレーション</h2><div id="simtitle"></div></div><div id="simrows"></div><div id="total" class="total"></div></div>
+<div class="note">※候補抽出・検証用の参考情報です。利益や元金10倍を保証するものではありません。投資判断はご自身の責任で行ってください。</div>
 </div>
-
 <script>
-let market="japan",horizon="short";
-let D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]}},H=[];
+let market="japan",horizon="short",D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]}},H=[];
 const $=s=>document.querySelector(s),L={short:"短期",medium:"中期",long:"長期"};
-function money(x){return market==="japan"?"¥"+Number(x).toLocaleString():"$"+Number(x).toFixed(2)}
-function chartUrl(x){const symbol=market==="japan"?"TSE:"+x.code:x.code;return "https://www.tradingview.com/chart/?symbol="+encodeURIComponent(symbol)}
+const money=(x,m=market)=>m==="japan"?"¥"+Number(x).toLocaleString(undefined,{maximumFractionDigits:2}):"$"+Number(x).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const chart=x=>"https://www.tradingview.com/chart/?symbol="+encodeURIComponent(market==="japan"?"TSE:"+x.code:x.code);
+const sig=s=>s==="最有力"?"best":s==="有力"?"good":"watch";
+function firstBuy(code){const a=H.filter(x=>x.market===market&&x.horizon===horizon&&x.code===code).sort((a,b)=>String(a.date).localeCompare(String(b.date)));return a.length?Number(a[0].buy_price):null}
 function render(){
- const a=D[market]?.[horizon]||[];
- $("#title").textContent=(market==="japan"?"日本株":"米国株")+"・"+L[horizon]+" TOP10";
- $("#list").innerHTML=a.length?a.map((x,i)=>`<div class="card"><div class="topline"><div class="rank">${i+1}</div><div><div class="name">${x.name}</div><div class="code">${x.code}</div></div><div class="price">${money(x.price)}<div class="chg ${x.change_pct>=0?"up":"down"}">${x.change_pct>0?"+":""}${x.change_pct}%</div></div></div><div class="scoreline"><b>総合スコア ${x.score}</b><span class="signal">${x.signal}</span></div><div class="metrics"><span>トレンド ${x.trend}</span><span>勢い ${x.momentum}</span><span>MACD ${x.macd}</span><span>出来高 ${x.volume_score}</span><span>相対強度 ${x.relative}</span><span>リスク ${x.risk}</span></div><a class="chart" href="${chartUrl(x)}" target="_blank" rel="noopener">📈 チャートを見る（TradingView）</a></div>`).join(""):`<div class="empty">データ更新後に表示します。</div>`;
- const h=H.filter(x=>x.market===market&&x.horizon===horizon).slice(-80).reverse();
- $("#history").innerHTML=h.length?h.map(x=>`<div class="hist">${x.date}　<b>${x.name}</b>（${x.code}）100株 @ ${market==="japan"?"¥"+Number(x.buy_price).toLocaleString():"$"+Number(x.buy_price).toFixed(2)}</div>`).join(""):`<div class="empty">記録は自動で蓄積されます。</div>`;
+ const a=(D[market]?.[horizon]||[]).slice(0,10),mname=market==="japan"?"日本株":"米国株";
+ $("#title").textContent=mname+"・"+L[horizon]+" TOP10";$("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";
+ $("#list").innerHTML=a.length?a.map((x,i)=>`<div class="stock"><div class="r1"><div class="rank">${i+1}</div><div><div class="name">${x.name}</div><div class="code">${x.code}</div></div><a class="chart" href="${chart(x)}" target="_blank">📈</a></div><div class="r2"><div class="m"><label>現在値</label><strong>${money(x.price)}</strong></div><div class="m"><label>騰落率</label><strong class="${x.change_pct>=0?"up":"down"}">${x.change_pct>0?"+":""}${x.change_pct}%</strong></div><div class="m"><label>総合スコア</label><strong>${x.score}</strong></div><span class="sig ${sig(x.signal)}">${x.signal}</span></div></div>`).join(""):'<div class="empty">データ更新後に表示します。</div>';
+ let tb=0,tn=0;
+ $("#simrows").innerHTML=a.length?a.map((x,i)=>{const b=firstBuy(x.code)??Number(x.price),n=Number(x.price),bv=b*100,nv=n*100,pl=nv-bv,p=b?(n/b-1)*100:0;tb+=bv;tn+=nv;return `<div class="srow"><div class="sname"><span>${i+1}. ${x.name}（${x.code}）</span><span class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${p.toFixed(2)}%</span></div><div class="sg"><div class="sc"><label>購入額（100株）</label><strong>${money(bv)}</strong></div><div class="sc"><label>現在価値（100株）</label><strong>${money(nv)}</strong></div><div class="sc"><label>評価損益</label><strong class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${money(pl)}</strong></div></div></div>`}).join(""):'<div class="empty">仮想購入データがありません。</div>';
+ const pl=tn-tb,pct=tb?(tn/tb-1)*100:0;$("#total").innerHTML=`<span>合計購入額<b>${money(tb)}</b></span><span>現在評価額<b>${money(tn)}</b></span><span>合計損益<b class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${money(pl)}</b></span><span>損益率<b class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${pct.toFixed(2)}%</b></span>`;
 }
-$("#jp").onclick=()=>{market="japan";$("#jp").classList.add("active");$("#us").classList.remove("active");render()};
-$("#us").onclick=()=>{market="usa";$("#us").classList.add("active");$("#jp").classList.remove("active");render()};
+$("#jp").onclick=()=>{market="japan";$("#jp").classList.add("active");$("#us").classList.remove("active");render()};$("#us").onclick=()=>{market="usa";$("#us").classList.add("active");$("#jp").classList.remove("active");render()};
 document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;document.querySelectorAll(".h").forEach(x=>x.classList.toggle("active",x===b));render()});
-Promise.all([fetch("tenx_data.json?"+Date.now()).then(r=>r.json()),fetch("tenx_history.json?"+Date.now()).then(r=>r.json())]).then(([d,h])=>{D=d;H=h;$("#updated").textContent="最終更新："+d.updated_at;render()}).catch(()=>{$("#updated").textContent="データ読込エラー"});
-render();
-</script>
-</body></html>
+Promise.all([fetch("tenx_data.json?"+Date.now()).then(r=>r.json()),fetch("tenx_history.json?"+Date.now()).then(r=>r.json())]).then(([d,h])=>{D=d;H=Array.isArray(h)?h:[];$("#updated").textContent="最終更新："+d.updated_at;render()}).catch(()=>{$("#updated").textContent="データ読込エラー"});render();
+</script></body></html>

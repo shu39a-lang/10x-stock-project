@@ -2,111 +2,215 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="株TOP10">
+<link rel="manifest" href="manifest.webmanifest">
 <title>新規買い候補 TOP10</title>
 <style>
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
 *{box-sizing:border-box}
-body{margin:0;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-.app{max-width:820px;margin:auto;padding:18px 18px 48px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 24px}
-.tab{height:70px;border-radius:22px;border:3px solid #333;font-size:28px;font-weight:900}
-.jp{background:linear-gradient(135deg,#fff 0 52%,#c90032 52% 100%);color:#111;border-color:#e0bb34}
-.us{background:repeating-linear-gradient(0deg,#c7374d 0 10px,#fff 10px 20px);color:#fff;border-color:#445581;text-shadow:0 2px 4px #000}
-.tab.active{outline:4px solid #ffd43b;outline-offset:2px}
-h1{font-size:36px;line-height:1.15;margin:8px 4px 4px;font-weight:950}
-.sub{font-size:18px;color:#a9a9ad;margin:0 4px 20px}
-.list{display:grid;gap:18px}
-.card{border:2px solid #303033;border-radius:28px;padding:28px 26px 22px;background:#090909}
-.top{display:grid;grid-template-columns:84px 1fr auto;gap:22px;align-items:center}
-.rank{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:#1e1e1f;font-size:36px;font-weight:900}
-.name{font-size:34px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.code{font-size:22px;color:#9b9b9f;margin-top:8px;font-weight:700}
-.price{text-align:right;font-size:34px;font-weight:950;white-space:nowrap}
-.change{text-align:right;font-size:24px;font-weight:900;margin-top:8px;white-space:nowrap}
-.up{color:#49d993}.down{color:#ff6b76}
-.bottom{margin-left:106px;margin-top:20px;padding-top:16px;border-top:2px solid #232326;display:flex;justify-content:space-between;align-items:center;gap:14px}
-.score{font-size:22px;color:#b5b5ba;font-weight:800}
-.signal{font-size:20px;color:#ffd43b;font-weight:950;white-space:nowrap}
-.note{margin:28px 6px 0;color:#737379;font-size:13px;line-height:1.6;text-align:center}
-.error{padding:30px;border:2px solid #333;border-radius:20px;color:#bbb}
-@media(max-width:600px){
- .app{padding:14px 14px 34px}
- .tab{height:62px;font-size:22px}
- h1{font-size:29px}.sub{font-size:15px}
- .card{padding:22px 18px 18px;border-radius:22px}
- .top{grid-template-columns:62px 1fr auto;gap:14px}
- .rank{width:62px;height:62px;font-size:28px}
- .name{font-size:27px}.code{font-size:17px}.price{font-size:27px}.change{font-size:20px}
- .bottom{margin-left:76px}.score{font-size:18px}.signal{font-size:18px}
-}
+html,body{margin:0;background:#000;color:#fff;min-height:100%;overflow-x:hidden}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.app{width:100%;max-width:640px;margin:0 auto;padding:10px 10px 22px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:sticky;top:0;z-index:20;background:#000;padding:6px 0 10px}
+.tab{border:0;border-radius:14px;height:58px;font-weight:800;font-size:20px;letter-spacing:.02em}
+.tab.jp{background:linear-gradient(135deg,#fff 0 58%,#bc002d 58% 100%);color:#111;border:2px solid #bc002d}
+.tab.us{background:repeating-linear-gradient(0deg,#b22234 0 6px,#fff 6px 12px);color:white;text-shadow:0 2px 3px #000;border:2px solid #3c3b6e;position:relative}
+.tab.us:before{content:"★";position:absolute;left:10px;top:7px;background:#3c3b6e;width:34px;height:26px;border-radius:4px;display:grid;place-items:center}
+.tab.active{outline:3px solid #ffd54f;transform:translateY(-1px)}
+.title{font-size:22px;font-weight:800;margin:8px 2px 2px}
+.meta{font-size:12px;color:#aaa;margin:0 2px 12px}
+.list{display:grid;gap:9px}
+.card{background:#0c0c0c;border:1px solid #2c2c2c;border-radius:14px;padding:11px 12px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:9px;box-shadow:0 4px 15px rgba(0,0,0,.24)}
+.rank{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#202020;font-weight:900;font-size:17px}
+.name{font-size:17px;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.code{font-size:12px;color:#aaa;margin-top:4px}
+.price{text-align:right;font-size:17px;font-weight:800}
+.chg{font-size:13px;margin-top:4px;font-weight:700}
+.up{color:#45d483}.down{color:#ff6b6b}.flat{color:#bbb}
+.detail{grid-column:2/4;display:flex;justify-content:space-between;gap:8px;border-top:1px solid #242424;padding-top:8px;margin-top:2px;font-size:12px;color:#bbb}
+.signal{font-weight:800;color:#ffd54f}
+.metrics{grid-column:2/4;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:2px;font-size:10px;color:#8f8f8f}.metrics span{background:#141414;border-radius:6px;padding:4px 5px;text-align:center}.footer{font-size:11px;color:#777;text-align:center;margin:15px 8px 0;line-height:1.5}
+@media(min-width:500px){.app{padding-left:18px;padding-right:18px}.card{padding:14px 16px}.name,.price{font-size:19px}}
+
+.history-wrap{margin-top:22px;border-top:1px solid #242424;padding-top:15px}
+.history-title{font-size:20px;font-weight:900;margin:0 2px 9px}
+.history-sub{font-size:11px;color:#888;margin:0 2px 10px;line-height:1.45}
+.history-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.htab{height:44px;border-radius:12px;border:1px solid #333;background:#151515;color:#ddd;font-weight:800;font-size:15px}
+.htab.jp.active{background:#fff;color:#bc002d;border:2px solid #bc002d}
+.htab.us.active{background:#3c3b6e;color:#fff;border:2px solid #b22234}
+.history-list{height:390px;overflow-y:auto;overscroll-behavior:contain;border:1px solid #242424;border-radius:14px;background:#080808}
+.hrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:11px 12px;border-bottom:1px solid #202020}
+.hrow:last-child{border-bottom:0}
+.hname{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdate{font-size:11px;color:#858585;margin-top:4px}
+.hpl{text-align:right;font-size:14px;font-weight:900}
+.hamt{font-size:12px;margin-top:4px}
+.hempty{padding:30px 15px;text-align:center;color:#777;font-size:13px}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="tabs">
-    <button id="jp" class="tab jp active">🇯🇵 日本株</button>
-    <button id="us" class="tab us">⭐ 🇺🇸 米国株</button>
+    <button class="tab jp active" id="jpBtn">🇯🇵 日本株</button>
+    <button class="tab us" id="usBtn">🇺🇸 米国株</button>
   </div>
-  <h1 id="title">日本株 新規買い候補 TOP10</h1>
-  <div id="updated" class="sub">更新日 読込中… ｜ 取引終了後の日次更新</div>
-  <div id="list" class="list"></div>
-  <div class="note">※テクニカル・流動性・トレンド等を総合評価した参考候補です。将来の上昇や利益を保証するものではありません。投資判断はご自身の責任で行ってください。</div>
+  <div class="title" id="title">日本株 新規買い候補 TOP10</div>
+  <div class="meta" id="meta">データ読込中…</div>
+  <div class="list" id="list"></div>
+  <section class="history-wrap">
+    <div class="history-title">100株 仮想購入の成績</div>
+    <div class="history-sub">初めてTOP10に入った日に100株購入したと仮定。各市場50銘柄まで保存し、51件目から古い記録を自動削除します。</div>
+    <div class="history-tabs">
+      <button class="htab jp active" id="hjpBtn">🇯🇵 日本株</button>
+      <button class="htab us" id="husBtn">🇺🇸 米国株</button>
+    </div>
+    <div class="history-list" id="historyList"><div class="hempty">履歴データ読込中…</div></div>
+  </section>
+  <div class="footer">日次終値ベースのスクリーナーです。投資判断そのものを保証するものではありません。</div>
 </div>
 <script>
-let market="japan";
-let data=null;
-const money=(v)=> market==="japan"
-  ? "¥"+Number(v).toLocaleString(undefined,{maximumFractionDigits:2})
-  : "$"+Number(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
-
+let data=null, history={japan:[],usa:[]}, market="japan", historyMarket="japan";
+const $=s=>document.querySelector(s);
+function fmtPrice(x){return market==="japan" ? `¥${Number(x).toLocaleString("ja-JP",{maximumFractionDigits:1})}` : `$${Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`}
+function fmtChange(x){const s=x>0?"+":"";return market==="japan" ? `${s}¥${Number(x).toLocaleString("ja-JP",{maximumFractionDigits:1})}` : `${s}$${Math.abs(Number(x)).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`.replace("$-","-$")}
 function render(){
-  if(!data) return;
-  const arr=(data[market]?.short||[]).slice(0,10);
-  const jp=market==="japan";
-  document.getElementById("title").textContent=(jp?"日本株":"米国株")+" 新規買い候補 TOP10";
-  document.getElementById("updated").textContent="更新日 "+(data.updated_at||"—")+" ｜ 取引終了後の日次更新";
-  document.getElementById("jp").classList.toggle("active",jp);
-  document.getElementById("us").classList.toggle("active",!jp);
-  const list=document.getElementById("list");
+  const arr=data[market]||[];
+  $("#title").textContent=(market==="japan"?"日本株":"米国株")+" 新規買い候補 TOP10";
+  $("#meta").textContent=`更新日 ${data.updated_at}｜取引終了後の日次更新`;
+  $("#list").innerHTML=arr.map(x=>{
+    const cls=x.change_pct>0?"up":x.change_pct<0?"down":"flat";
+    const ps=x.change_pct>0?"+":"";
+    return `<div class="card">
+      <div class="rank">${x.rank}</div>
+      <div><div class="name">${x.name}</div><div class="code">${x.code}</div></div>
+      <div class="price">${fmtPrice(x.price)}<div class="chg ${cls}">${fmtChange(x.change)}　${ps}${Number(x.change_pct).toFixed(2)}%</div></div>
+      <div class="detail"><span>総合 ${Number(x.score).toFixed(1)}</span><span class="signal">${x.signal}</span></div>
+      ${x.trend!==undefined?`<div class="metrics">
+        <span>トレンド ${x.trend}</span><span>勢い ${x.momentum}</span><span>MACD ${x.macd}</span>
+        <span>出来高 ${x.volume_score}</span><span>RS ${x.relative}</span><span>リスク ${x.risk}</span>
+      </div>`:""}
+    </div>`
+  }).join("");
+  $("#jpBtn").classList.toggle("active",market==="japan");
+  $("#usBtn").classList.toggle("active",market==="usa");
+}
+
+function fmtPLAmount(x){
+  const n=Number(x)||0, sign=n>0?"+":"";
+  if(historyMarket==="japan"){
+    return `${sign}¥${Math.abs(n).toLocaleString("ja-JP",{maximumFractionDigits:0})}`;
+  }
+  return `${sign}$${Math.abs(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+}
+function renderHistory(){
+  const arr=(history && history[historyMarket]) ? history[historyMarket] : [];
+  $("#hjpBtn").classList.toggle("active",historyMarket==="japan");
+  $("#husBtn").classList.toggle("active",historyMarket==="usa");
   if(!arr.length){
-    list.innerHTML='<div class="error">候補データがありません。</div>';
+    $("#historyList").innerHTML='<div class="hempty">まだ仮想購入の記録がありません。<br>次回の日次更新から自動で蓄積されます。</div>';
     return;
   }
-  list.innerHTML=arr.map((x,i)=>{
-    const ch=Number(x.change_pct||0);
-    const cls=ch>=0?"up":"down";
-    const sign=ch>=0?"+":"";
-    const sig=x.signal==="最有力"?"強い買い候補":x.signal==="有力"?"買い候補":"注目候補";
-    return `<div class="card">
-      <div class="top">
-        <div class="rank">${i+1}</div>
-        <div>
-          <div class="name">${x.name}</div>
-          <div class="code">${x.code}</div>
-        </div>
-        <div>
-          <div class="price">${money(x.price)}</div>
-          <div class="change ${cls}">${sign}${ch.toFixed(2)}%</div>
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="score">総合 ${Number(x.score).toFixed(1)}</div>
-        <div class="signal">${sig}</div>
-      </div>
+  $("#historyList").innerHTML=arr.map(x=>{
+    const p=Number(x.return_pct)||0;
+    const cls=p>0?"up":p<0?"down":"flat";
+    const ps=p>0?"+":"";
+    return `<div class="hrow">
+      <div><div class="hname">${x.name} <span style="color:#777;font-weight:600">${x.code}</span></div>
+      <div class="hdate">購入日 ${x.purchase_date}　100株</div></div>
+      <div class="hpl ${cls}">${ps}${p.toFixed(2)}%<div class="hamt">${fmtPLAmount(x.pl_amount)}</div></div>
     </div>`;
   }).join("");
 }
+$("#hjpBtn").onclick=()=>{historyMarket="japan";renderHistory()};
+$("#husBtn").onclick=()=>{historyMarket="usa";renderHistory()};
 
-document.getElementById("jp").onclick=()=>{market="japan";render()};
-document.getElementById("us").onclick=()=>{market="usa";render()};
+async function load(){
+  try{
+    const [rawData, rawHistory] = await Promise.all([
+      fetch("tenx_data.json?"+Date.now(), {cache:"no-store"}).then(r=>{if(!r.ok) throw new Error("data"); return r.json()}),
+      fetch("tenx_history.json?"+Date.now(), {cache:"no-store"}).then(r=>r.ok?r.json():[]).catch(()=>[])
+    ]);
 
-fetch("tenx_data.json?ts="+Date.now(),{cache:"no-store"})
- .then(r=>{if(!r.ok) throw new Error("HTTP "+r.status); return r.json()})
- .then(d=>{data=d;render()})
- .catch(e=>{
-   document.getElementById("updated").textContent="データ読込エラー";
-   document.getElementById("list").innerHTML='<div class="error">tenx_data.json を読み込めませんでした。</div>';
- });
+    // 現在のGitHub自動更新データを、元画面が使う形式へ変換
+    function normalizeMarket(m){
+      let a = rawData?.[m];
+      if(a && !Array.isArray(a)) a = a.short || a.top10 || a.candidates || [];
+      if(!Array.isArray(a)) a=[];
+      return a.slice(0,10).map((x,i)=>{
+        const price=Number(x.price)||0, pct=Number(x.change_pct)||0;
+        const prev = (1+pct/100)!==0 ? price/(1+pct/100) : price;
+        const ch = x.change!==undefined ? Number(x.change)||0 : price-prev;
+        return {
+          ...x,
+          rank:x.rank||i+1,
+          ticker:x.ticker || (m==="japan" ? `${x.code}.T` : x.code),
+          code:String(x.code||x.symbol||x.ticker||"").replace(".T",""),
+          name:x.name || x.company || x.code || x.symbol || "",
+          price,
+          change:ch,
+          change_pct:pct,
+          score:Number(x.score)||0,
+          signal:x.signal || "買い候補"
+        };
+      });
+    }
+
+    data={
+      updated_at: rawData.updated_at || "—",
+      japan: normalizeMarket("japan"),
+      usa: normalizeMarket("usa")
+    };
+
+    // 履歴は「初めて候補入りした価格で100株購入」として市場別に表示
+    const recs=Array.isArray(rawHistory)?rawHistory:[];
+    history={japan:[],usa:[]};
+    for(const m of ["japan","usa"]){
+      const current=data[m]||[];
+      const earliest=new Map();
+      for(const r of recs){
+        if(r.market!==m || (r.horizon && r.horizon!=="short")) continue;
+        const code=String(r.code||"").replace(".T","");
+        if(!code) continue;
+        const old=earliest.get(code);
+        const dt=String(r.date||"");
+        if(!old || dt < old.date) earliest.set(code,{...r,code,date:dt});
+      }
+      history[m]=current.map(x=>{
+        const e=earliest.get(String(x.code));
+        const buy=Number(e?.buy_price ?? x.price)||0;
+        const now=Number(x.price)||0;
+        const shares=Number(e?.shares||100);
+        const pl=(now-buy)*shares;
+        const ret=buy?((now/buy)-1)*100:0;
+        return {
+          ticker:x.ticker,
+          code:x.code,
+          name:x.name,
+          purchase_date:e?.date || data.updated_at?.slice(0,10) || "—",
+          purchase_price:buy,
+          shares,
+          current_price:now,
+          return_pct:ret,
+          pl_amount:pl
+        };
+      }).slice(0,50);
+    }
+
+    render(); renderHistory();
+  }catch(e){
+    console.error(e);
+    $("#meta").textContent="データ読込エラー";
+  }
+}
+$("#jpBtn").onclick=()=>{market="japan";render()};
+$("#usBtn").onclick=()=>{market="usa";render()};
+load();
+
 </script>
 </body>
 </html>

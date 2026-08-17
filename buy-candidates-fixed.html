@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>新規買い候補 TOP10</title>
+<style>
+:root{
+  --bg:#000; --card:#0a0a0a; --line:#303033; --muted:#aaaab0;
+  --green:#4bdc97; --red:#ff717c; --gold:#ffd43b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:#fff}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+.app{width:min(100%,860px);margin:auto;padding:18px 16px 50px;overflow-x:hidden}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:5px 0 22px}
+.tab{min-width:0;height:68px;border-radius:23px;border:3px solid #333;font-size:clamp(18px,5vw,30px);font-weight:950;overflow:hidden;white-space:nowrap}
+.jp{background:linear-gradient(135deg,#fff 0 52%,#c90032 52% 100%);color:#111;border-color:#e2bd3a}
+.us{background:repeating-linear-gradient(0deg,#c7384c 0 10px,#fff 10px 20px);color:#fff;border-color:#44527c;text-shadow:0 2px 4px #000}
+.tab.active{box-shadow:0 0 0 4px var(--gold)}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.12;margin:10px 4px 5px;font-weight:950}
+.sub{font-size:clamp(14px,3.7vw,20px);color:#a5a5aa;margin:0 4px 18px;line-height:1.45}
+.list{display:grid;gap:17px}
+.card{border:2px solid var(--line);border-radius:26px;padding:22px 20px 18px;background:var(--card);overflow:hidden}
+.top{
+  display:grid;
+  grid-template-columns:70px minmax(0,1fr) minmax(105px,auto);
+  gap:16px;align-items:center;min-width:0
+}
+.rank{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#1e1e1f;font-size:31px;font-weight:950}
+.info{min-width:0}
+.name{
+  font-size:clamp(22px,5vw,33px);font-weight:950;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0
+}
+.code{font-size:clamp(16px,3.5vw,21px);color:#99999f;margin-top:7px;font-weight:750}
+.quote{min-width:0;text-align:right}
+.price{
+  font-size:clamp(22px,5vw,33px);font-weight:950;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis
+}
+.change{font-size:clamp(17px,4vw,23px);font-weight:900;margin-top:7px;white-space:nowrap}
+.up{color:var(--green)} .down{color:var(--red)}
+.bottom{
+  margin-left:86px;margin-top:18px;padding-top:14px;border-top:2px solid #242427;
+  display:flex;justify-content:space-between;align-items:center;gap:12px
+}
+.score{font-size:clamp(17px,3.6vw,21px);color:#b6b6bb;font-weight:850}
+.signal{font-size:clamp(17px,3.6vw,21px);color:var(--gold);font-weight:950;white-space:nowrap}
+
+/* 仮想100株 */
+.sim{margin-top:30px;border-top:2px solid #252529;padding-top:25px}
+.sim h2{font-size:clamp(26px,5.5vw,36px);margin:0 4px 8px;font-weight:950}
+.sim-desc{color:#aaaab0;font-size:15px;line-height:1.55;margin:0 4px 16px}
+.summary{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px
+}
+.metric{border:2px solid var(--line);border-radius:18px;padding:14px 10px;background:#0b0b0b;text-align:center;min-width:0}
+.metric .label{color:#98989e;font-size:12px;font-weight:750}
+.metric .value{font-size:clamp(17px,4vw,23px);font-weight:950;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.simlist{display:grid;gap:10px}
+.simrow{
+  display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:10px;align-items:center;
+  border:1.5px solid #2c2c30;border-radius:17px;padding:13px 13px;background:#080808;min-width:0
+}
+.simrank{width:34px;height:34px;border-radius:50%;background:#1d1d20;display:grid;place-items:center;font-weight:900}
+.simname{min-width:0}
+.simname b{font-size:16px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.simname small{color:#96969c;font-size:12px}
+.simpl{text-align:right;min-width:100px}
+.simpl b{font-size:16px;display:block;white-space:nowrap}
+.simpl small{font-size:12px;color:#a0a0a5;white-space:nowrap}
+.note{margin:26px 5px 0;color:#707077;font-size:12px;line-height:1.6;text-align:center}
+.error{padding:24px;border:2px solid #333;border-radius:18px;color:#bbb}
+
+/* iPhone narrow width */
+@media(max-width:430px){
+  .app{padding:14px 12px 38px}
+  .tab{height:62px;border-radius:21px}
+  .card{padding:19px 15px 16px;border-radius:22px}
+  .top{grid-template-columns:58px minmax(0,1fr) minmax(92px,38%);gap:11px}
+  .rank{width:56px;height:56px;font-size:26px}
+  .name{font-size:clamp(20px,6.2vw,27px)}
+  .price{font-size:clamp(19px,5.8vw,27px)}
+  .change{font-size:clamp(15px,4.7vw,20px)}
+  .bottom{margin-left:69px}
+  .summary{grid-template-columns:1fr}
+  .metric{display:flex;justify-content:space-between;align-items:center;text-align:left}
+  .metric .value{margin-top:0}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="tabs">
+    <button id="jp" class="tab jp active">🇯🇵 日本株</button>
+    <button id="us" class="tab us">⭐ 🇺🇸 米国株</button>
+  </div>
+
+  <h1 id="title">日本株 新規買い候補 TOP10</h1>
+  <div id="updated" class="sub">更新日 読込中… ｜ 取引終了後の日次更新</div>
+  <div id="list" class="list"></div>
+
+  <section class="sim">
+    <h2>📊 仮想100株の成績</h2>
+    <p class="sim-desc">
+      各銘柄が買い候補に初めて入った時点で100株を仮想購入したものとして、
+      現在値との差を表示します。履歴がない銘柄は「履歴蓄積中」と表示します。
+    </p>
+    <div id="summary" class="summary"></div>
+    <div id="simlist" class="simlist"></div>
+  </section>
+
+  <div class="note">
+    ※テクニカル・流動性・トレンド等を総合評価した参考候補です。将来の上昇や利益を保証するものではありません。
+    仮想成績は手数料・税金・為替コスト等を含みません。投資判断はご自身の責任で行ってください。
+  </div>
+</div>
+
+<script>
+let market="japan";
+let data=null;
+let hist=null;
+
+const marketKeys = {
+  japan:["japan","jp","日本株"],
+  usa:["usa","us","america","米国株"]
+};
+
+function getMarket(obj,m){
+  if(!obj || typeof obj!=="object") return null;
+  for(const k of marketKeys[m]){
+    if(obj[k]) return obj[k];
+  }
+  return null;
+}
+
+function getShort(obj,m){
+  const mk=getMarket(obj,m);
+  if(!mk) return [];
+  if(Array.isArray(mk)) return mk;
+  return mk.short || mk.top10 || mk.candidates || mk.buy || [];
+}
+
+function snapshotsFromHistory(h){
+  if(!h) return [];
+  if(Array.isArray(h)) return h;
+  for(const k of ["history","snapshots","records","daily","items"]){
+    if(Array.isArray(h[k])) return h[k];
+  }
+  // 日付キーのオブジェクトにも対応
+  const vals=Object.values(h).filter(v=>v && typeof v==="object");
+  if(vals.length && vals.some(v=>getMarket(v,"japan")||getMarket(v,"usa"))) return vals;
+  return [];
+}
+
+function priceOf(x){
+  return Number(x?.price ?? x?.close ?? x?.current_price ?? x?.last ?? 0);
+}
+function codeOf(x){
+  return String(x?.code ?? x?.symbol ?? x?.ticker ?? "").replace(".T","");
+}
+function nameOf(x){
+  return String(x?.name ?? x?.company ?? x?.code ?? x?.symbol ?? "");
+}
+
+function money(v){
+  if(!Number.isFinite(v)) return "—";
+  return market==="japan"
+    ? "¥"+Math.round(v).toLocaleString()
+    : "$"+v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function money0(v){
+  if(!Number.isFinite(v)) return "—";
+  return market==="japan"
+    ? "¥"+Math.round(v).toLocaleString()
+    : "$"+v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function firstEntryFor(code){
+  const snaps=snapshotsFromHistory(hist);
+  for(let i=0;i<snaps.length;i++){
+    const arr=getShort(snaps[i],market);
+    const hit=arr.find(x=>codeOf(x)===code);
+    if(hit && priceOf(hit)>0){
+      return {price:priceOf(hit), date:snaps[i].updated_at || snaps[i].date || snaps[i].timestamp || ""};
+    }
+  }
+  return null;
+}
+
+function renderMain(){
+  if(!data) return;
+  const arr=getShort(data,market).slice(0,10);
+  const jp=market==="japan";
+  document.getElementById("title").textContent=(jp?"日本株":"米国株")+" 新規買い候補 TOP10";
+  document.getElementById("updated").textContent="更新日 "+(data.updated_at||"—")+" ｜ 取引終了後の日次更新";
+  document.getElementById("jp").classList.toggle("active",jp);
+  document.getElementById("us").classList.toggle("active",!jp);
+
+  const list=document.getElementById("list");
+  if(!arr.length){
+    list.innerHTML='<div class="error">候補データがありません。</div>';
+    return;
+  }
+  list.innerHTML=arr.map((x,i)=>{
+    const p=priceOf(x);
+    const ch=Number(x.change_pct||0);
+    const prev=ch===-100?0:p/(1+ch/100);
+    const diff=p-prev;
+    const cls=ch>=0?"up":"down";
+    const sign=ch>=0?"+":"";
+    const sig=x.signal==="最有力"?"強い買い候補":x.signal==="有力"?"買い候補":"注目候補";
+    const diffText=market==="japan"
+      ? `${sign}¥${Math.abs(diff).toLocaleString(undefined,{maximumFractionDigits:1})}`
+      : `${sign}$${Math.abs(diff).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+    return `<div class="card">
+      <div class="top">
+        <div class="rank">${i+1}</div>
+        <div class="info">
+          <div class="name">${nameOf(x)}</div>
+          <div class="code">${codeOf(x)}</div>
+        </div>
+        <div class="quote">
+          <div class="price">${money(p)}</div>
+          <div class="change ${cls}">${diffText}&nbsp;&nbsp;${sign}${ch.toFixed(2)}%</div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="score">総合 ${Number(x.score||0).toFixed(1)}</div>
+        <div class="signal">${sig}</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function renderSim(){
+  if(!data) return;
+  const arr=getShort(data,market).slice(0,10);
+  let invested=0, value=0, known=0;
+
+  const rows=arr.map((x,i)=>{
+    const code=codeOf(x), now=priceOf(x);
+    const first=firstEntryFor(code);
+    if(!first){
+      return `<div class="simrow">
+        <div class="simrank">${i+1}</div>
+        <div class="simname"><b>${nameOf(x)}</b><small>${code}</small></div>
+        <div class="simpl"><b>履歴蓄積中</b><small>100株の開始値を待っています</small></div>
+      </div>`;
+    }
+    const buy=first.price;
+    const cost=buy*100, cur=now*100, pl=cur-cost;
+    const pct=buy ? (now/buy-1)*100 : 0;
+    invested+=cost; value+=cur; known++;
+    const cls=pl>=0?"up":"down";
+    const sign=pl>=0?"+":"";
+    return `<div class="simrow">
+      <div class="simrank">${i+1}</div>
+      <div class="simname">
+        <b>${nameOf(x)}</b>
+        <small>${code} ｜ 仮想購入 ${money(buy)} ×100株</small>
+      </div>
+      <div class="simpl ${cls}">
+        <b>${sign}${money0(Math.abs(pl))}</b>
+        <small>${sign}${pct.toFixed(2)}%</small>
+      </div>
+    </div>`;
+  }).join("");
+
+  const pl=value-invested;
+  const pct=invested ? pl/invested*100 : 0;
+  const cls=pl>=0?"up":"down";
+  const sign=pl>=0?"+":"";
+  const summary=document.getElementById("summary");
+  if(known){
+    summary.innerHTML=`
+      <div class="metric"><div class="label">仮想投資額</div><div class="value">${money0(invested)}</div></div>
+      <div class="metric"><div class="label">現在評価額</div><div class="value">${money0(value)}</div></div>
+      <div class="metric"><div class="label">合計損益</div><div class="value ${cls}">${sign}${money0(Math.abs(pl))} (${sign}${pct.toFixed(2)}%)</div></div>
+    `;
+  }else{
+    summary.innerHTML=`<div class="metric" style="grid-column:1/-1"><div class="label">仮想100株</div><div class="value">履歴データ蓄積中</div></div>`;
+  }
+  document.getElementById("simlist").innerHTML=rows;
+}
+
+function render(){ renderMain(); renderSim(); }
+
+document.getElementById("jp").onclick=()=>{market="japan";render()};
+document.getElementById("us").onclick=()=>{market="usa";render()};
+
+Promise.all([
+  fetch("tenx_data.json?ts="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()}),
+  fetch("tenx_history.json?ts="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
+]).then(([d,h])=>{
+  data=d; hist=h; render();
+}).catch(()=>{
+  document.getElementById("updated").textContent="データ読込エラー";
+  document.getElementById("list").innerHTML='<div class="error">tenx_data.json を読み込めませんでした。</div>';
+});
+</script>
+</body>
+</html>

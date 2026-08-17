@@ -77,7 +77,14 @@ body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 let data=null, history={japan:[],usa:[]}, market="japan", historyMarket="japan";
 const $=s=>document.querySelector(s);
 function fmtPrice(x){return market==="japan" ? `¥${Number(x).toLocaleString("ja-JP",{maximumFractionDigits:1})}` : `$${Number(x).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`}
-function fmtChange(x){const s=x>0?"+":"";return market==="japan" ? `${s}¥${Number(x).toLocaleString("ja-JP",{maximumFractionDigits:1})}` : `${s}$${Math.abs(Number(x)).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`.replace("$-","-$")}
+function fmtChange(x){
+  const n=Number(x)||0;
+  const sign=n>0?"+":n<0?"-":"";
+  const a=Math.abs(n);
+  return market==="japan"
+    ? `${sign}¥${a.toLocaleString("ja-JP",{maximumFractionDigits:1})}`
+    : `${sign}$${a.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+}
 function render(){
   const arr=data[market]||[];
   $("#title").textContent=(market==="japan"?"日本株":"米国株")+" 新規買い候補 TOP10";
@@ -143,8 +150,12 @@ async function load(){
       if(!Array.isArray(a)) a=[];
       return a.slice(0,10).map((x,i)=>{
         const price=Number(x.price)||0, pct=Number(x.change_pct)||0;
-        const prev = (1+pct/100)!==0 ? price/(1+pct/100) : price;
-        const ch = x.change!==undefined ? Number(x.change)||0 : price-prev;
+        // 前日比率 pct は「前日終値 → 現在値」の変化率。
+        // 1株あたり前日比金額 = 現在値 - 前日終値。
+        // tenx_data.json に change がなくても必ず正しい桁で算出する。
+        const denom = 1 + pct/100;
+        const prev = denom!==0 ? price/denom : price;
+        const ch = price - prev;
         return {
           ...x,
           rank:x.rank||i+1,

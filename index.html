@@ -35,7 +35,18 @@ const money=(x,m=market)=>m==="japan"?"¥"+Number(x).toLocaleString(undefined,{m
 const chart=x=>"https://www.tradingview.com/chart/?symbol="+encodeURIComponent(market==="japan"?"TSE:"+x.code:x.code);
 const sig=s=>s==="最有力"?"best":s==="有力"?"good":"watch";
 function firstBuy(code){const a=H.filter(x=>x.market===market&&x.horizon===horizon&&x.code===code).sort((a,b)=>String(a.date).localeCompare(String(b.date)));return a.length?Number(a[0].buy_price):null}
-function entryPrice(x){const h=firstBuy(x.code);if(h!==null&&Number.isFinite(h)&&h>0)return h;const n=Number(x.price),c=Number(x.change_pct);if(Number.isFinite(n)&&Number.isFinite(c)&&1+c/100>0)return n/(1+c/100);return n}
+function entryPrice(x){
+ const h=firstBuy(x.code),n=Number(x.price),c=Number(x.change_pct);
+ // 旧履歴に「購入価格＝現在値」が保存されている銘柄は、
+ // その日の騰落率から前日終値を逆算して仮想購入価格に補正する。
+ if(h!==null&&Number.isFinite(h)&&h>0){
+   const same=Math.abs(h-n)<0.005;
+   if(same&&Number.isFinite(c)&&Math.abs(c)>0.005&&1+c/100>0)return n/(1+c/100);
+   return h;
+ }
+ if(Number.isFinite(n)&&Number.isFinite(c)&&1+c/100>0)return n/(1+c/100);
+ return n;
+}
 function render(){
  const a=(D[market]?.[horizon]||[]).slice(0,10),mname=market==="japan"?"日本株":"米国株";
  $("#title").textContent=mname+"・"+L[horizon]+" TOP10";$("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";

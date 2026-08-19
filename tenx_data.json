@@ -1,417 +1,1024 @@
 {
-  "updated_at": "2026-08-19 18:08 JST",
-  "engine_version": "2.0",
+  "updated_at": "2026-08-19 19:59 JST",
+  "engine_version": "3.0-5factor",
+  "scoring": {
+    "valuation": 20,
+    "quality_growth": 25,
+    "financial_safety": 15,
+    "technical": 25,
+    "catalyst": 15
+  },
   "japan": {
     "short": [
       {
-        "name": "任天堂",
-        "code": "7974",
-        "price": 8577.0,
-        "change_pct": -2.09,
-        "score": 88.2,
-        "signal": "最有力"
-      },
-      {
-        "name": "日本郵船",
-        "code": "9101",
-        "price": 6733.0,
-        "change_pct": -0.75,
-        "score": 87.7,
-        "signal": "最有力"
+        "name": "リクルートHD",
+        "code": "6098",
+        "price": 15740.0,
+        "change_pct": -1.75,
+        "score": 81.0,
+        "signal": "最有力",
+        "valuation": 23.7,
+        "quality": 84.2,
+        "financial": 79.4,
+        "technical": 88.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
       {
         "name": "オリンパス",
         "code": "7733",
         "price": 2131.5,
         "change_pct": 0.73,
-        "score": 87.2,
-        "signal": "最有力"
-      },
-      {
-        "name": "川崎汽船",
-        "code": "9107",
-        "price": 3157.0,
-        "change_pct": 0.51,
-        "score": 86.0,
-        "signal": "最有力"
-      },
-      {
-        "name": "INPEX",
-        "code": "1605",
-        "price": 3860.0,
-        "change_pct": -1.03,
-        "score": 82.4,
-        "signal": "最有力"
+        "score": 79.3,
+        "signal": "有力",
+        "valuation": 53.3,
+        "quality": 65.2,
+        "financial": 71.0,
+        "technical": 79.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
       },
       {
         "name": "アドバンテスト",
         "code": "6857",
         "price": 35020.0,
         "change_pct": -2.34,
-        "score": 81.5,
-        "signal": "有力"
+        "score": 78.8,
+        "signal": "有力",
+        "valuation": 12.8,
+        "quality": 91.7,
+        "financial": 78.8,
+        "technical": 81.1,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
-      {
-        "name": "リクルートHD",
-        "code": "6098",
-        "price": 15740.0,
-        "change_pct": -1.75,
-        "score": 81.2,
-        "signal": "有力"
-      },
-      {
-        "name": "武田薬品工業",
-        "code": "4502",
-        "price": 5769.0,
-        "change_pct": 1.18,
-        "score": 75.2,
-        "signal": "有力"
-      },
-      {
-        "name": "三菱重工業",
-        "code": "7011",
-        "price": 4097.0,
-        "change_pct": -6.25,
-        "score": 71.1,
-        "signal": "注目"
-      },
-      {
-        "name": "NTT",
-        "code": "9432",
-        "price": 159.4,
-        "change_pct": -0.62,
-        "score": 68.7,
-        "signal": "注目"
-      }
-    ],
-    "medium": [
       {
         "name": "日本郵船",
         "code": "9101",
         "price": 6733.0,
         "change_pct": -0.75,
-        "score": 86.4,
-        "signal": "最有力"
-      },
-      {
-        "name": "リクルートHD",
-        "code": "6098",
-        "price": 15740.0,
-        "change_pct": -1.75,
-        "score": 86.4,
-        "signal": "最有力"
-      },
-      {
-        "name": "オリンパス",
-        "code": "7733",
-        "price": 2131.5,
-        "change_pct": 0.73,
-        "score": 86.2,
-        "signal": "最有力"
+        "score": 76.9,
+        "signal": "有力",
+        "valuation": 64.0,
+        "quality": 67.9,
+        "financial": 49.1,
+        "technical": 80.5,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "D",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
       {
         "name": "商船三井",
         "code": "9104",
         "price": 6966.0,
         "change_pct": 1.24,
-        "score": 86.1,
-        "signal": "最有力"
+        "score": 76.4,
+        "signal": "有力",
+        "valuation": 62.9,
+        "quality": 65.9,
+        "financial": 30.7,
+        "technical": 81.8,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "D",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
       {
-        "name": "川崎汽船",
-        "code": "9107",
-        "price": 3157.0,
-        "change_pct": 0.51,
-        "score": 85.2,
-        "signal": "最有力"
-      },
-      {
-        "name": "武田薬品工業",
-        "code": "4502",
-        "price": 5769.0,
-        "change_pct": 1.18,
-        "score": 74.6,
-        "signal": "有力"
+        "name": "任天堂",
+        "code": "7974",
+        "price": 8577.0,
+        "change_pct": -2.09,
+        "score": 76.3,
+        "signal": "有力",
+        "valuation": 58.7,
+        "quality": 61.6,
+        "financial": 72.9,
+        "technical": 71.2,
+        "catalyst": 93.4,
+        "grades": {
+          "valuation": "C",
+          "quality": "C",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
       },
       {
         "name": "INPEX",
         "code": "1605",
         "price": 3860.0,
         "change_pct": -1.03,
-        "score": 71.1,
-        "signal": "注目"
+        "score": 73.7,
+        "signal": "有力",
+        "valuation": 66.1,
+        "quality": 68.3,
+        "financial": 68.9,
+        "technical": 70.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
       },
       {
-        "name": "MS&AD",
-        "code": "8725",
-        "price": 4860.0,
-        "change_pct": -2.51,
-        "score": 68.5,
-        "signal": "注目"
+        "name": "富士電機",
+        "code": "6504",
+        "price": 13505.0,
+        "change_pct": -6.28,
+        "score": 72.7,
+        "signal": "有力",
+        "valuation": 65.9,
+        "quality": 67.7,
+        "financial": 78.9,
+        "technical": 63.2,
+        "catalyst": 82.3,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
       },
       {
-        "name": "三菱UFJ FG",
-        "code": "8306",
-        "price": 3495.0,
-        "change_pct": -4.35,
-        "score": 67.9,
-        "signal": "注目"
+        "name": "川崎汽船",
+        "code": "9107",
+        "price": 3157.0,
+        "change_pct": 0.51,
+        "score": 71.3,
+        "signal": "有力",
+        "valuation": 70.8,
+        "quality": 48.5,
+        "financial": 74.3,
+        "technical": 80.8,
+        "catalyst": 58.8,
+        "grades": {
+          "valuation": "B",
+          "quality": "D",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "C"
+        }
       },
       {
-        "name": "ホンダ",
-        "code": "7267",
-        "price": 1662.0,
-        "change_pct": -2.98,
-        "score": 67.5,
-        "signal": "注目"
+        "name": "ニデック",
+        "code": "6594",
+        "price": 2633.0,
+        "change_pct": -6.3,
+        "score": 70.4,
+        "signal": "有力",
+        "valuation": 63.3,
+        "quality": 58.6,
+        "financial": 70.3,
+        "technical": 65.2,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "C",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
       }
     ],
-    "long": [
-      {
-        "name": "SOMPO HD",
-        "code": "8630",
-        "price": 6588.0,
-        "change_pct": -2.26,
-        "score": 80.3,
-        "signal": "有力"
-      },
+    "medium": [
       {
         "name": "リクルートHD",
         "code": "6098",
         "price": 15740.0,
         "change_pct": -1.75,
-        "score": 79.5,
-        "signal": "有力"
+        "score": 78.5,
+        "signal": "有力",
+        "valuation": 23.7,
+        "quality": 84.2,
+        "financial": 79.4,
+        "technical": 88.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
       {
         "name": "みずほFG",
         "code": "8411",
         "price": 8108.0,
         "change_pct": -4.96,
-        "score": 79.4,
-        "signal": "有力"
-      },
-      {
-        "name": "ファーストリテイリング",
-        "code": "9983",
-        "price": 74940.0,
-        "change_pct": -0.09,
-        "score": 79.3,
-        "signal": "有力"
+        "score": 77.0,
+        "signal": "有力",
+        "valuation": 74.3,
+        "quality": 84.4,
+        "financial": 100.0,
+        "technical": 50.3,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
       },
       {
         "name": "三菱UFJ FG",
         "code": "8306",
         "price": 3495.0,
         "change_pct": -4.35,
-        "score": 79.3,
-        "signal": "有力"
-      },
-      {
-        "name": "MS&AD",
-        "code": "8725",
-        "price": 4860.0,
-        "change_pct": -2.51,
-        "score": 78.7,
-        "signal": "有力"
+        "score": 76.2,
+        "signal": "有力",
+        "valuation": 70.3,
+        "quality": 81.0,
+        "financial": 100.0,
+        "technical": 48.8,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "A",
+          "financial": "A",
+          "technical": "D",
+          "catalyst": "A"
+        }
       },
       {
         "name": "アドバンテスト",
         "code": "6857",
         "price": 35020.0,
         "change_pct": -2.34,
-        "score": 78.1,
-        "signal": "有力"
+        "score": 75.9,
+        "signal": "有力",
+        "valuation": 12.8,
+        "quality": 91.7,
+        "financial": 78.8,
+        "technical": 81.1,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
       {
-        "name": "INPEX",
-        "code": "1605",
-        "price": 3860.0,
-        "change_pct": -1.03,
-        "score": 77.5,
-        "signal": "有力"
+        "name": "オリンパス",
+        "code": "7733",
+        "price": 2131.5,
+        "change_pct": 0.73,
+        "score": 75.2,
+        "signal": "有力",
+        "valuation": 53.3,
+        "quality": 65.2,
+        "financial": 71.0,
+        "technical": 79.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "日本郵船",
+        "code": "9101",
+        "price": 6733.0,
+        "change_pct": -0.75,
+        "score": 73.6,
+        "signal": "有力",
+        "valuation": 64.0,
+        "quality": 67.9,
+        "financial": 49.1,
+        "technical": 80.5,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "D",
+          "technical": "A",
+          "catalyst": "A"
+        }
       },
       {
         "name": "三井住友FG",
         "code": "8316",
         "price": 6568.0,
         "change_pct": -4.81,
-        "score": 77.2,
-        "signal": "有力"
+        "score": 71.8,
+        "signal": "有力",
+        "valuation": 71.4,
+        "quality": 77.7,
+        "financial": 100.0,
+        "technical": 45.7,
+        "catalyst": 88.5,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "A",
+          "technical": "D",
+          "catalyst": "A"
+        }
       },
       {
         "name": "商船三井",
         "code": "9104",
         "price": 6966.0,
         "change_pct": 1.24,
-        "score": 77.1,
-        "signal": "有力"
+        "score": 71.8,
+        "signal": "有力",
+        "valuation": 62.9,
+        "quality": 65.9,
+        "financial": 30.7,
+        "technical": 81.8,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "D",
+          "technical": "A",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "SOMPO HD",
+        "code": "8630",
+        "price": 6588.0,
+        "change_pct": -2.26,
+        "score": 71.4,
+        "signal": "有力",
+        "valuation": 68.9,
+        "quality": 78.5,
+        "financial": 75.5,
+        "technical": 44.6,
+        "catalyst": 99.2,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "INPEX",
+        "code": "1605",
+        "price": 3860.0,
+        "change_pct": -1.03,
+        "score": 70.3,
+        "signal": "有力",
+        "valuation": 66.1,
+        "quality": 68.3,
+        "financial": 68.9,
+        "technical": 70.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      }
+    ],
+    "long": [
+      {
+        "name": "みずほFG",
+        "code": "8411",
+        "price": 8108.0,
+        "change_pct": -4.96,
+        "score": 80.4,
+        "signal": "最有力",
+        "valuation": 74.3,
+        "quality": 84.4,
+        "financial": 100.0,
+        "technical": 50.3,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "三菱UFJ FG",
+        "code": "8306",
+        "price": 3495.0,
+        "change_pct": -4.35,
+        "score": 77.8,
+        "signal": "有力",
+        "valuation": 70.3,
+        "quality": 81.0,
+        "financial": 100.0,
+        "technical": 48.8,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "A",
+          "financial": "A",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "リクルートHD",
+        "code": "6098",
+        "price": 15740.0,
+        "change_pct": -1.75,
+        "score": 77.2,
+        "signal": "有力",
+        "valuation": 23.7,
+        "quality": 84.2,
+        "financial": 79.4,
+        "technical": 88.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "アドバンテスト",
+        "code": "6857",
+        "price": 35020.0,
+        "change_pct": -2.34,
+        "score": 75.3,
+        "signal": "有力",
+        "valuation": 12.8,
+        "quality": 91.7,
+        "financial": 78.8,
+        "technical": 81.1,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "A",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "三井住友FG",
+        "code": "8316",
+        "price": 6568.0,
+        "change_pct": -4.81,
+        "score": 75.3,
+        "signal": "有力",
+        "valuation": 71.4,
+        "quality": 77.7,
+        "financial": 100.0,
+        "technical": 45.7,
+        "catalyst": 88.5,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "A",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "INPEX",
+        "code": "1605",
+        "price": 3860.0,
+        "change_pct": -1.03,
+        "score": 73.1,
+        "signal": "有力",
+        "valuation": 66.1,
+        "quality": 68.3,
+        "financial": 68.9,
+        "technical": 70.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "富士電機",
+        "code": "6504",
+        "price": 13505.0,
+        "change_pct": -6.28,
+        "score": 72.3,
+        "signal": "有力",
+        "valuation": 65.9,
+        "quality": 67.7,
+        "financial": 78.9,
+        "technical": 63.2,
+        "catalyst": 82.3,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "SOMPO HD",
+        "code": "8630",
+        "price": 6588.0,
+        "change_pct": -2.26,
+        "score": 71.8,
+        "signal": "有力",
+        "valuation": 68.9,
+        "quality": 78.5,
+        "financial": 75.5,
+        "technical": 44.6,
+        "catalyst": 99.2,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "オリンパス",
+        "code": "7733",
+        "price": 2131.5,
+        "change_pct": 0.73,
+        "score": 71.0,
+        "signal": "有力",
+        "valuation": 53.3,
+        "quality": 65.2,
+        "financial": 71.0,
+        "technical": 79.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "MS&AD",
+        "code": "8725",
+        "price": 4860.0,
+        "change_pct": -2.51,
+        "score": 70.8,
+        "signal": "有力",
+        "valuation": 75.6,
+        "quality": 67.9,
+        "financial": 74.7,
+        "technical": 52.5,
+        "catalyst": 95.1,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
       }
     ]
   },
   "usa": {
     "short": [
       {
-        "name": "Salesforce",
-        "code": "CRM",
-        "price": 196.14,
-        "change_pct": 2.71,
-        "score": 84.2,
-        "signal": "最有力"
-      },
-      {
-        "name": "Shopify",
-        "code": "SHOP",
-        "price": 146.58,
-        "change_pct": -1.39,
-        "score": 83.9,
-        "signal": "最有力"
-      },
-      {
-        "name": "Exxon Mobil",
-        "code": "XOM",
-        "price": 165.56,
-        "change_pct": 2.54,
-        "score": 83.5,
-        "signal": "最有力"
-      },
-      {
-        "name": "Chevron",
-        "code": "CVX",
-        "price": 205.74,
-        "change_pct": 1.5,
-        "score": 80.4,
-        "signal": "有力"
-      },
-      {
-        "name": "Palo Alto Networks",
-        "code": "PANW",
-        "price": 374.14,
-        "change_pct": -0.43,
-        "score": 79.1,
-        "signal": "有力"
+        "name": "Super Micro Computer",
+        "code": "SMCI",
+        "price": 37.41,
+        "change_pct": -2.27,
+        "score": 78.1,
+        "signal": "有力",
+        "valuation": 71.8,
+        "quality": 64.9,
+        "financial": 46.5,
+        "technical": 73.1,
+        "catalyst": 76.8,
+        "grades": {
+          "valuation": "B",
+          "quality": "C",
+          "financial": "D",
+          "technical": "B",
+          "catalyst": "B"
+        }
       },
       {
         "name": "Palantir",
         "code": "PLTR",
         "price": 171.54,
         "change_pct": -0.59,
-        "score": 78.3,
-        "signal": "有力"
-      },
-      {
-        "name": "CrowdStrike",
-        "code": "CRWD",
-        "price": 212.92,
-        "change_pct": -0.46,
-        "score": 78.0,
-        "signal": "有力"
-      },
-      {
-        "name": "Merck",
-        "code": "MRK",
-        "price": 135.17,
-        "change_pct": -0.59,
-        "score": 77.6,
-        "signal": "有力"
-      },
-      {
-        "name": "Booking Holdings",
-        "code": "BKNG",
-        "price": 208.25,
-        "change_pct": 1.7,
-        "score": 74.8,
-        "signal": "有力"
-      },
-      {
-        "name": "Eli Lilly",
-        "code": "LLY",
-        "price": 1225.73,
-        "change_pct": 3.6,
-        "score": 73.1,
-        "signal": "有力"
-      }
-    ],
-    "medium": [
-      {
-        "name": "Palo Alto Networks",
-        "code": "PANW",
-        "price": 374.14,
-        "change_pct": -0.43,
-        "score": 84.0,
-        "signal": "最有力"
-      },
-      {
-        "name": "CrowdStrike",
-        "code": "CRWD",
-        "price": 212.92,
-        "change_pct": -0.46,
-        "score": 83.2,
-        "signal": "最有力"
-      },
-      {
-        "name": "ASML",
-        "code": "ASML",
-        "price": 1802.98,
-        "change_pct": -4.26,
-        "score": 81.5,
-        "signal": "有力"
+        "score": 77.8,
+        "signal": "有力",
+        "valuation": 13.1,
+        "quality": 90.6,
+        "financial": 80.3,
+        "technical": 72.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "A",
+          "technical": "B",
+          "catalyst": "A"
+        }
       },
       {
         "name": "Exxon Mobil",
         "code": "XOM",
         "price": 165.56,
         "change_pct": 2.54,
-        "score": 81.5,
-        "signal": "有力"
-      },
-      {
-        "name": "Eli Lilly",
-        "code": "LLY",
-        "price": 1225.73,
-        "change_pct": 3.6,
-        "score": 81.4,
-        "signal": "有力"
-      },
-      {
-        "name": "Chevron",
-        "code": "CVX",
-        "price": 205.74,
-        "change_pct": 1.5,
-        "score": 80.5,
-        "signal": "有力"
-      },
-      {
-        "name": "Merck",
-        "code": "MRK",
-        "price": 135.17,
-        "change_pct": -0.59,
-        "score": 79.6,
-        "signal": "有力"
-      },
-      {
-        "name": "GE Aerospace",
-        "code": "GE",
-        "price": 375.09,
-        "change_pct": 1.53,
-        "score": 76.8,
-        "signal": "有力"
-      },
-      {
-        "name": "AbbVie",
-        "code": "ABBV",
-        "price": 258.92,
-        "change_pct": 3.43,
-        "score": 74.9,
-        "signal": "有力"
+        "score": 77.8,
+        "signal": "有力",
+        "valuation": 63.1,
+        "quality": 74.5,
+        "financial": 76.2,
+        "technical": 73.9,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
       },
       {
         "name": "Booking Holdings",
         "code": "BKNG",
         "price": 208.25,
         "change_pct": 1.7,
-        "score": 73.1,
-        "signal": "有力"
+        "score": 76.2,
+        "signal": "有力",
+        "valuation": 45.0,
+        "quality": 84.6,
+        "financial": 68.9,
+        "technical": 65.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Chevron",
+        "code": "CVX",
+        "price": 205.74,
+        "change_pct": 1.5,
+        "score": 76.0,
+        "signal": "有力",
+        "valuation": 64.0,
+        "quality": 77.4,
+        "financial": 75.0,
+        "technical": 71.6,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Salesforce",
+        "code": "CRM",
+        "price": 196.14,
+        "change_pct": 2.71,
+        "score": 75.6,
+        "signal": "有力",
+        "valuation": 53.7,
+        "quality": 76.4,
+        "financial": 64.5,
+        "technical": 66.9,
+        "catalyst": 98.9,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "TSMC",
+        "code": "TSM",
+        "price": 413.41,
+        "change_pct": -4.07,
+        "score": 74.6,
+        "signal": "有力",
+        "valuation": 58.1,
+        "quality": 100.0,
+        "financial": 92.5,
+        "technical": 61.2,
+        "catalyst": 94.8,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Shopify",
+        "code": "SHOP",
+        "price": 146.58,
+        "change_pct": -1.39,
+        "score": 74.0,
+        "signal": "有力",
+        "valuation": 13.1,
+        "quality": 75.6,
+        "financial": 80.5,
+        "technical": 74.7,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "B",
+          "financial": "A",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Microsoft",
+        "code": "MSFT",
+        "price": 481.63,
+        "change_pct": 0.27,
+        "score": 73.3,
+        "signal": "有力",
+        "valuation": 29.3,
+        "quality": 84.5,
+        "financial": 75.2,
+        "technical": 58.1,
+        "catalyst": 88.8,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Uber",
+        "code": "UBER",
+        "price": 74.66,
+        "change_pct": -0.44,
+        "score": 71.2,
+        "signal": "有力",
+        "valuation": 55.7,
+        "quality": 85.8,
+        "financial": 70.4,
+        "technical": 59.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      }
+    ],
+    "medium": [
+      {
+        "name": "Micron",
+        "code": "MU",
+        "price": 940.76,
+        "change_pct": -7.02,
+        "score": 78.8,
+        "signal": "有力",
+        "valuation": 28.8,
+        "quality": 100.0,
+        "financial": 91.1,
+        "technical": 62.6,
+        "catalyst": 81.3,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "TSMC",
+        "code": "TSM",
+        "price": 413.41,
+        "change_pct": -4.07,
+        "score": 77.0,
+        "signal": "有力",
+        "valuation": 58.1,
+        "quality": 100.0,
+        "financial": 92.5,
+        "technical": 61.2,
+        "catalyst": 94.8,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Booking Holdings",
+        "code": "BKNG",
+        "price": 208.25,
+        "change_pct": 1.7,
+        "score": 75.0,
+        "signal": "有力",
+        "valuation": 45.0,
+        "quality": 84.6,
+        "financial": 68.9,
+        "technical": 65.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Chevron",
+        "code": "CVX",
+        "price": 205.74,
+        "change_pct": 1.5,
+        "score": 74.5,
+        "signal": "有力",
+        "valuation": 64.0,
+        "quality": 77.4,
+        "financial": 75.0,
+        "technical": 71.6,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Exxon Mobil",
+        "code": "XOM",
+        "price": 165.56,
+        "change_pct": 2.54,
+        "score": 74.3,
+        "signal": "有力",
+        "valuation": 63.1,
+        "quality": 74.5,
+        "financial": 76.2,
+        "technical": 73.9,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Bank of America",
+        "code": "BAC",
+        "price": 64.23,
+        "change_pct": 0.53,
+        "score": 73.5,
+        "signal": "有力",
+        "valuation": 67.8,
+        "quality": 76.2,
+        "financial": 77.9,
+        "technical": 57.3,
+        "catalyst": 96.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Palantir",
+        "code": "PLTR",
+        "price": 171.54,
+        "change_pct": -0.59,
+        "score": 73.2,
+        "signal": "有力",
+        "valuation": 13.1,
+        "quality": 90.6,
+        "financial": 80.3,
+        "technical": 72.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "A",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Shopify",
+        "code": "SHOP",
+        "price": 146.58,
+        "change_pct": -1.39,
+        "score": 72.2,
+        "signal": "有力",
+        "valuation": 13.1,
+        "quality": 75.6,
+        "financial": 80.5,
+        "technical": 74.7,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "B",
+          "financial": "A",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "JPMorgan",
+        "code": "JPM",
+        "price": 363.25,
+        "change_pct": 0.63,
+        "score": 71.2,
+        "signal": "有力",
+        "valuation": 61.6,
+        "quality": 88.0,
+        "financial": 46.0,
+        "technical": 54.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Super Micro Computer",
+        "code": "SMCI",
+        "price": 37.41,
+        "change_pct": -2.27,
+        "score": 70.3,
+        "signal": "有力",
+        "valuation": 71.8,
+        "quality": 64.9,
+        "financial": 46.5,
+        "technical": 73.1,
+        "catalyst": 76.8,
+        "grades": {
+          "valuation": "B",
+          "quality": "C",
+          "financial": "D",
+          "technical": "B",
+          "catalyst": "B"
+        }
       }
     ],
     "long": [
@@ -420,80 +1027,200 @@
         "code": "TSM",
         "price": 413.41,
         "change_pct": -4.07,
-        "score": 84.7,
-        "signal": "最有力"
-      },
-      {
-        "name": "ASML",
-        "code": "ASML",
-        "price": 1802.98,
-        "change_pct": -4.26,
-        "score": 81.5,
-        "signal": "有力"
-      },
-      {
-        "name": "Exxon Mobil",
-        "code": "XOM",
-        "price": 165.56,
-        "change_pct": 2.54,
-        "score": 81.2,
-        "signal": "有力"
-      },
-      {
-        "name": "Chevron",
-        "code": "CVX",
-        "price": 205.74,
-        "change_pct": 1.5,
-        "score": 79.0,
-        "signal": "有力"
-      },
-      {
-        "name": "JPMorgan",
-        "code": "JPM",
-        "price": 363.25,
-        "change_pct": 0.63,
-        "score": 78.4,
-        "signal": "有力"
+        "score": 80.3,
+        "signal": "最有力",
+        "valuation": 58.1,
+        "quality": 100.0,
+        "financial": 92.5,
+        "technical": 61.2,
+        "catalyst": 94.8,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
       },
       {
         "name": "Micron",
         "code": "MU",
         "price": 940.76,
         "change_pct": -7.02,
-        "score": 78.1,
-        "signal": "有力"
-      },
-      {
-        "name": "Eli Lilly",
-        "code": "LLY",
-        "price": 1225.73,
-        "change_pct": 3.6,
-        "score": 77.7,
-        "signal": "有力"
-      },
-      {
-        "name": "GE Aerospace",
-        "code": "GE",
-        "price": 375.09,
-        "change_pct": 1.53,
         "score": 77.6,
-        "signal": "有力"
+        "signal": "有力",
+        "valuation": 28.8,
+        "quality": 100.0,
+        "financial": 91.1,
+        "technical": 62.6,
+        "catalyst": 81.3,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "A",
+          "technical": "C",
+          "catalyst": "A"
+        }
       },
       {
-        "name": "AbbVie",
-        "code": "ABBV",
-        "price": 258.92,
-        "change_pct": 3.43,
-        "score": 77.5,
-        "signal": "有力"
+        "name": "Exxon Mobil",
+        "code": "XOM",
+        "price": 165.56,
+        "change_pct": 2.54,
+        "score": 76.8,
+        "signal": "有力",
+        "valuation": 63.1,
+        "quality": 74.5,
+        "financial": 76.2,
+        "technical": 73.9,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
       },
       {
-        "name": "Texas Instruments",
-        "code": "TXN",
-        "price": 272.24,
-        "change_pct": -3.77,
-        "score": 77.0,
-        "signal": "有力"
+        "name": "Chevron",
+        "code": "CVX",
+        "price": 205.74,
+        "change_pct": 1.5,
+        "score": 76.2,
+        "signal": "有力",
+        "valuation": 64.0,
+        "quality": 77.4,
+        "financial": 75.0,
+        "technical": 71.6,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Goldman Sachs",
+        "code": "GS",
+        "price": 1040.47,
+        "change_pct": -1.03,
+        "score": 71.9,
+        "signal": "有力",
+        "valuation": 70.9,
+        "quality": 87.7,
+        "financial": 40.0,
+        "technical": 58.3,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "A",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Bank of America",
+        "code": "BAC",
+        "price": 64.23,
+        "change_pct": 0.53,
+        "score": 70.6,
+        "signal": "有力",
+        "valuation": 67.8,
+        "quality": 76.2,
+        "financial": 77.9,
+        "technical": 57.3,
+        "catalyst": 96.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Booking Holdings",
+        "code": "BKNG",
+        "price": 208.25,
+        "change_pct": 1.7,
+        "score": 69.8,
+        "signal": "有力",
+        "valuation": 45.0,
+        "quality": 84.6,
+        "financial": 68.9,
+        "technical": 65.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Uber",
+        "code": "UBER",
+        "price": 74.66,
+        "change_pct": -0.44,
+        "score": 69.1,
+        "signal": "有力",
+        "valuation": 55.7,
+        "quality": 85.8,
+        "financial": 70.4,
+        "technical": 59.0,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "JPMorgan",
+        "code": "JPM",
+        "price": 363.25,
+        "change_pct": 0.63,
+        "score": 69.0,
+        "signal": "有力",
+        "valuation": 61.6,
+        "quality": 88.0,
+        "financial": 46.0,
+        "technical": 54.4,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Lam Research",
+        "code": "LRCX",
+        "price": 327.92,
+        "change_pct": -4.63,
+        "score": 68.8,
+        "signal": "有力",
+        "valuation": 12.6,
+        "quality": 89.6,
+        "financial": 75.1,
+        "technical": 63.0,
+        "catalyst": 67.9,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "C",
+          "catalyst": "B"
+        }
       }
     ]
   }

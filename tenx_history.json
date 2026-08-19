@@ -2554,5 +2554,230 @@
     "name": "Texas Instruments",
     "buy_price": 272.24,
     "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "9104",
+    "name": "商船三井",
+    "buy_price": 6966.0,
+    "score": 76.4
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6504",
+    "name": "富士電機",
+    "buy_price": 13505.0,
+    "score": 72.7
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6594",
+    "name": "ニデック",
+    "buy_price": 2633.0,
+    "score": 70.4
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8411",
+    "name": "みずほFG",
+    "buy_price": 8108.0,
+    "score": 77.0
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6857",
+    "name": "アドバンテスト",
+    "buy_price": 35020.0,
+    "score": 75.9
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8316",
+    "name": "三井住友FG",
+    "buy_price": 6568.0,
+    "score": 71.8
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8630",
+    "name": "SOMPO HD",
+    "buy_price": 6588.0,
+    "score": 71.4
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6504",
+    "name": "富士電機",
+    "buy_price": 13505.0,
+    "score": 72.3
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "7733",
+    "name": "オリンパス",
+    "buy_price": 2131.5,
+    "score": 71.0
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "SMCI",
+    "name": "Super Micro Computer",
+    "buy_price": 37.41,
+    "score": 78.1
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "TSM",
+    "name": "TSMC",
+    "buy_price": 413.41,
+    "score": 74.6
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "MSFT",
+    "name": "Microsoft",
+    "buy_price": 481.63,
+    "score": 73.3
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "UBER",
+    "name": "Uber",
+    "buy_price": 74.66,
+    "score": 71.2
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "MU",
+    "name": "Micron",
+    "buy_price": 940.76,
+    "score": 78.8
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "TSM",
+    "name": "TSMC",
+    "buy_price": 413.41,
+    "score": 77.0
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "BAC",
+    "name": "Bank of America",
+    "buy_price": 64.23,
+    "score": 73.5
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "PLTR",
+    "name": "Palantir",
+    "buy_price": 171.54,
+    "score": 73.2
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "SHOP",
+    "name": "Shopify",
+    "buy_price": 146.58,
+    "score": 72.2
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "JPM",
+    "name": "JPMorgan",
+    "buy_price": 363.25,
+    "score": 71.2
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "SMCI",
+    "name": "Super Micro Computer",
+    "buy_price": 37.41,
+    "score": 70.3
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "GS",
+    "name": "Goldman Sachs",
+    "buy_price": 1040.47,
+    "score": 71.9
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "BAC",
+    "name": "Bank of America",
+    "buy_price": 64.23,
+    "score": 70.6
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "BKNG",
+    "name": "Booking Holdings",
+    "buy_price": 208.25,
+    "score": 69.8
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "UBER",
+    "name": "Uber",
+    "buy_price": 74.66,
+    "score": 69.1
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "LRCX",
+    "name": "Lam Research",
+    "buy_price": 327.92,
+    "score": 68.8
   }
 ]

@@ -61,6 +61,20 @@ button{font-family:inherit}
 .total span{font-size:11px;color:#9facbc}.total b{display:block;margin-top:3px;font-size:15px}
 .note{text-align:center;color:#6f7d8d;font-size:10px;line-height:1.6;margin:18px 5px}
 .empty{text-align:center;padding:24px;color:#788596}
+
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
+.tool{border:1px solid #2a394b;background:#0d1722;color:#fff;border-radius:11px;padding:9px 4px;font-size:12px;font-weight:800}
+.tool.on{outline:2px solid #ffd54f}
+.alertbox,.portbox{display:none;margin:10px 0;border:1px solid #2b3e53;border-radius:14px;background:#0a131e;padding:12px}
+.alertbox.show,.portbox.show{display:block}
+.paneltitle{font-size:17px;font-weight:900;margin-bottom:8px}
+.alertitem,.portitem{border-top:1px solid #203044;padding:9px 0}.alertitem:first-of-type,.portitem:first-of-type{border-top:0}
+.alertwhy{font-size:11px;color:#9fadc0;margin-top:3px;line-height:1.45}
+.actions{display:flex;gap:6px;margin-top:9px}.act{flex:1;border:1px solid #29415b;background:#101c29;color:#fff;border-radius:8px;padding:7px;font-size:11px;font-weight:800}.act.favon{color:#ffd54f;border-color:#9d7c19}
+.buymatch{margin-top:8px;border-radius:8px;padding:7px 9px;background:#172617;border:1px solid #3c7b43;color:#7df197;font-size:11px;font-weight:900}
+.portgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}.portgrid div{background:#101a25;border-radius:8px;padding:7px}.portgrid label{display:block;color:#8391a3;font-size:9px}.portgrid b{font-size:12px}
+.badge{display:inline-block;border-radius:999px;padding:2px 7px;font-size:10px;font-weight:900;background:#3b2d00;color:#ffd54f;margin-left:6px}
+
 @media(min-width:760px){.list{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -71,6 +85,15 @@ button{font-family:inherit}
 <div class="sub">割安性・企業品質/成長・財務安全性・テクニカル・カタリストの5本柱で総合評価</div>
 
 <div class="status"><div id="updated">最終更新：読込中…</div><div class="auto">自動更新</div></div>
+<div class="tools">
+  <button id="refresh" class="tool">↻ 更新</button>
+  <button id="alertsBtn" class="tool">🔔 買いアラート</button>
+  <button id="favBtn" class="tool">★ お気に入り</button>
+  <button id="portBtn" class="tool">💼 保有株</button>
+</div>
+<div id="alertbox" class="alertbox"><div class="paneltitle">買い条件一致候補 <span id="alertCount" class="badge">0</span></div><div id="alertRows"></div><button id="notifyBtn" class="act">アプリ起動時通知をON</button></div>
+<div id="portbox" class="portbox"><div class="paneltitle">保有株管理</div><div id="portRows"></div></div>
+
 
 <div class="sticky">
   <div class="markets">
@@ -99,7 +122,7 @@ button{font-family:inherit}
 
 <script>
 let market=localStorage.getItem("tenx_market")||"japan",horizon=localStorage.getItem("tenx_horizon")||"short",
-D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]}},H=[];
+D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]}},H=[],favOnly=false;
 const $=s=>document.querySelector(s),L={short:"短期",medium:"中期",long:"長期"};
 const money=(x,m=market)=>m==="japan"?"¥"+Number(x).toLocaleString(undefined,{maximumFractionDigits:2}):"$"+Number(x).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const chart=x=>"https://www.tradingview.com/chart/?symbol="+encodeURIComponent(market==="japan"?"TSE:"+x.code:x.code);
@@ -107,75 +130,27 @@ const sig=s=>s==="最有力"?"best":s==="有力"?"good":"watch";
 const gclass=g=>"g"+String(g||"C").toLowerCase();
 const gv=(x,k)=>x.grades?.[k]||"C";
 const sv=(x,k)=>Number(x[k]??50).toFixed(0);
-
-function firstBuy(code){
-  const a=H.filter(x=>x.market===market&&x.horizon===horizon&&x.code===code)
-           .sort((a,b)=>String(a.date).localeCompare(String(b.date)));
-  return a.length?Number(a[0].buy_price):null
-}
-function entryPrice(x){
-  const h=firstBuy(x.code),n=Number(x.price),c=Number(x.change_pct);
-  if(h!==null&&Number.isFinite(h)&&h>0){
-    const same=Math.abs(h-n)<0.005;
-    if(same&&Number.isFinite(c)&&Math.abs(c)>0.005&&1+c/100>0)return n/(1+c/100);
-    return h;
-  }
-  if(Number.isFinite(n)&&Number.isFinite(c)&&1+c/100>0)return n/(1+c/100);
-  return n;
-}
-function syncControls(){
-  $("#jp").classList.toggle("active",market==="japan");
-  $("#us").classList.toggle("active",market==="usa");
-  document.querySelectorAll(".h").forEach(b=>b.classList.toggle("active",b.dataset.h===horizon));
-}
-function render(){
-  syncControls();
-  const a=(D[market]?.[horizon]||[]).slice(0,10),mname=market==="japan"?"日本株":"米国株";
-  $("#title").textContent=mname+"・"+L[horizon]+" TOP10";
-  $("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";
-  $("#list").innerHTML=a.length?a.map((x,i)=>`
-    <div class="stock">
-      <div class="r1">
-        <div class="rank">${i+1}</div>
-        <div><div class="name">${x.name}</div><div class="code">${x.code}</div></div>
-        <a class="chart" href="${chart(x)}" target="_blank" rel="noopener">📈</a>
-      </div>
-      <div class="r2">
-        <div class="m"><label>現在値</label><strong>${money(x.price)}</strong></div>
-        <div class="m"><label>騰落率</label><strong class="${x.change_pct>=0?"up":"down"}">${x.change_pct>0?"+":""}${x.change_pct}%</strong></div>
-        <div class="m"><label>総合スコア</label><strong>${x.score}</strong></div>
-        <span class="sig ${sig(x.signal)}">${x.signal}</span>
-      </div>
-      <div class="five">
-        <div class="f"><label>割安</label><b class="${gclass(gv(x,"valuation"))}">${gv(x,"valuation")} ${sv(x,"valuation")}</b></div>
-        <div class="f"><label>品質</label><b class="${gclass(gv(x,"quality"))}">${gv(x,"quality")} ${sv(x,"quality")}</b></div>
-        <div class="f"><label>財務</label><b class="${gclass(gv(x,"financial"))}">${gv(x,"financial")} ${sv(x,"financial")}</b></div>
-        <div class="f"><label>技術</label><b class="${gclass(gv(x,"technical"))}">${gv(x,"technical")} ${sv(x,"technical")}</b></div>
-        <div class="f"><label>材料</label><b class="${gclass(gv(x,"catalyst"))}">${gv(x,"catalyst")} ${sv(x,"catalyst")}</b></div>
-      </div>
-    </div>`).join(""):'<div class="empty">データ更新後に表示します。</div>';
-  let tb=0,tn=0;
-  $("#simrows").innerHTML=a.length?a.map((x,i)=>{
-    const b=entryPrice(x),n=Number(x.price),bv=b*100,nv=n*100,pl=nv-bv,p=b?(n/b-1)*100:0;
-    tb+=bv;tn+=nv;
-    return `<div class="srow"><div class="sname"><span>${i+1}. ${x.name}（${x.code}）</span><span class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${p.toFixed(2)}%</span></div><div class="sg"><div class="sc"><label>購入額（100株）</label><strong>${money(bv)}</strong></div><div class="sc"><label>現在価値（100株）</label><strong>${money(nv)}</strong></div><div class="sc"><label>評価損益</label><strong class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${money(pl)}</strong></div></div></div>`
-  }).join(""):'<div class="empty">仮想購入データがありません。</div>';
-  const pl=tn-tb,pct=tb?(tn/tb-1)*100:0;
-  $("#total").innerHTML=`<span>合計購入額<b>${money(tb)}</b></span><span>現在評価額<b>${money(tn)}</b></span><span>合計損益<b class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${money(pl)}</b></span><span>損益率<b class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${pct.toFixed(2)}%</b></span>`;
-}
-$("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};
-$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};
-document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});
-Promise.all([
-  fetch("tenx_data.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()),
-  fetch("tenx_history.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json())
-]).then(([d,h])=>{
-  D=d;H=Array.isArray(h)?h:[];
-  $("#updated").textContent="最終更新："+d.updated_at;
-  render()
-}).catch(()=>{$("#updated").textContent="データ読込エラー"});
-render();
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+const favKey=(m,c)=>m+":"+c;
+const getFavs=()=>new Set(JSON.parse(localStorage.getItem("tenx_favs")||"[]"));
+const setFavs=s=>localStorage.setItem("tenx_favs",JSON.stringify([...s]));
+const getPorts=()=>JSON.parse(localStorage.getItem("tenx_portfolio")||"{}");
+const setPorts=o=>localStorage.setItem("tenx_portfolio",JSON.stringify(o));
+function firstBuy(code){const a=H.filter(x=>x.market===market&&x.horizon===horizon&&x.code===code).sort((a,b)=>String(a.date).localeCompare(String(b.date)));return a.length?Number(a[0].buy_price):null}
+function entryPrice(x){const h=firstBuy(x.code),n=Number(x.price),c=Number(x.change_pct);if(h!==null&&Number.isFinite(h)&&h>0){const same=Math.abs(h-n)<.005;if(same&&Number.isFinite(c)&&Math.abs(c)>.005&&1+c/100>0)return n/(1+c/100);return h}if(Number.isFinite(n)&&Number.isFinite(c)&&1+c/100>0)return n/(1+c/100);return n}
+function buyMatch(x){const score=Number(x.score),tech=Number(x.technical),cat=Number(x.catalyst),fin=Number(x.financial),q=Number(x.quality);let ok=false,why=[];if(horizon==="short"){ok=score>=78&&tech>=78&&cat>=60; if(tech>=78)why.push("技術強い"); if(cat>=60)why.push("材料良好")}else if(horizon==="medium"){ok=score>=76&&tech>=70&&q>=65; if(q>=65)why.push("品質/成長良好"); if(tech>=70)why.push("上昇基調")}else{ok=score>=75&&q>=70&&fin>=60; if(q>=70)why.push("成長力"); if(fin>=60)why.push("財務安定")}if(score>=80)why.unshift("総合80点以上");return {ok,why:why.join("・")||"総合条件を確認"}}
+function syncControls(){$("#jp").classList.toggle("active",market==="japan");$("#us").classList.toggle("active",market==="usa");document.querySelectorAll(".h").forEach(b=>b.classList.toggle("active",b.dataset.h===horizon));$("#favBtn").classList.toggle("on",favOnly)}
+function toggleFav(code){const f=getFavs(),k=favKey(market,code);f.has(k)?f.delete(k):f.add(k);setFavs(f);render()}
+function addHolding(x){const qty=prompt(x.name+" の保有株数を入力してください","100");if(qty===null)return;const q=Number(qty);if(!(q>0))return alert("株数を正しく入力してください");const bp=prompt("平均購入単価を入力してください",String(x.price));if(bp===null)return;const b=Number(bp);if(!(b>0))return alert("購入単価を正しく入力してください");const p=getPorts();p[favKey(market,x.code)]={market,code:x.code,name:x.name,qty:q,buyPrice:b};setPorts(p);renderPortfolio();alert("保有株に登録しました")}
+function removeHolding(k){const p=getPorts();delete p[k];setPorts(p);renderPortfolio()}
+function latestPrice(m,c){for(const h of ["short","medium","long"]){const x=(D[m]?.[h]||[]).find(z=>String(z.code)===String(c));if(x)return Number(x.price)}return null}
+function renderPortfolio(){const p=getPorts(),rows=Object.entries(p);if(!rows.length){$("#portRows").innerHTML='<div class="empty">まだ保有株は登録されていません。</div>';return}let totalCost=0,totalNow=0;$("#portRows").innerHTML=rows.map(([k,v])=>{const n=latestPrice(v.market,v.code),cost=v.qty*v.buyPrice,now=n==null?null:v.qty*n,pl=now==null?null:now-cost;totalCost+=cost;if(now!=null)totalNow+=now;return `<div class="portitem"><b>${v.name}（${v.code}）</b><div class="portgrid"><div><label>保有</label><b>${v.qty}株</b></div><div><label>購入単価</label><b>${money(v.buyPrice,v.market)}</b></div><div><label>損益</label><b class="${pl==null?'':pl>=0?'up':'down'}">${pl==null?'圏外':(pl>=0?'+':'')+money(pl,v.market)}</b></div></div><div class="actions"><button class="act" onclick="removeHolding('${k}')">削除</button></div></div>`}).join("")+`<div class="total"><span>取得額合計<b>¥${Math.round(totalCost).toLocaleString()}</b></span><span>現在額参考<b>¥${Math.round(totalNow).toLocaleString()}</b></span></div>`}
+function currentAlerts(){return (D[market]?.[horizon]||[]).slice(0,10).filter(x=>buyMatch(x).ok)}
+function renderAlerts(){const a=currentAlerts();$("#alertCount").textContent=a.length;$("#alertRows").innerHTML=a.length?a.map(x=>`<div class="alertitem"><b>${x.name}（${x.code}）</b> <span class="sig ${sig(x.signal)}">${x.signal}</span><div class="alertwhy">${buyMatch(x).why}・総合 ${x.score}点</div></div>`).join(""):'<div class="empty">現在、この条件に一致する銘柄はありません。</div>'}
+async function maybeNotify(){if(!('Notification' in window)||Notification.permission!=="granted")return;const a=currentAlerts();const key=market+":"+horizon+":"+a.map(x=>x.code).join(","),prev=localStorage.getItem("tenx_last_alert");if(a.length&&key!==prev){localStorage.setItem("tenx_last_alert",key);if('serviceWorker' in navigator){const reg=await navigator.serviceWorker.ready;reg.showNotification("10X STOCK 買いアラート",{body:`${market==='japan'?'日本株':'米国株'}・${L[horizon]}で ${a.length}銘柄が条件一致`,icon:'icon-192.png',badge:'icon-192.png'})}}}
+function render(){syncControls();const favs=getFavs();let a=(D[market]?.[horizon]||[]).slice(0,10);if(favOnly)a=a.filter(x=>favs.has(favKey(market,x.code)));const mname=market==="japan"?"日本株":"米国株";$("#title").textContent=mname+"・"+L[horizon]+(favOnly?" お気に入り":" TOP10");$("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";$("#list").innerHTML=a.length?a.map((x,i)=>{const bm=buyMatch(x),isfav=favs.has(favKey(market,x.code));return `<div class="stock"><div class="r1"><div class="rank">${i+1}</div><div><div class="name">${x.name}</div><div class="code">${x.code}</div></div><a class="chart" href="${chart(x)}" target="_blank" rel="noopener">📈</a></div><div class="r2"><div class="m"><label>現在値</label><strong>${money(x.price)}</strong></div><div class="m"><label>騰落率</label><strong class="${x.change_pct>=0?'up':'down'}">${x.change_pct>0?'+':''}${x.change_pct}%</strong></div><div class="m"><label>総合スコア</label><strong>${x.score}</strong></div><span class="sig ${sig(x.signal)}">${x.signal}</span></div><div class="five"><div class="f"><label>割安</label><b class="${gclass(gv(x,'valuation'))}">${gv(x,'valuation')} ${sv(x,'valuation')}</b></div><div class="f"><label>品質</label><b class="${gclass(gv(x,'quality'))}">${gv(x,'quality')} ${sv(x,'quality')}</b></div><div class="f"><label>財務</label><b class="${gclass(gv(x,'financial'))}">${gv(x,'financial')} ${sv(x,'financial')}</b></div><div class="f"><label>技術</label><b class="${gclass(gv(x,'technical'))}">${gv(x,'technical')} ${sv(x,'technical')}</b></div><div class="f"><label>材料</label><b class="${gclass(gv(x,'catalyst'))}">${gv(x,'catalyst')} ${sv(x,'catalyst')}</b></div></div>${bm.ok?`<div class="buymatch">✅ 買い条件一致：${bm.why}</div>`:''}<div class="actions"><button class="act ${isfav?'favon':''}" onclick="toggleFav('${x.code}')">${isfav?'★ お気に入り済':'☆ お気に入り'}</button><button class="act" onclick='addHolding(${JSON.stringify(x).replace(/'/g,"&#39;")})'>💼 保有登録</button></div></div>`}).join(''):'<div class="empty">該当する銘柄がありません。</div>';let sim=(D[market]?.[horizon]||[]).slice(0,10),tb=0,tn=0;$("#simrows").innerHTML=sim.length?sim.map((x,i)=>{const b=entryPrice(x),n=Number(x.price),bv=b*100,nv=n*100,pl=nv-bv,p=b?(n/b-1)*100:0;tb+=bv;tn+=nv;return `<div class="srow"><div class="sname"><span>${i+1}. ${x.name}（${x.code}）</span><span class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${p.toFixed(2)}%</span></div><div class="sg"><div class="sc"><label>購入額（100株）</label><strong>${money(bv)}</strong></div><div class="sc"><label>現在価値（100株）</label><strong>${money(nv)}</strong></div><div class="sc"><label>評価損益</label><strong class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${money(pl)}</strong></div></div></div>`}).join(''):'<div class="empty">仮想購入データがありません。</div>';const pl=tn-tb,pct=tb?(tn/tb-1)*100:0;$("#total").innerHTML=`<span>合計購入額<b>${money(tb)}</b></span><span>現在評価額<b>${money(tn)}</b></span><span>合計損益<b class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${money(pl)}</b></span><span>損益率<b class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${pct.toFixed(2)}%</b></span>`;renderAlerts();renderPortfolio();maybeNotify()}
+function loadData(){$("#updated").textContent="最終更新：読込中…";return Promise.all([fetch("tenx_data.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()),fetch("tenx_history.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json())]).then(([d,h])=>{D=d;H=Array.isArray(h)?h:[];$("#updated").textContent="最終更新："+d.updated_at;render()}).catch(()=>{$("#updated").textContent="データ読込エラー"})}
+$("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});$("#refresh").onclick=()=>loadData();$("#alertsBtn").onclick=()=>{$("#alertbox").classList.toggle("show")};$("#portBtn").onclick=()=>{$("#portbox").classList.toggle("show");renderPortfolio()};$("#favBtn").onclick=()=>{favOnly=!favOnly;render()};$("#notifyBtn").onclick=async()=>{if(!('Notification' in window))return alert("この端末では通知機能を利用できません");const p=await Notification.requestPermission();alert(p==="granted"?"アプリ起動時の買いアラート通知をONにしました":"通知は許可されませんでした")};
+render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script>
 </body>
 </html>

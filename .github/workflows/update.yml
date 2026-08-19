@@ -3,7 +3,10 @@ name: Update stock candidates
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 7 * * 1-5'
+    # 日本株の引け後（16:00 JST）
+    - cron: '0 7 * * 1-5'
+    # 米国株の引け後（06:30 JST、翌朝）
+    - cron: '30 21 * * 1-5'
 
 permissions:
   contents: write

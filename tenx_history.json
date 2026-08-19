@@ -2014,5 +2014,545 @@
     "name": "Bank of America",
     "buy_price": 64.49,
     "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7974",
+    "name": "任天堂",
+    "buy_price": 8577.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "9101",
+    "name": "日本郵船",
+    "buy_price": 6733.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7733",
+    "name": "オリンパス",
+    "buy_price": 2131.5,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "9107",
+    "name": "川崎汽船",
+    "buy_price": 3157.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "1605",
+    "name": "INPEX",
+    "buy_price": 3860.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6857",
+    "name": "アドバンテスト",
+    "buy_price": 35020.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6098",
+    "name": "リクルートHD",
+    "buy_price": 15740.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "4502",
+    "name": "武田薬品工業",
+    "buy_price": 5769.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7011",
+    "name": "三菱重工業",
+    "buy_price": 4097.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "short",
+    "code": "9432",
+    "name": "NTT",
+    "buy_price": 159.4,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "9101",
+    "name": "日本郵船",
+    "buy_price": 6733.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6098",
+    "name": "リクルートHD",
+    "buy_price": 15740.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "7733",
+    "name": "オリンパス",
+    "buy_price": 2131.5,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "9104",
+    "name": "商船三井",
+    "buy_price": 6966.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "9107",
+    "name": "川崎汽船",
+    "buy_price": 3157.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "4502",
+    "name": "武田薬品工業",
+    "buy_price": 5769.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "1605",
+    "name": "INPEX",
+    "buy_price": 3860.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8725",
+    "name": "MS&AD",
+    "buy_price": 4860.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "8306",
+    "name": "三菱UFJ FG",
+    "buy_price": 3495.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "7267",
+    "name": "ホンダ",
+    "buy_price": 1662.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "8630",
+    "name": "SOMPO HD",
+    "buy_price": 6588.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6098",
+    "name": "リクルートHD",
+    "buy_price": 15740.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "8411",
+    "name": "みずほFG",
+    "buy_price": 8108.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "9983",
+    "name": "ファーストリテイリング",
+    "buy_price": 74940.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "8306",
+    "name": "三菱UFJ FG",
+    "buy_price": 3495.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "8725",
+    "name": "MS&AD",
+    "buy_price": 4860.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6857",
+    "name": "アドバンテスト",
+    "buy_price": 35020.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "1605",
+    "name": "INPEX",
+    "buy_price": 3860.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "8316",
+    "name": "三井住友FG",
+    "buy_price": 6568.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "japan",
+    "horizon": "long",
+    "code": "9104",
+    "name": "商船三井",
+    "buy_price": 6966.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "CRM",
+    "name": "Salesforce",
+    "buy_price": 196.14,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "SHOP",
+    "name": "Shopify",
+    "buy_price": 146.58,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "XOM",
+    "name": "Exxon Mobil",
+    "buy_price": 165.56,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "CVX",
+    "name": "Chevron",
+    "buy_price": 205.74,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "PANW",
+    "name": "Palo Alto Networks",
+    "buy_price": 374.14,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "PLTR",
+    "name": "Palantir",
+    "buy_price": 171.54,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "CRWD",
+    "name": "CrowdStrike",
+    "buy_price": 212.92,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "MRK",
+    "name": "Merck",
+    "buy_price": 135.17,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "BKNG",
+    "name": "Booking Holdings",
+    "buy_price": 208.25,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "short",
+    "code": "LLY",
+    "name": "Eli Lilly",
+    "buy_price": 1225.73,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "PANW",
+    "name": "Palo Alto Networks",
+    "buy_price": 374.14,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "CRWD",
+    "name": "CrowdStrike",
+    "buy_price": 212.92,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "ASML",
+    "name": "ASML",
+    "buy_price": 1802.98,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "XOM",
+    "name": "Exxon Mobil",
+    "buy_price": 165.56,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "LLY",
+    "name": "Eli Lilly",
+    "buy_price": 1225.73,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "CVX",
+    "name": "Chevron",
+    "buy_price": 205.74,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "MRK",
+    "name": "Merck",
+    "buy_price": 135.17,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "GE",
+    "name": "GE Aerospace",
+    "buy_price": 375.09,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "ABBV",
+    "name": "AbbVie",
+    "buy_price": 258.92,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "BKNG",
+    "name": "Booking Holdings",
+    "buy_price": 208.25,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "TSM",
+    "name": "TSMC",
+    "buy_price": 413.41,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "ASML",
+    "name": "ASML",
+    "buy_price": 1802.98,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "XOM",
+    "name": "Exxon Mobil",
+    "buy_price": 165.56,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "CVX",
+    "name": "Chevron",
+    "buy_price": 205.74,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "JPM",
+    "name": "JPMorgan",
+    "buy_price": 363.25,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "MU",
+    "name": "Micron",
+    "buy_price": 940.76,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "LLY",
+    "name": "Eli Lilly",
+    "buy_price": 1225.73,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "GE",
+    "name": "GE Aerospace",
+    "buy_price": 375.09,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "ABBV",
+    "name": "AbbVie",
+    "buy_price": 258.92,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-19",
+    "market": "usa",
+    "horizon": "long",
+    "code": "TXN",
+    "name": "Texas Instruments",
+    "buy_price": 272.24,
+    "shares": 100
   }
 ]

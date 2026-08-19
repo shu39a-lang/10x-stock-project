@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050910">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="元金10倍計画">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>元金10倍計画</title>
 <style>
 *{box-sizing:border-box}
@@ -92,7 +98,7 @@ button{font-family:inherit}
 </div>
 
 <script>
-let market="japan",horizon="short",
+let market=localStorage.getItem("tenx_market")||"japan",horizon=localStorage.getItem("tenx_horizon")||"short",
 D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]}},H=[];
 const $=s=>document.querySelector(s),L={short:"短期",medium:"中期",long:"長期"};
 const money=(x,m=market)=>m==="japan"?"¥"+Number(x).toLocaleString(undefined,{maximumFractionDigits:2}):"$"+Number(x).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -107,7 +113,6 @@ function firstBuy(code){
            .sort((a,b)=>String(a.date).localeCompare(String(b.date)));
   return a.length?Number(a[0].buy_price):null
 }
-
 function entryPrice(x){
   const h=firstBuy(x.code),n=Number(x.price),c=Number(x.change_pct);
   if(h!==null&&Number.isFinite(h)&&h>0){
@@ -118,18 +123,22 @@ function entryPrice(x){
   if(Number.isFinite(n)&&Number.isFinite(c)&&1+c/100>0)return n/(1+c/100);
   return n;
 }
-
+function syncControls(){
+  $("#jp").classList.toggle("active",market==="japan");
+  $("#us").classList.toggle("active",market==="usa");
+  document.querySelectorAll(".h").forEach(b=>b.classList.toggle("active",b.dataset.h===horizon));
+}
 function render(){
+  syncControls();
   const a=(D[market]?.[horizon]||[]).slice(0,10),mname=market==="japan"?"日本株":"米国株";
   $("#title").textContent=mname+"・"+L[horizon]+" TOP10";
   $("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";
-
   $("#list").innerHTML=a.length?a.map((x,i)=>`
     <div class="stock">
       <div class="r1">
         <div class="rank">${i+1}</div>
         <div><div class="name">${x.name}</div><div class="code">${x.code}</div></div>
-        <a class="chart" href="${chart(x)}" target="_blank">📈</a>
+        <a class="chart" href="${chart(x)}" target="_blank" rel="noopener">📈</a>
       </div>
       <div class="r2">
         <div class="m"><label>現在値</label><strong>${money(x.price)}</strong></div>
@@ -145,37 +154,28 @@ function render(){
         <div class="f"><label>材料</label><b class="${gclass(gv(x,"catalyst"))}">${gv(x,"catalyst")} ${sv(x,"catalyst")}</b></div>
       </div>
     </div>`).join(""):'<div class="empty">データ更新後に表示します。</div>';
-
   let tb=0,tn=0;
   $("#simrows").innerHTML=a.length?a.map((x,i)=>{
     const b=entryPrice(x),n=Number(x.price),bv=b*100,nv=n*100,pl=nv-bv,p=b?(n/b-1)*100:0;
     tb+=bv;tn+=nv;
     return `<div class="srow"><div class="sname"><span>${i+1}. ${x.name}（${x.code}）</span><span class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${p.toFixed(2)}%</span></div><div class="sg"><div class="sc"><label>購入額（100株）</label><strong>${money(bv)}</strong></div><div class="sc"><label>現在価値（100株）</label><strong>${money(nv)}</strong></div><div class="sc"><label>評価損益</label><strong class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${money(pl)}</strong></div></div></div>`
   }).join(""):'<div class="empty">仮想購入データがありません。</div>';
-
   const pl=tn-tb,pct=tb?(tn/tb-1)*100:0;
   $("#total").innerHTML=`<span>合計購入額<b>${money(tb)}</b></span><span>現在評価額<b>${money(tn)}</b></span><span>合計損益<b class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${money(pl)}</b></span><span>損益率<b class="${pl>=0?"up":"down"}">${pl>=0?"+":""}${pct.toFixed(2)}%</b></span>`;
 }
-
-$("#jp").onclick=()=>{market="japan";$("#jp").classList.add("active");$("#us").classList.remove("active");render()};
-$("#us").onclick=()=>{market="usa";$("#us").classList.add("active");$("#jp").classList.remove("active");render()};
-document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{
-  horizon=b.dataset.h;
-  document.querySelectorAll(".h").forEach(x=>x.classList.toggle("active",x===b));
-  render()
-});
-
+$("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};
+$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};
+document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});
 Promise.all([
-  fetch("tenx_data.json?"+Date.now()).then(r=>r.json()),
-  fetch("tenx_history.json?"+Date.now()).then(r=>r.json())
+  fetch("tenx_data.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()),
+  fetch("tenx_history.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json())
 ]).then(([d,h])=>{
   D=d;H=Array.isArray(h)?h:[];
   $("#updated").textContent="最終更新："+d.updated_at;
   render()
-}).catch(()=>{
-  $("#updated").textContent="データ読込エラー"
-});
+}).catch(()=>{$("#updated").textContent="データ読込エラー"});
 render();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script>
 </body>
 </html>

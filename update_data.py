@@ -109,7 +109,7 @@ def info_scores(symbol):
     }
 
 def analyze(symbol, name):
-    d = yf.download(symbol, period="2y", auto_adjust=True, progress=False, threads=False)
+    d = yf.download(symbol, period="2y", auto_adjust=False, progress=False, threads=False)
     if isinstance(d.columns, pd.MultiIndex):
         d.columns = d.columns.get_level_values(0)
     if len(d) < 210:
@@ -206,18 +206,9 @@ def make_row(x, s, horizon):
 
 def rank(universe, market):
     rows = []
-    quotes = {}
     for symbol, name in universe.items():
         try:
             x = analyze(symbol, name)
-            if x:
-                # ランキング外でも保有株管理で現在値を使えるよう、全監視銘柄の価格を保存。
-                quotes[str(x["code"])] = {
-                    "name": x["name"],
-                    "code": x["code"],
-                    "price": x["price"],
-                    "change_pct": x["change_pct"]
-                }
             min_value = 300_000_000 if market == "japan" else 20_000_000
             if x and x["avg_value20"] >= min_value:
                 rows.append(x)
@@ -250,14 +241,12 @@ def rank(universe, market):
 
         out[horizon] = sorted(candidates, key=lambda z: z["score"], reverse=True)[:10]
 
-    return out, quotes
+    return out
 
 now = datetime.now(JST)
-jp_rank, jp_quotes = rank(JP, "japan")
-us_rank, us_quotes = rank(US, "usa")
 data = {
     "updated_at": now.strftime("%Y-%m-%d %H:%M JST"),
-    "engine_version": "3.1-5factor-custom-holdings",
+    "engine_version": "3.0-5factor",
     "scoring":{
         "valuation":20,
         "quality_growth":25,
@@ -265,9 +254,8 @@ data = {
         "technical":25,
         "catalyst":15
     },
-    "japan": jp_rank,
-    "usa": us_rank,
-    "quotes": {"japan": jp_quotes, "usa": us_quotes},
+    "japan": rank(JP, "japan"),
+    "usa": rank(US, "usa"),
 }
 
 (R / "tenx_data.json").write_text(

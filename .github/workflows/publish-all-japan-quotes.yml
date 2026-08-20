@@ -1,0 +1,216 @@
+name: Publish All Japan Live Quotes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-all-japan-quotes.yml"
+  schedule:
+    - cron: "*/30 * * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: all-japan-live-quotes
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all TSE quotes on GitHub server
+        shell: bash
+        run: |
+          cat > /tmp/build_quotes.py <<'PY'
+          import json, urllib.request
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          URL = "https://scanner.tradingview.com/japan/scan"
+          payload = {
+              "filter": [{"left": "exchange", "operation": "equal", "right": "TSE"}],
+              "options": {"lang": "ja"},
+              "markets": ["japan"],
+              "symbols": {"query": {"types": []}, "tickers": []},
+              "columns": ["name", "description", "close", "change", "exchange"],
+              "range": [0, 10000]
+          }
+
+          req = urllib.request.Request(
+              URL,
+              data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+              headers={
+                  "Content-Type": "application/json",
+                  "Accept": "application/json",
+                  "User-Agent": "Mozilla/5.0"
+              },
+              method="POST"
+          )
+
+          with urllib.request.urlopen(req, timeout=60) as r:
+              data = json.loads(r.read().decode("utf-8"))
+
+          quotes = {}
+          for row in data.get("data") or []:
+              d = row.get("d") or []
+              if len(d) < 4:
+                  continue
+              code = str(d[0] or "").strip().upper().replace(".T", "")
+              price = d[2]
+              if not code or not isinstance(price, (int, float)) or price <= 0:
+                  continue
+              quotes[code] = {
+                  "code": code,
+                  "name": str(d[1] or code).strip(),
+                  "price": float(price),
+                  "change_pct": float(d[3] or 0),
+                  "source": "TradingView scanner"
+              }
+
+          if "7203" not in quotes:
+              raise SystemExit("Safety check failed: 7203 was not returned. Nothing will be published.")
+
+          Path("live_quotes.json").write_text(
+              json.dumps({
+                  "updated_at": datetime.now(timezone.utc).isoformat(),
+                  "source": "TradingView TSE full-market scan via GitHub Actions",
+                  "japan": quotes
+              }, ensure_ascii=False, separators=(",", ":")),
+              encoding="utf-8"
+          )
+
+          print("TSE quotes:", len(quotes))
+          print("7203:", quotes["7203"])
+          PY
+
+          python /tmp/build_quotes.py
+
+      - name: Patch only the published copy of index.html
+        shell: bash
+        run: |
+          cat > /tmp/patch_index.py <<'PY'
+          from pathlib import Path
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          START = "<!-- ALL_JAPAN_QUOTES_START -->"
+          END = "<!-- ALL_JAPAN_QUOTES_END -->"
+
+          a = s.find(START)
+          b = s.find(END)
+          if a != -1 and b != -1 and b > a:
+              s = s[:a] + s[b + len(END):]
+
+          block = '''<!-- ALL_JAPAN_QUOTES_START -->
+          <script>
+          (() => {
+            const originalQuoteInfo = quoteInfo;
+            let allQuotes = {japan:{}};
+
+            const quoteReady = fetch("live_quotes.json?t=" + Date.now(), {cache:"no-store"})
+              .then(r => {
+                if (!r.ok) throw new Error("live_quotes.json HTTP " + r.status);
+                return r.json();
+              })
+              .then(x => { allQuotes = x || {japan:{}}; })
+              .catch(e => console.warn("live quote cache:", e));
+
+            quoteInfo = function(m, c) {
+              const k = String(c || "").trim().toUpperCase().replace(/\.T$/i, "");
+              const liveQ = allQuotes && allQuotes[m] && allQuotes[m][k];
+              return liveQ || originalQuoteInfo(m, k);
+            };
+
+            autofillCustomStock = async function() {
+              const m = $("#customMarket").value;
+              const c = normalizeCustomCode();
+              const st = $("#customLookup");
+
+              if (!c) {
+                st.className = "lookupstatus";
+                st.textContent = "コードを入力すると会社名と現在値を確認します。";
+                return null;
+              }
+
+              $("#customName").readOnly = false;
+              $("#customNow").readOnly = false;
+              st.className = "lookupstatus";
+              st.textContent = "会社名・現在値を取得中…";
+
+              await quoteReady;
+
+              let q = quoteInfo(m, c);
+              let mappedName = "";
+              try {
+                const map = await loadCompanyMap(m);
+                mappedName = String((map && map[c]) || "").trim();
+              } catch (e) {}
+
+              if (q && Number.isFinite(Number(q.price))) {
+                const displayName = mappedName || q.name || c;
+                $("#customName").value = displayName;
+                $("#customNow").value = Number(q.price);
+                $("#customName").readOnly = true;
+                $("#customNow").readOnly = true;
+                st.className = "lookupstatus ok";
+                st.textContent =
+                  "✓ " + displayName +
+                  " ｜ 現在値 " + money(q.price, m) +
+                  " ｜ " + (Number(q.change_pct || 0) >= 0 ? "+" : "") +
+                  Number(q.change_pct || 0).toFixed(2) + "%";
+                return q;
+              }
+
+              $("#customName").value = mappedName;
+              $("#customName").readOnly = !!mappedName;
+              $("#customNow").value = "";
+              $("#customNow").readOnly = false;
+              st.className = "lookupstatus warn";
+              st.textContent = mappedName
+                ? "✓ " + mappedName + " を確認しました。現在値データはありません。"
+                : "銘柄を確認できませんでした。";
+              return null;
+            };
+          })();
+          </script>
+          <!-- ALL_JAPAN_QUOTES_END -->'''
+
+          if "</body>" not in s:
+              raise SystemExit("index.html does not contain </body>")
+
+          p.write_text(
+              s.replace("</body>", block + "\n</body>", 1),
+              encoding="utf-8"
+          )
+          PY
+
+          python /tmp/patch_index.py
+
+      - name: Verify generated files
+        shell: bash
+        run: |
+          test -s live_quotes.json
+          grep -q '"7203"' live_quotes.json
+          grep -q 'ALL_JAPAN_QUOTES_START' index.html
+          echo "Quote cache and page patch verified."
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,181 @@
+name: Publish Live Price Fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-live-price-fix.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-live-fix"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject live price lookup into published index
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          inject = r"""
+          <script>
+          (() => {
+            const remoteQuotes = { japan: {}, usa: {} };
+            const originalQuoteInfo = quoteInfo;
+
+            async function fetchTV(marketName, rawCode) {
+              const c = String(rawCode || "").trim().toUpperCase().replace(/\.T$/i, "");
+              let endpoint, payload;
+
+              if (marketName === "japan") {
+                if (!/^\d{4}[A-Z]?$/.test(c)) return null;
+                endpoint = "https://scanner.tradingview.com/japan/scan";
+                payload = {
+                  symbols: { tickers: ["TSE:" + c], query: { types: [] } },
+                  columns: ["name", "description", "close", "change"]
+                };
+              } else {
+                if (!/^[A-Z0-9.\-]+$/.test(c)) return null;
+                endpoint = "https://scanner.tradingview.com/america/scan";
+                payload = {
+                  filter: [{ left: "name", operation: "equal", right: c }],
+                  options: { lang: "en" },
+                  symbols: { query: { types: [] }, tickers: [] },
+                  columns: ["name", "description", "close", "change"]
+                };
+              }
+
+              const r = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=UTF-8" },
+                body: JSON.stringify(payload),
+                cache: "no-store"
+              });
+              if (!r.ok) return null;
+
+              const data = await r.json();
+              const row = data && Array.isArray(data.data) ? data.data[0] : null;
+              if (!row || !Array.isArray(row.d)) return null;
+
+              const price = Number(row.d[2]);
+              if (!Number.isFinite(price) || price <= 0) return null;
+
+              const q = {
+                code: c,
+                name: String(row.d[1] || row.d[0] || c).trim(),
+                price,
+                change_pct: Number(row.d[3] || 0),
+                remote: true
+              };
+              remoteQuotes[marketName][c] = q;
+              return q;
+            }
+
+            quoteInfo = function(m, c) {
+              const k = String(c || "").trim().toUpperCase().replace(/\.T$/i, "");
+              return (remoteQuotes[m] && remoteQuotes[m][k]) || originalQuoteInfo(m, k);
+            };
+
+            autofillCustomStock = async function() {
+              const m = $("#customMarket").value;
+              const c = normalizeCustomCode();
+              const st = $("#customLookup");
+
+              if (!c) {
+                st.className = "lookupstatus";
+                st.textContent = "コードを入力すると会社名と現在値を確認します。";
+                return null;
+              }
+
+              $("#customName").readOnly = false;
+              $("#customNow").readOnly = false;
+              st.className = "lookupstatus";
+              st.textContent = "会社名・現在値を取得中…";
+
+              let q = null;
+              try { q = await fetchTV(m, c); } catch (e) {}
+
+              if (!q) q = originalQuoteInfo(m, c);
+
+              let mapped = "";
+              try {
+                const map = await loadCompanyMap(m);
+                mapped = String((map && map[c]) || "").trim();
+              } catch (e) {}
+
+              if (q && Number.isFinite(Number(q.price))) {
+                q.name = mapped || q.name || c;
+                if (!remoteQuotes[m]) remoteQuotes[m] = {};
+                remoteQuotes[m][c] = q;
+
+                $("#customName").value = q.name;
+                $("#customNow").value = Number(q.price);
+                $("#customName").readOnly = true;
+                $("#customNow").readOnly = true;
+                st.className = "lookupstatus ok";
+                st.textContent =
+                  "✓ " + q.name +
+                  " ｜ 現在値 " + money(q.price, m) +
+                  " ｜ " + (Number(q.change_pct || 0) >= 0 ? "+" : "") +
+                  Number(q.change_pct || 0).toFixed(2) + "%";
+                return q;
+              }
+
+              $("#customName").value = mapped;
+              $("#customName").readOnly = !!mapped;
+              $("#customNow").value = "";
+              $("#customNow").readOnly = false;
+              st.className = "lookupstatus warn";
+              st.textContent = mapped
+                ? "✓ " + mapped + " を確認しました。現在値だけ取得できませんでした。"
+                : "自動取得できませんでした。";
+              return null;
+            };
+          })();
+          </script>
+          """
+
+          if "</body>" not in s:
+              raise SystemExit("index.html has no </body>")
+
+          # Remove an older injected copy if this workflow is rerun.
+          start = s.find("<!-- LIVE_PRICE_FIX_START -->")
+          end = s.find("<!-- LIVE_PRICE_FIX_END -->")
+          if start != -1 and end != -1 and end > start:
+              end += len("<!-- LIVE_PRICE_FIX_END -->")
+              s = s[:start] + s[end:]
+
+          block = "\n<!-- LIVE_PRICE_FIX_START -->\n" + inject + "\n<!-- LIVE_PRICE_FIX_END -->\n"
+          s = s.replace("</body>", block + "</body>", 1)
+          p.write_text(s, encoding="utf-8")
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

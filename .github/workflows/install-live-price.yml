@@ -1,0 +1,54 @@
+name: Install Live Price Fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/install-live-price.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install live-price module and stable Pages workflow
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          live = '// 10X STOCK PROJECT - live price bridge\n// Uses TradingView\'s unauthenticated scanner endpoint directly from the browser.\n(() => {\n  const remoteQuotes = { japan: {}, usa: {} };\n  const originalQuoteInfo = typeof quoteInfo === "function" ? quoteInfo : () => null;\n\n  async function tvScan(endpoint, payload) {\n    const r = await fetch(endpoint, {\n      method: "POST",\n      headers: { "Content-Type": "text/plain;charset=UTF-8" },\n      body: JSON.stringify(payload),\n      cache: "no-store"\n    });\n    if (!r.ok) throw new Error("TradingView HTTP " + r.status);\n    return r.json();\n  }\n\n  async function fetchTradingViewQuote(marketName, rawCode) {\n    const c = String(rawCode || "").trim().toUpperCase().replace(/\\.T$/i, "");\n    if (!c) return null;\n\n    let endpoint, payload;\n    if (marketName === "japan") {\n      if (!/^\\d{4}[A-Z]?$/.test(c)) return null;\n      endpoint = "https://scanner.tradingview.com/japan/scan";\n      payload = {\n        symbols: { tickers: ["TSE:" + c], query: { types: [] } },\n        columns: ["name", "description", "close", "change"]\n      };\n    } else {\n      if (!/^[A-Z0-9.\\-]+$/.test(c)) return null;\n      endpoint = "https://scanner.tradingview.com/america/scan";\n      payload = {\n        filter: [{ left: "name", operation: "equal", right: c }],\n        options: { lang: "en" },\n        symbols: { query: { types: [] }, tickers: [] },\n        columns: ["name", "description", "close", "change", "exchange"]\n      };\n    }\n\n    const data = await tvScan(endpoint, payload);\n    const row = Array.isArray(data?.data) && data.data.length ? data.data[0] : null;\n    if (!row || !Array.isArray(row.d)) return null;\n\n    const name = String(row.d[1] || row.d[0] || c).trim();\n    const price = Number(row.d[2]);\n    const change = Number(row.d[3] || 0);\n    if (!Number.isFinite(price) || price <= 0) return null;\n\n    remoteQuotes[marketName] ??= {};\n    remoteQuotes[marketName][c] = {\n      code: c,\n      name,\n      price,\n      change_pct: Number.isFinite(change) ? change : 0,\n      remote: true,\n      source: "TradingView"\n    };\n    return remoteQuotes[marketName][c];\n  }\n\n  // Make remote quotes visible to the existing portfolio logic.\n  quoteInfo = function(m, c) {\n    const key = String(c || "").trim().toUpperCase().replace(/\\.T$/i, "");\n    const rq = remoteQuotes?.[m]?.[key];\n    if (rq && Number.isFinite(Number(rq.price))) return rq;\n    return originalQuoteInfo(m, key);\n  };\n\n  autofillCustomStock = async function() {\n    const m = $("#customMarket").value;\n    const c = normalizeCustomCode();\n    const st = $("#customLookup");\n\n    if (!c) {\n      st.className = "lookupstatus";\n      st.textContent = "コードを入力すると会社名と現在値を確認します。";\n      return null;\n    }\n\n    $("#customName").readOnly = false;\n    $("#customNow").readOnly = false;\n    st.className = "lookupstatus";\n    st.textContent = "会社名・現在値を取得中…";\n\n    let q = null;\n    try {\n      q = await fetchTradingViewQuote(m, c);\n    } catch (e) {\n      console.warn("TradingView lookup failed", e);\n    }\n\n    // Keep the existing ranking/quote data as a fallback.\n    if (!q) q = originalQuoteInfo(m, c);\n\n    // Preserve the existing company-name database even if price lookup fails.\n    let mappedName = "";\n    try {\n      const map = await loadCompanyMap(m);\n      mappedName = String(map?.[c] || "").trim();\n    } catch (e) {}\n\n    if (q && Number.isFinite(Number(q.price))) {\n      const displayName = mappedName || q.name || c;\n      q.name = displayName;\n      remoteQuotes[m] ??= {};\n      remoteQuotes[m][c] = q;\n\n      $("#customName").value = displayName;\n      $("#customNow").value = Number(q.price);\n      $("#customName").readOnly = true;\n      $("#customNow").readOnly = true;\n      st.className = "lookupstatus ok";\n      st.textContent =\n        "✓ " + displayName +\n        " ｜ 現在値 " + money(q.price, m) +\n        " ｜ " + (Number(q.change_pct || 0) >= 0 ? "+" : "") +\n        Number(q.change_pct || 0).toFixed(2) + "%";\n      return q;\n    }\n\n    if (mappedName) {\n      $("#customName").value = mappedName;\n      $("#customName").readOnly = true;\n    } else {\n      $("#customName").value = "";\n      $("#customName").readOnly = false;\n    }\n    $("#customNow").value = "";\n    $("#customNow").readOnly = false;\n    st.className = "lookupstatus warn";\n    st.textContent = mappedName\n      ? "✓ " + mappedName + " を確認しました。株価取得だけ再試行してください。"\n      : "自動取得できませんでした。コードと市場を確認してください。";\n    return null;\n  };\n\n  async function refreshRemotePortfolio() {\n    let ports = {};\n    try { ports = getPorts(); } catch (e) { return; }\n    const jobs = Object.values(ports || {}).map(v =>\n      fetchTradingViewQuote(v.market, v.code).catch(() => null)\n    );\n    if (jobs.length) {\n      await Promise.allSettled(jobs);\n      try { renderPortfolio(); } catch (e) {}\n    }\n  }\n\n  // Existing click handler still works; this adds a live refresh afterwards.\n  try {\n    $("#portBtn")?.addEventListener("click", () => {\n      setTimeout(refreshRemotePortfolio, 0);\n    });\n  } catch (e) {}\n\n  // Refresh previously registered holdings after the page has loaded.\n  setTimeout(refreshRemotePortfolio, 700);\n})();'
+          publish = 'name: Publish 10X Stock App\n\non:\n  push:\n    branches: [main]\n    paths:\n      - "index.html"\n      - "live-price.js"\n      - "tenx_data.json"\n      - "tenx_history.json"\n      - "manifest.webmanifest"\n      - "sw.js"\n      - "icon-192.png"\n      - "icon-512.png"\n      - "apple-touch-icon.png"\n      - ".github/workflows/publish-pages.yml"\n  workflow_dispatch:\n\npermissions:\n  contents: read\n  pages: write\n  id-token: write\n\nconcurrency:\n  group: "pages"\n  cancel-in-progress: true\n\njobs:\n  deploy:\n    environment:\n      name: github-pages\n      url: ${{ steps.deployment.outputs.page_url }}\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Configure Pages\n        uses: actions/configure-pages@v5\n        with:\n          enablement: true\n\n      - name: Upload Pages artifact\n        uses: actions/upload-pages-artifact@v3\n        with:\n          path: .\n\n      - name: Deploy to GitHub Pages\n        id: deployment\n        uses: actions/deploy-pages@v4\n'
+
+          Path("live-price.js").write_text(live, encoding="utf-8")
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+          marker = '<script src="live-price.js?v=20260821"></script>'
+          if marker not in s:
+              if "</body>" not in s:
+                  raise SystemExit("index.html has no </body>")
+              s = s.replace("</body>", marker + "\n</body>", 1)
+              p.write_text(s, encoding="utf-8")
+
+          wf = Path(".github/workflows/publish-pages.yml")
+          wf.parent.mkdir(parents=True, exist_ok=True)
+          wf.write_text(publish, encoding="utf-8")
+          PY
+
+      - name: Validate installed JavaScript
+        run: node --check live-price.js
+
+      - name: Commit installed files
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html live-price.js .github/workflows/publish-pages.yml
+          git diff --cached --quiet || git commit -m "Install TradingView live price lookup"
+          git push

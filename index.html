@@ -96,7 +96,7 @@ button{font-family:inherit}
 <div id="portbox" class="portbox"><div class="paneltitle">保有株管理</div><div id="portRows"></div>
   <div class="custombox">
     <div class="customtitle">➕ ランキング外の株を自由登録</div>
-    <div class="customnote">ランキングに出ていない株も登録できます。コードを入力すると銘柄名と現在値を自動取得します。取得できない場合だけ手入力できます。</div>
+    <div class="customnote">ランキングに出ていない株も登録できます。コードを入力すると会社名を自動表示します。現在値は取得できる場合だけ自動表示し、それ以外は手入力できます。</div>
     <div class="customgrid">
       <select id="customMarket"><option value="japan">🇯🇵 日本株</option><option value="usa">🇺🇸 米国株</option></select>
       <input id="customCode" placeholder="コード 例 7203 / NVDA">
@@ -138,7 +138,14 @@ button{font-family:inherit}
 
 <script>
 let market=localStorage.getItem("tenx_market")||"japan",horizon=localStorage.getItem("tenx_horizon")||"short",
-D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]},quotes:{japan:{},usa:{}}},H=[],favOnly=false,remoteQuotes={japan:{},usa:{}};
+D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]},quotes:{japan:{},usa:{}}},H=[],favOnly=false;
+let companyMaps={japan:null,usa:null};
+const JP_COMPANY_CSV="https://raw.githubusercontent.com/te-chan/JP-CompanyCode/master/company_list.csv";
+const US_COMPANY_CSV="https://raw.githubusercontent.com/browser-vm/us-stock-tickers/main/us_stock_tickers.csv";
+const FALLBACK_NAMES={
+ japan:{"7203":"トヨタ自動車","9984":"ソフトバンクグループ","6758":"ソニーグループ","8306":"三菱UFJフィナンシャル・グループ","6098":"リクルートホールディングス"},
+ usa:{"NVDA":"NVIDIA Corporation","AAPL":"Apple Inc.","MSFT":"Microsoft Corporation","AMZN":"Amazon.com, Inc.","GOOGL":"Alphabet Inc."}
+};
 const $=s=>document.querySelector(s),L={short:"短期",medium:"中期",long:"長期"};
 const money=(x,m=market)=>m==="japan"?"¥"+Number(x).toLocaleString(undefined,{maximumFractionDigits:2}):"$"+Number(x).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const chart=x=>"https://www.tradingview.com/chart/?symbol="+encodeURIComponent(market==="japan"?"TSE:"+x.code:x.code);
@@ -159,46 +166,89 @@ function syncControls(){$("#jp").classList.toggle("active",market==="japan");$("
 function toggleFav(code){const f=getFavs(),k=favKey(market,code);f.has(k)?f.delete(k):f.add(k);setFavs(f);render()}
 function addHolding(x){const qty=prompt(x.name+" の保有株数を入力してください","100");if(qty===null)return;const q=Number(qty);if(!(q>0))return alert("株数を正しく入力してください");const bp=prompt("平均購入単価を入力してください",String(x.price));if(bp===null)return;const b=Number(bp);if(!(b>0))return alert("購入単価を正しく入力してください");const p=getPorts();p[favKey(market,x.code)]={market,code:x.code,name:x.name,qty:q,buyPrice:b};setPorts(p);renderPortfolio();alert("保有株に登録しました")}
 function removeHolding(k){const p=getPorts();delete p[k];setPorts(p);renderPortfolio()}
-function quoteInfo(m,c){const rq=remoteQuotes?.[m]?.[String(c)];if(rq&&Number.isFinite(Number(rq.price)))return rq;const q=D?.quotes?.[m]?.[String(c)];if(q&&Number.isFinite(Number(q.price)))return q;for(const h of ["short","medium","long"]){const x=(D[m]?.[h]||[]).find(z=>String(z.code)===String(c));if(x)return x}return null}
+function quoteInfo(m,c){const q=D?.quotes?.[m]?.[String(c)];if(q&&Number.isFinite(Number(q.price)))return q;for(const h of ["short","medium","long"]){const x=(D[m]?.[h]||[]).find(z=>String(z.code)===String(c));if(x)return x}return null}
 function latestPrice(m,c,fallback=null){const q=quoteInfo(m,c);if(q)return Number(q.price);const f=Number(fallback);return Number.isFinite(f)&&f>0?f:null}
+
+function parseCsvLine(line){
+  const out=[]; let cur="",q=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){
+      if(q&&line[i+1]==='"'){cur+='"';i++}
+      else q=!q;
+    }else if(ch===','&&!q){out.push(cur);cur=""}
+    else cur+=ch;
+  }
+  out.push(cur); return out;
+}
+async function loadCompanyMap(m){
+  if(companyMaps[m])return companyMaps[m];
+  const map={...(FALLBACK_NAMES[m]||{})};
+  try{
+    const url=m==="japan"?JP_COMPANY_CSV:US_COMPANY_CSV;
+    const r=await fetch(url,{cache:"force-cache"});
+    if(r.ok){
+      const text=await r.text(),lines=text.split(/\r?\n/).filter(Boolean);
+      const head=parseCsvLine(lines[0]).map(x=>x.trim().toLowerCase());
+      const codeKey=m==="japan"?"code":"ticker_symbol";
+      const nameKey=m==="japan"?"name":"company_name";
+      const ci=head.indexOf(codeKey),ni=head.indexOf(nameKey);
+      if(ci>=0&&ni>=0){
+        for(let i=1;i<lines.length;i++){
+          const row=parseCsvLine(lines[i]);
+          const code=String(row[ci]||"").trim().toUpperCase().replace(/\.T$/i,"");
+          const name=String(row[ni]||"").trim();
+          if(code&&name)map[code]=name;
+        }
+      }
+    }
+  }catch(e){}
+  companyMaps[m]=map;
+  return map;
+}
 function normalizeCustomCode(){const el=$("#customCode");el.value=el.value.trim().toUpperCase().replace(/\.T$/i,"");return el.value}
 async function autofillCustomStock(){
   const m=$("#customMarket").value,c=normalizeCustomCode(),st=$("#customLookup");
-  if(!c){st.className="lookupstatus";st.textContent="コードを入力すると銘柄名を確認します。";return null}
-  const local=quoteInfo(m,c);
-  if(local){
-    $("#customName").value=local.name||c;
-    $("#customNow").value=Number(local.price);
-    $("#customName").readOnly=true;
-    $("#customNow").readOnly=true;
-    st.className="lookupstatus ok";
-    st.textContent="✓ "+(local.name||c)+" を確認しました。";
-    return local;
+  if(!c){
+    st.className="lookupstatus";
+    st.textContent="コードを入力すると会社名を確認します。";
+    return null;
   }
   $("#customName").readOnly=false;
   $("#customNow").readOnly=false;
   st.className="lookupstatus";
-  st.textContent="銘柄情報を取得中…";
-  try{
-    const r=await fetch("https://10x-stock-quote-api.shu39a.workers.dev/api/stock?market="+encodeURIComponent(m)+"&code="+encodeURIComponent(c),{cache:"no-store"});
-    const q=await r.json();
-    if(!r.ok||!q||!q.ok||!Number.isFinite(Number(q.price)))throw new Error("lookup");
-    remoteQuotes[m][c]={name:q.name||c,code:c,price:Number(q.price),change_pct:Number(q.change_pct||0),remote:true};
-    $("#customName").value=q.name||c;
+  st.textContent="会社名を検索中…";
+
+  const q=quoteInfo(m,c);
+  if(q){
+    $("#customName").value=q.name||$("#customName").value;
     $("#customNow").value=Number(q.price);
     $("#customName").readOnly=true;
     $("#customNow").readOnly=true;
     st.className="lookupstatus ok";
-    st.textContent="✓ "+(q.name||c)+" を確認しました。現在値も取得しました。";
-    return remoteQuotes[m][c];
-  }catch(e){
-    $("#customName").readOnly=false;
-    $("#customNow").readOnly=false;
-    $("#customNow").value="";
-    st.className="lookupstatus warn";
-    st.textContent="自動取得できませんでした。銘柄名と現在値を手入力できます。";
-    return null;
+    st.textContent="✓ "+(q.name||c)+" を確認しました。現在値も自動表示しました。";
+    return q;
   }
+
+  const map=await loadCompanyMap(m);
+  const name=map[c];
+  if(name){
+    $("#customName").value=name;
+    $("#customName").readOnly=true;
+    $("#customNow").value="";
+    $("#customNow").readOnly=false;
+    st.className="lookupstatus ok";
+    st.textContent="✓ "+name+" を確認しました。現在値だけ入力してください。";
+    return {code:c,name:name,price:null};
+  }
+
+  $("#customName").value="";
+  $("#customName").readOnly=false;
+  $("#customNow").value="";
+  $("#customNow").readOnly=false;
+  st.className="lookupstatus warn";
+  st.textContent="会社名を確認できませんでした。銘柄名と現在値を手入力してください。";
+  return null;
 }
 function editManualPrice(k){const p=getPorts(),v=p[k];if(!v)return;const q=quoteInfo(v.market,v.code);if(q)return alert("この銘柄は自動更新対象です。現在値は自動で更新されます。");const x=prompt("現在値を入力してください",v.manualPrice?String(v.manualPrice):"");if(x===null)return;const n=Number(x);if(!(n>0))return alert("現在値を正しく入力してください");v.manualPrice=n;p[k]=v;setPorts(p);renderPortfolio()}
 function addCustomHolding(){const m=$("#customMarket").value,c=normalizeCustomCode(),auto=quoteInfo(m,c),name=(auto?.name||$("#customName").value).trim(),q=Number($("#customQty").value),b=Number($("#customBuy").value),manual=Number($("#customNow").value);if(!c)return alert("銘柄コードを入力してください");if(!name)return alert("銘柄名を入力してください");if(!(q>0))return alert("株数を正しく入力してください");if(!(b>0))return alert("購入単価を正しく入力してください");if(!auto&&!(manual>0))return alert("この銘柄は自動価格取得の対象外です。現在値も入力してください");const p=getPorts(),k=favKey(m,c);p[k]={market:m,code:c,name,qty:q,buyPrice:b,manualPrice:auto?null:manual>0?manual:null,custom:true};setPorts(p);["customCode","customName","customQty","customBuy","customNow"].forEach(id=>$("#"+id).value="");$("#customName").readOnly=false;$("#customNow").readOnly=false;$("#customLookup").className="lookupstatus";$("#customLookup").textContent="コードを入力すると銘柄名を確認します。";renderPortfolio();alert(auto?`登録しました。${name} の現在値は自動更新されます`:"登録しました。現在値は手入力で管理します")}
@@ -209,7 +259,7 @@ async function maybeNotify(){if(!('Notification' in window)||Notification.permis
 function render(){syncControls();const favs=getFavs();let a=(D[market]?.[horizon]||[]).slice(0,10);if(favOnly)a=a.filter(x=>favs.has(favKey(market,x.code)));const mname=market==="japan"?"日本株":"米国株";$("#title").textContent=mname+"・"+L[horizon]+(favOnly?" お気に入り":" TOP10");$("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";$("#list").innerHTML=a.length?a.map((x,i)=>{const bm=buyMatch(x),isfav=favs.has(favKey(market,x.code));return `<div class="stock"><div class="r1"><div class="rank">${i+1}</div><div><div class="name">${x.name}</div><div class="code">${x.code}</div></div><a class="chart" href="${chart(x)}" target="_blank" rel="noopener">📈</a></div><div class="r2"><div class="m"><label>現在値</label><strong>${money(x.price)}</strong></div><div class="m"><label>騰落率</label><strong class="${x.change_pct>=0?'up':'down'}">${x.change_pct>0?'+':''}${x.change_pct}%</strong></div><div class="m"><label>総合スコア</label><strong>${x.score}</strong></div><span class="sig ${sig(x.signal)}">${x.signal}</span></div><div class="five"><div class="f"><label>割安</label><b class="${gclass(gv(x,'valuation'))}">${gv(x,'valuation')} ${sv(x,'valuation')}</b></div><div class="f"><label>品質</label><b class="${gclass(gv(x,'quality'))}">${gv(x,'quality')} ${sv(x,'quality')}</b></div><div class="f"><label>財務</label><b class="${gclass(gv(x,'financial'))}">${gv(x,'financial')} ${sv(x,'financial')}</b></div><div class="f"><label>技術</label><b class="${gclass(gv(x,'technical'))}">${gv(x,'technical')} ${sv(x,'technical')}</b></div><div class="f"><label>材料</label><b class="${gclass(gv(x,'catalyst'))}">${gv(x,'catalyst')} ${sv(x,'catalyst')}</b></div></div>${bm.ok?`<div class="buymatch">✅ 買い条件一致：${bm.why}</div>`:''}<div class="actions"><button class="act ${isfav?'favon':''}" onclick="toggleFav('${x.code}')">${isfav?'★ お気に入り済':'☆ お気に入り'}</button><button class="act" onclick='addHolding(${JSON.stringify(x).replace(/'/g,"&#39;")})'>💼 保有登録</button></div></div>`}).join(''):'<div class="empty">該当する銘柄がありません。</div>';let sim=(D[market]?.[horizon]||[]).slice(0,10),tb=0,tn=0;$("#simrows").innerHTML=sim.length?sim.map((x,i)=>{const e=entryInfo(x),b=e.price,n=Number(x.price),bv=b*100,nv=n*100,pl=nv-bv,p=b?(n/b-1)*100:0;tb+=bv;tn+=nv;return `<div class="srow"><div class="sname"><span>${i+1}. ${x.name}（${x.code}）</span><span class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${p.toFixed(2)}%</span></div><div class="smeta">購入日 ${e.date} ｜ 購入単価 ${money(b)} → 現在 ${money(n)}</div><div class="sg"><div class="sc"><label>購入額（100株）</label><strong>${money(bv)}</strong></div><div class="sc"><label>現在価値（100株）</label><strong>${money(nv)}</strong></div><div class="sc"><label>累計損益</label><strong class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${money(pl)}</strong></div></div></div>`}).join(''):'<div class="empty">仮想購入データがありません。</div>';const pl=tn-tb,pct=tb?(tn/tb-1)*100:0;$("#total").innerHTML=`<span>合計購入額<b>${money(tb)}</b></span><span>現在評価額<b>${money(tn)}</b></span><span>累計損益<b class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${money(pl)}</b></span><span>累計損益率<b class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${pct.toFixed(2)}%</b></span>`;renderAlerts();renderPortfolio();maybeNotify()}
 function loadData(){$("#updated").textContent="最終更新：読込中…";return Promise.all([fetch("tenx_data.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()),fetch("tenx_history.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json())]).then(([d,h])=>{D=d;H=Array.isArray(h)?h:[];$("#updated").textContent="最終更新："+d.updated_at;render()}).catch(()=>{$("#updated").textContent="データ読込エラー"})}
 $("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});$("#refresh").onclick=()=>loadData();$("#alertsBtn").onclick=()=>{$("#alertbox").classList.toggle("show")};$("#portBtn").onclick=()=>{$("#portbox").classList.toggle("show");renderPortfolio()};$("#favBtn").onclick=()=>{favOnly=!favOnly;render()};$("#customCode").addEventListener("input",()=>{clearTimeout(window.__customLookupTimer);window.__customLookupTimer=setTimeout(autofillCustomStock,250)});$("#customCode").addEventListener("change",autofillCustomStock);$("#customMarket").addEventListener("change",()=>{$("#customName").value="";$("#customNow").value="";autofillCustomStock()});$("#customAddBtn").onclick=()=>addCustomHolding();$("#notifyBtn").onclick=async()=>{if(!('Notification' in window))return alert("この端末では通知機能を利用できません");const p=await Notification.requestPermission();alert(p==="granted"?"アプリ起動時の買いアラート通知をONにしました":"通知は許可されませんでした")};
-render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).then(r=>r.update()).catch(()=>{}));}
+render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).catch(()=>{}));}
 </script>
 </body>
 </html>

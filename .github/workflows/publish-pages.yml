@@ -1,0 +1,142 @@
+name: Publish 10X Stock App
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-pages.yml"
+      - "index.html"
+      - "tenx_data.json"
+      - "tenx_history.json"
+      - "manifest.webmanifest"
+      - "sw.js"
+      - "icon-192.png"
+      - "icon-512.png"
+      - "apple-touch-icon.png"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch ranking-out stock lookup for browser
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          new_func = r"""async function autofillCustomStock(){
+            const m=$("#customMarket").value,c=normalizeCustomCode(),st=$("#customLookup");
+            if(!c){
+              st.className="lookupstatus";
+              st.textContent="コードを入力すると会社名と現在値を確認します。";
+              return null;
+            }
+
+            $("#customName").readOnly=false;
+            $("#customNow").readOnly=false;
+            st.className="lookupstatus";
+            st.textContent="会社名・現在値を取得中…";
+
+            let q=quoteInfo(m,c);
+
+            if(!q && m==="japan"){
+              try{
+                const gf="https://r.jina.ai/http://www.google.com/finance/quote/"+encodeURIComponent(c)+":TYO?hl=ja&_="+Date.now();
+                const r=await fetch(gf,{cache:"no-store"});
+                if(r.ok){
+                  const t=await r.text();
+                  let name="";
+                  const nm=t.match(/(?:^|\n)([^\n]{2,80})\n[￥¥][0-9,]+(?:\.[0-9]+)?/);
+                  if(nm) name=nm[1].trim();
+                  let pm=t.match(/[￥¥]\s*([0-9][0-9,]*(?:\.[0-9]+)?)/);
+                  let price=pm?Number(pm[1].replace(/,/g,"")):NaN;
+                  if(Number.isFinite(price)){
+                    q={code:c,name:name||c,price,change_pct:0,remote:true};
+                  }
+                }
+              }catch(e){}
+            }
+
+            if(!q){
+              try{
+                const r=await fetch("/api/stock?market="+encodeURIComponent(m)+"&code="+encodeURIComponent(c)+"&_="+Date.now(),{cache:"no-store"});
+                if(r.ok){
+                  const x=await r.json();
+                  if(x&&x.ok&&Number.isFinite(Number(x.price))){
+                    q={code:c,name:x.name||c,price:Number(x.price),change_pct:Number(x.change_pct||0),remote:true};
+                  }
+                }
+              }catch(e){}
+            }
+
+            if(!q){
+              try{
+                const map=await loadCompanyMap(m);
+                const name=map[c];
+                if(name){
+                  $("#customName").value=name;
+                  $("#customName").readOnly=true;
+                }
+              }catch(e){}
+              $("#customNow").value="";
+              $("#customNow").readOnly=false;
+              st.className="lookupstatus warn";
+              st.textContent="会社名は確認しました。現在値は取得できない場合のみ手入力してください。";
+              return null;
+            }
+
+            $("#customName").value=q.name||c;
+            $("#customNow").value=Number(q.price);
+            $("#customName").readOnly=true;
+            $("#customNow").readOnly=true;
+            st.className="lookupstatus ok";
+            st.textContent="✓ "+(q.name||c)+" ｜ 現在値 "+money(q.price,m);
+            return q;
+          }"""
+
+          pattern = r'async function autofillCustomStock\(\)\{.*?\n\}\nfunction editManualPrice'
+          repl = new_func + "\nfunction editManualPrice"
+          s2, n = re.subn(pattern, repl, s, count=1, flags=re.S)
+
+          if n != 1:
+            raise SystemExit("autofillCustomStock replacement failed")
+
+          p.write_text(s2, encoding="utf-8")
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

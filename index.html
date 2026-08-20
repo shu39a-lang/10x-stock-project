@@ -160,7 +160,29 @@ function toggleFav(code){const f=getFavs(),k=favKey(market,code);f.has(k)?f.dele
 function addHolding(x){const qty=prompt(x.name+" の保有株数を入力してください","100");if(qty===null)return;const q=Number(qty);if(!(q>0))return alert("株数を正しく入力してください");const bp=prompt("平均購入単価を入力してください",String(x.price));if(bp===null)return;const b=Number(bp);if(!(b>0))return alert("購入単価を正しく入力してください");const p=getPorts();p[favKey(market,x.code)]={market,code:x.code,name:x.name,qty:q,buyPrice:b};setPorts(p);renderPortfolio();alert("保有株に登録しました")}
 function removeHolding(k){const p=getPorts();delete p[k];setPorts(p);renderPortfolio()}
 function quoteInfo(m,c){const rq=remoteQuotes?.[m]?.[String(c)];if(rq&&Number.isFinite(Number(rq.price)))return rq;const q=D?.quotes?.[m]?.[String(c)];if(q&&Number.isFinite(Number(q.price)))return q;for(const h of ["short","medium","long"]){const x=(D[m]?.[h]||[]).find(z=>String(z.code)===String(c));if(x)return x}return null}
-async function fetchAnyQuote(m,c){c=String(c||"").trim().toUpperCase().replace(/\.T$/i,"");if(!c)return null;const local=quoteInfo(m,c);if(local)return local;try{const r=await fetch(`/api/stock?market=${encodeURIComponent(m)}&code=${encodeURIComponent(c)}&_=${Date.now()}`,{cache:"no-store"});if(!r.ok)return null;const q=await r.json();if(!q||!q.ok||!Number.isFinite(Number(q.price)))return null;remoteQuotes[m]??={};remoteQuotes[m][c]={name:q.name||c,code:c,price:Number(q.price),change_pct:Number(q.change_pct||0),remote:true};return remoteQuotes[m][c]}catch(e){return null}}
+async function fetchAnyQuote(m,c){
+  c=String(c||"").trim().toUpperCase().replace(/\.T$/i,"");
+  if(!c)return null;
+  const local=quoteInfo(m,c);
+  if(local)return local;
+  try{
+    const r=await fetch(`./api/stock?market=${encodeURIComponent(m)}&code=${encodeURIComponent(c)}&_=${Date.now()}`,{cache:"no-store"});
+    if(!r.ok)return null;
+    const q=await r.json();
+    if(!q||!q.ok||!Number.isFinite(Number(q.price)))return null;
+    remoteQuotes[m]??={};
+    remoteQuotes[m][c]={
+      name:q.name||c,
+      code:c,
+      price:Number(q.price),
+      change_pct:Number(q.change_pct||0),
+      remote:true
+    };
+    return remoteQuotes[m][c];
+  }catch(e){
+    return null;
+  }
+}
 function latestPrice(m,c,fallback=null){const q=quoteInfo(m,c);if(q)return Number(q.price);const f=Number(fallback);return Number.isFinite(f)&&f>0?f:null}
 function normalizeCustomCode(){const el=$("#customCode");el.value=el.value.trim().toUpperCase().replace(/\.T$/i,"");return el.value}
 async function autofillCustomStock(){const m=$("#customMarket").value,c=normalizeCustomCode(),st=$("#customLookup");if(!c){st.className="lookupstatus";st.textContent="コードを入力すると銘柄名を確認します。";return null}$("#customName").readOnly=false;$("#customNow").readOnly=false;st.className="lookupstatus";st.textContent="銘柄情報を取得しています…";const q=await fetchAnyQuote(m,c);if(c!==normalizeCustomCode()||m!==$("#customMarket").value)return null;if(q){$("#customName").value=q.name||c;$("#customNow").value=Number(q.price);$("#customName").readOnly=true;$("#customNow").readOnly=true;st.className="lookupstatus ok";st.textContent=`✓ ${q.name} を確認しました。現在値も自動更新されます。`;return q}$("#customName").readOnly=false;$("#customNow").readOnly=false;$("#customNow").value="";st.className="lookupstatus warn";st.textContent="銘柄情報を取得できませんでした。市場とコードを確認するか、銘柄名と現在値を手入力してください。";return null}

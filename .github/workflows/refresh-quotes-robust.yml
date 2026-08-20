@@ -1,0 +1,256 @@
+name: Refresh Quotes Robustly and Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-quotes-robust.yml"
+  schedule:
+    - cron: "*/30 * * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: stock-pages-robust
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build fresh quote cache
+        shell: bash
+        run: |
+          cat > /tmp/quotes.py <<'PY'
+          import json, re, time, urllib.request, urllib.parse
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126 Safari/537.36"
+
+          def get_json(url, timeout=25):
+              req = urllib.request.Request(url, headers={
+                  "User-Agent": UA,
+                  "Accept": "application/json,text/plain,*/*",
+                  "Cache-Control": "no-cache",
+                  "Pragma": "no-cache",
+              })
+              with urllib.request.urlopen(req, timeout=timeout) as r:
+                  return json.loads(r.read().decode("utf-8"))
+
+          def yahoo_jp(code):
+              symbol = f"{code}.T"
+              url = (
+                  "https://query1.finance.yahoo.com/v8/finance/chart/"
+                  + urllib.parse.quote(symbol)
+                  + "?interval=1m&range=1d&includePrePost=false&events=div%2Csplits&_="
+                  + str(int(time.time()))
+              )
+              x = get_json(url)
+              result = x.get("chart", {}).get("result") or []
+              if not result:
+                  return None
+              meta = result[0].get("meta") or {}
+              price = meta.get("regularMarketPrice")
+              if price is None:
+                  closes = (((result[0].get("indicators") or {}).get("quote") or [{}])[0].get("close") or [])
+                  closes = [v for v in closes if isinstance(v, (int, float))]
+                  price = closes[-1] if closes else None
+              if price is None:
+                  return None
+              prev = meta.get("chartPreviousClose") or meta.get("previousClose")
+              pct = ((float(price) / float(prev) - 1) * 100) if prev else 0.0
+              return {
+                  "code": code,
+                  "name": code,
+                  "price": float(price),
+                  "change_pct": float(pct),
+                  "source": "Yahoo chart",
+                  "market_time": meta.get("regularMarketTime")
+              }
+
+          def tv_jp(code):
+              payload = json.dumps({
+                  "symbols":{"tickers":[f"TSE:{code}"],"query":{"types":[]}},
+                  "columns":["name","description","close","change"]
+              }).encode()
+              req = urllib.request.Request(
+                  "https://scanner.tradingview.com/japan/scan",
+                  data=payload,
+                  headers={
+                      "Content-Type":"application/json",
+                      "User-Agent":UA,
+                      "Accept":"application/json"
+                  },
+                  method="POST"
+              )
+              with urllib.request.urlopen(req, timeout=25) as r:
+                  x = json.loads(r.read().decode("utf-8"))
+              rows = x.get("data") or []
+              if not rows:
+                  return None
+              d = rows[0].get("d") or []
+              if len(d) < 4 or d[2] is None:
+                  return None
+              return {
+                  "code": code,
+                  "name": str(d[1] or d[0] or code),
+                  "price": float(d[2]),
+                  "change_pct": float(d[3] or 0),
+                  "source": "TradingView scanner"
+              }
+
+          def quote_jp(code):
+              errors = []
+              for fn in (yahoo_jp, tv_jp):
+                  try:
+                      q = fn(code)
+                      if q and q["price"] > 0:
+                          return q, errors
+                  except Exception as e:
+                      errors.append(f"{fn.__name__}: {e}")
+              return None, errors
+
+          codes = {"7203"}
+          for fn in ("index.html", "tenx_data.json"):
+              p = Path(fn)
+              if p.exists():
+                  txt = p.read_text(encoding="utf-8", errors="ignore")
+                  codes.update(re.findall(r'(?<!\d)(\d{4})(?!\d)', txt))
+
+          quotes = {}
+          diagnostics = {}
+          for code in sorted(codes):
+              q, errs = quote_jp(code)
+              if q:
+                  quotes[code] = q
+              if errs:
+                  diagnostics[code] = errs
+
+          if "7203" not in quotes or not isinstance(quotes["7203"].get("price"), (int, float)):
+              raise SystemExit("7203 current price could not be obtained: "
+                               + json.dumps(diagnostics.get("7203", []), ensure_ascii=False))
+
+          Path("live_quotes.json").write_text(
+              json.dumps({
+                  "updated_at": datetime.now(timezone.utc).isoformat(),
+                  "japan": quotes,
+                  "diagnostics": diagnostics
+              }, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
+          print("7203:", quotes["7203"])
+          print("cached quotes:", len(quotes))
+          PY
+
+          python /tmp/quotes.py
+
+      - name: Inject same-origin quote lookup
+        shell: bash
+        run: |
+          cat > /tmp/patch.py <<'PY'
+          from pathlib import Path
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          start = "<!-- ROBUST_QUOTE_FIX_START -->"
+          end = "<!-- ROBUST_QUOTE_FIX_END -->"
+          a = s.find(start)
+          b = s.find(end)
+          if a != -1 and b != -1 and b > a:
+              s = s[:a] + s[b + len(end):]
+
+          block = """<!-- ROBUST_QUOTE_FIX_START -->
+          <script>
+          (() => {
+            const oldQuoteInfo = quoteInfo;
+            let live = {japan:{}};
+            const ready = fetch("live_quotes.json?t="+Date.now(), {cache:"no-store"})
+              .then(r => { if(!r.ok) throw new Error("live_quotes "+r.status); return r.json(); })
+              .then(x => live=x)
+              .catch(e => console.warn(e));
+
+            quoteInfo = function(m,c){
+              const k=String(c||"").trim().toUpperCase().replace(/\\.T$/i,"");
+              const q=live && live[m] && live[m][k];
+              return q || oldQuoteInfo(m,k);
+            };
+
+            autofillCustomStock = async function(){
+              const m=$("#customMarket").value;
+              const c=normalizeCustomCode();
+              const st=$("#customLookup");
+
+              if(!c){
+                st.className="lookupstatus";
+                st.textContent="コードを入力すると会社名と現在値を確認します。";
+                return null;
+              }
+
+              st.className="lookupstatus";
+              st.textContent="会社名・現在値を取得中…";
+              await ready;
+
+              let q=quoteInfo(m,c);
+              let mapped="";
+              try{
+                const map=await loadCompanyMap(m);
+                mapped=String((map&&map[c])||"").trim();
+              }catch(e){}
+
+              if(q && Number.isFinite(Number(q.price))){
+                const nm=mapped || q.name || c;
+                $("#customName").value=nm;
+                $("#customNow").value=Number(q.price);
+                $("#customName").readOnly=true;
+                $("#customNow").readOnly=true;
+                st.className="lookupstatus ok";
+                st.textContent="✓ "+nm+" ｜ 現在値 "+money(q.price,m)
+                  +" ｜ "+(Number(q.change_pct||0)>=0?"+":"")
+                  +Number(q.change_pct||0).toFixed(2)+"%";
+                return q;
+              }
+
+              $("#customName").value=mapped;
+              $("#customName").readOnly=!!mapped;
+              $("#customNow").value="";
+              $("#customNow").readOnly=false;
+              st.className="lookupstatus warn";
+              st.textContent=mapped
+                ? "✓ "+mapped+" を確認しました。現在値データは更新待ちです。"
+                : "自動取得できませんでした。";
+              return null;
+            };
+          })();
+          </script>
+          <!-- ROBUST_QUOTE_FIX_END -->"""
+
+          if "</body>" not in s:
+              raise SystemExit("index.html missing </body>")
+
+          s = s.replace("</body>", block + "\n</body>", 1)
+          p.write_text(s, encoding="utf-8")
+          PY
+
+          python /tmp/patch.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4

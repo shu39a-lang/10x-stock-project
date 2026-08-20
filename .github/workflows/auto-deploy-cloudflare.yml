@@ -1,0 +1,65 @@
+name: Auto Deploy 10X Stock
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_worker.js"
+      - ".github/workflows/auto-deploy-cloudflare.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Create Wrangler config
+        shell: bash
+        run: |
+          cat > wrangler.toml <<'EOF'
+          name = "quiet-firefly-dd73"
+          main = "_worker.js"
+          compatibility_date = "2026-08-21"
+
+          [assets]
+          directory = "."
+          binding = "ASSETS"
+          EOF
+
+      - name: Select Cloudflare credentials
+        shell: bash
+        env:
+          TOKEN_A: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TOKEN_B: ${{ secrets.CF_API_TOKEN }}
+          TOKEN_C: ${{ secrets.CLOUDFLARE_TOKEN }}
+          ACCOUNT_A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ACCOUNT_B: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          TOKEN="${TOKEN_A:-${TOKEN_B:-$TOKEN_C}}"
+          ACCOUNT="${ACCOUNT_A:-$ACCOUNT_B}"
+
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Cloudflare API token was not found in repository secrets."
+            exit 1
+          fi
+
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          if [ -n "$ACCOUNT" ]; then
+            echo "CLOUDFLARE_ACCOUNT_ID=$ACCOUNT" >> "$GITHUB_ENV"
+          fi
+
+      - name: Deploy current Worker automatically
+        run: npx --yes wrangler@4 deploy
+
+      - name: Deployment completed
+        run: echo "Cloudflare deployment completed."

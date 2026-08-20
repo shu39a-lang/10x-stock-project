@@ -3319,5 +3319,68 @@
     "name": "JPMorgan",
     "buy_price": 357.26,
     "score": 69.1
+  },
+  {
+    "date": "2026-08-20",
+    "market": "japan",
+    "horizon": "short",
+    "code": "7267",
+    "name": "ホンダ",
+    "buy_price": 1741.5,
+    "score": 71.7
+  },
+  {
+    "date": "2026-08-20",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6701",
+    "name": "NEC",
+    "buy_price": 4820.0,
+    "score": 71.6
+  },
+  {
+    "date": "2026-08-20",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6758",
+    "name": "ソニーグループ",
+    "buy_price": 3777.0,
+    "score": 70.1
+  },
+  {
+    "date": "2026-08-20",
+    "market": "japan",
+    "horizon": "medium",
+    "code": "6701",
+    "name": "NEC",
+    "buy_price": 4820.0,
+    "score": 71.1
+  },
+  {
+    "date": "2026-08-20",
+    "market": "japan",
+    "horizon": "long",
+    "code": "9101",
+    "name": "日本郵船",
+    "buy_price": 6795.0,
+    "score": 70.3
+  },
+  {
+    "date": "2026-08-20",
+    "market": "japan",
+    "horizon": "long",
+    "code": "9104",
+    "name": "商船三井",
+    "buy_price": 6957.0,
+    "score": 70.3
+  },
+  {
+    "date": "2026-08-20",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "CRM",
+    "name": "Salesforce",
+    "buy_price": 206.09,
+    "score": 71.0
   }
 ]

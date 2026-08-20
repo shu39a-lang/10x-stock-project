@@ -206,9 +206,18 @@ def make_row(x, s, horizon):
 
 def rank(universe, market):
     rows = []
+    quotes = {}
     for symbol, name in universe.items():
         try:
             x = analyze(symbol, name)
+            if x:
+                # ランキング外でも保有株管理で現在値を使えるよう、全監視銘柄の価格を保存。
+                quotes[str(x["code"])] = {
+                    "name": x["name"],
+                    "code": x["code"],
+                    "price": x["price"],
+                    "change_pct": x["change_pct"]
+                }
             min_value = 300_000_000 if market == "japan" else 20_000_000
             if x and x["avg_value20"] >= min_value:
                 rows.append(x)
@@ -241,12 +250,14 @@ def rank(universe, market):
 
         out[horizon] = sorted(candidates, key=lambda z: z["score"], reverse=True)[:10]
 
-    return out
+    return out, quotes
 
 now = datetime.now(JST)
+jp_rank, jp_quotes = rank(JP, "japan")
+us_rank, us_quotes = rank(US, "usa")
 data = {
     "updated_at": now.strftime("%Y-%m-%d %H:%M JST"),
-    "engine_version": "3.0-5factor",
+    "engine_version": "3.1-5factor-custom-holdings",
     "scoring":{
         "valuation":20,
         "quality_growth":25,
@@ -254,8 +265,9 @@ data = {
         "technical":25,
         "catalyst":15
     },
-    "japan": rank(JP, "japan"),
-    "usa": rank(US, "usa"),
+    "japan": jp_rank,
+    "usa": us_rank,
+    "quotes": {"japan": jp_quotes, "usa": us_quotes},
 }
 
 (R / "tenx_data.json").write_text(
@@ -264,27 +276,39 @@ data = {
 
 try:
     history = json.loads((R / "tenx_history.json").read_text(encoding="utf-8"))
+    if not isinstance(history, list):
+        history = []
 except Exception:
     history = []
 
-date = now.strftime("%Y-%m-%d")
-for market in ["japan","usa"]:
-    for horizon in ["short","medium","long"]:
-        for z in data[market][horizon]:
-            exists = any(
-                a.get("date") == date and
-                a.get("market") == market and
-                a.get("horizon") == horizon and
-                a.get("code") == z["code"]
-                for a in history
-            )
-            if not exists:
-                history.append({
-                    "date":date,"market":market,"horizon":horizon,
-                    "code":z["code"],"name":z["name"],
-                    "buy_price":z["price"],"score":z["score"]
-                })
+# 仮想購入は「初回選出日の価格」を固定して累計成績を追跡する。
+# 旧仕様で日次保存されていた履歴があっても、各 市場×期間×銘柄 の最古記録だけを残す。
+baseline = {}
+for item in sorted(history, key=lambda z: str(z.get("date", "9999-99-99"))):
+    key = (item.get("market"), item.get("horizon"), str(item.get("code")))
+    if key not in baseline and item.get("buy_price") is not None:
+        baseline[key] = item
+
+for m in ("japan", "usa"):
+    for q in ("short", "medium", "long"):
+        for x in data[m][q]:
+            key = (m, q, str(x["code"]))
+            if key not in baseline:
+                baseline[key] = {
+                    "date": now.strftime("%Y-%m-%d"),
+                    "market": m,
+                    "horizon": q,
+                    "code": x["code"],
+                    "name": x["name"],
+                    "buy_price": x["price"],
+                    "shares": 100
+                }
+
+history = sorted(
+    baseline.values(),
+    key=lambda z: (str(z.get("date", "")), str(z.get("market", "")), str(z.get("horizon", "")), str(z.get("code", "")))
+)
 
 (R / "tenx_history.json").write_text(
-    json.dumps(history[-2400:], ensure_ascii=False, indent=2), encoding="utf-8"
+    json.dumps(history, ensure_ascii=False, indent=2), encoding="utf-8"
 )

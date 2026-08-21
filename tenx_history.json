@@ -1285,5 +1285,14 @@
     "name": "Uber",
     "buy_price": 78.04,
     "score": 72.0
+  },
+  {
+    "date": "2026-08-21",
+    "market": "japan",
+    "horizon": "short",
+    "code": "4661",
+    "name": "オリエンタルランド",
+    "buy_price": 3007.0,
+    "shares": 100
   }
 ]

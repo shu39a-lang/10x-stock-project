@@ -1,0 +1,264 @@
+name: Stable Live Quotes + iPhone Fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-all-japan-quotes.yml"
+  schedule:
+    - cron: "*/30 * * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: stable-live-quotes
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Japan and US live quotes
+        shell: bash
+        run: |
+          cat > /tmp/build_quotes.py <<'PY'
+          import json
+          import urllib.request
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          HEADERS = {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+              "User-Agent": "Mozilla/5.0"
+          }
+
+          def scan(url, payload):
+              req = urllib.request.Request(
+                  url,
+                  data=json.dumps(payload).encode("utf-8"),
+                  headers=HEADERS,
+                  method="POST",
+              )
+              with urllib.request.urlopen(req, timeout=90) as r:
+                  return json.loads(r.read().decode("utf-8"))
+
+          def make_quotes(data, us=False):
+              out = {}
+              allowed = {"NASDAQ", "NYSE", "AMEX", "NYSEARCA"}
+              for row in data.get("data") or []:
+                  d = row.get("d") or []
+                  if len(d) < 4:
+                      continue
+                  code = str(d[0] or "").strip().upper().replace(".T", "")
+                  price = d[2]
+                  if not code or not isinstance(price, (int, float)) or price <= 0:
+                      continue
+                  if us:
+                      exchange = str(d[4] if len(d) > 4 else "").strip().upper()
+                      if exchange and exchange not in allowed:
+                          continue
+                  out[code] = {
+                      "code": code,
+                      "name": str(d[1] or code).strip(),
+                      "price": float(price),
+                      "change_pct": float(d[3] or 0),
+                  }
+              return out
+
+          jp = scan(
+              "https://scanner.tradingview.com/japan/scan",
+              {
+                  "filter": [{"left": "exchange", "operation": "equal", "right": "TSE"}],
+                  "options": {"lang": "ja"},
+                  "markets": ["japan"],
+                  "symbols": {"query": {"types": []}, "tickers": []},
+                  "columns": ["name", "description", "close", "change", "exchange"],
+                  "range": [0, 10000],
+              },
+          )
+
+          us = scan(
+              "https://scanner.tradingview.com/america/scan",
+              {
+                  "filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                  "options": {"lang": "en"},
+                  "markets": ["america"],
+                  "symbols": {"query": {"types": []}, "tickers": []},
+                  "columns": ["name", "description", "close", "change", "exchange"],
+                  "range": [0, 20000],
+              },
+          )
+
+          japan = make_quotes(jp, False)
+          usa = make_quotes(us, True)
+
+          if "7203" not in japan:
+              raise SystemExit("7203 missing")
+          if "NVDA" not in usa:
+              raise SystemExit("NVDA missing")
+
+          Path("live_quotes.json").write_text(
+              json.dumps({
+                  "updated_at": datetime.now(timezone.utc).isoformat(),
+                  "japan": japan,
+                  "usa": usa
+              }, ensure_ascii=False, separators=(",", ":")),
+              encoding="utf-8"
+          )
+          PY
+
+          python /tmp/build_quotes.py
+
+      - name: Permanently patch index.html
+        shell: bash
+        run: |
+          cat > /tmp/patch_index.py <<'PY'
+          from pathlib import Path
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          s = s.replace(
+              ".customgrid input,.customgrid select{width:100%;border:1px solid #2b3e53;background:#101a25;color:#fff;border-radius:8px;padding:9px;font-size:12px}",
+              ".customgrid input,.customgrid select{width:100%;border:1px solid #2b3e53;background:#101a25;color:#fff;border-radius:8px;padding:9px;font-size:16px}"
+          )
+
+          START = "<!-- STABLE_LIVE_QUOTES_START -->"
+          END = "<!-- STABLE_LIVE_QUOTES_END -->"
+          a = s.find(START)
+          b = s.find(END)
+          if a != -1 and b != -1 and b > a:
+              s = s[:a] + s[b + len(END):]
+
+          block = """<!-- STABLE_LIVE_QUOTES_START -->
+          <script>
+          (() => {
+            let liveQuotes = {japan:{}, usa:{}};
+            const originalQuoteInfo = quoteInfo;
+
+            const liveReady = fetch('./live_quotes.json?v=' + Date.now(), {cache:'no-store'})
+              .then(r => { if (!r.ok) throw new Error('live_quotes HTTP ' + r.status); return r.json(); })
+              .then(x => { liveQuotes = x || {japan:{}, usa:{}}; })
+              .catch(e => console.warn('live quote load failed', e));
+
+            quoteInfo = function(m, c) {
+              const k = String(c || '').trim().toUpperCase().replace(/\\.T$/i, '');
+              const q = liveQuotes && liveQuotes[m] && liveQuotes[m][k];
+              if (q && Number.isFinite(Number(q.price))) return q;
+              return originalQuoteInfo(m, k);
+            };
+
+            autofillCustomStock = async function() {
+              const m = $('#customMarket').value;
+              const el = $('#customCode');
+              const c = String(el.value || '').trim().toUpperCase().replace(/\\.T$/i, '');
+              const st = $('#customLookup');
+              if (!c) {
+                st.className = 'lookupstatus';
+                st.textContent = 'コードを入力すると会社名と現在値を確認します。';
+                return null;
+              }
+              el.value = c;
+              st.className = 'lookupstatus';
+              st.textContent = '会社名・現在値を取得中…';
+              $('#customName').readOnly = false;
+              $('#customNow').readOnly = false;
+
+              await liveReady;
+              const q = quoteInfo(m, c);
+              let mappedName = '';
+              try {
+                const map = await loadCompanyMap(m);
+                mappedName = String((map && map[c]) || '').trim();
+              } catch (e) {}
+
+              if (q && Number.isFinite(Number(q.price))) {
+                const nm = mappedName || q.name || c;
+                $('#customName').value = nm;
+                $('#customNow').value = Number(q.price);
+                $('#customName').readOnly = true;
+                $('#customNow').readOnly = true;
+                st.className = 'lookupstatus ok';
+                st.textContent = '✓ ' + nm + ' ｜ 現在値 ' + money(q.price, m) + ' ｜ ' +
+                  (Number(q.change_pct || 0) >= 0 ? '+' : '') + Number(q.change_pct || 0).toFixed(2) + '%';
+                return q;
+              }
+
+              $('#customName').value = mappedName;
+              $('#customName').readOnly = !!mappedName;
+              $('#customNow').value = '';
+              $('#customNow').readOnly = false;
+              st.className = 'lookupstatus warn';
+              st.textContent = mappedName
+                ? '✓ ' + mappedName + ' を確認しました。現在値のみ手入力してください。'
+                : '銘柄を確認できませんでした。';
+              return null;
+            };
+
+            const oldInput = document.getElementById('customCode');
+            if (oldInput) {
+              const fresh = oldInput.cloneNode(true);
+              fresh.setAttribute('autocapitalize', 'characters');
+              fresh.setAttribute('autocomplete', 'off');
+              fresh.setAttribute('spellcheck', 'false');
+              fresh.style.fontSize = '16px';
+              oldInput.replaceWith(fresh);
+
+              let composing = false;
+              fresh.addEventListener('compositionstart', () => composing = true);
+              fresh.addEventListener('compositionend', () => composing = false);
+              fresh.addEventListener('change', () => { if (!composing) autofillCustomStock(); });
+              fresh.addEventListener('blur', () => { if (!composing) autofillCustomStock(); });
+            }
+
+            document.querySelectorAll('.customgrid input,.customgrid select').forEach(el => {
+              el.style.fontSize = '16px';
+            });
+          })();
+          </script>
+          <!-- STABLE_LIVE_QUOTES_END -->"""
+
+          if "</body>" not in s:
+              raise SystemExit("index.html missing </body>")
+          s = s.replace("</body>", block + "\n</body>", 1)
+          p.write_text(s, encoding="utf-8")
+          PY
+
+          python /tmp/patch_index.py
+
+      - name: Verify
+        shell: bash
+        run: |
+          grep -q '"NVDA"' live_quotes.json
+          grep -q 'STABLE_LIVE_QUOTES_START' index.html
+          grep -q 'font-size:16px' index.html
+
+      - name: Save fixes into repository
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html live_quotes.json
+          git diff --cached --quiet || git commit -m "Persist live quotes and iPhone input fixes"
+          git push
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

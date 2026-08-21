@@ -1,4 +1,4 @@
-name: Publish Japan + US Live Quotes
+name: Fix Live Quotes and Deploy Cloudflare
 
 on:
   push:
@@ -10,25 +10,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: all-live-quotes
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Japan and US live quote cache
+      - name: Build live quote cache
         shell: bash
         run: |
           cat > /tmp/build_quotes.py <<'PY'
@@ -62,25 +53,8 @@ jobs:
                   "symbols": {"query": {"types": []}, "tickers": []},
                   "columns": ["name", "description", "close", "change", "exchange"],
                   "range": [0, 10000],
-              },
-          )
-
-          japan = {}
-          for row in jp_data.get("data") or []:
-              d = row.get("d") or []
-              if len(d) < 4:
-                  continue
-              code = str(d[0] or "").strip().upper().replace(".T", "")
-              price = d[2]
-              if not code or not isinstance(price, (int, float)) or price <= 0:
-                  continue
-              japan[code] = {
-                  "code": code,
-                  "name": str(d[1] or code).strip(),
-                  "price": float(price),
-                  "change_pct": float(d[3] or 0),
-                  "source": "TradingView scanner",
               }
+          )
 
           us_data = scan(
               "https://scanner.tradingview.com/america/scan",
@@ -91,79 +65,99 @@ jobs:
                   "symbols": {"query": {"types": []}, "tickers": []},
                   "columns": ["name", "description", "close", "change", "exchange"],
                   "range": [0, 20000],
-              },
+              }
           )
 
-          usa = {}
-          allowed = {"NASDAQ", "NYSE", "AMEX", "NYSEARCA"}
-          for row in us_data.get("data") or []:
-              d = row.get("d") or []
-              if len(d) < 5:
-                  continue
-              code = str(d[0] or "").strip().upper()
-              price = d[2]
-              exchange = str(d[4] or "").strip().upper()
-              if exchange not in allowed:
-                  continue
-              if not code or not isinstance(price, (int, float)) or price <= 0:
-                  continue
-              usa[code] = {
-                  "code": code,
-                  "name": str(d[1] or code).strip(),
-                  "price": float(price),
-                  "change_pct": float(d[3] or 0),
-                  "exchange": exchange,
-                  "source": "TradingView scanner",
-              }
+          def build(data, allowed_exchanges=None):
+              out = {}
+              for row in data.get("data") or []:
+                  d = row.get("d") or []
+                  if len(d) < 4:
+                      continue
+                  code = str(d[0] or "").strip().upper().replace(".T", "")
+                  name = str(d[1] or code).strip()
+                  price = d[2]
+                  change = d[3]
+                  exchange = str(d[4] if len(d) > 4 else "").strip().upper()
+
+                  if allowed_exchanges and exchange not in allowed_exchanges:
+                      continue
+                  if not code or not isinstance(price, (int, float)) or price <= 0:
+                      continue
+
+                  out[code] = {
+                      "code": code,
+                      "name": name,
+                      "price": float(price),
+                      "change_pct": float(change or 0),
+                      "exchange": exchange
+                  }
+              return out
+
+          japan = build(jp_data)
+          usa = build(us_data, {"NASDAQ", "NYSE", "AMEX", "NYSEARCA"})
 
           if "7203" not in japan:
-              raise SystemExit("Safety check failed: Japan 7203 missing")
+              raise SystemExit("Safety check failed: 7203 missing")
           if "NVDA" not in usa:
-              raise SystemExit("Safety check failed: US NVDA missing")
+              raise SystemExit("Safety check failed: NVDA missing")
 
-          out = {
-              "updated_at": datetime.now(timezone.utc).isoformat(),
-              "source": "TradingView full-market scan via GitHub Actions",
-              "japan": japan,
-              "usa": usa,
-          }
           Path("live_quotes.json").write_text(
-              json.dumps(out, ensure_ascii=False, separators=(",", ":")),
-              encoding="utf-8",
+              json.dumps({
+                  "updated_at": datetime.now(timezone.utc).isoformat(),
+                  "japan": japan,
+                  "usa": usa
+              }, ensure_ascii=False, separators=(",", ":")),
+              encoding="utf-8"
           )
 
           print("Japan quotes:", len(japan))
           print("US quotes:", len(usa))
-          print("7203:", japan["7203"])
           print("NVDA:", usa["NVDA"])
           PY
 
           python /tmp/build_quotes.py
 
-      - name: Patch published index safely
+      - name: Patch index.html for iPhone and live prices
         shell: bash
         run: |
           cat > /tmp/patch_index.py <<'PY'
           from pathlib import Path
+          import re
 
           p = Path("index.html")
           s = p.read_text(encoding="utf-8")
 
-          START = "<!-- LIVE_QUOTES_V2_START -->"
-          END = "<!-- LIVE_QUOTES_V2_END -->"
+          # Prevent iPhone Safari from auto-zooming focused form controls.
+          s = re.sub(
+              r'(\.customgrid input,\.customgrid select\{[^}]*?)font-size:\s*12px',
+              r'\1font-size:16px',
+              s,
+              count=1
+          )
 
-          a = s.find(START)
-          b = s.find(END)
-          if a != -1 and b != -1 and b > a:
-              s = s[:a] + s[b + len(END):]
+          # Remove older injected live-quote blocks so only one version remains.
+          markers = [
+              ("<!-- ALL_JAPAN_QUOTES_START -->", "<!-- ALL_JAPAN_QUOTES_END -->"),
+              ("<!-- LIVE_QUOTES_V2_START -->", "<!-- LIVE_QUOTES_V2_END -->"),
+              ("<!-- STABLE_LIVE_QUOTES_START -->", "<!-- STABLE_LIVE_QUOTES_END -->"),
+              ("<!-- FINAL_LIVE_QUOTES_START -->", "<!-- FINAL_LIVE_QUOTES_END -->"),
+          ]
+          for start, end in markers:
+              while True:
+                  a = s.find(start)
+                  b = s.find(end)
+                  if a == -1 or b == -1 or b <= a:
+                      break
+                  s = s[:a] + s[b + len(end):]
 
-          block = r'''<!-- LIVE_QUOTES_V2_START -->
+          block = r'''<!-- FINAL_LIVE_QUOTES_START -->
           <script>
           (() => {
-            const originalQuoteInfo = quoteInfo;
+            const baseQuoteInfo = quoteInfo;
             let liveQuotes = {japan:{}, usa:{}};
 
-            const liveReady = fetch("live_quotes.json?t=" + Date.now(), {cache:"no-store"})
+            const liveReady = fetch("./live_quotes.json?t=" + Date.now(), {cache:"no-store"})
               .then(r => {
                 if (!r.ok) throw new Error("live_quotes.json HTTP " + r.status);
                 return r.json();
@@ -171,12 +165,13 @@ jobs:
               .then(x => {
                 liveQuotes = x || {japan:{}, usa:{}};
               })
-              .catch(e => console.warn("live quote cache:", e));
+              .catch(e => console.warn("live quote cache failed:", e));
 
             quoteInfo = function(m, c) {
-              const k = String(c || "").trim().toUpperCase().replace(/\.T$/i, "");
-              const q = liveQuotes && liveQuotes[m] && liveQuotes[m][k];
-              return q || originalQuoteInfo(m, k);
+              const key = String(c || "").trim().toUpperCase().replace(/\.T$/i, "");
+              const q = liveQuotes?.[m]?.[key];
+              if (q && Number.isFinite(Number(q.price))) return q;
+              return baseQuoteInfo(m, key);
             };
 
             autofillCustomStock = async function() {
@@ -192,15 +187,12 @@ jobs:
               }
 
               el.value = c;
-
-              $("#customName").readOnly = false;
-              $("#customNow").readOnly = false;
               st.className = "lookupstatus";
               st.textContent = "会社名・現在値を取得中…";
 
               await liveReady;
 
-              let q = quoteInfo(m, c);
+              const q = quoteInfo(m, c);
               let mappedName = "";
               try {
                 const map = await loadCompanyMap(m);
@@ -208,14 +200,14 @@ jobs:
               } catch (e) {}
 
               if (q && Number.isFinite(Number(q.price))) {
-                const displayName = mappedName || q.name || c;
-                $("#customName").value = displayName;
+                const name = mappedName || q.name || c;
+                $("#customName").value = name;
                 $("#customNow").value = Number(q.price);
                 $("#customName").readOnly = true;
                 $("#customNow").readOnly = true;
                 st.className = "lookupstatus ok";
                 st.textContent =
-                  "✓ " + displayName +
+                  "✓ " + name +
                   " ｜ 現在値 " + money(q.price, m) +
                   " ｜ " + (Number(q.change_pct || 0) >= 0 ? "+" : "") +
                   Number(q.change_pct || 0).toFixed(2) + "%";
@@ -233,48 +225,49 @@ jobs:
               return null;
             };
 
+            // Replace ticker input node to remove the old 250ms input listener.
             const oldInput = document.getElementById("customCode");
             if (oldInput) {
-              const freshInput = oldInput.cloneNode(true);
-              freshInput.setAttribute("autocapitalize", "characters");
-              freshInput.setAttribute("autocomplete", "off");
-              freshInput.setAttribute("spellcheck", "false");
-              oldInput.replaceWith(freshInput);
+              const fresh = oldInput.cloneNode(true);
+              fresh.setAttribute("autocapitalize", "characters");
+              fresh.setAttribute("autocomplete", "off");
+              fresh.setAttribute("spellcheck", "false");
+              fresh.style.fontSize = "16px";
+              oldInput.replaceWith(fresh);
 
               let composing = false;
 
-              freshInput.addEventListener("compositionstart", () => {
-                composing = true;
-              });
-
-              freshInput.addEventListener("compositionend", () => {
+              fresh.addEventListener("compositionstart", () => composing = true);
+              fresh.addEventListener("compositionend", () => {
                 composing = false;
-                const st = $("#customLookup");
-                st.className = "lookupstatus";
-                st.textContent = "入力後に「完了」を押すか、別の欄をタップしてください。";
+                $("#customLookup").className = "lookupstatus";
+                $("#customLookup").textContent =
+                  "入力後に「完了」を押すか、別の欄をタップしてください。";
               });
-
-              freshInput.addEventListener("input", (e) => {
+              fresh.addEventListener("input", e => {
                 if (composing || e.isComposing) return;
-                const st = $("#customLookup");
-                st.className = "lookupstatus";
-                st.textContent = "入力後に「完了」を押すか、別の欄をタップしてください。";
+                $("#customLookup").className = "lookupstatus";
+                $("#customLookup").textContent =
+                  "入力後に「完了」を押すか、別の欄をタップしてください。";
               });
-
-              freshInput.addEventListener("change", () => {
+              fresh.addEventListener("change", () => {
                 if (!composing) autofillCustomStock();
               });
-
-              freshInput.addEventListener("blur", () => {
+              fresh.addEventListener("blur", () => {
                 if (!composing) autofillCustomStock();
               });
             }
+
+            // 16px or larger prevents iPhone Safari focus zoom.
+            document.querySelectorAll(".customgrid input,.customgrid select").forEach(el => {
+              el.style.fontSize = "16px";
+            });
           })();
           </script>
-          <!-- LIVE_QUOTES_V2_END -->'''
+          <!-- FINAL_LIVE_QUOTES_END -->'''
 
           if "</body>" not in s:
-              raise SystemExit("index.html does not contain </body>")
+              raise SystemExit("index.html missing </body>")
 
           s = s.replace("</body>", block + "\n</body>", 1)
           p.write_text(s, encoding="utf-8")
@@ -285,19 +278,57 @@ jobs:
       - name: Verify generated files
         shell: bash
         run: |
-          test -s live_quotes.json
-          grep -q '"7203"' live_quotes.json
           grep -q '"NVDA"' live_quotes.json
-          grep -q 'LIVE_QUOTES_V2_START' index.html
-          grep -q 'compositionstart' index.html
-          echo "Japan/US quote cache and IME-safe input patch verified."
+          grep -q 'FINAL_LIVE_QUOTES_START' index.html
+          grep -q 'font-size:16px' index.html
+          echo "Validation passed."
 
-      - uses: actions/configure-pages@v5
+      - name: Save fixed files to repository
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html live_quotes.json
+          git diff --cached --quiet || git commit -m "Fix iPhone input zoom and live US quotes"
+          git push
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/setup-node@v4
         with:
-          path: .
+          node-version: "20"
 
-      - name: Publish to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Create Wrangler config
+        shell: bash
+        run: |
+          cat > wrangler.toml <<'EOF'
+          name = "quiet-firefly-dd73"
+          main = "_worker.js"
+          compatibility_date = "2026-08-21"
+
+          [assets]
+          directory = "."
+          binding = "ASSETS"
+          EOF
+
+      - name: Deploy updated app to Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          TOKEN="${CLOUDFLARE_API_TOKEN:-${CF_API_TOKEN:-$CLOUDFLARE_TOKEN}}"
+          ACCOUNT="${CLOUDFLARE_ACCOUNT_ID:-$CF_ACCOUNT_ID}"
+
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Cloudflare API token not found"
+            exit 1
+          fi
+
+          export CLOUDFLARE_API_TOKEN="$TOKEN"
+          if [ -n "$ACCOUNT" ]; then
+            export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT"
+          fi
+
+          npx --yes wrangler@4 deploy

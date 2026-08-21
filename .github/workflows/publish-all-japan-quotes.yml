@@ -112,6 +112,20 @@ jobs:
           if a != -1 and b != -1 and b > a:
               s = s[:a] + s[b + len(END):]
 
+          # iPhone/Safari fix: do not rewrite the ticker input while the user is typing.
+          # The previous 250ms input lookup called normalizeCustomCode(), which assigns
+          # back to customCode.value and can interrupt text entry after the first letter.
+          old_input_listener = '$('# + chr(34) + 'customCode' + chr(34) + ').addEventListener(' + chr(34) + 'input' + chr(34) + ',()=>{clearTimeout(window.__customLookupTimer);window.__customLookupTimer=setTimeout(autofillCustomStock,250)});'
+          new_input_listener = '$('# + chr(34) + 'customCode' + chr(34) + ').addEventListener(' + chr(34) + 'input' + chr(34) + ',()=>{const st=$(' + chr(34) + '#customLookup' + chr(34) + ');st.className=' + chr(34) + 'lookupstatus' + chr(34) + ';st.textContent=' + chr(34) + '入力後に「完了」を押すと会社名と現在値を確認します。' + chr(34) + '});'
+          if old_input_listener in s:
+              s = s.replace(old_input_listener, new_input_listener, 1)
+
+          # Keep lookup on change and also support leaving the field by tapping elsewhere.
+          old_change_listener = '$('# + chr(34) + 'customCode' + chr(34) + ').addEventListener(' + chr(34) + 'change' + chr(34) + ',autofillCustomStock);'
+          new_change_listener = old_change_listener + '$('# + chr(34) + 'customCode' + chr(34) + ').addEventListener(' + chr(34) + 'blur' + chr(34) + ',autofillCustomStock);'
+          if old_change_listener in s and 'addEventListener(' + chr(34) + 'blur' + chr(34) not in s:
+              s = s.replace(old_change_listener, new_change_listener, 1)
+
           block = '''<!-- ALL_JAPAN_QUOTES_START -->
           <script>
           (() => {

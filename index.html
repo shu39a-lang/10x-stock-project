@@ -263,6 +263,81 @@ function loadData(){$("#updated").textContent="最終更新：読込中…";retu
 $("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});$("#refresh").onclick=()=>loadData();$("#alertsBtn").onclick=()=>{$("#alertbox").classList.toggle("show")};$("#portBtn").onclick=()=>{$("#portbox").classList.toggle("show");renderPortfolio()};$("#favBtn").onclick=()=>{favOnly=!favOnly;render()};$("#customCode").addEventListener("input",()=>{clearTimeout(window.__customLookupTimer);window.__customLookupTimer=setTimeout(autofillCustomStock,250)});$("#customCode").addEventListener("change",autofillCustomStock);$("#customMarket").addEventListener("change",()=>{$("#customName").value="";$("#customNow").value="";autofillCustomStock()});$("#customAddBtn").onclick=()=>addCustomHolding();$("#notifyBtn").onclick=async()=>{if(!('Notification' in window))return alert("この端末では通知機能を利用できません");const p=await Notification.requestPermission();alert(p==="granted"?"アプリ起動時の買いアラート通知をONにしました":"通知は許可されませんでした")};
 render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).catch(()=>{}));}
 </script>
+
+<!-- TENX_API_FIX_START -->
+<script>
+(()=> {
+  async function tenxLookup(){
+    const m=document.querySelector('#customMarket')?.value;
+    const el=document.querySelector('#customCode');
+    const st=document.querySelector('#customLookup');
+    if(!m||!el||!st)return null;
+
+    const c=String(el.value||'').trim().toUpperCase().replace(/\.T$/i,'');
+    if(!c){
+      st.className='lookupstatus';
+      st.textContent='コードを入力すると会社名と現在値を確認します。';
+      return null;
+    }
+
+    el.value=c;
+    st.className='lookupstatus';
+    st.textContent='会社名・現在値を取得中…';
+
+    try{
+      const r=await fetch(
+        '/api/stock?market='+encodeURIComponent(m)+'&code='+encodeURIComponent(c)+'&t='+Date.now(),
+        {cache:'no-store'}
+      );
+      const q=await r.json();
+
+      if(r.ok&&q&&q.ok&&Number.isFinite(Number(q.price))){
+        const name=q.name||c;
+        document.querySelector('#customName').value=name;
+        document.querySelector('#customNow').value=Number(q.price);
+        document.querySelector('#customName').readOnly=true;
+        document.querySelector('#customNow').readOnly=true;
+        st.className='lookupstatus ok';
+        const prefix=m==='japan'?'¥':'$';
+        st.textContent='✓ '+name+' ｜ 現在値 '+prefix+
+          Number(q.price).toLocaleString(undefined,{
+            minimumFractionDigits:m==='usa'?2:0,
+            maximumFractionDigits:2
+          });
+        return q;
+      }
+    }catch(e){}
+
+    st.className='lookupstatus warn';
+    st.textContent='現在値を取得できませんでした。もう一度コード欄から移動してください。';
+    document.querySelector('#customNow').readOnly=false;
+    return null;
+  }
+
+  window.autofillCustomStock=tenxLookup;
+
+  // Replace the old code input node so the previous 250ms handler is removed.
+  const old=document.getElementById('customCode');
+  if(old){
+    const fresh=old.cloneNode(true);
+    fresh.style.fontSize='16px';
+    fresh.setAttribute('autocapitalize','characters');
+    fresh.setAttribute('autocomplete','off');
+    fresh.setAttribute('spellcheck','false');
+    old.replaceWith(fresh);
+
+    let composing=false;
+    fresh.addEventListener('compositionstart',()=>composing=true);
+    fresh.addEventListener('compositionend',()=>composing=false);
+    fresh.addEventListener('change',()=>{if(!composing)tenxLookup();});
+    fresh.addEventListener('blur',()=>{if(!composing)tenxLookup();});
+  }
+
+  document.querySelectorAll('.customgrid input,.customgrid select')
+    .forEach(x=>x.style.fontSize='16px');
+})();
+</script>
+<!-- TENX_API_FIX_END -->
 <!-- FINAL_LIVE_QUOTES_START -->
 <script>
 (() => {
@@ -377,79 +452,5 @@ render();loadData();if("serviceWorker" in navigator){window.addEventListener("lo
 })();
 </script>
 <!-- FINAL_LIVE_QUOTES_END -->
-<!-- TENX_API_FIX_START -->
-<script>
-(()=> {
-  async function tenxLookup(){
-    const m=document.querySelector('#customMarket')?.value;
-    const el=document.querySelector('#customCode');
-    const st=document.querySelector('#customLookup');
-    if(!m||!el||!st)return null;
-
-    const c=String(el.value||'').trim().toUpperCase().replace(/\.T$/i,'');
-    if(!c){
-      st.className='lookupstatus';
-      st.textContent='コードを入力すると会社名と現在値を確認します。';
-      return null;
-    }
-
-    el.value=c;
-    st.className='lookupstatus';
-    st.textContent='会社名・現在値を取得中…';
-
-    try{
-      const r=await fetch(
-        '/api/stock?market='+encodeURIComponent(m)+'&code='+encodeURIComponent(c)+'&t='+Date.now(),
-        {cache:'no-store'}
-      );
-      const q=await r.json();
-
-      if(r.ok&&q&&q.ok&&Number.isFinite(Number(q.price))){
-        const name=q.name||c;
-        document.querySelector('#customName').value=name;
-        document.querySelector('#customNow').value=Number(q.price);
-        document.querySelector('#customName').readOnly=true;
-        document.querySelector('#customNow').readOnly=true;
-        st.className='lookupstatus ok';
-        const prefix=m==='japan'?'¥':'$';
-        st.textContent='✓ '+name+' ｜ 現在値 '+prefix+
-          Number(q.price).toLocaleString(undefined,{
-            minimumFractionDigits:m==='usa'?2:0,
-            maximumFractionDigits:2
-          });
-        return q;
-      }
-    }catch(e){}
-
-    st.className='lookupstatus warn';
-    st.textContent='現在値を取得できませんでした。もう一度コード欄から移動してください。';
-    document.querySelector('#customNow').readOnly=false;
-    return null;
-  }
-
-  window.autofillCustomStock=tenxLookup;
-
-  // Replace the old code input node so the previous 250ms handler is removed.
-  const old=document.getElementById('customCode');
-  if(old){
-    const fresh=old.cloneNode(true);
-    fresh.style.fontSize='16px';
-    fresh.setAttribute('autocapitalize','characters');
-    fresh.setAttribute('autocomplete','off');
-    fresh.setAttribute('spellcheck','false');
-    old.replaceWith(fresh);
-
-    let composing=false;
-    fresh.addEventListener('compositionstart',()=>composing=true);
-    fresh.addEventListener('compositionend',()=>composing=false);
-    fresh.addEventListener('change',()=>{if(!composing)tenxLookup();});
-    fresh.addEventListener('blur',()=>{if(!composing)tenxLookup();});
-  }
-
-  document.querySelectorAll('.customgrid input,.customgrid select')
-    .forEach(x=>x.style.fontSize='16px');
-})();
-</script>
-<!-- TENX_API_FIX_END -->
 </body>
 </html>

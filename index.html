@@ -66,7 +66,7 @@ button{font-family:inherit}
 .tool{border:1px solid #2a394b;background:#0d1722;color:#fff;border-radius:11px;padding:9px 4px;font-size:12px;font-weight:800}
 .tool.on{outline:2px solid #ffd54f}
 .alertbox,.portbox{display:none;margin:10px 0;border:1px solid #2b3e53;border-radius:14px;background:#0a131e;padding:12px}
-.custombox{margin-top:14px;border-top:1px solid #2b3e53;padding-top:13px}.customtitle{font-size:15px;font-weight:900;margin-bottom:5px}.customnote{font-size:10px;color:#93a2b5;line-height:1.5;margin-bottom:9px}.customgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.customgrid input,.customgrid select{width:100%;border:1px solid #2b3e53;background:#101a25;color:#fff;border-radius:8px;padding:9px;font-size:12px}.customgrid .wide{grid-column:1/-1}.lookupstatus{grid-column:1/-1;font-size:10px;color:#93a2b5;min-height:1.5em;padding:1px 2px}.lookupstatus.ok{color:#63e693}.lookupstatus.warn{color:#ffd25e}.customadd{width:100%;margin-top:8px;border:1px solid #6f5a00;background:#2b2300;color:#ffd54f;border-radius:9px;padding:9px;font-weight:900}.sourcehint{font-size:9px;color:#7f8ea0;margin-top:5px}.porttotals{display:grid;gap:7px;margin-top:10px}
+.custombox{margin-top:14px;border-top:1px solid #2b3e53;padding-top:13px}.customtitle{font-size:15px;font-weight:900;margin-bottom:5px}.customnote{font-size:10px;color:#93a2b5;line-height:1.5;margin-bottom:9px}.customgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.customgrid input,.customgrid select{width:100%;border:1px solid #2b3e53;background:#101a25;color:#fff;border-radius:8px;padding:9px;font-size:16px}.customgrid .wide{grid-column:1/-1}.lookupstatus{grid-column:1/-1;font-size:10px;color:#93a2b5;min-height:1.5em;padding:1px 2px}.lookupstatus.ok{color:#63e693}.lookupstatus.warn{color:#ffd25e}.customadd{width:100%;margin-top:8px;border:1px solid #6f5a00;background:#2b2300;color:#ffd54f;border-radius:9px;padding:9px;font-weight:900}.sourcehint{font-size:9px;color:#7f8ea0;margin-top:5px}.porttotals{display:grid;gap:7px;margin-top:10px}
 .alertbox.show,.portbox.show{display:block}
 .paneltitle{font-size:17px;font-weight:900;margin-bottom:8px}
 .alertitem,.portitem{border-top:1px solid #203044;padding:9px 0}.alertitem:first-of-type,.portitem:first-of-type{border-top:0}
@@ -261,5 +261,119 @@ function loadData(){$("#updated").textContent="最終更新：読込中…";retu
 $("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});$("#refresh").onclick=()=>loadData();$("#alertsBtn").onclick=()=>{$("#alertbox").classList.toggle("show")};$("#portBtn").onclick=()=>{$("#portbox").classList.toggle("show");renderPortfolio()};$("#favBtn").onclick=()=>{favOnly=!favOnly;render()};$("#customCode").addEventListener("input",()=>{clearTimeout(window.__customLookupTimer);window.__customLookupTimer=setTimeout(autofillCustomStock,250)});$("#customCode").addEventListener("change",autofillCustomStock);$("#customMarket").addEventListener("change",()=>{$("#customName").value="";$("#customNow").value="";autofillCustomStock()});$("#customAddBtn").onclick=()=>addCustomHolding();$("#notifyBtn").onclick=async()=>{if(!('Notification' in window))return alert("この端末では通知機能を利用できません");const p=await Notification.requestPermission();alert(p==="granted"?"アプリ起動時の買いアラート通知をONにしました":"通知は許可されませんでした")};
 render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).catch(()=>{}));}
 </script>
+<!-- FINAL_LIVE_QUOTES_START -->
+<script>
+(() => {
+  const baseQuoteInfo = quoteInfo;
+  let liveQuotes = {japan:{}, usa:{}};
+
+  const liveReady = fetch("./live_quotes.json?t=" + Date.now(), {cache:"no-store"})
+    .then(r => {
+      if (!r.ok) throw new Error("live_quotes.json HTTP " + r.status);
+      return r.json();
+    })
+    .then(x => {
+      liveQuotes = x || {japan:{}, usa:{}};
+    })
+    .catch(e => console.warn("live quote cache failed:", e));
+
+  quoteInfo = function(m, c) {
+    const key = String(c || "").trim().toUpperCase().replace(/\.T$/i, "");
+    const q = liveQuotes?.[m]?.[key];
+    if (q && Number.isFinite(Number(q.price))) return q;
+    return baseQuoteInfo(m, key);
+  };
+
+  autofillCustomStock = async function() {
+    const m = $("#customMarket").value;
+    const el = $("#customCode");
+    const c = String(el.value || "").trim().toUpperCase().replace(/\.T$/i, "");
+    const st = $("#customLookup");
+
+    if (!c) {
+      st.className = "lookupstatus";
+      st.textContent = "コードを入力すると会社名と現在値を確認します。";
+      return null;
+    }
+
+    el.value = c;
+    st.className = "lookupstatus";
+    st.textContent = "会社名・現在値を取得中…";
+
+    await liveReady;
+
+    const q = quoteInfo(m, c);
+    let mappedName = "";
+    try {
+      const map = await loadCompanyMap(m);
+      mappedName = String((map && map[c]) || "").trim();
+    } catch (e) {}
+
+    if (q && Number.isFinite(Number(q.price))) {
+      const name = mappedName || q.name || c;
+      $("#customName").value = name;
+      $("#customNow").value = Number(q.price);
+      $("#customName").readOnly = true;
+      $("#customNow").readOnly = true;
+      st.className = "lookupstatus ok";
+      st.textContent =
+        "✓ " + name +
+        " ｜ 現在値 " + money(q.price, m) +
+        " ｜ " + (Number(q.change_pct || 0) >= 0 ? "+" : "") +
+        Number(q.change_pct || 0).toFixed(2) + "%";
+      return q;
+    }
+
+    $("#customName").value = mappedName;
+    $("#customName").readOnly = !!mappedName;
+    $("#customNow").value = "";
+    $("#customNow").readOnly = false;
+    st.className = "lookupstatus warn";
+    st.textContent = mappedName
+      ? "✓ " + mappedName + " を確認しました。現在値のみ手入力してください。"
+      : "銘柄を確認できませんでした。";
+    return null;
+  };
+
+  // Replace ticker input node to remove the old 250ms input listener.
+  const oldInput = document.getElementById("customCode");
+  if (oldInput) {
+    const fresh = oldInput.cloneNode(true);
+    fresh.setAttribute("autocapitalize", "characters");
+    fresh.setAttribute("autocomplete", "off");
+    fresh.setAttribute("spellcheck", "false");
+    fresh.style.fontSize = "16px";
+    oldInput.replaceWith(fresh);
+
+    let composing = false;
+
+    fresh.addEventListener("compositionstart", () => composing = true);
+    fresh.addEventListener("compositionend", () => {
+      composing = false;
+      $("#customLookup").className = "lookupstatus";
+      $("#customLookup").textContent =
+        "入力後に「完了」を押すか、別の欄をタップしてください。";
+    });
+    fresh.addEventListener("input", e => {
+      if (composing || e.isComposing) return;
+      $("#customLookup").className = "lookupstatus";
+      $("#customLookup").textContent =
+        "入力後に「完了」を押すか、別の欄をタップしてください。";
+    });
+    fresh.addEventListener("change", () => {
+      if (!composing) autofillCustomStock();
+    });
+    fresh.addEventListener("blur", () => {
+      if (!composing) autofillCustomStock();
+    });
+  }
+
+  // 16px or larger prevents iPhone Safari focus zoom.
+  document.querySelectorAll(".customgrid input,.customgrid select").forEach(el => {
+    el.style.fontSize = "16px";
+  });
+})();
+</script>
+<!-- FINAL_LIVE_QUOTES_END -->
 </body>
 </html>

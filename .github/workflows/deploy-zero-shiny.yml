@@ -1,0 +1,217 @@
+name: Deploy 10X STOCK ZERO to shiny-cake
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/deploy-zero-shiny.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build ZERO from proven 10X STOCK
+        shell: bash
+        run: |
+          set -e
+          rm -rf zero_build
+          mkdir zero_build
+          for f in index.html _worker.js tenx_data.json tenx_history.json live_quotes.json manifest.webmanifest sw.js icon-192.png icon-512.png apple-touch-icon.png; do
+            if [ -f "$f" ]; then cp "$f" zero_build/; fi
+          done
+
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('zero_build/index.html')
+          s=p.read_text(encoding='utf-8')
+
+          s=s.replace('<meta name="apple-mobile-web-app-title" content="元金10倍計画">','<meta name="apple-mobile-web-app-title" content="10X STOCK ZERO">')
+          s=s.replace('<title>元金10倍計画</title>','<title>10X STOCK ZERO</title>')
+          s=s.replace('<h1>元金10倍計画</h1>','<h1>10X STOCK ZERO</h1>')
+
+          css=r'''
+          /* ZERO_DUAL_MARKET_V1 */
+          .markets{display:none!important}
+          #title,#list{display:none!important}
+          .zero-dual{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+          .zero-market-card{background:#0b141e;border:1px solid #29384b;border-radius:16px;padding:11px;min-width:0}
+          .zero-market-head{min-height:70px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:22px;font-weight:1000;margin-bottom:9px}
+          .zero-market-head.jp{background:#fff;color:#b51434}
+          .zero-market-head.us{background:#28479d;color:#fff}
+          .zero-market-head span{font-size:29px}
+          .zero-row{border-top:1px solid #203044;padding:9px 0}
+          .zero-row:first-child{border-top:0}
+          .zero-name{font-size:13px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+          .zero-meta{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:4px;font-size:11px;color:#97a5b7}
+          .zero-price{font-weight:900;color:#fff}
+          .zero-score{color:#ffd54f;font-weight:900}
+          .zero-empty{padding:14px 4px;color:#8492a4;font-size:11px;text-align:center}
+          @media(max-width:680px){
+            .zero-dual{grid-template-columns:1fr 1fr;gap:6px}
+            .zero-market-card{padding:7px}
+            .zero-market-head{font-size:16px;min-height:58px;margin-bottom:5px}
+            .zero-market-head span{font-size:22px}
+            .zero-name{font-size:11px}
+            .zero-meta{font-size:9px;display:block}
+            .zero-meta span{display:block;margin-top:2px}
+          }
+          '''
+          s=s.replace('</style>',css+'\n</style>',1)
+
+          marker='<div class="sim">'
+          dual='''<div id="zeroDual" class="zero-dual">
+            <section class="zero-market-card"><div class="zero-market-head jp"><span>🇯🇵</span>日本株</div><div id="zeroJP"></div></section>
+            <section class="zero-market-card"><div class="zero-market-head us"><span>🇺🇸</span>米国株</div><div id="zeroUS"></div></section>
+          </div>'''
+          if marker in s:
+            s=s.replace(marker,dual+'\n'+marker,1)
+
+          js=r'''
+          <!-- ZERO_DUAL_MARKET_SCRIPT_V1 -->
+          <script>
+          (()=> {
+            const q=s=>document.querySelector(s);
+            const draftKey='tenx_zero_custom_draft_v1';
+
+            function money2(n,m){
+              const v=Number(n); if(!Number.isFinite(v)) return '-';
+              return m==='japan'
+                ? '¥'+v.toLocaleString(undefined,{maximumFractionDigits:2})
+                : '$'+v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+            }
+
+            function renderSide(m,id){
+              const box=q(id); if(!box) return;
+              const arr=((D&&D[m]&&D[m][horizon])||[]).slice(0,10);
+              box.innerHTML=arr.length
+                ? arr.map((x,i)=>`<div class="zero-row">
+                    <div class="zero-name">${i+1}. ${x.name}（${x.code}）</div>
+                    <div class="zero-meta">
+                      <span class="zero-price">${money2(x.price,m)} ${Number(x.change_pct||0)>=0?'+':''}${Number(x.change_pct||0).toFixed(2)}%</span>
+                      <span class="zero-score">${x.score}点</span>
+                    </div>
+                  </div>`).join('')
+                : '<div class="zero-empty">データ読込中</div>';
+            }
+
+            function renderDual(){renderSide('japan','#zeroJP');renderSide('usa','#zeroUS')}
+
+            const baseRender=window.render;
+            if(typeof baseRender==='function'){
+              window.render=function(){
+                const r=baseRender.apply(this,arguments);
+                renderDual();
+                return r;
+              }
+            }
+            renderDual();
+
+            const code=q('#customCode'), name=q('#customName'), qty=q('#customQty'),
+                  buy=q('#customBuy'), now=q('#customNow'), marketEl=q('#customMarket');
+            const els=[code,name,qty,buy,now,marketEl].filter(Boolean);
+
+            function saveDraft(){
+              try{
+                localStorage.setItem(draftKey,JSON.stringify({
+                  code:code?.value||'', name:name?.value||'', qty:qty?.value||'',
+                  buy:buy?.value||'', now:now?.value||'', market:marketEl?.value||'japan'
+                }));
+              }catch(e){}
+            }
+
+            function loadDraft(){
+              try{
+                const d=JSON.parse(localStorage.getItem(draftKey)||'null');
+                if(!d)return;
+                if(code)code.value=d.code||'';
+                if(name)name.value=d.name||'';
+                if(qty)qty.value=d.qty||'';
+                if(buy)buy.value=d.buy||'';
+                if(now)now.value=d.now||'';
+                if(marketEl&&d.market)marketEl.value=d.market;
+              }catch(e){}
+            }
+
+            els.forEach(el=>el.addEventListener('input',saveDraft));
+            els.forEach(el=>el.addEventListener('change',saveDraft));
+            loadDraft();
+
+            let timer=0, composing=false;
+            if(code){
+              code.style.fontSize='16px';
+              code.addEventListener('compositionstart',()=>composing=true);
+              code.addEventListener('compositionend',()=>{
+                composing=false;
+                clearTimeout(timer);
+                timer=setTimeout(async()=>{await window.autofillCustomStock?.();saveDraft()},150);
+              });
+              code.addEventListener('input',e=>{
+                if(composing||e.isComposing)return;
+                saveDraft();
+                clearTimeout(timer);
+                timer=setTimeout(async()=>{await window.autofillCustomStock?.();saveDraft()},650);
+              });
+              code.addEventListener('blur',async()=>{
+                if(composing)return;
+                await window.autofillCustomStock?.();
+                saveDraft();
+              });
+            }
+            if(code?.value){
+              setTimeout(async()=>{await window.autofillCustomStock?.();saveDraft()},250);
+            }
+          })();
+          </script>
+          '''
+
+          s=s.replace('</body>',js+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Validate ZERO files
+        shell: bash
+        run: |
+          test -s zero_build/index.html
+          test -s zero_build/_worker.js
+          grep -q 'ZERO_DUAL_MARKET_V1' zero_build/index.html
+          grep -q '/api/stock' zero_build/_worker.js
+          grep -q 'query1.finance.yahoo.com' zero_build/_worker.js
+
+      - name: Create Wrangler config
+        shell: bash
+        run: |
+          cat > wrangler-zero.toml <<'EOF'
+          name = "shiny-cake-fb9f"
+          main = "zero_build/_worker.js"
+          compatibility_date = "2026-08-22"
+
+          [assets]
+          directory = "zero_build"
+          binding = "ASSETS"
+          EOF
+
+      - name: Deploy ZERO to existing Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          TOKEN="${CLOUDFLARE_API_TOKEN:-${CF_API_TOKEN:-$CLOUDFLARE_TOKEN}}"
+          ACCOUNT="${CLOUDFLARE_ACCOUNT_ID:-$CF_ACCOUNT_ID}"
+          test -n "$TOKEN" || { echo "Cloudflare token missing"; exit 1; }
+          export CLOUDFLARE_API_TOKEN="$TOKEN"
+          if [ -n "$ACCOUNT" ]; then export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT"; fi
+          npx --yes wrangler@4 deploy --config wrangler-zero.toml

@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#050910">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="元金10倍計画">
+<meta name="apple-mobile-web-app-title" content="10X STOCK ZERO">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>元金10倍計画</title>
+<title>10X STOCK ZERO</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#050910;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
@@ -66,7 +66,7 @@ button{font-family:inherit}
 .tool{border:1px solid #2a394b;background:#0d1722;color:#fff;border-radius:11px;padding:9px 4px;font-size:12px;font-weight:800}
 .tool.on{outline:2px solid #ffd54f}
 .alertbox,.portbox{display:none;margin:10px 0;border:1px solid #2b3e53;border-radius:14px;background:#0a131e;padding:12px}
-.custombox{margin-top:14px;border-top:1px solid #2b3e53;padding-top:13px}.customtitle{font-size:15px;font-weight:900;margin-bottom:5px}.customnote{font-size:10px;color:#93a2b5;line-height:1.5;margin-bottom:9px}.customgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.customgrid input,.customgrid select{width:100%;border:1px solid #2b3e53;background:#101a25;color:#fff;border-radius:8px;padding:9px;font-size:16px}.customgrid .wide{grid-column:1/-1}.lookupstatus{grid-column:1/-1;font-size:10px;color:#93a2b5;min-height:1.5em;padding:1px 2px}.lookupstatus.ok{color:#63e693}.lookupstatus.warn{color:#ffd25e}.customadd{width:100%;margin-top:8px;border:1px solid #6f5a00;background:#2b2300;color:#ffd54f;border-radius:9px;padding:9px;font-weight:900}.sourcehint{font-size:9px;color:#7f8ea0;margin-top:5px}.porttotals{display:grid;gap:7px;margin-top:10px}
+.custombox{margin-top:14px;border-top:1px solid #2b3e53;padding-top:13px}.customtitle{font-size:15px;font-weight:900;margin-bottom:5px}.customnote{font-size:10px;color:#93a2b5;line-height:1.5;margin-bottom:9px}.customgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.customgrid input,.customgrid select{width:100%;border:1px solid #2b3e53;background:#101a25;color:#fff;border-radius:8px;padding:9px;font-size:12px}.customgrid .wide{grid-column:1/-1}.lookupstatus{grid-column:1/-1;font-size:10px;color:#93a2b5;min-height:1.5em;padding:1px 2px}.lookupstatus.ok{color:#63e693}.lookupstatus.warn{color:#ffd25e}.customadd{width:100%;margin-top:8px;border:1px solid #6f5a00;background:#2b2300;color:#ffd54f;border-radius:9px;padding:9px;font-weight:900}.sourcehint{font-size:9px;color:#7f8ea0;margin-top:5px}.porttotals{display:grid;gap:7px;margin-top:10px}
 .alertbox.show,.portbox.show{display:block}
 .paneltitle{font-size:17px;font-weight:900;margin-bottom:8px}
 .alertitem,.portitem{border-top:1px solid #203044;padding:9px 0}.alertitem:first-of-type,.portitem:first-of-type{border-top:0}
@@ -78,14 +78,28 @@ button{font-family:inherit}
 
 @media(min-width:760px){.list{grid-template-columns:1fr 1fr}}
 
-.customgrid input,.customgrid select{font-size:16px!important}
+/* ZERO_PREVIOUS_SUCCESS_BASE_V1 */
+.markets{display:none!important}
+#title,#list{display:none!important}
+.zeroDualTitle{font-size:12px;color:#aab5c3;margin:12px 2px 7px;font-weight:800}
+.zeroDual{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.zeroPanel{background:#0b141e;border:1px solid #29384b;border-radius:16px;overflow:hidden;min-width:0}
+.zeroPanelHead{height:66px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:21px;font-weight:1000}
+.zeroPanelHead.jp{background:#fff;color:#c20e2d}.zeroPanelHead.us{background:#28479d;color:#fff}
+.zeroPanelHead span{font-size:28px}.zeroRows{padding:5px 8px 8px}.zeroRow{border-top:1px solid #203044;padding:8px 0}
+.zeroRow:first-child{border-top:0}.zeroName{font-size:12px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zeroCode{font-size:9px;color:#7f8ea0;margin-top:2px}.zeroMeta{display:flex;justify-content:space-between;gap:5px;margin-top:4px;font-size:10px}
+.zeroPrice{font-weight:900;color:#fff}.zeroScore{font-weight:900;color:#ffd54f}.zeroChange.up{color:#42df7d}.zeroChange.down{color:#ff626c}
+.zeroEmpty{text-align:center;color:#788596;font-size:10px;padding:15px 4px}.customgrid input,.customgrid select{font-size:16px!important}
+@media(max-width:680px){.zeroDual{grid-template-columns:1fr 1fr;gap:6px}.zeroPanelHead{height:58px;font-size:16px}.zeroPanelHead span{font-size:22px}.zeroRows{padding:4px 6px 7px}.zeroRow{padding:7px 0}.zeroName{font-size:10px}.zeroMeta{display:block;font-size:9px}.zeroMeta span{display:block;margin-top:2px}}
+
 </style>
 </head>
 <body>
 <div class="app">
-<div class="gold">10X STOCK PROJECT</div>
-<h1>元金10倍計画</h1>
-<div class="sub">割安性・企業品質/成長・財務安全性・テクニカル・カタリストの5本柱で総合評価</div>
+<div class="gold">10X STOCK ZERO</div>
+<h1>株式分析・管理</h1>
+<div class="sub">前回成功版を基盤にした拡張版｜日本株・米国株同時表示｜コード自動入力</div>
 
 <div class="status"><div id="updated">最終更新：読込中…</div><div class="auto">自動更新</div></div>
 <div class="tools">
@@ -98,7 +112,7 @@ button{font-family:inherit}
 <div id="portbox" class="portbox"><div class="paneltitle">保有株管理</div><div id="portRows"></div>
   <div class="custombox">
     <div class="customtitle">➕ ランキング外の株を自由登録</div>
-    <div class="customnote">ランキングに出ていない株も登録できます。コードを入力すると会社名を自動表示します。現在値は取得できる場合だけ自動表示し、それ以外は手入力できます。</div>
+    <div class="customnote">ランキングに出ていない株も登録できます。コードを入力すると、監視対象銘柄は銘柄名と現在値を自動表示します。対象外の銘柄だけ銘柄名と現在値を手入力してください。</div>
     <div class="customgrid">
       <select id="customMarket"><option value="japan">🇯🇵 日本株</option><option value="usa">🇺🇸 米国株</option></select>
       <input id="customCode" placeholder="コード 例 7203 / NVDA">
@@ -125,6 +139,11 @@ button{font-family:inherit}
   </div>
 </div>
 
+<div class="zeroDualTitle">日本株・米国株を同時表示（切替不要）</div>
+<div class="zeroDual">
+<section class="zeroPanel"><div class="zeroPanelHead jp"><span>🇯🇵</span>日本株</div><div id="zeroJP" class="zeroRows"><div class="zeroEmpty">読込中…</div></div></section>
+<section class="zeroPanel"><div class="zeroPanelHead us"><span>🇺🇸</span>米国株</div><div id="zeroUS" class="zeroRows"><div class="zeroEmpty">読込中…</div></div></section>
+</div>
 <div id="title" class="title">日本株・短期 TOP10</div>
 <div class="legend">100点満点：割安20点・品質/成長25点・財務15点・テクニカル25点・カタリスト15点。A=80以上 / B=65以上 / C=50以上 / D=50未満</div>
 <div id="list" class="list"></div>
@@ -141,13 +160,6 @@ button{font-family:inherit}
 <script>
 let market=localStorage.getItem("tenx_market")||"japan",horizon=localStorage.getItem("tenx_horizon")||"short",
 D={japan:{short:[],medium:[],long:[]},usa:{short:[],medium:[],long:[]},quotes:{japan:{},usa:{}}},H=[],favOnly=false;
-let companyMaps={japan:null,usa:null};
-const JP_COMPANY_CSV="https://raw.githubusercontent.com/te-chan/JP-CompanyCode/master/company_list.csv";
-const US_COMPANY_CSV="https://raw.githubusercontent.com/browser-vm/us-stock-tickers/main/us_stock_tickers.csv";
-const FALLBACK_NAMES={
- japan:{"7203":"トヨタ自動車","9984":"ソフトバンクグループ","6758":"ソニーグループ","8306":"三菱UFJフィナンシャル・グループ","6098":"リクルートホールディングス"},
- usa:{"NVDA":"NVIDIA Corporation","AAPL":"Apple Inc.","MSFT":"Microsoft Corporation","AMZN":"Amazon.com, Inc.","GOOGL":"Alphabet Inc."}
-};
 const $=s=>document.querySelector(s),L={short:"短期",medium:"中期",long:"長期"};
 const money=(x,m=market)=>m==="japan"?"¥"+Number(x).toLocaleString(undefined,{maximumFractionDigits:2}):"$"+Number(x).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const chart=x=>"https://www.tradingview.com/chart/?symbol="+encodeURIComponent(market==="japan"?"TSE:"+x.code:x.code);
@@ -168,90 +180,10 @@ function syncControls(){$("#jp").classList.toggle("active",market==="japan");$("
 function toggleFav(code){const f=getFavs(),k=favKey(market,code);f.has(k)?f.delete(k):f.add(k);setFavs(f);render()}
 function addHolding(x){const qty=prompt(x.name+" の保有株数を入力してください","100");if(qty===null)return;const q=Number(qty);if(!(q>0))return alert("株数を正しく入力してください");const bp=prompt("平均購入単価を入力してください",String(x.price));if(bp===null)return;const b=Number(bp);if(!(b>0))return alert("購入単価を正しく入力してください");const p=getPorts();p[favKey(market,x.code)]={market,code:x.code,name:x.name,qty:q,buyPrice:b};setPorts(p);renderPortfolio();alert("保有株に登録しました")}
 function removeHolding(k){const p=getPorts();delete p[k];setPorts(p);renderPortfolio()}
-function quoteInfo(m,c){const q=D?.quotes?.[m]?.[String(c)];if(q&&Number.isFinite(Number(q.price)))return q;for(const h of ["short","medium","long"]){const x=(D[m]?.[h]||[]).find(z=>String(z.code)===String(c));if(x)return x}return null}
+function quoteInfo(m,c){const k=String(c||"").trim().toUpperCase().replace(/\.T$/i,"");const live=LIVE?.[m]?.[k];if(live&&Number.isFinite(Number(live.price)))return live;const q=D?.quotes?.[m]?.[k];if(q&&Number.isFinite(Number(q.price)))return q;for(const h of ["short","medium","long"]){const x=(D[m]?.[h]||[]).find(z=>String(z.code).toUpperCase()===k);if(x)return x}return null}
 function latestPrice(m,c,fallback=null){const q=quoteInfo(m,c);if(q)return Number(q.price);const f=Number(fallback);return Number.isFinite(f)&&f>0?f:null}
-
-function parseCsvLine(line){
-  const out=[]; let cur="",q=false;
-  for(let i=0;i<line.length;i++){
-    const ch=line[i];
-    if(ch==='"'){
-      if(q&&line[i+1]==='"'){cur+='"';i++}
-      else q=!q;
-    }else if(ch===','&&!q){out.push(cur);cur=""}
-    else cur+=ch;
-  }
-  out.push(cur); return out;
-}
-async function loadCompanyMap(m){
-  if(companyMaps[m])return companyMaps[m];
-  const map={...(FALLBACK_NAMES[m]||{})};
-  try{
-    const url=m==="japan"?JP_COMPANY_CSV:US_COMPANY_CSV;
-    const r=await fetch(url,{cache:"force-cache"});
-    if(r.ok){
-      const text=await r.text(),lines=text.split(/\r?\n/).filter(Boolean);
-      const head=parseCsvLine(lines[0]).map(x=>x.trim().toLowerCase());
-      const codeKey=m==="japan"?"code":"ticker_symbol";
-      const nameKey=m==="japan"?"name":"company_name";
-      const ci=head.indexOf(codeKey),ni=head.indexOf(nameKey);
-      if(ci>=0&&ni>=0){
-        for(let i=1;i<lines.length;i++){
-          const row=parseCsvLine(lines[i]);
-          const code=String(row[ci]||"").trim().toUpperCase().replace(/\.T$/i,"");
-          const name=String(row[ni]||"").trim();
-          if(code&&name)map[code]=name;
-        }
-      }
-    }
-  }catch(e){}
-  companyMaps[m]=map;
-  return map;
-}
 function normalizeCustomCode(){const el=$("#customCode");el.value=el.value.trim().toUpperCase().replace(/\.T$/i,"");return el.value}
-async function autofillCustomStock(){
-  const m=$("#customMarket").value,c=normalizeCustomCode(),st=$("#customLookup");
-  if(!c){
-    st.className="lookupstatus";
-    st.textContent="コードを入力すると会社名を確認します。";
-    return null;
-  }
-  $("#customName").readOnly=false;
-  $("#customNow").readOnly=false;
-  st.className="lookupstatus";
-  st.textContent="会社名を検索中…";
-
-  const q=quoteInfo(m,c);
-  if(q){
-    $("#customName").value=q.name||$("#customName").value;
-    $("#customNow").value=Number(q.price);
-    $("#customName").readOnly=true;
-    $("#customNow").readOnly=true;
-    st.className="lookupstatus ok";
-    st.textContent="✓ "+(q.name||c)+" を確認しました。現在値も自動表示しました。";
-    return q;
-  }
-
-  const map=await loadCompanyMap(m);
-  const name=map[c];
-  if(name){
-    $("#customName").value=name;
-    $("#customName").readOnly=true;
-    $("#customNow").value="";
-    $("#customNow").readOnly=false;
-    st.className="lookupstatus ok";
-    st.textContent="✓ "+name+" を確認しました。現在値だけ入力してください。";
-    return {code:c,name:name,price:null};
-  }
-
-  $("#customName").value="";
-  $("#customName").readOnly=false;
-  $("#customNow").value="";
-  $("#customNow").readOnly=false;
-  st.className="lookupstatus warn";
-  st.textContent="会社名を確認できませんでした。銘柄名と現在値を手入力してください。";
-  return null;
-}
+function autofillCustomStock(){const m=$("#customMarket").value,c=normalizeCustomCode(),st=$("#customLookup");if(!c){st.className="lookupstatus";st.textContent="コードを入力すると銘柄名を確認します。";return null}const q=quoteInfo(m,c);if(q){$("#customName").value=q.name||$("#customName").value;$("#customNow").value=Number(q.price);$("#customName").readOnly=true;$("#customNow").readOnly=true;st.className="lookupstatus ok";st.textContent=`✓ ${q.name} を確認しました。現在値も自動更新されます。`;return q}$("#customName").readOnly=false;$("#customNow").readOnly=false;$("#customNow").value="";st.className="lookupstatus warn";st.textContent="このコードは現在の自動監視対象外です。銘柄名と現在値を手入力してください。";return null}
 function editManualPrice(k){const p=getPorts(),v=p[k];if(!v)return;const q=quoteInfo(v.market,v.code);if(q)return alert("この銘柄は自動更新対象です。現在値は自動で更新されます。");const x=prompt("現在値を入力してください",v.manualPrice?String(v.manualPrice):"");if(x===null)return;const n=Number(x);if(!(n>0))return alert("現在値を正しく入力してください");v.manualPrice=n;p[k]=v;setPorts(p);renderPortfolio()}
 function addCustomHolding(){const m=$("#customMarket").value,c=normalizeCustomCode(),auto=quoteInfo(m,c),name=(auto?.name||$("#customName").value).trim(),q=Number($("#customQty").value),b=Number($("#customBuy").value),manual=Number($("#customNow").value);if(!c)return alert("銘柄コードを入力してください");if(!name)return alert("銘柄名を入力してください");if(!(q>0))return alert("株数を正しく入力してください");if(!(b>0))return alert("購入単価を正しく入力してください");if(!auto&&!(manual>0))return alert("この銘柄は自動価格取得の対象外です。現在値も入力してください");const p=getPorts(),k=favKey(m,c);p[k]={market:m,code:c,name,qty:q,buyPrice:b,manualPrice:auto?null:manual>0?manual:null,custom:true};setPorts(p);["customCode","customName","customQty","customBuy","customNow"].forEach(id=>$("#"+id).value="");$("#customName").readOnly=false;$("#customNow").readOnly=false;$("#customLookup").className="lookupstatus";$("#customLookup").textContent="コードを入力すると銘柄名を確認します。";renderPortfolio();alert(auto?`登録しました。${name} の現在値は自動更新されます`:"登録しました。現在値は手入力で管理します")}
 function renderPortfolio(){const p=getPorts(),rows=Object.entries(p);if(!rows.length){$("#portRows").innerHTML='<div class="empty">まだ保有株は登録されていません。</div>';return}const totals={japan:{cost:0,now:0,known:0},usa:{cost:0,now:0,known:0}};$("#portRows").innerHTML=rows.map(([k,v])=>{const auto=quoteInfo(v.market,v.code),n=latestPrice(v.market,v.code,v.manualPrice),cost=v.qty*v.buyPrice,now=n==null?null:v.qty*n,pl=now==null?null:now-cost,pct=pl==null||!cost?null:pl/cost*100;t=totals[v.market]||totals.japan;t.cost+=cost;if(now!=null){t.now+=now;t.known++}const plText=pl==null?'現在値未設定':`${pl>=0?'+':''}${money(pl,v.market)} (${pct>=0?'+':''}${pct.toFixed(2)}%)`;const src=auto?'自動更新':'手入力';return `<div class="portitem"><b>${v.name}（${v.code}）</b><div class="portgrid"><div><label>保有</label><b>${v.qty}株</b></div><div><label>購入単価</label><b>${money(v.buyPrice,v.market)}</b></div><div><label>損益 / 損益率</label><b class="${pl==null?'':pl>=0?'up':'down'}">${plText}</b></div></div><div class="sourcehint">現在値 ${n==null?'未設定':money(n,v.market)} ｜ ${src}</div><div class="actions">${auto?'':`<button class="act" onclick="editManualPrice('${k}')">現在値を修正</button>`}<button class="act" onclick="removeHolding('${k}')">削除</button></div></div>`}).join("")+`<div class="porttotals">${totals.japan.cost?`<div class="total"><span>日本株 取得額合計<b>${money(totals.japan.cost,'japan')}</b></span><span>現在額参考<b>${money(totals.japan.now,'japan')}</b></span></div>`:''}${totals.usa.cost?`<div class="total"><span>米国株 取得額合計<b>${money(totals.usa.cost,'usa')}</b></span><span>現在額参考<b>${money(totals.usa.now,'usa')}</b></span></div>`:''}</div>`}
@@ -259,215 +191,33 @@ function currentAlerts(){return (D[market]?.[horizon]||[]).slice(0,10).filter(x=
 function renderAlerts(){const a=currentAlerts();$("#alertCount").textContent=a.length;$("#alertRows").innerHTML=a.length?a.map(x=>`<div class="alertitem"><b>${x.name}（${x.code}）</b> <span class="sig ${sig(x.signal)}">${x.signal}</span><div class="alertwhy">${buyMatch(x).why}・総合 ${x.score}点</div></div>`).join(""):'<div class="empty">現在、この条件に一致する銘柄はありません。</div>'}
 async function maybeNotify(){if(!('Notification' in window)||Notification.permission!=="granted")return;const a=currentAlerts();const key=market+":"+horizon+":"+a.map(x=>x.code).join(","),prev=localStorage.getItem("tenx_last_alert");if(a.length&&key!==prev){localStorage.setItem("tenx_last_alert",key);if('serviceWorker' in navigator){const reg=await navigator.serviceWorker.ready;reg.showNotification("10X STOCK 買いアラート",{body:`${market==='japan'?'日本株':'米国株'}・${L[horizon]}で ${a.length}銘柄が条件一致`,icon:'icon-192.png',badge:'icon-192.png'})}}}
 function render(){syncControls();const favs=getFavs();let a=(D[market]?.[horizon]||[]).slice(0,10);if(favOnly)a=a.filter(x=>favs.has(favKey(market,x.code)));const mname=market==="japan"?"日本株":"米国株";$("#title").textContent=mname+"・"+L[horizon]+(favOnly?" お気に入り":" TOP10");$("#simtitle").textContent=mname+"・"+L[horizon]+" TOP10（各100株）";$("#list").innerHTML=a.length?a.map((x,i)=>{const bm=buyMatch(x),isfav=favs.has(favKey(market,x.code));return `<div class="stock"><div class="r1"><div class="rank">${i+1}</div><div><div class="name">${x.name}</div><div class="code">${x.code}</div></div><a class="chart" href="${chart(x)}" target="_blank" rel="noopener">📈</a></div><div class="r2"><div class="m"><label>現在値</label><strong>${money(x.price)}</strong></div><div class="m"><label>騰落率</label><strong class="${x.change_pct>=0?'up':'down'}">${x.change_pct>0?'+':''}${x.change_pct}%</strong></div><div class="m"><label>総合スコア</label><strong>${x.score}</strong></div><span class="sig ${sig(x.signal)}">${x.signal}</span></div><div class="five"><div class="f"><label>割安</label><b class="${gclass(gv(x,'valuation'))}">${gv(x,'valuation')} ${sv(x,'valuation')}</b></div><div class="f"><label>品質</label><b class="${gclass(gv(x,'quality'))}">${gv(x,'quality')} ${sv(x,'quality')}</b></div><div class="f"><label>財務</label><b class="${gclass(gv(x,'financial'))}">${gv(x,'financial')} ${sv(x,'financial')}</b></div><div class="f"><label>技術</label><b class="${gclass(gv(x,'technical'))}">${gv(x,'technical')} ${sv(x,'technical')}</b></div><div class="f"><label>材料</label><b class="${gclass(gv(x,'catalyst'))}">${gv(x,'catalyst')} ${sv(x,'catalyst')}</b></div></div>${bm.ok?`<div class="buymatch">✅ 買い条件一致：${bm.why}</div>`:''}<div class="actions"><button class="act ${isfav?'favon':''}" onclick="toggleFav('${x.code}')">${isfav?'★ お気に入り済':'☆ お気に入り'}</button><button class="act" onclick='addHolding(${JSON.stringify(x).replace(/'/g,"&#39;")})'>💼 保有登録</button></div></div>`}).join(''):'<div class="empty">該当する銘柄がありません。</div>';let sim=(D[market]?.[horizon]||[]).slice(0,10),tb=0,tn=0;$("#simrows").innerHTML=sim.length?sim.map((x,i)=>{const e=entryInfo(x),b=e.price,n=Number(x.price),bv=b*100,nv=n*100,pl=nv-bv,p=b?(n/b-1)*100:0;tb+=bv;tn+=nv;return `<div class="srow"><div class="sname"><span>${i+1}. ${x.name}（${x.code}）</span><span class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${p.toFixed(2)}%</span></div><div class="smeta">購入日 ${e.date} ｜ 購入単価 ${money(b)} → 現在 ${money(n)}</div><div class="sg"><div class="sc"><label>購入額（100株）</label><strong>${money(bv)}</strong></div><div class="sc"><label>現在価値（100株）</label><strong>${money(nv)}</strong></div><div class="sc"><label>累計損益</label><strong class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${money(pl)}</strong></div></div></div>`}).join(''):'<div class="empty">仮想購入データがありません。</div>';const pl=tn-tb,pct=tb?(tn/tb-1)*100:0;$("#total").innerHTML=`<span>合計購入額<b>${money(tb)}</b></span><span>現在評価額<b>${money(tn)}</b></span><span>累計損益<b class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${money(pl)}</b></span><span>累計損益率<b class="${pl>=0?'up':'down'}">${pl>=0?'+':''}${pct.toFixed(2)}%</b></span>`;renderAlerts();renderPortfolio();maybeNotify()}
-function loadData(){$("#updated").textContent="最終更新：読込中…";return Promise.all([fetch("tenx_data.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json()),fetch("tenx_history.json?"+Date.now(),{cache:"no-store"}).then(r=>r.json())]).then(([d,h])=>{D=d;H=Array.isArray(h)?h:[];$("#updated").textContent="最終更新："+d.updated_at;render()}).catch(()=>{$("#updated").textContent="データ読込エラー"})}
+let LIVE={japan:{},usa:{}};
+const REMOTE_BASE="https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/main";
+function loadData(){$("#updated").textContent="最終更新：読込中…";return Promise.all([
+fetch(REMOTE_BASE+"/tenx_data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()),
+fetch(REMOTE_BASE+"/tenx_history.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()),
+fetch(REMOTE_BASE+"/live_quotes.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():{japan:{},usa:{}}).catch(()=>({japan:{},usa:{}}))
+]).then(([d,h,l])=>{D=d;H=Array.isArray(h)?h:[];LIVE=l||{japan:{},usa:{}};$("#updated").textContent="最終更新："+d.updated_at;render();renderZeroDual();if($("#customCode")?.value)zeroAutoLookup()}).catch(()=>{$("#updated").textContent="データ読込エラー"})}
 $("#jp").onclick=()=>{market="japan";localStorage.setItem("tenx_market",market);render()};$("#us").onclick=()=>{market="usa";localStorage.setItem("tenx_market",market);render()};document.querySelectorAll(".h").forEach(b=>b.onclick=()=>{horizon=b.dataset.h;localStorage.setItem("tenx_horizon",horizon);render()});$("#refresh").onclick=()=>loadData();$("#alertsBtn").onclick=()=>{$("#alertbox").classList.toggle("show")};$("#portBtn").onclick=()=>{$("#portbox").classList.toggle("show");renderPortfolio()};$("#favBtn").onclick=()=>{favOnly=!favOnly;render()};$("#customCode").addEventListener("input",()=>{clearTimeout(window.__customLookupTimer);window.__customLookupTimer=setTimeout(autofillCustomStock,250)});$("#customCode").addEventListener("change",autofillCustomStock);$("#customMarket").addEventListener("change",()=>{$("#customName").value="";$("#customNow").value="";autofillCustomStock()});$("#customAddBtn").onclick=()=>addCustomHolding();$("#notifyBtn").onclick=async()=>{if(!('Notification' in window))return alert("この端末では通知機能を利用できません");const p=await Notification.requestPermission();alert(p==="granted"?"アプリ起動時の買いアラート通知をONにしました":"通知は許可されませんでした")};
-render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).catch(()=>{}));}
+render();loadData();if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script>
 
-<!-- TENX_API_FIX_START -->
+<!-- ZERO_PREVIOUS_SUCCESS_OVERLAY_V1 -->
 <script>
 (()=> {
-  async function tenxLookup(){
-    const m=document.querySelector('#customMarket')?.value;
-    const el=document.querySelector('#customCode');
-    const st=document.querySelector('#customLookup');
-    if(!m||!el||!st)return null;
-
-    const c=String(el.value||'').trim().toUpperCase().replace(/\.T$/i,'');
-    if(!c){
-      st.className='lookupstatus';
-      st.textContent='コードを入力すると会社名と現在値を確認します。';
-      return null;
-    }
-
-    el.value=c;
-    st.className='lookupstatus';
-    st.textContent='会社名・現在値を取得中…';
-
-    try{
-      const r=await fetch(
-        '/api/stock?market='+encodeURIComponent(m)+'&code='+encodeURIComponent(c)+'&t='+Date.now(),
-        {cache:'no-store'}
-      );
-      const q=await r.json();
-
-      if(r.ok&&q&&q.ok&&Number.isFinite(Number(q.price))){
-        const name=q.name||c;
-        document.querySelector('#customName').value=name;
-        document.querySelector('#customNow').value=Number(q.price);
-        document.querySelector('#customName').readOnly=true;
-        document.querySelector('#customNow').readOnly=true;
-        st.className='lookupstatus ok';
-        const prefix=m==='japan'?'¥':'$';
-        st.textContent='✓ '+name+' ｜ 現在値 '+prefix+
-          Number(q.price).toLocaleString(undefined,{
-            minimumFractionDigits:m==='usa'?2:0,
-            maximumFractionDigits:2
-          });
-        return q;
-      }
-    }catch(e){}
-
-    st.className='lookupstatus warn';
-    st.textContent='現在値を取得できませんでした。もう一度コード欄から移動してください。';
-    document.querySelector('#customNow').readOnly=false;
-    return null;
-  }
-
-  window.autofillCustomStock=tenxLookup;
-
-  // Replace the old code input node so the previous 250ms handler is removed.
-  const old=document.getElementById('customCode');
-  if(old){
-    const fresh=old.cloneNode(true);
-    fresh.style.fontSize='16px';
-    fresh.setAttribute('autocapitalize','characters');
-    fresh.setAttribute('autocomplete','off');
-    fresh.setAttribute('spellcheck','false');
-    old.replaceWith(fresh);
-
-    let composing=false;
-    fresh.addEventListener('compositionstart',()=>composing=true);
-    fresh.addEventListener('compositionend',()=>composing=false);
-    fresh.addEventListener('change',()=>{if(!composing)tenxLookup();});
-    fresh.addEventListener('blur',()=>{if(!composing)tenxLookup();});
-  }
-
-  document.querySelectorAll('.customgrid input,.customgrid select')
-    .forEach(x=>x.style.fontSize='16px');
+ const q=s=>document.querySelector(s), KEY="tenx_zero_draft_successbase_v1";
+ const fmt=(n,m)=>m==="japan"?"¥"+Number(n).toLocaleString(undefined,{maximumFractionDigits:2}):"$"+Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+ window.renderZeroDual=()=>{for(const [m,id] of [["japan","#zeroJP"],["usa","#zeroUS"]]){const b=q(id),a=(D?.[m]?.[horizon]||[]).slice(0,10);if(!b)continue;b.innerHTML=a.length?a.map((x,i)=>{const c=Number(x.change_pct||0);return `<div class="zeroRow"><div class="zeroName">${i+1}. ${x.name}</div><div class="zeroCode">${x.code}</div><div class="zeroMeta"><span class="zeroPrice">${fmt(x.price,m)}</span><span class="zeroChange ${c>=0?'up':'down'}">${c>=0?'+':''}${c.toFixed(2)}%</span><span class="zeroScore">${x.score}点</span></div></div>`}).join(""):'<div class="zeroEmpty">該当銘柄なし</div>'}}
+ const oldRender=window.render;if(typeof oldRender==="function")window.render=function(){const r=oldRender.apply(this,arguments);renderZeroDual();return r};
+ const E=()=>({m:q("#customMarket"),c:q("#customCode"),n:q("#customName"),qty:q("#customQty"),b:q("#customBuy"),now:q("#customNow"),st:q("#customLookup")});
+ function save(){const e=E();try{localStorage.setItem(KEY,JSON.stringify({m:e.m?.value||"japan",c:e.c?.value||"",n:e.n?.value||"",qty:e.qty?.value||"",b:e.b?.value||"",now:e.now?.value||""}))}catch(_){}}
+ function restore(){const e=E();try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;if(e.m)e.m.value=d.m||"japan";if(e.c)e.c.value=d.c||"";if(e.n)e.n.value=d.n||"";if(e.qty)e.qty.value=d.qty||"";if(e.b)e.b.value=d.b||"";if(e.now)e.now.value=d.now||""}catch(_){}}
+ window.zeroAutoLookup=async()=>{const e=E();if(!e.c)return null;const c=String(e.c.value||"").trim().toUpperCase().replace(/\.T$/i,"");e.c.value=c;if(!c){save();return null}const m=/^\d{4}[A-Z]?$/.test(c)?"japan":"usa";if(e.m)e.m.value=m;if(e.st){e.st.className="lookupstatus";e.st.textContent="会社名・現在値を確認中…"}let x=quoteInfo(m,c);if(!x){await new Promise(r=>setTimeout(r,250));x=quoteInfo(m,c)}if(x){const nm=String(x.name||x.description||c);if(e.n){e.n.value=nm;e.n.readOnly=true}if(e.now){e.now.value=Number(x.price);e.now.readOnly=true}if(e.st){e.st.className="lookupstatus ok";e.st.textContent="✓ "+nm+" ｜ 現在値 "+fmt(x.price,m)}save();return x}if(e.n)e.n.readOnly=false;if(e.now)e.now.readOnly=false;if(e.st){e.st.className="lookupstatus warn";e.st.textContent="このコードは現在のデータにありません。"}save();return null};
+ restore();let e=E();[e.m,e.c,e.n,e.qty,e.b,e.now].filter(Boolean).forEach(x=>{x.addEventListener("input",save);x.addEventListener("change",save)});
+ if(e.c){const f=e.c.cloneNode(true);f.style.fontSize="16px";f.setAttribute("autocapitalize","characters");f.setAttribute("autocomplete","off");f.setAttribute("spellcheck","false");e.c.replaceWith(f);let comp=false,t=0;f.addEventListener("compositionstart",()=>comp=true);f.addEventListener("compositionend",()=>{comp=false;clearTimeout(t);t=setTimeout(zeroAutoLookup,150)});f.addEventListener("input",ev=>{if(comp||ev.isComposing)return;save();clearTimeout(t);t=setTimeout(zeroAutoLookup,600)});f.addEventListener("change",()=>{if(!comp)zeroAutoLookup()});f.addEventListener("blur",()=>{if(!comp)zeroAutoLookup()})}
+ document.querySelectorAll(".customgrid input,.customgrid select").forEach(x=>x.style.fontSize="16px");setTimeout(()=>{renderZeroDual();if(E().c?.value)zeroAutoLookup()},500);
 })();
 </script>
-<!-- TENX_API_FIX_END -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- FINAL_LIVE_QUOTES_START -->
-<script>
-(() => {
-  const baseQuoteInfo = quoteInfo;
-  let liveQuotes = {japan:{}, usa:{}};
-
-  const liveReady = fetch("./live_quotes.json?t=" + Date.now(), {cache:"no-store"})
-    .then(r => {
-      if (!r.ok) throw new Error("live_quotes.json HTTP " + r.status);
-      return r.json();
-    })
-    .then(x => {
-      liveQuotes = x || {japan:{}, usa:{}};
-    })
-    .catch(e => console.warn("live quote cache failed:", e));
-
-  quoteInfo = function(m, c) {
-    const key = String(c || "").trim().toUpperCase().replace(/\.T$/i, "");
-    const q = liveQuotes?.[m]?.[key];
-    if (q && Number.isFinite(Number(q.price))) return q;
-    return baseQuoteInfo(m, key);
-  };
-
-  autofillCustomStock = async function() {
-    const m = $("#customMarket").value;
-    const el = $("#customCode");
-    const c = String(el.value || "").trim().toUpperCase().replace(/\.T$/i, "");
-    const st = $("#customLookup");
-
-    if (!c) {
-      st.className = "lookupstatus";
-      st.textContent = "コードを入力すると会社名と現在値を確認します。";
-      return null;
-    }
-
-    el.value = c;
-    st.className = "lookupstatus";
-    st.textContent = "会社名・現在値を取得中…";
-
-    await liveReady;
-
-    const q = quoteInfo(m, c);
-    let mappedName = "";
-    try {
-      const map = await loadCompanyMap(m);
-      mappedName = String((map && map[c]) || "").trim();
-    } catch (e) {}
-
-    if (q && Number.isFinite(Number(q.price))) {
-      const name = mappedName || q.name || c;
-      $("#customName").value = name;
-      $("#customNow").value = Number(q.price);
-      $("#customName").readOnly = true;
-      $("#customNow").readOnly = true;
-      st.className = "lookupstatus ok";
-      st.textContent =
-        "✓ " + name +
-        " ｜ 現在値 " + money(q.price, m) +
-        " ｜ " + (Number(q.change_pct || 0) >= 0 ? "+" : "") +
-        Number(q.change_pct || 0).toFixed(2) + "%";
-      return q;
-    }
-
-    $("#customName").value = mappedName;
-    $("#customName").readOnly = !!mappedName;
-    $("#customNow").value = "";
-    $("#customNow").readOnly = false;
-    st.className = "lookupstatus warn";
-    st.textContent = mappedName
-      ? "✓ " + mappedName + " を確認しました。現在値のみ手入力してください。"
-      : "銘柄を確認できませんでした。";
-    return null;
-  };
-
-  // Replace ticker input node to remove the old 250ms input listener.
-  const oldInput = document.getElementById("customCode");
-  if (oldInput) {
-    const fresh = oldInput.cloneNode(true);
-    fresh.setAttribute("autocapitalize", "characters");
-    fresh.setAttribute("autocomplete", "off");
-    fresh.setAttribute("spellcheck", "false");
-    fresh.style.fontSize = "16px";
-    oldInput.replaceWith(fresh);
-
-    let composing = false;
-
-    fresh.addEventListener("compositionstart", () => composing = true);
-    fresh.addEventListener("compositionend", () => {
-      composing = false;
-      $("#customLookup").className = "lookupstatus";
-      $("#customLookup").textContent =
-        "入力後に「完了」を押すか、別の欄をタップしてください。";
-    });
-    fresh.addEventListener("input", e => {
-      if (composing || e.isComposing) return;
-      $("#customLookup").className = "lookupstatus";
-      $("#customLookup").textContent =
-        "入力後に「完了」を押すか、別の欄をタップしてください。";
-    });
-    fresh.addEventListener("change", () => {
-      if (!composing) autofillCustomStock();
-    });
-    fresh.addEventListener("blur", () => {
-      if (!composing) autofillCustomStock();
-    });
-  }
-
-  // 16px or larger prevents iPhone Safari focus zoom.
-  document.querySelectorAll(".customgrid input,.customgrid select").forEach(el => {
-    el.style.fontSize = "16px";
-  });
-})();
-</script>
-<!-- FINAL_LIVE_QUOTES_END -->
 </body>
 </html>

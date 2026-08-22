@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#030811">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="10X STOCK ZERO">
@@ -128,7 +131,91 @@ a{text-decoration:none;color:inherit}
   .marketlink{min-height:102px}.marketlink span{font-size:11px}
   .managebtn{min-height:80px}
 }
+
+/* V1_5_FORCE_COMPACT */
+.marketbtn{
+  min-height:42px!important;
+  height:42px!important;
+  border-radius:10px!important;
+  font-size:16px!important;
+  gap:4px!important;
+  padding:4px 7px!important;
+}
+.marketbtn .flag,.flag{
+  font-size:23px!important;
+}
+.termbtn{
+  min-height:38px!important;
+  height:38px!important;
+  border-radius:9px!important;
+  font-size:13px!important;
+  padding:3px 5px!important;
+}
+.termbtn small{
+  font-size:7px!important;
+  margin-top:1px!important;
+}
+.marketrow{
+  gap:7px!important;
+  margin:7px 0!important;
+}
+.termrow{
+  gap:6px!important;
+}
+.status{
+  margin:5px 0!important;
+  padding:5px!important;
+  font-size:11px!important;
+}
+.maincta{
+  min-height:48px!important;
+  height:48px!important;
+  border-radius:10px!important;
+  gap:7px!important;
+  padding:5px 7px!important;
+  margin:5px 0 7px!important;
+}
+.maincta .icon{
+  width:29px!important;
+  height:29px!important;
+  border-width:2px!important;
+  font-size:16px!important;
+}
+.maincta strong{
+  font-size:13px!important;
+}
+.maincta small{
+  font-size:7px!important;
+  margin-top:1px!important;
+}
+
 </style>
+
+<script>
+(async()=>{
+  const BUILD="tenx-zero-v15-force";
+  try{
+    const seen=localStorage.getItem("tenx_build");
+    if(seen!==BUILD){
+      localStorage.setItem("tenx_build",BUILD);
+      if("caches" in window){
+        const keys=await caches.keys();
+        await Promise.all(keys.map(k=>caches.delete(k)));
+      }
+      if("serviceWorker" in navigator){
+        const regs=await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r=>r.unregister()));
+      }
+      const u=new URL(location.href);
+      if(u.searchParams.get("build")!=="15"){
+        u.searchParams.set("build","15");
+        location.replace(u.toString());
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
 </head>
 <body>
 <div id="drawerShade" class="drawerShade hidden"></div>
@@ -147,18 +234,18 @@ a{text-decoration:none;color:inherit}
     <button class="menu" id="menuBtn">☰</button>
     <button class="guide" id="guideBtn">使い方ガイド</button>
     <div class="kicker">株式分析ツール</div>
-    <div class="logo">10X STOCK ZERO</div><div style="font-size:9px;color:#68798c;margin-top:-5px;margin-bottom:5px">FINAL COMPLETE v1.4 COMPACT+</div>
+    <div class="logo">10X STOCK ZERO</div><div style="font-size:9px;color:#68798c;margin-top:-5px;margin-bottom:5px">FINAL COMPLETE v1.5 FORCE</div>
   </div>
 
   <section id="homeView">
     <div class="marketrow">
-      <button type="button" class="marketbtn jp" data-market="japan"><span class="flag">🇯🇵</span>日本株</button>
-      <button type="button" class="marketbtn active" data-market="usa"><span class="flag">🇺🇸</span>米国株</button>
+      <button type="button" class="marketbtn jp active" data-market="japan"><span class="flag">🇯🇵</span>日本株</button>
+      <button type="button" class="marketbtn" data-market="usa"><span class="flag">🇺🇸</span>米国株</button>
     </div>
 
     <div class="termrow">
-      <button type="button" class="termbtn" data-term="short">短期<small>〜6か月</small></button>
-      <button type="button" class="termbtn active" data-term="mid">中期<small>6か月〜1年</small></button>
+      <button type="button" class="termbtn active" data-term="short">短期<small>〜6か月</small></button>
+      <button type="button" class="termbtn" data-term="mid">中期<small>6か月〜1年</small></button>
       <button type="button" class="termbtn" data-term="long">長期<small>1年以上</small></button>
     </div>
 
@@ -337,6 +424,8 @@ function toggleRankingFav(m,code,name,score){
  setJSON("tenx_zero_favorites",f); renderRanking();
 }
 function renderRanking(){
+ document.querySelectorAll(".marketbtn").forEach(b=>b.classList.toggle("active",b.dataset.market===state.market));
+ document.querySelectorAll(".termbtn").forEach(b=>b.classList.toggle("active",b.dataset.term===state.term));
  const arr=DATA[state.market][state.term], ml=state.market==="japan"?"日本株":"米国株", tl={short:"短期",mid:"中期",long:"長期"}[state.term];
  $("#statusText").textContent=ml+" / "+tl;
  $("#rankingTitle").textContent="🏆 "+ml+"・"+tl+" TOP10";

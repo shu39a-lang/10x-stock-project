@@ -147,7 +147,7 @@ a{text-decoration:none;color:inherit}
     <button class="menu" id="menuBtn">☰</button>
     <button class="guide" id="guideBtn">使い方ガイド</button>
     <div class="kicker">株式分析ツール</div>
-    <div class="logo">10X STOCK ZERO</div><div style="font-size:9px;color:#68798c;margin-top:-5px;margin-bottom:5px">FINAL COMPLETE v1.1 LOOKUP</div>
+    <div class="logo">10X STOCK ZERO</div><div style="font-size:9px;color:#68798c;margin-top:-5px;margin-bottom:5px">FINAL COMPLETE v1.2 LIVE</div>
   </div>
 
   <section id="homeView">
@@ -465,6 +465,7 @@ async function zeroLookupStock(){
   const codeEl=$("#codeInput"),nameEl=$("#nameInput"),nowEl=$("#nowInput"),st=$("#lookupStatus");
   const c=String(codeEl.value||"").trim().toUpperCase().replace(/\.T$/i,"");
   codeEl.value=c;
+
   if(!c){
     st.style.color="#93a2b5";
     st.textContent="コードを入力すると会社名と現在値を確認します。";
@@ -473,26 +474,42 @@ async function zeroLookupStock(){
 
   st.style.color="#93a2b5";
   st.textContent="会社名・現在値を検索中…";
-  const symbol=zeroSymbol(m,c);
-  let name="",price=null;
+  let name="",price=null,source="";
 
-  // 1) Yahoo Finance search: company name
+  // 1) Cloudflare Pages/Worker の同一オリジンAPIを最優先
   try{
-    const q=await zeroFetchJson("https://query1.finance.yahoo.com/v1/finance/search?q="+encodeURIComponent(symbol)+"&quotesCount=6&newsCount=0");
-    const hit=(q?.quotes||[]).find(x=>String(x.symbol||"").toUpperCase()===symbol.toUpperCase()) || (q?.quotes||[])[0];
-    if(hit) name=String(hit.longname||hit.shortname||hit.displayName||"").trim();
+    const r=await fetch("/api/stock?market="+encodeURIComponent(m)+"&code="+encodeURIComponent(c)+"&t="+Date.now(),{
+      cache:"no-store",
+      headers:{"accept":"application/json"}
+    });
+    if(r.ok){
+      const q=await r.json();
+      if(q&&q.ok){
+        name=String(q.name||"").trim();
+        const p=Number(q.price);
+        if(Number.isFinite(p)&&p>0) price=p;
+        source=q.source||"api";
+      }
+    }
   }catch(e){}
 
-  // 2) Yahoo Finance chart: current/last price
-  try{
-    const q=await zeroFetchJson("https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(symbol)+"?interval=1d&range=5d");
-    const meta=q?.chart?.result?.[0]?.meta;
-    const p=Number(meta?.regularMarketPrice ?? meta?.previousClose);
-    if(Number.isFinite(p)&&p>0) price=p;
-    if(!name) name=String(meta?.longName||meta?.shortName||"").trim();
-  }catch(e){}
+  // 2) live_quotes.json が使える場合のフォールバック
+  if(!(Number.isFinite(price)&&price>0)){
+    try{
+      const r=await fetch("live_quotes.json?t="+Date.now(),{cache:"no-store"});
+      if(r.ok){
+        const q=await r.json();
+        const row=q?.[m]?.[c] || q?.quotes?.[m]?.[c];
+        if(row){
+          if(!name) name=String(row.name||row.description||"").trim();
+          const p=Number(row.price);
+          if(Number.isFinite(p)&&p>0){price=p;source="live_quotes";}
+        }
+      }
+    }catch(e){}
+  }
 
-  // 3) local fallback for common stocks
+  // 3) 会社名だけはローカル辞書で確実に補完
   if(!name) name=(ZERO_FALLBACK_NAMES[m]||{})[c]||"";
 
   if(name){
@@ -506,6 +523,7 @@ async function zeroLookupStock(){
     nowEl.value=price;
     nowEl.readOnly=true;
   }else{
+    nowEl.value="";
     nowEl.readOnly=false;
   }
 
@@ -513,15 +531,16 @@ async function zeroLookupStock(){
     st.style.color="#55dc7f";
     st.textContent="✓ "+name+" ｜ 現在値 "+(m==="japan"?"¥":"$")+Number(price).toLocaleString(undefined,{
       minimumFractionDigits:m==="usa"?2:0,maximumFractionDigits:2
-    });
+    })+(source?" ｜ "+source:"");
   }else if(name){
     st.style.color="#ffc928";
-    st.textContent="✓ "+name+" を確認しました。現在値は取得できない場合のみ手入力してください。";
+    st.textContent="✓ "+name+" を確認しました。現在値は取得できませんでした。";
   }else{
     st.style.color="#ffc928";
     st.textContent="自動取得できませんでした。会社名と現在値を手入力できます。";
   }
-  return {market:m,code:c,name,price};
+
+  return {market:m,code:c,name,price,source};
 }
 
 $("#lookupBtn").onclick=async()=>{

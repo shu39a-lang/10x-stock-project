@@ -2,25 +2,51 @@ name: Deploy Cloudflare Worker
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "_worker.js"
+      - "index.html"
+      - "tenx_data.json"
+      - "tenx_history.json"
+      - "live_quotes.json"
+      - ".github/workflows/deploy-cloudflare.yml"
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
-      - name: Check Cloudflare token
+      - name: Select Cloudflare credentials
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TOKEN_A: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TOKEN_B: ${{ secrets.CF_API_TOKEN }}
+          TOKEN_C: ${{ secrets.CLOUDFLARE_TOKEN }}
+          ACCOUNT_A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ACCOUNT_B: ${{ secrets.CF_ACCOUNT_ID }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error::CLOUDFLARE_API_TOKEN secret is not set"
+          TOKEN="${TOKEN_A:-${TOKEN_B:-$TOKEN_C}}"
+          ACCOUNT="${ACCOUNT_A:-$ACCOUNT_B}"
+
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Cloudflare API token was not found in repository secrets."
             exit 1
+          fi
+
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          if [ -n "$ACCOUNT" ]; then
+            echo "CLOUDFLARE_ACCOUNT_ID=$ACCOUNT" >> "$GITHUB_ENV"
           fi
 
       - name: Create Wrangler config
@@ -36,7 +62,16 @@ jobs:
           binding = "ASSETS"
           EOF
 
-      - name: Deploy current _worker.js to Cloudflare
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Validate files before deploy
+        shell: bash
+        run: |
+          test -s _worker.js
+          test -s index.html
+          grep -q '/api/stock' _worker.js
+          grep -q 'env.ASSETS.fetch(request)' _worker.js
+
+      - name: Deploy to Cloudflare
         run: npx --yes wrangler@4 deploy
+
+      - name: Deployment completed
+        run: echo "Cloudflare deployment completed."

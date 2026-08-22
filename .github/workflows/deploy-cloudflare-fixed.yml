@@ -1,0 +1,82 @@
+name: Deploy Cloudflare Worker
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "_worker.js"
+      - "index.html"
+      - "tenx_data.json"
+      - "tenx_history.json"
+      - "live_quotes.json"
+      - ".github/workflows/deploy-cloudflare.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Select Cloudflare credentials
+        shell: bash
+        env:
+          TOKEN_A: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TOKEN_B: ${{ secrets.CF_API_TOKEN }}
+          TOKEN_C: ${{ secrets.CLOUDFLARE_TOKEN }}
+          TOKEN_D: ${{ vars.CLOUDFLARE_API_TOKEN }}
+          TOKEN_E: ${{ vars.CF_API_TOKEN }}
+          TOKEN_F: ${{ vars.CLOUDFLARE_TOKEN }}
+          ACCOUNT_A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ACCOUNT_B: ${{ secrets.CF_ACCOUNT_ID }}
+          ACCOUNT_C: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          ACCOUNT_D: ${{ vars.CF_ACCOUNT_ID }}
+        run: |
+          TOKEN="${TOKEN_A:-${TOKEN_B:-${TOKEN_C:-${TOKEN_D:-${TOKEN_E:-$TOKEN_F}}}}}}"
+          ACCOUNT="${ACCOUNT_A:-${ACCOUNT_B:-${ACCOUNT_C:-$ACCOUNT_D}}}"
+
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Cloudflare API token was not found in GitHub Actions secrets or variables."
+            exit 1
+          fi
+
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+          if [ -n "$ACCOUNT" ]; then
+            echo "CLOUDFLARE_ACCOUNT_ID=$ACCOUNT" >> "$GITHUB_ENV"
+          fi
+
+      - name: Create Wrangler config
+        shell: bash
+        run: |
+          cat > wrangler.toml <<'EOF2'
+          name = "quiet-firefly-dd73"
+          main = "_worker.js"
+          compatibility_date = "2026-08-21"
+
+          [assets]
+          directory = "."
+          binding = "ASSETS"
+          EOF2
+
+      - name: Validate files before deploy
+        shell: bash
+        run: |
+          test -s _worker.js
+          test -s index.html
+          grep -q '/api/stock' _worker.js
+          grep -q 'env.ASSETS.fetch(request)' _worker.js
+
+      - name: Deploy to Cloudflare
+        run: npx --yes wrangler@4 deploy
+
+      - name: Deployment completed
+        run: echo "Cloudflare deployment completed."

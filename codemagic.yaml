@@ -1,6 +1,6 @@
 workflows:
   ios-workflow:
-    name: 10X STOCK ZERO iOS
+    name: 10X あSTOCK ZERO iOS
     max_build_duration: 60
     environment:
       xcode: latest

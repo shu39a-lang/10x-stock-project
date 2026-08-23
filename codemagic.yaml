@@ -1,28 +1,39 @@
 workflows:
   ios-workflow:
-    name: 10X あSTOCK ZERO iOS
+    name: 10X STOCK ZERO iOS
     max_build_duration: 60
     environment:
       xcode: latest
-      cocoapods: default
+      node: latest
     scripts:
-      - name: Install dependencies
+      - name: Prepare web app
         script: |
-          npm install
-      - name: Build web app
+          mkdir -p www
+          HTML_FILE=$(find . -maxdepth 1 -type f \( -name "*.html" -o -name "*.htm" \) | head -1)
+          if [ -z "$HTML_FILE" ]; then
+            echo "ERROR: HTML file not found"
+            exit 1
+          fi
+          cp "$HTML_FILE" www/index.html
+
+      - name: Create Capacitor project
         script: |
-          npm run build
-      - name: Sync Capacitor iOS
-        script: |
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/ios
+          npx cap init "10X STOCK ZERO" "com.stockzero.app" --web-dir=www
+          npx cap add ios
           npx cap sync ios
+
       - name: Build iOS
         script: |
           cd ios/App
-          xcodebuild -workspace App.xcworkspace \
+          xcodebuild \
+            -workspace App.xcworkspace \
             -scheme App \
-            -configuration Release \
-            -sdk iphoneos \
-            -archivePath $CM_BUILD_DIR/App.xcarchive \
-            archive
+            -sdk iphonesimulator \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
     artifacts:
-      - $CM_BUILD_DIR/App.xcarchive
+      - ios/App/build/**/*

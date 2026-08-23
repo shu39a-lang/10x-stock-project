@@ -2,9 +2,17 @@ workflows:
   ios-workflow:
     name: 10X STOCK ZERO iOS
     max_build_duration: 60
+
+    integrations:
+      app_store_connect: codemagic3
+
     environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.shu39a.10xstock
       xcode: latest
       node: latest
+
     scripts:
       - name: Prepare web app
         script: |
@@ -20,20 +28,31 @@ workflows:
         script: |
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init "10X STOCK ZERO" "com.stockzero.app" --web-dir=www
+          npx cap init "10X STOCK ZERO" "com.shu39a.10xstock" --web-dir=www
           npx cap add ios
           npx cap sync ios
 
-      - name: Build iOS
+      - name: Set up code signing
         script: |
           cd ios/App
-          xcodebuild \
-            -project App.xcodeproj \
-            -scheme App \
-            -sdk iphonesimulator \
-            -configuration Debug \
-            CODE_SIGNING_ALLOWED=NO \
-            build
+          xcode-project use-profiles
+
+      - name: Set build number
+        script: |
+          cd ios/App
+          agvtool new-version -all "$BUILD_NUMBER"
+
+      - name: Build IPA
+        script: |
+          cd ios/App
+          xcode-project build-ipa \
+            --project "App.xcodeproj" \
+            --scheme "App"
 
     artifacts:
-      - ios/App/build/**/*
+      - ios/App/build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration

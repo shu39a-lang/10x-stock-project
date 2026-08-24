@@ -4,12 +4,10 @@ workflows:
     max_build_duration: 60
 
     integrations:
-      app_store_connect: codemagic3
+      app_store_connect: codemagic7
 
     environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.shu39a.10xstock
+     
       xcode: latest
       node: latest
 
@@ -32,6 +30,13 @@ workflows:
           npx cap add ios
           npx cap sync ios
 
+      - name: Fetch signing files
+        script: |
+        keychain initialize
+        app-store-connect fetch-signing-files "com.shu39a.10xstock" --type IOS_APP_STORE --create
+        keychain add-certificates
+        
+        
       - name: Set up code signing
         script: |
           cd ios/App

@@ -1294,5 +1294,14 @@
     "name": "オリエンタルランド",
     "buy_price": 3007.0,
     "shares": 100
+  },
+  {
+    "date": "2026-08-24",
+    "market": "japan",
+    "horizon": "short",
+    "code": "8411",
+    "name": "みずほFG",
+    "buy_price": 8108.0,
+    "shares": 100
   }
 ]

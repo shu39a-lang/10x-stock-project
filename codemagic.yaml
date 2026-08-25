@@ -26,7 +26,7 @@ workflows:
         script: |
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init "10X STOCK ZERO" "com.shu39a.10xstock" --web-dir=www
+          npx cap init  "10X STOCK ZERO" "com.shu39a.10xstock" --web-dir=www --skip-appid-validation
           npx cap add ios
           npx cap sync ios
 

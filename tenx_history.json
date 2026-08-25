@@ -1303,5 +1303,23 @@
     "name": "みずほFG",
     "buy_price": 8108.0,
     "shares": 100
+  },
+  {
+    "date": "2026-08-25",
+    "market": "usa",
+    "horizon": "long",
+    "code": "GOOGL",
+    "name": "Alphabet",
+    "buy_price": 348.06,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-25",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "GS",
+    "name": "Goldman Sachs",
+    "buy_price": 1036.28,
+    "shares": 100
   }
 ]

@@ -32,9 +32,9 @@ workflows:
 
       - name: Fetch signing files
         script: |
-        keychain initialize
-        app-store-connect fetch-signing-files "com.shu39a.10xstock" --type IOS_APP_STORE --create
-        keychain add-certificates
+          keychain initialize
+          app-store-connect fetch-signing-files "com.shu39a.10xstock" --type IOS_APP_STORE --create
+          keychain add-certificates
         
         
       - name: Set up code signing

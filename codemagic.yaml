@@ -29,7 +29,7 @@ workflows:
           npx cap init  "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www --skip-appid-validation
           npx cap add ios
           npx cap sync ios
-perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
+          perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
       - name: Fetch signing files
         script: |
           keychain initialize

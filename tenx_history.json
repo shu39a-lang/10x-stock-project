@@ -1321,5 +1321,23 @@
     "name": "Goldman Sachs",
     "buy_price": 1036.28,
     "shares": 100
+  },
+  {
+    "date": "2026-08-26",
+    "market": "japan",
+    "horizon": "short",
+    "code": "8725",
+    "name": "MS&AD",
+    "buy_price": 5084.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-26",
+    "market": "usa",
+    "horizon": "short",
+    "code": "GS",
+    "name": "Goldman Sachs",
+    "buy_price": 1058.88,
+    "shares": 100
   }
 ]

@@ -32,11 +32,7 @@ workflows:
           npx cap add ios
           npx cap sync ios
           perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
-      - name: Fetch signing files
-        script: |
-          keychain initialize
-          app-store-connect fetch-signing-files "com.shu39a.10xstock" --type IOS_APP_STORE --create
-          keychain add-certificates
+      
         
         
       - name: Set up code signing

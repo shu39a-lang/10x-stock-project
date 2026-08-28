@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-29 06:32 JST",
+  "updated_at": "2026-08-29 07:01 JST",
   "engine_version": "3.0-5factor",
   "scoring": {
     "valuation": 20,
@@ -961,6 +961,26 @@
         }
       },
       {
+        "name": "Booking Holdings",
+        "code": "BKNG",
+        "price": 205.63,
+        "change_pct": 1.52,
+        "score": 70.0,
+        "signal": "有力",
+        "valuation": 45.4,
+        "quality": 84.7,
+        "financial": 68.9,
+        "technical": 48.8,
+        "catalyst": 100.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "B",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
         "name": "Chevron",
         "code": "CVX",
         "price": 201.86,
@@ -977,26 +997,6 @@
           "quality": "B",
           "financial": "B",
           "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Booking Holdings",
-        "code": "BKNG",
-        "price": 205.63,
-        "change_pct": 1.52,
-        "score": 69.9,
-        "signal": "有力",
-        "valuation": 44.7,
-        "quality": 84.5,
-        "financial": 69.0,
-        "technical": 48.8,
-        "catalyst": 100.0,
-        "grades": {
-          "valuation": "D",
-          "quality": "A",
-          "financial": "B",
-          "technical": "D",
           "catalyst": "A"
         }
       },

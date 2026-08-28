@@ -1339,5 +1339,41 @@
     "name": "Goldman Sachs",
     "buy_price": 1058.88,
     "shares": 100
+  },
+  {
+    "date": "2026-08-28",
+    "market": "japan",
+    "horizon": "long",
+    "code": "6762",
+    "name": "TDK",
+    "buy_price": 3104.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-28",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6762",
+    "name": "TDK",
+    "buy_price": 3104.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-28",
+    "market": "japan",
+    "horizon": "short",
+    "code": "6981",
+    "name": "村田製作所",
+    "buy_price": 7454.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-28",
+    "market": "japan",
+    "horizon": "short",
+    "code": "8316",
+    "name": "三井住友FG",
+    "buy_price": 6913.0,
+    "shares": 100
   }
 ]

@@ -155,3 +155,135 @@ if(market){
 }
 
 })();
+
+/* BUILD 28 - public release final fixes:
+   1) Holding "現在値を反映" fetches latest quote automatically when possible.
+   2) Backup labels are clearer.
+   3) US screener is replaced with a Japanese-language Japan stocks link.
+*/
+(function(){
+"use strict";
+
+const q = s => document.querySelector(s);
+
+function patchLabels(){
+  const exportBtn=q("#exportBtn");
+  const importBtn=q("#importBtn");
+  if(exportBtn) exportBtn.textContent="バックアップを保存";
+  if(importBtn) importBtn.textContent="バックアップから復元";
+
+  const screener=q("#screenerBtn");
+  if(screener){
+    screener.innerHTML="<b>🇯🇵</b>日本株スクリーナー<br>日本語で銘柄を絞り込み";
+    screener.onclick=()=>{
+      location.href="https://jp.tradingview.com/markets/stocks-japan/market-movers-all-stocks/";
+    };
+  }
+
+  document.querySelectorAll(".guideStep").forEach(el=>{
+    if(el.textContent.includes("米国株スクリーナー")){
+      el.innerHTML=el.innerHTML.replace("米国株スクリーナー","日本株スクリーナー");
+    }
+  });
+
+  document.querySelectorAll(".disclaimer").forEach(el=>{
+    if(el.textContent.includes("市場データの自動取得は行いません")){
+      el.textContent="保有株の現在値は取得可能な市場データから更新します。取得できない場合は手入力できます。特定銘柄の売買を推奨するものではありません。";
+    }
+  });
+}
+
+async function quoteFromSameOrigin(market,code){
+  try{
+    const r=await fetch(
+      "/api/stock?market="+encodeURIComponent(market)+
+      "&code="+encodeURIComponent(code)+"&t="+Date.now(),
+      {cache:"no-store",headers:{"accept":"application/json"}}
+    );
+    if(!r.ok) return null;
+    const x=await r.json();
+    const p=Number(x?.price);
+    return x?.ok && Number.isFinite(p) && p>0 ? p : null;
+  }catch(e){ return null; }
+}
+
+async function quoteFromBundledFile(market,code){
+  try{
+    const r=await fetch("live_quotes.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok) return null;
+    const x=await r.json();
+    const row=x?.[market]?.[code] || x?.quotes?.[market]?.[code];
+    const p=Number(row?.price);
+    return Number.isFinite(p) && p>0 ? p : null;
+  }catch(e){ return null; }
+}
+
+async function quoteFromCapacitor(market,code){
+  try{
+    const cap=window.Capacitor;
+    const http=cap?.Plugins?.CapacitorHttp;
+    if(!http?.get) return null;
+    const symbol=market==="japan" ? code+".T" : code;
+    const url="https://query1.finance.yahoo.com/v8/finance/chart/"+
+      encodeURIComponent(symbol)+"?interval=1d&range=5d&_="+Date.now();
+    const r=await http.get({url,headers:{"Accept":"application/json"}});
+    const data=typeof r.data==="string" ? JSON.parse(r.data) : r.data;
+    const p=Number(data?.chart?.result?.[0]?.meta?.regularMarketPrice);
+    return Number.isFinite(p) && p>0 ? p : null;
+  }catch(e){ return null; }
+}
+
+async function fetchHoldingPrice(market,code){
+  const clean=String(code||"").trim().toUpperCase().replace(/\.T$/i,"");
+  return await quoteFromSameOrigin(market,clean)
+      ?? await quoteFromBundledFile(market,clean)
+      ?? await quoteFromCapacitor(market,clean);
+}
+
+window.updateHoldingNow=async function(i){
+  const h=(typeof holdings==="function") ? holdings() : [];
+  const item=h[i];
+  if(!item) return;
+
+  const btn=document.querySelector(`button[onclick="updateHoldingNow(${i})"]`);
+  const oldText=btn?.textContent || "現在値を反映";
+  if(btn){
+    btn.disabled=true;
+    btn.textContent="現在値を取得中…";
+  }
+
+  try{
+    const p=await fetchHoldingPrice(item.market,item.code);
+
+    if(Number.isFinite(p) && p>0){
+      item.now=p;
+      if(typeof setJSON==="function") setJSON("tenx_zero_holdings",h);
+      if(typeof renderPortfolio==="function") renderPortfolio();
+      return;
+    }
+
+    const el=document.getElementById("holdNow"+i);
+    const manual=Number(el?.value);
+    if(Number.isFinite(manual) && manual>0 && manual!==Number(item.now)){
+      item.now=manual;
+      if(typeof setJSON==="function") setJSON("tenx_zero_holdings",h);
+      if(typeof renderPortfolio==="function") renderPortfolio();
+      return;
+    }
+
+    alert("最新株価を取得できませんでした。通信状態を確認してもう一度押すか、現在値を手入力してください。");
+  }finally{
+    if(btn && document.body.contains(btn)){
+      btn.disabled=false;
+      btn.textContent=oldText;
+    }
+  }
+};
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",patchLabels,{once:true});
+}else{
+  patchLabels();
+}
+
+})();

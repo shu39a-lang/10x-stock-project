@@ -1,123 +1,157 @@
 (function(){
 "use strict";
 
+const $ = s => document.querySelector(s);
+
 function clamp(n){
   return Math.max(0,Math.min(100,Math.round(n)));
 }
 
 function avg(a){
-  if(!a.length)return null;
-  return a.reduce((x,y)=>x+y,0)/a.length;
+  return a.length ? a.reduce((x,y)=>x+y,0)/a.length : 0;
 }
 
 function pct(a,b){
-  if(!Number.isFinite(a)||!Number.isFinite(b)||b===0)return null;
+  if(!Number.isFinite(a)||!Number.isFinite(b)||b===0)return 0;
   return (a/b-1)*100;
 }
 
-function autoScore(data){
-  data=data||{};
+async function fetchHistory(){
+  const market=$("#marketInput")?.value||"japan";
+  let code=($("#codeInput")?.value||"").trim().toUpperCase().replace(/\.T$/i,"");
+  if(!code)return;
 
-  const prices=Array.isArray(data.prices)
-    ? data.prices.map(Number).filter(Number.isFinite)
-    : [];
+  const symbol=market==="japan"?code+".T":code;
 
-  let price=Number(data.price);
+  try{
+    const url=
+      "https://query1.finance.yahoo.com/v8/finance/chart/"
+      +encodeURIComponent(symbol)
+      +"?interval=1d&range=1y&events=history";
 
-  if(!Number.isFinite(price)&&prices.length){
-    price=prices[prices.length-1];
+    const r=await fetch(url,{cache:"no-store"});
+    if(!r.ok)throw new Error("HTTP "+r.status);
+
+    const j=await r.json();
+    const result=j?.chart?.result?.[0];
+    const q=result?.indicators?.quote?.[0];
+
+    if(!q)throw new Error("no data");
+
+    const closes=(q.close||[])
+      .map(Number)
+      .filter(Number.isFinite);
+
+    const volumes=(q.volume||[])
+      .map(Number)
+      .filter(Number.isFinite);
+
+    if(closes.length<20)throw new Error("insufficient data");
+
+    applyScore(closes,volumes);
+
+  }catch(e){
+    console.log("auto score fetch failed",e);
+  }
+}
+
+function applyScore(prices,volumes){
+  const current=prices[prices.length-1];
+
+  const high52=Math.max(...prices);
+  const low52=Math.min(...prices);
+
+  const position=
+    high52===low52 ? 50 :
+    ((current-low52)/(high52-low52))*100;
+
+  const p5=prices.length>=6
+    ?pct(current,prices[prices.length-6]):0;
+
+  const p20=prices.length>=21
+    ?pct(current,prices[prices.length-21]):0;
+
+  const p60=prices.length>=61
+    ?pct(current,prices[prices.length-61]):p20;
+
+  const ma20=avg(prices.slice(-20));
+  const vsMa20=pct(current,ma20);
+
+  const returns=[];
+  for(let i=Math.max(1,prices.length-20);i<prices.length;i++){
+    returns.push(Math.abs(pct(prices[i],prices[i-1])));
   }
 
-  let valuation=50;
-  let quality=50;
-  let financial=50;
-  let technical=50;
-  let catalyst=50;
+  const volatility=avg(returns);
 
-  if(Number.isFinite(Number(data.pe))){
-    valuation+=(20-Number(data.pe))*1.4;
-  }
+  const valueScore=clamp(100-position);
 
-  if(Number.isFinite(Number(data.pb))){
-    valuation+=(2-Number(data.pb))*7;
-  }
+  const growthScore=clamp(
+    50 + p20*1.5 + p60*0.7
+  );
 
-  if(Number.isFinite(Number(data.revenueGrowth))){
-    quality+=Number(data.revenueGrowth)*0.7;
-    catalyst+=Number(data.revenueGrowth)*0.25;
-  }
+  const stabilityScore=clamp(
+    85 - volatility*12
+  );
 
-  if(Number.isFinite(Number(data.earningsGrowth))){
-    quality+=Number(data.earningsGrowth)*0.8;
-    catalyst+=Number(data.earningsGrowth)*0.45;
-  }
+  const technicalScore=clamp(
+    50 + p5*2.2 + p20*0.9 + vsMa20*1.8
+  );
 
-  if(Number.isFinite(Number(data.roe))){
-    quality+=(Number(data.roe)-10)*1.1;
-  }
+  let volumeScore=50;
 
-  if(Number.isFinite(Number(data.equityRatio))){
-    financial+=(Number(data.equityRatio)-40)*0.7;
-  }
+  if(volumes.length>=21){
+    const recent=avg(volumes.slice(-5));
+    const base=avg(volumes.slice(-20));
 
-  if(Number.isFinite(Number(data.debtToEquity))){
-    financial+=(1-Number(data.debtToEquity))*15;
-  }
-
-  const moves=[];
-
-  if(prices.length>=2){
-    const p=pct(price,prices[prices.length-2]);
-    if(p!==null)moves.push(50+p*5);
-  }
-
-  if(prices.length>=6){
-    const p=pct(price,prices[prices.length-6]);
-    if(p!==null){
-      moves.push(50+p*2.5);
-      catalyst+=p*1.2;
+    if(base>0){
+      const ratio=recent/base;
+      volumeScore=clamp(
+        50 + (ratio-1)*35 + p5*1.5
+      );
     }
   }
 
-  if(prices.length>=21){
-    const p=pct(price,prices[prices.length-21]);
-    if(p!==null)moves.push(50+p*1.3);
-
-    const ma20=avg(prices.slice(-20));
-    const m=pct(price,ma20);
-    if(m!==null)moves.push(50+m*2);
-  }
-
-  if(moves.length){
-    technical=avg(moves);
-  }
-
-  valuation=clamp(valuation);
-  quality=clamp(quality);
-  financial=clamp(financial);
-  technical=clamp(technical);
-  catalyst=clamp(catalyst);
-
-  const total=clamp(
-    valuation*0.20+
-    quality*0.25+
-    financial*0.15+
-    technical*0.25+
-    catalyst*0.15
-  );
-
-  return {
-    valuation,
-    quality,
-    financial,
-    technical,
-    catalyst,
-    total
+  const scores={
+    valuation:valueScore,
+    quality:growthScore,
+    financial:stabilityScore,
+    technical:technicalScore,
+    catalyst:volumeScore
   };
+
+  Object.entries(scores).forEach(([id,val])=>{
+    const el=$("#"+id);
+    if(el){
+      el.value=val;
+      el.dispatchEvent(new Event("input",{bubbles:true}));
+    }
+  });
 }
 
-window.TenXAutoScore={
-  calculate:autoScore
-};
+let timer=null;
+
+function schedule(){
+  clearTimeout(timer);
+  timer=setTimeout(fetchHistory,700);
+}
+
+const code=$("#codeInput");
+const market=$("#marketInput");
+
+if(code){
+  code.addEventListener("input",schedule);
+  code.addEventListener("change",fetchHistory);
+  code.addEventListener("blur",fetchHistory);
+  code.addEventListener("keyup",e=>{
+    if(e.key==="Enter")fetchHistory();
+  });
+}
+
+if(market){
+  market.addEventListener("change",()=>{
+    if(code?.value.trim())fetchHistory();
+  });
+}
 
 })();

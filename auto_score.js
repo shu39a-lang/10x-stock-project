@@ -287,3 +287,70 @@ if(document.readyState==="loading"){
 }
 
 })();
+
+/* BUILD 29 - iOS backup save fix */
+(function(){
+"use strict";
+
+function buildBackupData(){
+  const read=(key,fallback)=>{
+    try{
+      const v=JSON.parse(localStorage.getItem(key));
+      return v ?? fallback;
+    }catch(e){ return fallback; }
+  };
+  return {
+    version:"1.0",
+    exportedAt:new Date().toISOString(),
+    holdings:typeof holdings==="function" ? holdings() : read("tenx_zero_holdings",[]),
+    favorites:typeof favorites==="function" ? favorites() : read("tenx_zero_favorites",[]),
+    history:typeof history==="function" ? history() : read("tenx_zero_history",[])
+  };
+}
+
+async function saveBackup(){
+  try{
+    const text=JSON.stringify(buildBackupData(),null,2);
+    const file=new File([text],"10X_STOCK_ZERO_backup.json",{type:"application/json"});
+
+    if(navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))){
+      await navigator.share({
+        files:[file],
+        title:"10X STOCK ZERO バックアップ"
+      });
+      return;
+    }
+
+    const blob=new Blob([text],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="10X_STOCK_ZERO_backup.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+  }catch(e){
+    if(e && e.name==="AbortError") return;
+    console.error("backup save failed",e);
+    alert("バックアップを保存できませんでした。もう一度お試しください。");
+  }
+}
+
+function installBackupFix(){
+  const btn=document.getElementById("exportBtn");
+  if(!btn) return;
+  btn.textContent="バックアップを保存";
+  btn.addEventListener("click",function(ev){
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+    saveBackup();
+  },true);
+}
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",installBackupFix,{once:true});
+}else{
+  installBackupFix();
+}
+})();

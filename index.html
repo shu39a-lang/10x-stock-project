@@ -192,7 +192,42 @@ a{text-decoration:none;color:inherit}
   font-size:7px!important;
   margin-top:1px!important;
 }
+/* iPhone上部安全領域・ヘッダーボタン修正 */
+.app{
+  padding-top:calc(env(safe-area-inset-top, 0px) + 14px) !important;
+}
 
+.header{
+  position:relative !important;
+  z-index:1000 !important;
+  padding-top:8px !important;
+}
+
+.menu,
+.guide{
+  z-index:1002 !important;
+  pointer-events:auto !important;
+  touch-action:manipulation !important;
+}
+
+.menu{
+  top:8px !important;
+  left:0 !important;
+  min-width:48px !important;
+  min-height:44px !important;
+}
+
+.guide{
+  top:8px !important;
+  right:0 !important;
+  min-height:40px !important;
+}
+
+.kicker,
+.logo{
+  position:relative !important;
+  z-index:1 !important;
+}
 </style>
 
 <script>

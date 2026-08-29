@@ -18,8 +18,8 @@ workflows:
         script: |
            mkdir -p www
            cp -f index.html www/index.html
-           cp -f *.html www/2>/dev/nu11 || true
-           cp -f *.json www/2>/dev/nu11 || true
+           cp -f *.html www/ 2>/dev/null || true
+           cp -f *.json www/ 2>/dev/null || true
            cp -f *.js www/ 2>/dev/null || true
            cp -f *.webmanifest www/ 2>/dev/null || true
            cp -f *.png www/ 2>/dev/null || true

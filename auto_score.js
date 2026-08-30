@@ -140,7 +140,7 @@ const code=$("#codeInput");
 const market=$("#marketInput");
 
 if(code){
-  code.addEventListener("input",schedule);
+  
   code.addEventListener("change",fetchHistory);
   code.addEventListener("blur",fetchHistory);
   code.addEventListener("keyup",e=>{

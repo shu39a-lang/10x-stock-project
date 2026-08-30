@@ -3,25 +3,54 @@
 
 const $ = s => document.querySelector(s);
 
-function clamp(n){
-  return Math.max(0,Math.min(100,Math.round(n)));
+function clamp(n,min=0,max=100){
+  if(!Number.isFinite(n)) return 50;
+  return Math.max(min,Math.min(max,n));
+}
+
+/*
+  極端な0点・100点への張り付きを抑える。
+  通常の値動きではおおむね8〜92点に収まり、
+  本当に強い/弱い場合だけ端へ近づく。
+*/
+function squashScore(raw){
+  if(!Number.isFinite(raw)) return 50;
+  const score = 50 + 42 * Math.tanh((raw - 50) / 32);
+  return Math.round(clamp(score,5,95));
 }
 
 function avg(a){
-  return a.length ? a.reduce((x,y)=>x+y,0)/a.length : 0;
+  const v=a.filter(Number.isFinite);
+  return v.length ? v.reduce((x,y)=>x+y,0)/v.length : null;
+}
+
+function median(a){
+  const v=a.filter(Number.isFinite).sort((x,y)=>x-y);
+  if(!v.length) return null;
+  const m=Math.floor(v.length/2);
+  return v.length%2 ? v[m] : (v[m-1]+v[m])/2;
 }
 
 function pct(a,b){
-  if(!Number.isFinite(a)||!Number.isFinite(b)||b===0)return 0;
+  if(!Number.isFinite(a)||!Number.isFinite(b)||b===0) return null;
   return (a/b-1)*100;
+}
+
+function capped(v,min,max,neutral=0){
+  if(!Number.isFinite(v)) return neutral;
+  return clamp(v,min,max);
 }
 
 async function fetchHistory(){
   const market=$("#marketInput")?.value||"japan";
-  let code=($("#codeInput")?.value||"").trim().toUpperCase().replace(/\.T$/i,"");
+  let code=($("#codeInput")?.value||"")
+    .trim()
+    .toUpperCase()
+    .replace(/\.T$/i,"");
+
   if(!code)return;
 
-  const symbol=market==="japan"?code+".T":code;
+  const symbol=market==="japan" ? code+".T" : code;
 
   try{
     const url=
@@ -66,58 +95,100 @@ function applyScore(prices,volumes){
     ((current-low52)/(high52-low52))*100;
 
   const p5=prices.length>=6
-    ?pct(current,prices[prices.length-6]):0;
+    ?pct(current,prices[prices.length-6]):null;
 
   const p20=prices.length>=21
-    ?pct(current,prices[prices.length-21]):0;
+    ?pct(current,prices[prices.length-21]):null;
 
   const p60=prices.length>=61
-    ?pct(current,prices[prices.length-61]):p20;
+    ?pct(current,prices[prices.length-61]):null;
 
   const ma20=avg(prices.slice(-20));
+  const ma60=prices.length>=60 ? avg(prices.slice(-60)) : null;
+
   const vsMa20=pct(current,ma20);
+  const maTrend=pct(ma20,ma60);
 
   const returns=[];
-  for(let i=Math.max(1,prices.length-20);i<prices.length;i++){
-    returns.push(Math.abs(pct(prices[i],prices[i-1])));
+  for(let i=Math.max(1,prices.length-30);i<prices.length;i++){
+    const r=Math.abs(pct(prices[i],prices[i-1]));
+    if(Number.isFinite(r)) returns.push(r);
   }
 
-  const volatility=avg(returns);
+  /*
+    単日の異常値に引っ張られにくいよう、
+    平均ではなく中央値ベースで変動性を評価。
+  */
+  const volatility=median(returns);
 
-  const valueScore=clamp(100-position);
+  /*
+    valuation:
+    52週レンジだけで0/100を決めず、
+    安値圏・高値圏の位置を緩やかに評価。
+  */
+  const rawValue=
+    72 - capped(position,0,100,50)*0.44;
 
-  const growthScore=clamp(
-    50 + p20*1.5 + p60*0.7
-  );
+  /*
+    quality:
+    20日・60日の上昇率を使う。
+    異常な急騰・急落は上限を設けて影響を抑える。
+  */
+  const rawGrowth=
+    50
+    + capped(p20,-25,25)*0.90
+    + capped(p60,-40,40)*0.45;
 
-  const stabilityScore=clamp(
-    85 - volatility*12
-  );
+  /*
+    financial:
+    この画面では財務諸表を直接取得していないため、
+    値動きの安定性を代理指標として使う。
+    データ不足時は50点付近の中立評価。
+  */
+  const rawStability=
+    Number.isFinite(volatility)
+      ? 78 - capped(volatility,0,10)*5.5
+      : 50;
 
-  const technicalScore=clamp(
-    50 + p5*2.2 + p20*0.9 + vsMa20*1.8
-  );
+  /*
+    technical:
+    短期モメンタムだけでなく、
+    20日移動平均・中期トレンドも組み合わせる。
+  */
+  const rawTechnical=
+    50
+    + capped(p5,-12,12)*1.35
+    + capped(p20,-25,25)*0.60
+    + capped(vsMa20,-15,15)*1.10
+    + capped(maTrend,-12,12)*0.55;
 
-  let volumeScore=50;
+  /*
+    catalyst:
+    出来高急増を評価するが、
+    1日の異常出来高だけで100点にならないよう制限。
+  */
+  let rawVolume=50;
 
   if(volumes.length>=21){
     const recent=avg(volumes.slice(-5));
     const base=avg(volumes.slice(-20));
 
-    if(base>0){
+    if(Number.isFinite(recent)&&Number.isFinite(base)&&base>0){
       const ratio=recent/base;
-      volumeScore=clamp(
-        50 + (ratio-1)*35 + p5*1.5
-      );
+
+      rawVolume=
+        50
+        + capped((ratio-1)*25,-22,22)
+        + capped(p5,-12,12)*0.70;
     }
   }
 
   const scores={
-    valuation:valueScore,
-    quality:growthScore,
-    financial:stabilityScore,
-    technical:technicalScore,
-    catalyst:volumeScore
+    valuation:squashScore(rawValue),
+    quality:squashScore(rawGrowth),
+    financial:squashScore(rawStability),
+    technical:squashScore(rawTechnical),
+    catalyst:squashScore(rawVolume)
   };
 
   Object.entries(scores).forEach(([id,val])=>{
@@ -129,18 +200,10 @@ function applyScore(prices,volumes){
   });
 }
 
-let timer=null;
-
-function schedule(){
-  clearTimeout(timer);
-  timer=setTimeout(fetchHistory,700);
-}
-
 const code=$("#codeInput");
 const market=$("#marketInput");
 
 if(code){
-  
   code.addEventListener("change",fetchHistory);
   code.addEventListener("blur",fetchHistory);
   code.addEventListener("keyup",e=>{
@@ -223,18 +286,38 @@ async function quoteFromCapacitor(market,code){
     const cap=window.Capacitor;
     const http=cap?.Plugins?.CapacitorHttp;
     if(!http?.get) return null;
+
     const symbol=market==="japan" ? code+".T" : code;
-    const url="https://query1.finance.yahoo.com/v8/finance/chart/"+
-      encodeURIComponent(symbol)+"?interval=1d&range=5d&_="+Date.now();
-    const r=await http.get({url,headers:{"Accept":"application/json"}});
-    const data=typeof r.data==="string" ? JSON.parse(r.data) : r.data;
-    const p=Number(data?.chart?.result?.[0]?.meta?.regularMarketPrice);
-    return Number.isFinite(p) && p>0 ? p : null;
+
+    const url=
+      "https://query1.finance.yahoo.com/v8/finance/chart/"
+      +encodeURIComponent(symbol)
+      +"?interval=1d&range=5d&_="+Date.now();
+
+    const r=await http.get({
+      url,
+      headers:{"Accept":"application/json"}
+    });
+
+    const data=typeof r.data==="string"
+      ?JSON.parse(r.data)
+      :r.data;
+
+    const p=Number(
+      data?.chart?.result?.[0]?.meta?.regularMarketPrice
+    );
+
+    return Number.isFinite(p)&&p>0 ? p : null;
+
   }catch(e){ return null; }
 }
 
 async function fetchHoldingPrice(market,code){
-  const clean=String(code||"").trim().toUpperCase().replace(/\.T$/i,"");
+  const clean=String(code||"")
+    .trim()
+    .toUpperCase()
+    .replace(/\.T$/i,"");
+
   return await quoteFromSameOrigin(market,clean)
       ?? await quoteFromBundledFile(market,clean)
       ?? await quoteFromCapacitor(market,clean);
@@ -243,10 +326,15 @@ async function fetchHoldingPrice(market,code){
 window.updateHoldingNow=async function(i){
   const h=(typeof holdings==="function") ? holdings() : [];
   const item=h[i];
+
   if(!item) return;
 
-  const btn=document.querySelector(`button[onclick="updateHoldingNow(${i})"]`);
+  const btn=document.querySelector(
+    `button[onclick="updateHoldingNow(${i})"]`
+  );
+
   const oldText=btn?.textContent || "現在値を反映";
+
   if(btn){
     btn.disabled=true;
     btn.textContent="現在値を取得中…";
@@ -255,25 +343,43 @@ window.updateHoldingNow=async function(i){
   try{
     const p=await fetchHoldingPrice(item.market,item.code);
 
-    if(Number.isFinite(p) && p>0){
+    if(Number.isFinite(p)&&p>0){
       item.now=p;
-      if(typeof setJSON==="function") setJSON("tenx_zero_holdings",h);
-      if(typeof renderPortfolio==="function") renderPortfolio();
+
+      if(typeof setJSON==="function")
+        setJSON("tenx_zero_holdings",h);
+
+      if(typeof renderPortfolio==="function")
+        renderPortfolio();
+
       return;
     }
 
     const el=document.getElementById("holdNow"+i);
     const manual=Number(el?.value);
-    if(Number.isFinite(manual) && manual>0 && manual!==Number(item.now)){
+
+    if(
+      Number.isFinite(manual)&&
+      manual>0&&
+      manual!==Number(item.now)
+    ){
       item.now=manual;
-      if(typeof setJSON==="function") setJSON("tenx_zero_holdings",h);
-      if(typeof renderPortfolio==="function") renderPortfolio();
+
+      if(typeof setJSON==="function")
+        setJSON("tenx_zero_holdings",h);
+
+      if(typeof renderPortfolio==="function")
+        renderPortfolio();
+
       return;
     }
 
-    alert("最新株価を取得できませんでした。通信状態を確認してもう一度押すか、現在値を手入力してください。");
+    alert(
+      "最新株価を取得できませんでした。通信状態を確認してもう一度押すか、現在値を手入力してください。"
+    );
+
   }finally{
-    if(btn && document.body.contains(btn)){
+    if(btn&&document.body.contains(btn)){
       btn.disabled=false;
       btn.textContent=oldText;
     }
@@ -281,7 +387,11 @@ window.updateHoldingNow=async function(i){
 };
 
 if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",patchLabels,{once:true});
+  document.addEventListener(
+    "DOMContentLoaded",
+    patchLabels,
+    {once:true}
+  );
 }else{
   patchLabels();
 }
@@ -297,23 +407,48 @@ function buildBackupData(){
     try{
       const v=JSON.parse(localStorage.getItem(key));
       return v ?? fallback;
-    }catch(e){ return fallback; }
+    }catch(e){
+      return fallback;
+    }
   };
+
   return {
     version:"1.0",
     exportedAt:new Date().toISOString(),
-    holdings:typeof holdings==="function" ? holdings() : read("tenx_zero_holdings",[]),
-    favorites:typeof favorites==="function" ? favorites() : read("tenx_zero_favorites",[]),
-    history:typeof history==="function" ? history() : read("tenx_zero_history",[])
+    holdings:
+      typeof holdings==="function"
+        ?holdings()
+        :read("tenx_zero_holdings",[]),
+    favorites:
+      typeof favorites==="function"
+        ?favorites()
+        :read("tenx_zero_favorites",[]),
+    history:
+      typeof history==="function"
+        ?history()
+        :read("tenx_zero_history",[])
   };
 }
 
 async function saveBackup(){
   try{
-    const text=JSON.stringify(buildBackupData(),null,2);
-    const file=new File([text],"10X_STOCK_ZERO_backup.json",{type:"application/json"});
+    const text=JSON.stringify(
+      buildBackupData(),
+      null,
+      2
+    );
 
-    if(navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))){
+    const file=new File(
+      [text],
+      "10X_STOCK_ZERO_backup.json",
+      {type:"application/json"}
+    );
+
+    if(
+      navigator.share &&
+      (!navigator.canShare ||
+       navigator.canShare({files:[file]}))
+    ){
       await navigator.share({
         files:[file],
         title:"10X STOCK ZERO バックアップ"
@@ -321,36 +456,65 @@ async function saveBackup(){
       return;
     }
 
-    const blob=new Blob([text],{type:"application/json"});
+    const blob=new Blob(
+      [text],
+      {type:"application/json"}
+    );
+
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");
+
     a.href=url;
     a.download="10X_STOCK_ZERO_backup.json";
+
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1500);
+
+    setTimeout(
+      ()=>URL.revokeObjectURL(url),
+      1500
+    );
+
   }catch(e){
-    if(e && e.name==="AbortError") return;
-    console.error("backup save failed",e);
-    alert("バックアップを保存できませんでした。もう一度お試しください。");
+    if(e&&e.name==="AbortError") return;
+
+    console.error(
+      "backup save failed",
+      e
+    );
+
+    alert(
+      "バックアップを保存できませんでした。もう一度お試しください。"
+    );
   }
 }
 
 function installBackupFix(){
   const btn=document.getElementById("exportBtn");
   if(!btn) return;
+
   btn.textContent="バックアップを保存";
-  btn.addEventListener("click",function(ev){
-    ev.preventDefault();
-    ev.stopImmediatePropagation();
-    saveBackup();
-  },true);
+
+  btn.addEventListener(
+    "click",
+    function(ev){
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      saveBackup();
+    },
+    true
+  );
 }
 
 if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",installBackupFix,{once:true});
+  document.addEventListener(
+    "DOMContentLoaded",
+    installBackupFix,
+    {once:true}
+  );
 }else{
   installBackupFix();
 }
+
 })();

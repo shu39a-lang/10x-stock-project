@@ -337,9 +337,9 @@ a{text-decoration:none;color:inherit}
     <option value="usa">米国株</option>
   </select>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:5px">
-     type="button" id="analysisMarketJapan" style="min-width:0;height:42px;border:2px solid #ffc73d;border-radius:10px;background:#fff;color:#b31435;font-size:14px;font-weight:900;padding:4px 3px;white-space:nowrap" onclick="const s=document.getElementById('marketInput');s.value='japan';s.dispatchEvent(new Event('change',{bubbles:true}));this.style.borderColor='#ffc73d';document.getElementById('analysisMarketUs').style.borderColor='#31506c';"><span style="font-size:17px">🇯🇵</span> 日本株</button>
+     <button type="button" id="analysisMarketJapan" style="min-width:0;height:42px;border:2px solid #ffc73d;border-radius:10px;background:#fff;color:#b31435;font-size:14px;font-weight:900;padding:4px 3px;white-space:nowrap" onclick="const s=document.getElementById('marketInput');s.value='japan';s.dispatchEvent(new Event('change',{bubbles:true}));this.style.borderColor='#ffc73d';document.getElementById('analysisMarketUs').style.borderColor='#31506c';"><span style="font-size:17px">🇯🇵</span> 日本株</button>
 <button type="button" id="analysisMarketUs" style="min-width:0;height:42px;border:2px solid #31506c;border-radius:10px;background:linear-gradient(135deg,#124da8,#082656);color:#fff;font-size:14px;font-weight:900;padding:4px 3px;white-space:nowrap" onclick="const s=document.getElementById('marketInput');s.value='usa';s.dispatchEvent(new Event('change',{bubbles:true}));this.style.borderColor='#ffc73d';document.getElementById('analysisMarketJapan').style.borderColor='#31506c';"><span style="font-size:17px">🇺🇸</span> 米国株</button>
-</label>
+</div></label>
         <label>銘柄コード<input id="codeInput" autocomplete="off" autocapitalize="characters" placeholder="7203 / AAPL"></label>
         <label class="full">会社名<input id="nameInput" placeholder="会社名"></label>
         <div id="lookupStatus" class="full" style="font-size:10px;color:#93a2b5;min-height:1.4em;margin-top:-3px">コードを入力すると会社名と現在値を確認します。</div>

@@ -384,7 +384,7 @@ def rank(universe, market):
 
         for x in rows:
 
-                        if horizon == "short":
+            if horizon == "short":
                 ok = (
                     x["price"] > x["ma20"]
                     and 42 <= x["rsi"] <= 72

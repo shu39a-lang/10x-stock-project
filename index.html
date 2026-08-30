@@ -537,14 +537,10 @@ function calcScore(){
 }
 ["valuation","quality","financial","technical","catalyst"].forEach(id=>$("#"+id).addEventListener("input",calcScore));
 
-let __zeroLookupTimer=null;
-$("#codeInput").addEventListener("input",()=>{
-  clearTimeout(__zeroLookupTimer);
-  __zeroLookupTimer=setTimeout(zeroLookupStock,450);
-});
+
 $("#codeInput").addEventListener("change",zeroLookupStock);
 $("#codeInput").addEventListener("blur",zeroLookupStock);
-$("#codeInput").addEventListener("compositionend",()=>setTimeout(zeroLookupStock,120));
+
 $("#codeInput").addEventListener("keyup",e=>{if(e.key==="Enter")zeroLookupStock()});
 $("#marketInput").addEventListener("change",()=>{
   $("#nameInput").value="";

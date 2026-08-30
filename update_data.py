@@ -14,6 +14,11 @@ SCREEN_TARGET = 500
 LIQUIDITY_KEEP = 200
 BATCH_SIZE = 50
 
+JPX_LIST_URL = (
+    "https://www.jpx.co.jp/markets/statistics-equities/misc/"
+    "tvdivq0000001vg2-att/data_j.xls"
+)
+
 JP_FALLBACK = {
     "6857.T":"アドバンテスト","8035.T":"東京エレクトロン","6920.T":"レーザーテック",
     "7974.T":"任天堂","6701.T":"NEC","7011.T":"三菱重工業","5803.T":"フジクラ",
@@ -74,9 +79,36 @@ def mean_with_confidence(values, expected):
     vals=[float(v) for v in values if v is not None and np.isfinite(v)]
     return shrink_to_neutral(float(np.mean(vals)),len(vals),expected) if vals else 50.0
 
+def load_jpx_japanese_names():
+    try:
+        df = pd.read_excel(JPX_LIST_URL, dtype={"コード": str})
+        code_col = "コード"
+        name_col = "銘柄名"
+
+        if code_col not in df.columns or name_col not in df.columns:
+            raise ValueError("JPX columns not found")
+
+        names = {}
+        for _, row in df[[code_col, name_col]].dropna().iterrows():
+            code = str(row[code_col]).strip()
+            name = str(row[name_col]).strip()
+
+            # 4桁コードの普通株をYahoo Finance形式へ
+            if len(code) == 4 and code.isdigit() and name:
+                names[code + ".T"] = name
+
+        print("JPX Japanese names loaded", len(names))
+        return names
+
+    except Exception as e:
+        print("JPX name load error", e)
+        return {symbol: name for symbol, name in JP_FALLBACK.items()}
+
+
 def screen_universe(market):
     region="jp" if market=="japan" else "us"
     fallback=JP_FALLBACK if market=="japan" else US_FALLBACK
+    jp_names=load_jpx_japanese_names() if market=="japan" else {}
     try:
         q=EquityQuery("and",[
             EquityQuery("eq",["region",region]),
@@ -91,7 +123,23 @@ def screen_universe(market):
                 symbol=str(item.get("symbol") or "").upper().strip()
                 if not symbol:
                     continue
-                name=item.get("shortName") or item.get("longName") or item.get("displayName") or symbol.replace(".T","")
+                if market=="japan":
+                    name=jp_names.get(symbol)
+                    if not name:
+                        name=(
+                            item.get("shortName")
+                            or item.get("longName")
+                            or item.get("displayName")
+                            or symbol.replace(".T","")
+                        )
+                else:
+                    name=(
+                        item.get("shortName")
+                        or item.get("longName")
+                        or item.get("displayName")
+                        or symbol
+                    )
+
                 universe[symbol]=str(name)
             if len(quotes)<250:
                 break

@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-30 22:24 JST",
-  "engine_version": "3.1-precision-balanced",
+  "updated_at": "2026-08-30 22:56 JST",
+  "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
     "quality_growth": 25,
@@ -8,10 +8,114 @@
     "technical": 25,
     "catalyst": 15
   },
+  "universe_stats": {
+    "japan": {
+      "source": "yahoo_screener",
+      "screen_target": 500,
+      "screened": 500,
+      "history_ok": 492,
+      "liquidity_selected": 200,
+      "fundamental_analyzed": 134,
+      "short_candidates": 51,
+      "medium_candidates": 84,
+      "long_candidates": 119
+    },
+    "usa": {
+      "source": "yahoo_screener",
+      "screen_target": 500,
+      "screened": 500,
+      "history_ok": 483,
+      "liquidity_selected": 200,
+      "fundamental_analyzed": 103,
+      "short_candidates": 31,
+      "medium_candidates": 61,
+      "long_candidates": 89
+    }
+  },
   "japan": {
     "short": [
       {
-        "name": "アドバンテスト",
+        "name": "FERROTEC CORPORATION",
+        "code": "6890",
+        "price": 9600.0,
+        "change_pct": 1.16,
+        "score": 71.8,
+        "signal": "有力",
+        "valuation": 58.5,
+        "quality": 67.1,
+        "financial": 53.0,
+        "technical": 72.1,
+        "catalyst": 86.2,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "RESONA HOLDINGS",
+        "code": "8308",
+        "price": 2512.5,
+        "change_pct": 2.91,
+        "score": 68.2,
+        "signal": "有力",
+        "valuation": 67.7,
+        "quality": 60.9,
+        "financial": 62.8,
+        "technical": 70.4,
+        "catalyst": 71.2,
+        "grades": {
+          "valuation": "B",
+          "quality": "C",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "B"
+        }
+      },
+      {
+        "name": "YAMAHA MOTOR CO",
+        "code": "7272",
+        "price": 1924.5,
+        "change_pct": 0.94,
+        "score": 68.2,
+        "signal": "有力",
+        "valuation": 62.5,
+        "quality": 63.0,
+        "financial": 50.6,
+        "technical": 66.2,
+        "catalyst": 83.8,
+        "grades": {
+          "valuation": "C",
+          "quality": "C",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "NOMURA HOLDINGS INC.",
+        "code": "8604",
+        "price": 1642.0,
+        "change_pct": 1.89,
+        "score": 68.0,
+        "signal": "有力",
+        "valuation": 75.2,
+        "quality": 66.0,
+        "financial": 50.0,
+        "technical": 67.5,
+        "catalyst": 84.3,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "ADVANTEST CORP",
         "code": "6857",
         "price": 35270.0,
         "change_pct": 1.91,
@@ -31,7 +135,27 @@
         }
       },
       {
-        "name": "みずほFG",
+        "name": "SUMITOMO MITSUI TRUST GP INC",
+        "code": "8309",
+        "price": 1789.5,
+        "change_pct": 1.62,
+        "score": 67.3,
+        "signal": "有力",
+        "valuation": 73.4,
+        "quality": 67.2,
+        "financial": 63.5,
+        "technical": 66.3,
+        "catalyst": 86.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "MIZUHO FINANCIAL GROUP",
         "code": "8411",
         "price": 8486.0,
         "change_pct": 1.75,
@@ -51,169 +175,189 @@
         }
       },
       {
-        "name": "TDK",
-        "code": "6762",
-        "price": 3112.0,
-        "change_pct": 1.14,
-        "score": 65.0,
-        "signal": "注目",
-        "valuation": 59.1,
-        "quality": 65.5,
-        "financial": 60.9,
-        "technical": 61.8,
-        "catalyst": 71.9,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "三井住友FG",
-        "code": "8316",
-        "price": 6902.0,
-        "change_pct": 1.59,
-        "score": 64.4,
-        "signal": "注目",
-        "valuation": 69.7,
-        "quality": 66.0,
-        "financial": 63.9,
-        "technical": 60.2,
-        "catalyst": 77.1,
+        "name": "DAIWA SECURITIES GROUP",
+        "code": "8601",
+        "price": 1863.0,
+        "change_pct": 2.19,
+        "score": 66.4,
+        "signal": "有力",
+        "valuation": 73.6,
+        "quality": 69.7,
+        "financial": 49.9,
+        "technical": 64.4,
+        "catalyst": 92.0,
         "grades": {
           "valuation": "B",
           "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "三菱UFJ FG",
-        "code": "8306",
-        "price": 3658.0,
-        "change_pct": 1.39,
-        "score": 63.5,
-        "signal": "注目",
-        "valuation": 67.2,
-        "quality": 67.9,
-        "financial": 61.6,
-        "technical": 58.2,
-        "catalyst": 82.3,
-        "grades": {
-          "valuation": "B",
-          "quality": "B",
-          "financial": "C",
+          "financial": "D",
           "technical": "C",
           "catalyst": "A"
         }
       },
       {
-        "name": "ソニーグループ",
-        "code": "6758",
-        "price": 3928.0,
-        "change_pct": 1.5,
-        "score": 62.2,
-        "signal": "注目",
-        "valuation": 61.6,
-        "quality": 65.3,
-        "financial": 61.6,
-        "technical": 61.3,
-        "catalyst": 77.5,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "MS&AD",
-        "code": "8725",
-        "price": 5114.0,
-        "change_pct": 1.23,
-        "score": 60.7,
-        "signal": "注目",
-        "valuation": 67.3,
-        "quality": 60.9,
-        "financial": 57.3,
-        "technical": 64.9,
-        "catalyst": 75.7,
+        "name": "JAPAN POST BANK CO LTD",
+        "code": "7182",
+        "price": 3335.0,
+        "change_pct": 1.03,
+        "score": 66.3,
+        "signal": "有力",
+        "valuation": 67.7,
+        "quality": 68.3,
+        "financial": 64.0,
+        "technical": 65.5,
+        "catalyst": 85.2,
         "grades": {
           "valuation": "B",
-          "quality": "C",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "三井物産",
-        "code": "8031",
-        "price": 4979.0,
-        "change_pct": 1.06,
-        "score": 58.6,
-        "signal": "注目",
-        "valuation": 60.1,
-        "quality": 60.2,
-        "financial": 51.7,
-        "technical": 56.5,
-        "catalyst": 85.8,
-        "grades": {
-          "valuation": "C",
-          "quality": "C",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "NEC",
-        "code": "6701",
-        "price": 4908.0,
-        "change_pct": 3.65,
-        "score": 58.4,
-        "signal": "注目",
-        "valuation": 60.2,
-        "quality": 66.5,
-        "financial": 60.6,
-        "technical": 50.0,
-        "catalyst": 80.5,
-        "grades": {
-          "valuation": "C",
           "quality": "B",
           "financial": "C",
-          "technical": "C",
+          "technical": "B",
           "catalyst": "A"
         }
       },
       {
-        "name": "日立製作所",
-        "code": "6501",
-        "price": 5550.0,
-        "change_pct": 2.15,
-        "score": 58.4,
-        "signal": "注目",
-        "valuation": 57.6,
-        "quality": 54.6,
-        "financial": 62.4,
-        "technical": 53.1,
-        "catalyst": 62.8,
+        "name": "ROHM CO LTD",
+        "code": "6963",
+        "price": 4830.0,
+        "change_pct": 0.0,
+        "score": 66.1,
+        "signal": "有力",
+        "valuation": 57.5,
+        "quality": 55.4,
+        "financial": 54.8,
+        "technical": 65.6,
+        "catalyst": 70.3,
         "grades": {
           "valuation": "C",
           "quality": "C",
           "financial": "C",
-          "technical": "C",
-          "catalyst": "C"
+          "technical": "B",
+          "catalyst": "B"
         }
       }
     ],
     "medium": [
       {
-        "name": "みずほFG",
+        "name": "SBI HOLDINGS INC",
+        "code": "8473",
+        "price": 3427.0,
+        "change_pct": 0.65,
+        "score": 72.4,
+        "signal": "有力",
+        "valuation": 77.0,
+        "quality": 80.2,
+        "financial": 56.5,
+        "technical": 65.7,
+        "catalyst": 87.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "A",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "SUMITOMO MITSUI TRUST GP INC",
+        "code": "8309",
+        "price": 1789.5,
+        "change_pct": 1.62,
+        "score": 71.3,
+        "signal": "有力",
+        "valuation": 73.4,
+        "quality": 67.2,
+        "financial": 63.5,
+        "technical": 66.3,
+        "catalyst": 86.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "FERROTEC CORPORATION",
+        "code": "6890",
+        "price": 9600.0,
+        "change_pct": 1.16,
+        "score": 70.3,
+        "signal": "有力",
+        "valuation": 58.5,
+        "quality": 67.1,
+        "financial": 53.0,
+        "technical": 72.1,
+        "catalyst": 86.2,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "DAIWA SECURITIES GROUP",
+        "code": "8601",
+        "price": 1863.0,
+        "change_pct": 2.19,
+        "score": 70.0,
+        "signal": "有力",
+        "valuation": 73.6,
+        "quality": 69.7,
+        "financial": 49.9,
+        "technical": 64.4,
+        "catalyst": 92.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "NAMURA SHIPBUILDING CO",
+        "code": "7014",
+        "price": 4880.0,
+        "change_pct": 2.2,
+        "score": 69.3,
+        "signal": "有力",
+        "valuation": 66.5,
+        "quality": 67.1,
+        "financial": 62.3,
+        "technical": 68.2,
+        "catalyst": 83.6,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "NOMURA HOLDINGS INC.",
+        "code": "8604",
+        "price": 1642.0,
+        "change_pct": 1.89,
+        "score": 69.1,
+        "signal": "有力",
+        "valuation": 75.2,
+        "quality": 66.0,
+        "financial": 50.0,
+        "technical": 67.5,
+        "catalyst": 84.3,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "MIZUHO FINANCIAL GROUP",
         "code": "8411",
         "price": 8486.0,
         "change_pct": 1.75,
@@ -233,7 +377,47 @@
         }
       },
       {
-        "name": "三菱UFJ FG",
+        "name": "JAPAN POST BANK CO LTD",
+        "code": "7182",
+        "price": 3335.0,
+        "change_pct": 1.03,
+        "score": 68.0,
+        "signal": "有力",
+        "valuation": 67.7,
+        "quality": 68.3,
+        "financial": 64.0,
+        "technical": 65.5,
+        "catalyst": 85.2,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "RESONA HOLDINGS",
+        "code": "8308",
+        "price": 2512.5,
+        "change_pct": 2.91,
+        "score": 67.9,
+        "signal": "有力",
+        "valuation": 67.7,
+        "quality": 60.9,
+        "financial": 62.8,
+        "technical": 70.4,
+        "catalyst": 71.2,
+        "grades": {
+          "valuation": "B",
+          "quality": "C",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "B"
+        }
+      },
+      {
+        "name": "MITSUBISHI UFJ FINANCIAL GROUP ",
         "code": "8306",
         "price": 3658.0,
         "change_pct": 1.39,
@@ -251,171 +435,111 @@
           "technical": "C",
           "catalyst": "A"
         }
-      },
-      {
-        "name": "三井住友FG",
-        "code": "8316",
-        "price": 6902.0,
-        "change_pct": 1.59,
-        "score": 67.1,
-        "signal": "有力",
-        "valuation": 69.7,
-        "quality": 66.0,
-        "financial": 63.9,
-        "technical": 60.2,
-        "catalyst": 77.1,
-        "grades": {
-          "valuation": "B",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "日本郵船",
-        "code": "9101",
-        "price": 7115.0,
-        "change_pct": 2.64,
-        "score": 65.9,
-        "signal": "有力",
-        "valuation": 60.8,
-        "quality": 61.0,
-        "financial": 47.7,
-        "technical": 69.9,
-        "catalyst": 79.2,
-        "grades": {
-          "valuation": "C",
-          "quality": "C",
-          "financial": "D",
-          "technical": "B",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "MS&AD",
-        "code": "8725",
-        "price": 5114.0,
-        "change_pct": 1.23,
-        "score": 65.5,
-        "signal": "有力",
-        "valuation": 67.3,
-        "quality": 60.9,
-        "financial": 57.3,
-        "technical": 64.9,
-        "catalyst": 75.7,
-        "grades": {
-          "valuation": "B",
-          "quality": "C",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "アドバンテスト",
-        "code": "6857",
-        "price": 35270.0,
-        "change_pct": 1.91,
-        "score": 65.3,
-        "signal": "有力",
-        "valuation": 22.2,
-        "quality": 80.5,
-        "financial": 62.3,
-        "technical": 62.5,
-        "catalyst": 86.2,
-        "grades": {
-          "valuation": "D",
-          "quality": "A",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "商船三井",
-        "code": "9104",
-        "price": 7096.0,
-        "change_pct": 1.33,
-        "score": 64.2,
-        "signal": "注目",
-        "valuation": 57.4,
-        "quality": 61.7,
-        "financial": 38.9,
-        "technical": 70.0,
-        "catalyst": 81.2,
-        "grades": {
-          "valuation": "C",
-          "quality": "C",
-          "financial": "D",
-          "technical": "B",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "ソニーグループ",
-        "code": "6758",
-        "price": 3928.0,
-        "change_pct": 1.5,
-        "score": 63.8,
-        "signal": "注目",
-        "valuation": 61.6,
-        "quality": 65.3,
-        "financial": 61.6,
-        "technical": 61.3,
-        "catalyst": 77.5,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "SOMPO HD",
-        "code": "8630",
-        "price": 6861.0,
-        "change_pct": 0.16,
-        "score": 63.5,
-        "signal": "注目",
-        "valuation": 62.9,
-        "quality": 66.6,
-        "financial": 57.5,
-        "technical": 48.8,
-        "catalyst": 82.1,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "NEC",
-        "code": "6701",
-        "price": 4908.0,
-        "change_pct": 3.65,
-        "score": 62.9,
-        "signal": "注目",
-        "valuation": 60.2,
-        "quality": 66.5,
-        "financial": 60.6,
-        "technical": 50.0,
-        "catalyst": 80.5,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
       }
     ],
     "long": [
       {
-        "name": "みずほFG",
+        "name": "SUMITOMO MITSUI TRUST GP INC",
+        "code": "8309",
+        "price": 1789.5,
+        "change_pct": 1.62,
+        "score": 70.6,
+        "signal": "有力",
+        "valuation": 73.4,
+        "quality": 67.2,
+        "financial": 63.5,
+        "technical": 66.3,
+        "catalyst": 86.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "JAPAN POST BANK CO LTD",
+        "code": "7182",
+        "price": 3335.0,
+        "change_pct": 1.03,
+        "score": 70.0,
+        "signal": "有力",
+        "valuation": 67.7,
+        "quality": 68.3,
+        "financial": 64.0,
+        "technical": 65.5,
+        "catalyst": 85.2,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "DAIWA SECURITIES GROUP",
+        "code": "8601",
+        "price": 1863.0,
+        "change_pct": 2.19,
+        "score": 70.0,
+        "signal": "有力",
+        "valuation": 73.6,
+        "quality": 69.7,
+        "financial": 49.9,
+        "technical": 64.4,
+        "catalyst": 92.0,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "SUMITOMO METAL MINING CO",
+        "code": "5713",
+        "price": 11525.0,
+        "change_pct": 1.1,
+        "score": 69.9,
+        "signal": "有力",
+        "valuation": 61.4,
+        "quality": 66.1,
+        "financial": 57.2,
+        "technical": 73.3,
+        "catalyst": 92.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "FERROTEC CORPORATION",
+        "code": "6890",
+        "price": 9600.0,
+        "change_pct": 1.16,
+        "score": 69.7,
+        "signal": "有力",
+        "valuation": 58.5,
+        "quality": 67.1,
+        "financial": 53.0,
+        "technical": 72.1,
+        "catalyst": 86.2,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "MIZUHO FINANCIAL GROUP",
         "code": "8411",
         "price": 8486.0,
         "change_pct": 1.75,
@@ -435,7 +559,47 @@
         }
       },
       {
-        "name": "リクルートHD",
+        "name": "NOMURA HOLDINGS INC.",
+        "code": "8604",
+        "price": 1642.0,
+        "change_pct": 1.89,
+        "score": 68.5,
+        "signal": "有力",
+        "valuation": 75.2,
+        "quality": 66.0,
+        "financial": 50.0,
+        "technical": 67.5,
+        "catalyst": 84.3,
+        "grades": {
+          "valuation": "B",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "ASTELLAS PHARMA",
+        "code": "4503",
+        "price": 2370.5,
+        "change_pct": -0.86,
+        "score": 67.8,
+        "signal": "有力",
+        "valuation": 62.4,
+        "quality": 75.3,
+        "financial": 59.1,
+        "technical": 57.9,
+        "catalyst": 86.6,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "RECRUIT HOLDINGS CO LTD",
         "code": "6098",
         "price": 17800.0,
         "change_pct": 4.89,
@@ -455,7 +619,7 @@
         }
       },
       {
-        "name": "三井住友FG",
+        "name": "SUMITOMO MITSUI FINANCIAL GROUP",
         "code": "8316",
         "price": 6902.0,
         "change_pct": 1.59,
@@ -473,153 +637,53 @@
           "technical": "C",
           "catalyst": "B"
         }
-      },
-      {
-        "name": "三菱UFJ FG",
-        "code": "8306",
-        "price": 3658.0,
-        "change_pct": 1.39,
-        "score": 67.4,
-        "signal": "有力",
-        "valuation": 67.2,
-        "quality": 67.9,
-        "financial": 61.6,
-        "technical": 58.2,
-        "catalyst": 82.3,
-        "grades": {
-          "valuation": "B",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "MS&AD",
-        "code": "8725",
-        "price": 5114.0,
-        "change_pct": 1.23,
-        "score": 65.5,
-        "signal": "有力",
-        "valuation": 67.3,
-        "quality": 60.9,
-        "financial": 57.3,
-        "technical": 64.9,
-        "catalyst": 75.7,
-        "grades": {
-          "valuation": "B",
-          "quality": "C",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "TDK",
-        "code": "6762",
-        "price": 3112.0,
-        "change_pct": 1.14,
-        "score": 64.9,
-        "signal": "注目",
-        "valuation": 59.1,
-        "quality": 65.5,
-        "financial": 60.9,
-        "technical": 61.8,
-        "catalyst": 71.9,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "アドバンテスト",
-        "code": "6857",
-        "price": 35270.0,
-        "change_pct": 1.91,
-        "score": 63.9,
-        "signal": "注目",
-        "valuation": 22.2,
-        "quality": 80.5,
-        "financial": 62.3,
-        "technical": 62.5,
-        "catalyst": 86.2,
-        "grades": {
-          "valuation": "D",
-          "quality": "A",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "日本郵船",
-        "code": "9101",
-        "price": 7115.0,
-        "change_pct": 2.64,
-        "score": 63.7,
-        "signal": "注目",
-        "valuation": 60.8,
-        "quality": 61.0,
-        "financial": 47.7,
-        "technical": 69.9,
-        "catalyst": 79.2,
-        "grades": {
-          "valuation": "C",
-          "quality": "C",
-          "financial": "D",
-          "technical": "B",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "SOMPO HD",
-        "code": "8630",
-        "price": 6861.0,
-        "change_pct": 0.16,
-        "score": 63.5,
-        "signal": "注目",
-        "valuation": 62.9,
-        "quality": 66.6,
-        "financial": 57.5,
-        "technical": 48.8,
-        "catalyst": 82.1,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "商船三井",
-        "code": "9104",
-        "price": 7096.0,
-        "change_pct": 1.33,
-        "score": 63.5,
-        "signal": "注目",
-        "valuation": 57.4,
-        "quality": 61.7,
-        "financial": 38.9,
-        "technical": 70.0,
-        "catalyst": 81.2,
-        "grades": {
-          "valuation": "C",
-          "quality": "C",
-          "financial": "D",
-          "technical": "B",
-          "catalyst": "A"
-        }
       }
     ]
   },
   "usa": {
     "short": [
       {
-        "name": "Micron",
+        "name": "Barrick Mining Corporation",
+        "code": "B",
+        "price": 45.65,
+        "change_pct": -3.53,
+        "score": 73.7,
+        "signal": "有力",
+        "valuation": 61.7,
+        "quality": 79.8,
+        "financial": 62.3,
+        "technical": 66.9,
+        "catalyst": 84.5,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Newmont Corporation",
+        "code": "NEM",
+        "price": 127.98,
+        "change_pct": -3.26,
+        "score": 69.8,
+        "signal": "有力",
+        "valuation": 57.5,
+        "quality": 70.9,
+        "financial": 62.3,
+        "technical": 71.0,
+        "catalyst": 64.7,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "C"
+        }
+      },
+      {
+        "name": "Micron Technology, Inc.",
         "code": "MU",
         "price": 932.86,
         "change_pct": -0.27,
@@ -639,7 +703,67 @@
         }
       },
       {
-        "name": "Microsoft",
+        "name": "Freeport-McMoRan, Inc.",
+        "code": "FCX",
+        "price": 76.45,
+        "change_pct": -2.51,
+        "score": 65.8,
+        "signal": "有力",
+        "valuation": 50.3,
+        "quality": 57.5,
+        "financial": 59.5,
+        "technical": 73.3,
+        "catalyst": 63.1,
+        "grades": {
+          "valuation": "C",
+          "quality": "C",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "C"
+        }
+      },
+      {
+        "name": "Charles Schwab Corporation (The",
+        "code": "SCHW",
+        "price": 110.16,
+        "change_pct": 1.95,
+        "score": 63.0,
+        "signal": "注目",
+        "valuation": 54.4,
+        "quality": 71.2,
+        "financial": 52.8,
+        "technical": 55.0,
+        "catalyst": 78.7,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "B"
+        }
+      },
+      {
+        "name": "Devon Energy Corporation",
+        "code": "DVN",
+        "price": 47.35,
+        "change_pct": 0.49,
+        "score": 62.8,
+        "signal": "注目",
+        "valuation": 61.6,
+        "quality": 69.3,
+        "financial": 56.9,
+        "technical": 57.6,
+        "catalyst": 88.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Microsoft Corporation",
         "code": "MSFT",
         "price": 513.53,
         "change_pct": 1.68,
@@ -659,39 +783,39 @@
         }
       },
       {
-        "name": "Apple",
-        "code": "AAPL",
-        "price": 319.7,
-        "change_pct": 1.63,
-        "score": 58.0,
+        "name": "SLB Limited",
+        "code": "SLB",
+        "price": 57.33,
+        "change_pct": 4.22,
+        "score": 62.1,
         "signal": "注目",
-        "valuation": 32.7,
-        "quality": 74.4,
-        "financial": 56.8,
-        "technical": 61.7,
-        "catalyst": 71.1,
+        "valuation": 57.2,
+        "quality": 49.3,
+        "financial": 57.5,
+        "technical": 69.9,
+        "catalyst": 47.1,
         "grades": {
-          "valuation": "D",
-          "quality": "B",
+          "valuation": "C",
+          "quality": "D",
           "financial": "C",
-          "technical": "C",
-          "catalyst": "B"
+          "technical": "B",
+          "catalyst": "D"
         }
       },
       {
-        "name": "CrowdStrike",
-        "code": "CRWD",
-        "price": 218.4,
-        "change_pct": -4.19,
-        "score": 58.0,
+        "name": "Halliburton Company",
+        "code": "HAL",
+        "price": 36.18,
+        "change_pct": 1.94,
+        "score": 61.6,
         "signal": "注目",
-        "valuation": 18.7,
-        "quality": 51.9,
-        "financial": 62.1,
-        "technical": 64.9,
-        "catalyst": 64.0,
+        "valuation": 59.9,
+        "quality": 60.6,
+        "financial": 53.3,
+        "technical": 62.5,
+        "catalyst": 56.8,
         "grades": {
-          "valuation": "D",
+          "valuation": "C",
           "quality": "C",
           "financial": "C",
           "technical": "C",
@@ -699,89 +823,129 @@
         }
       },
       {
-        "name": "Meta Platforms",
-        "code": "META",
-        "price": 578.02,
-        "change_pct": 1.21,
-        "score": 56.7,
+        "name": "Fortinet, Inc.",
+        "code": "FTNT",
+        "price": 166.0,
+        "change_pct": -3.92,
+        "score": 60.0,
         "signal": "注目",
-        "valuation": 51.8,
-        "quality": 64.3,
-        "financial": 59.5,
-        "technical": 53.1,
-        "catalyst": 50.0,
+        "valuation": 24.1,
+        "quality": 77.2,
+        "financial": 60.9,
+        "technical": 66.8,
+        "catalyst": 79.9,
+        "grades": {
+          "valuation": "D",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "B"
+        }
+      }
+    ],
+    "medium": [
+      {
+        "name": "Barrick Mining Corporation",
+        "code": "B",
+        "price": 45.65,
+        "change_pct": -3.53,
+        "score": 68.7,
+        "signal": "有力",
+        "valuation": 61.7,
+        "quality": 79.8,
+        "financial": 62.3,
+        "technical": 66.9,
+        "catalyst": 84.5,
         "grades": {
           "valuation": "C",
-          "quality": "C",
+          "quality": "B",
           "financial": "C",
-          "technical": "C",
-          "catalyst": "D"
+          "technical": "B",
+          "catalyst": "A"
         }
       },
       {
-        "name": "Merck",
-        "code": "MRK",
-        "price": 148.35,
-        "change_pct": -0.8,
-        "score": 56.6,
-        "signal": "注目",
-        "valuation": 34.9,
-        "quality": 52.6,
-        "financial": 50.1,
-        "technical": 69.2,
-        "catalyst": 55.9,
+        "name": "Newmont Corporation",
+        "code": "NEM",
+        "price": 127.98,
+        "change_pct": -3.26,
+        "score": 66.1,
+        "signal": "有力",
+        "valuation": 57.5,
+        "quality": 70.9,
+        "financial": 62.3,
+        "technical": 71.0,
+        "catalyst": 64.7,
         "grades": {
-          "valuation": "D",
-          "quality": "C",
+          "valuation": "C",
+          "quality": "B",
           "financial": "C",
           "technical": "B",
           "catalyst": "C"
         }
       },
       {
-        "name": "Palo Alto Networks",
-        "code": "PANW",
-        "price": 371.59,
-        "change_pct": -2.94,
-        "score": 56.2,
-        "signal": "注目",
-        "valuation": 23.6,
-        "quality": 55.6,
-        "financial": 62.3,
-        "technical": 58.7,
-        "catalyst": 64.1,
+        "name": "ConocoPhillips",
+        "code": "COP",
+        "price": 130.35,
+        "change_pct": 0.64,
+        "score": 65.3,
+        "signal": "有力",
+        "valuation": 60.8,
+        "quality": 71.7,
+        "financial": 58.4,
+        "technical": 57.3,
+        "catalyst": 88.1,
         "grades": {
-          "valuation": "D",
-          "quality": "C",
+          "valuation": "C",
+          "quality": "B",
           "financial": "C",
           "technical": "C",
-          "catalyst": "C"
+          "catalyst": "A"
         }
       },
       {
-        "name": "Tesla",
-        "code": "TSLA",
-        "price": 348.75,
-        "change_pct": -1.71,
-        "score": 54.4,
-        "signal": "注目",
-        "valuation": 23.1,
-        "quality": 52.3,
-        "financial": 62.0,
-        "technical": 55.5,
-        "catalyst": 51.6,
+        "name": "Dell Technologies Inc.",
+        "code": "DELL",
+        "price": 456.24,
+        "change_pct": -3.39,
+        "score": 65.2,
+        "signal": "有力",
+        "valuation": 51.9,
+        "quality": 67.7,
+        "financial": 53.6,
+        "technical": 57.2,
+        "catalyst": 92.0,
         "grades": {
-          "valuation": "D",
-          "quality": "C",
+          "valuation": "C",
+          "quality": "B",
           "financial": "C",
           "technical": "C",
-          "catalyst": "C"
+          "catalyst": "A"
         }
-      }
-    ],
-    "medium": [
+      },
       {
-        "name": "Uber",
+        "name": "Chevron Corporation",
+        "code": "CVX",
+        "price": 201.86,
+        "change_pct": 1.05,
+        "score": 64.2,
+        "signal": "注目",
+        "valuation": 61.5,
+        "quality": 71.4,
+        "financial": 60.1,
+        "technical": 51.8,
+        "catalyst": 92.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Uber Technologies, Inc.",
         "code": "UBER",
         "price": 78.82,
         "change_pct": 2.43,
@@ -801,189 +965,89 @@
         }
       },
       {
-        "name": "Chevron",
-        "code": "CVX",
-        "price": 201.86,
-        "change_pct": 1.05,
-        "score": 64.2,
+        "name": "Shell PLC",
+        "code": "SHEL",
+        "price": 90.91,
+        "change_pct": 0.23,
+        "score": 64.1,
         "signal": "注目",
-        "valuation": 61.5,
-        "quality": 71.4,
-        "financial": 60.1,
-        "technical": 51.8,
-        "catalyst": 92.0,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "JPMorgan",
-        "code": "JPM",
-        "price": 357.62,
-        "change_pct": 0.96,
-        "score": 63.5,
-        "signal": "注目",
-        "valuation": 61.4,
-        "quality": 71.6,
-        "financial": 48.7,
-        "technical": 50.0,
-        "catalyst": 83.3,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "D",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Bank of America",
-        "code": "BAC",
-        "price": 62.32,
-        "change_pct": 1.88,
-        "score": 63.3,
-        "signal": "注目",
-        "valuation": 64.2,
-        "quality": 65.6,
-        "financial": 58.5,
-        "technical": 49.9,
-        "catalyst": 74.6,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "NVIDIA",
-        "code": "NVDA",
-        "price": 217.55,
-        "change_pct": -4.57,
-        "score": 63.1,
-        "signal": "注目",
-        "valuation": 31.2,
-        "quality": 83.7,
-        "financial": 61.8,
-        "technical": 54.3,
-        "catalyst": 92.0,
-        "grades": {
-          "valuation": "D",
-          "quality": "A",
-          "financial": "C",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Microsoft",
-        "code": "MSFT",
-        "price": 513.53,
-        "change_pct": 1.68,
-        "score": 62.8,
-        "signal": "注目",
-        "valuation": 40.8,
+        "valuation": 64.1,
         "quality": 73.0,
-        "financial": 60.6,
-        "technical": 58.3,
-        "catalyst": 77.3,
+        "financial": 56.8,
+        "technical": 51.6,
+        "catalyst": 91.1,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Carvana Co.",
+        "code": "CVNA",
+        "price": 74.04,
+        "change_pct": -0.07,
+        "score": 64.0,
+        "signal": "注目",
+        "valuation": 43.0,
+        "quality": 73.6,
+        "financial": 53.4,
+        "technical": 61.5,
+        "catalyst": 90.4,
         "grades": {
           "valuation": "D",
           "quality": "B",
           "financial": "C",
           "technical": "C",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "Amazon",
-        "code": "AMZN",
-        "price": 266.43,
-        "change_pct": 3.97,
-        "score": 62.5,
-        "signal": "注目",
-        "valuation": 55.6,
-        "quality": 70.9,
-        "financial": 58.7,
-        "technical": 49.5,
-        "catalyst": 81.4,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
           "catalyst": "A"
         }
       },
       {
-        "name": "Exxon Mobil",
-        "code": "XOM",
-        "price": 156.71,
-        "change_pct": 0.17,
-        "score": 62.1,
+        "name": "Fortinet, Inc.",
+        "code": "FTNT",
+        "price": 166.0,
+        "change_pct": -3.92,
+        "score": 63.8,
         "signal": "注目",
-        "valuation": 61.4,
-        "quality": 69.3,
-        "financial": 60.8,
-        "technical": 48.1,
-        "catalyst": 88.5,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Booking Holdings",
-        "code": "BKNG",
-        "price": 205.63,
-        "change_pct": 1.52,
-        "score": 61.6,
-        "signal": "注目",
-        "valuation": 51.9,
-        "quality": 68.3,
-        "financial": 54.5,
-        "technical": 49.7,
-        "catalyst": 78.7,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "B"
-        }
-      },
-      {
-        "name": "Visa",
-        "code": "V",
-        "price": 381.6,
-        "change_pct": 0.51,
-        "score": 60.3,
-        "signal": "注目",
-        "valuation": 30.5,
-        "quality": 73.5,
-        "financial": 57.5,
-        "technical": 61.9,
-        "catalyst": 67.6,
+        "valuation": 24.1,
+        "quality": 77.2,
+        "financial": 60.9,
+        "technical": 66.8,
+        "catalyst": 79.9,
         "grades": {
           "valuation": "D",
           "quality": "B",
           "financial": "C",
-          "technical": "C",
+          "technical": "B",
           "catalyst": "B"
+        }
+      },
+      {
+        "name": "Occidental Petroleum Corporatio",
+        "code": "OXY",
+        "price": 59.1,
+        "change_pct": -0.12,
+        "score": 63.8,
+        "signal": "注目",
+        "valuation": 60.3,
+        "quality": 76.0,
+        "financial": 57.0,
+        "technical": 52.6,
+        "catalyst": 91.9,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
         }
       }
     ],
     "long": [
       {
-        "name": "TSMC",
+        "name": "Taiwan Semiconductor Manufactur",
         "code": "TSM",
         "price": 417.52,
         "change_pct": -2.29,
@@ -1003,7 +1067,7 @@
         }
       },
       {
-        "name": "Micron",
+        "name": "Micron Technology, Inc.",
         "code": "MU",
         "price": 932.86,
         "change_pct": -0.27,
@@ -1023,7 +1087,107 @@
         }
       },
       {
-        "name": "Chevron",
+        "name": "ConocoPhillips",
+        "code": "COP",
+        "price": 130.35,
+        "change_pct": 0.64,
+        "score": 66.9,
+        "signal": "有力",
+        "valuation": 60.8,
+        "quality": 71.7,
+        "financial": 58.4,
+        "technical": 57.3,
+        "catalyst": 88.1,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Occidental Petroleum Corporatio",
+        "code": "OXY",
+        "price": 59.1,
+        "change_pct": -0.12,
+        "score": 66.8,
+        "signal": "有力",
+        "valuation": 60.3,
+        "quality": 76.0,
+        "financial": 57.0,
+        "technical": 52.6,
+        "catalyst": 91.9,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Newmont Corporation",
+        "code": "NEM",
+        "price": 127.98,
+        "change_pct": -3.26,
+        "score": 66.6,
+        "signal": "有力",
+        "valuation": 57.5,
+        "quality": 70.9,
+        "financial": 62.3,
+        "technical": 71.0,
+        "catalyst": 64.7,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "B",
+          "catalyst": "C"
+        }
+      },
+      {
+        "name": "Western Digital Corporation",
+        "code": "WDC",
+        "price": 459.45,
+        "change_pct": -0.55,
+        "score": 66.5,
+        "signal": "有力",
+        "valuation": 46.0,
+        "quality": 83.4,
+        "financial": 62.0,
+        "technical": 50.3,
+        "catalyst": 69.2,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "B"
+        }
+      },
+      {
+        "name": "Devon Energy Corporation",
+        "code": "DVN",
+        "price": 47.35,
+        "change_pct": 0.49,
+        "score": 66.0,
+        "signal": "有力",
+        "valuation": 61.6,
+        "quality": 69.3,
+        "financial": 56.9,
+        "technical": 57.6,
+        "catalyst": 88.0,
+        "grades": {
+          "valuation": "C",
+          "quality": "B",
+          "financial": "C",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Chevron Corporation",
         "code": "CVX",
         "price": 201.86,
         "change_pct": 1.05,
@@ -1043,143 +1207,43 @@
         }
       },
       {
-        "name": "Goldman Sachs",
-        "code": "GS",
-        "price": 1033.99,
-        "change_pct": -0.66,
+        "name": "Petroleo Brasileiro S.A. Petrob",
+        "code": "PBR",
+        "price": 18.53,
+        "change_pct": 1.53,
+        "score": 65.5,
+        "signal": "有力",
+        "valuation": 57.5,
+        "quality": 83.3,
+        "financial": 43.1,
+        "technical": 51.4,
+        "catalyst": 88.7,
+        "grades": {
+          "valuation": "C",
+          "quality": "A",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "Dell Technologies Inc.",
+        "code": "DELL",
+        "price": 456.24,
+        "change_pct": -3.39,
         "score": 65.2,
         "signal": "有力",
-        "valuation": 67.7,
-        "quality": 72.9,
-        "financial": 42.7,
-        "technical": 55.6,
-        "catalyst": 84.0,
-        "grades": {
-          "valuation": "B",
-          "quality": "B",
-          "financial": "D",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Exxon Mobil",
-        "code": "XOM",
-        "price": 156.71,
-        "change_pct": 0.17,
-        "score": 64.3,
-        "signal": "注目",
-        "valuation": 61.4,
-        "quality": 69.3,
-        "financial": 60.8,
-        "technical": 48.1,
-        "catalyst": 88.5,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Alphabet",
-        "code": "GOOGL",
-        "price": 346.59,
-        "change_pct": 1.74,
-        "score": 63.1,
-        "signal": "注目",
-        "valuation": 48.3,
-        "quality": 79.3,
-        "financial": 62.1,
-        "technical": 49.0,
-        "catalyst": 81.3,
-        "grades": {
-          "valuation": "D",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "NVIDIA",
-        "code": "NVDA",
-        "price": 217.55,
-        "change_pct": -4.57,
-        "score": 63.0,
-        "signal": "注目",
-        "valuation": 31.2,
-        "quality": 83.7,
-        "financial": 61.8,
-        "technical": 54.3,
+        "valuation": 51.9,
+        "quality": 67.7,
+        "financial": 53.6,
+        "technical": 57.2,
         "catalyst": 92.0,
         "grades": {
-          "valuation": "D",
-          "quality": "A",
+          "valuation": "C",
+          "quality": "B",
           "financial": "C",
           "technical": "C",
           "catalyst": "A"
-        }
-      },
-      {
-        "name": "JPMorgan",
-        "code": "JPM",
-        "price": 357.62,
-        "change_pct": 0.96,
-        "score": 61.3,
-        "signal": "注目",
-        "valuation": 61.4,
-        "quality": 71.6,
-        "financial": 48.7,
-        "technical": 50.0,
-        "catalyst": 83.3,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "D",
-          "technical": "C",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Amazon",
-        "code": "AMZN",
-        "price": 266.43,
-        "change_pct": 3.97,
-        "score": 61.1,
-        "signal": "注目",
-        "valuation": 55.6,
-        "quality": 70.9,
-        "financial": 58.7,
-        "technical": 49.5,
-        "catalyst": 81.4,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
-        "name": "Bank of America",
-        "code": "BAC",
-        "price": 62.32,
-        "change_pct": 1.88,
-        "score": 61.0,
-        "signal": "注目",
-        "valuation": 64.2,
-        "quality": 65.6,
-        "financial": 58.5,
-        "technical": 49.9,
-        "catalyst": 74.6,
-        "grades": {
-          "valuation": "C",
-          "quality": "B",
-          "financial": "C",
-          "technical": "D",
-          "catalyst": "B"
         }
       }
     ]

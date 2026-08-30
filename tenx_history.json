@@ -1375,5 +1375,50 @@
     "name": "三井住友FG",
     "buy_price": 6913.0,
     "shares": 100
+  },
+  {
+    "date": "2026-08-30",
+    "market": "japan",
+    "horizon": "short",
+    "code": "8031",
+    "name": "三井物産",
+    "buy_price": 4979.0,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-30",
+    "market": "usa",
+    "horizon": "medium",
+    "code": "V",
+    "name": "Visa",
+    "buy_price": 381.6,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-30",
+    "market": "usa",
+    "horizon": "short",
+    "code": "AAPL",
+    "name": "Apple",
+    "buy_price": 319.7,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-30",
+    "market": "usa",
+    "horizon": "short",
+    "code": "META",
+    "name": "Meta Platforms",
+    "buy_price": 578.02,
+    "shares": 100
+  },
+  {
+    "date": "2026-08-30",
+    "market": "usa",
+    "horizon": "short",
+    "code": "TSLA",
+    "name": "Tesla",
+    "buy_price": 348.75,
+    "shares": 100
   }
 ]

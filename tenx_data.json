@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-30 22:56 JST",
+  "updated_at": "2026-08-30 23:12 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -35,7 +35,7 @@
   "japan": {
     "short": [
       {
-        "name": "FERROTEC CORPORATION",
+        "name": "フェローテック",
         "code": "6890",
         "price": 9600.0,
         "change_pct": 1.16,
@@ -55,7 +55,7 @@
         }
       },
       {
-        "name": "RESONA HOLDINGS",
+        "name": "りそなホールディングス",
         "code": "8308",
         "price": 2512.5,
         "change_pct": 2.91,
@@ -75,7 +75,7 @@
         }
       },
       {
-        "name": "YAMAHA MOTOR CO",
+        "name": "ヤマハ発動機",
         "code": "7272",
         "price": 1924.5,
         "change_pct": 0.94,
@@ -95,7 +95,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1642.0,
         "change_pct": 1.89,
@@ -115,7 +115,7 @@
         }
       },
       {
-        "name": "ADVANTEST CORP",
+        "name": "アドバンテスト",
         "code": "6857",
         "price": 35270.0,
         "change_pct": 1.91,
@@ -135,7 +135,7 @@
         }
       },
       {
-        "name": "SUMITOMO MITSUI TRUST GP INC",
+        "name": "三井住友トラストグループ",
         "code": "8309",
         "price": 1789.5,
         "change_pct": 1.62,
@@ -155,7 +155,7 @@
         }
       },
       {
-        "name": "MIZUHO FINANCIAL GROUP",
+        "name": "みずほフィナンシャルグループ",
         "code": "8411",
         "price": 8486.0,
         "change_pct": 1.75,
@@ -175,7 +175,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1863.0,
         "change_pct": 2.19,
@@ -195,7 +195,7 @@
         }
       },
       {
-        "name": "JAPAN POST BANK CO LTD",
+        "name": "ゆうちょ銀行",
         "code": "7182",
         "price": 3335.0,
         "change_pct": 1.03,
@@ -215,7 +215,7 @@
         }
       },
       {
-        "name": "ROHM CO LTD",
+        "name": "ローム",
         "code": "6963",
         "price": 4830.0,
         "change_pct": 0.0,
@@ -237,7 +237,7 @@
     ],
     "medium": [
       {
-        "name": "SBI HOLDINGS INC",
+        "name": "ＳＢＩホールディングス",
         "code": "8473",
         "price": 3427.0,
         "change_pct": 0.65,
@@ -257,7 +257,7 @@
         }
       },
       {
-        "name": "SUMITOMO MITSUI TRUST GP INC",
+        "name": "三井住友トラストグループ",
         "code": "8309",
         "price": 1789.5,
         "change_pct": 1.62,
@@ -277,7 +277,7 @@
         }
       },
       {
-        "name": "FERROTEC CORPORATION",
+        "name": "フェローテック",
         "code": "6890",
         "price": 9600.0,
         "change_pct": 1.16,
@@ -297,7 +297,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1863.0,
         "change_pct": 2.19,
@@ -317,7 +317,7 @@
         }
       },
       {
-        "name": "NAMURA SHIPBUILDING CO",
+        "name": "名村造船所",
         "code": "7014",
         "price": 4880.0,
         "change_pct": 2.2,
@@ -337,7 +337,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1642.0,
         "change_pct": 1.89,
@@ -357,7 +357,7 @@
         }
       },
       {
-        "name": "MIZUHO FINANCIAL GROUP",
+        "name": "みずほフィナンシャルグループ",
         "code": "8411",
         "price": 8486.0,
         "change_pct": 1.75,
@@ -377,7 +377,7 @@
         }
       },
       {
-        "name": "JAPAN POST BANK CO LTD",
+        "name": "ゆうちょ銀行",
         "code": "7182",
         "price": 3335.0,
         "change_pct": 1.03,
@@ -397,7 +397,7 @@
         }
       },
       {
-        "name": "RESONA HOLDINGS",
+        "name": "りそなホールディングス",
         "code": "8308",
         "price": 2512.5,
         "change_pct": 2.91,
@@ -417,7 +417,7 @@
         }
       },
       {
-        "name": "MITSUBISHI UFJ FINANCIAL GROUP ",
+        "name": "三菱ＵＦＪフィナンシャル・グループ",
         "code": "8306",
         "price": 3658.0,
         "change_pct": 1.39,
@@ -439,7 +439,7 @@
     ],
     "long": [
       {
-        "name": "SUMITOMO MITSUI TRUST GP INC",
+        "name": "三井住友トラストグループ",
         "code": "8309",
         "price": 1789.5,
         "change_pct": 1.62,
@@ -459,7 +459,7 @@
         }
       },
       {
-        "name": "JAPAN POST BANK CO LTD",
+        "name": "ゆうちょ銀行",
         "code": "7182",
         "price": 3335.0,
         "change_pct": 1.03,
@@ -479,7 +479,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1863.0,
         "change_pct": 2.19,
@@ -499,7 +499,7 @@
         }
       },
       {
-        "name": "SUMITOMO METAL MINING CO",
+        "name": "住友金属鉱山",
         "code": "5713",
         "price": 11525.0,
         "change_pct": 1.1,
@@ -519,7 +519,7 @@
         }
       },
       {
-        "name": "FERROTEC CORPORATION",
+        "name": "フェローテック",
         "code": "6890",
         "price": 9600.0,
         "change_pct": 1.16,
@@ -539,7 +539,7 @@
         }
       },
       {
-        "name": "MIZUHO FINANCIAL GROUP",
+        "name": "みずほフィナンシャルグループ",
         "code": "8411",
         "price": 8486.0,
         "change_pct": 1.75,
@@ -559,7 +559,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1642.0,
         "change_pct": 1.89,
@@ -579,7 +579,7 @@
         }
       },
       {
-        "name": "ASTELLAS PHARMA",
+        "name": "アステラス製薬",
         "code": "4503",
         "price": 2370.5,
         "change_pct": -0.86,
@@ -599,7 +599,7 @@
         }
       },
       {
-        "name": "RECRUIT HOLDINGS CO LTD",
+        "name": "リクルートホールディングス",
         "code": "6098",
         "price": 17800.0,
         "change_pct": 4.89,
@@ -619,7 +619,7 @@
         }
       },
       {
-        "name": "SUMITOMO MITSUI FINANCIAL GROUP",
+        "name": "三井住友フィナンシャルグループ",
         "code": "8316",
         "price": 6902.0,
         "change_pct": 1.59,

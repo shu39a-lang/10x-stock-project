@@ -53,16 +53,42 @@ async function fetchHistory(){
   const symbol=market==="japan" ? code+".T" : code;
 
   try{
-    const url=
-      "https://query1.finance.yahoo.com/v8/finance/chart/"
-      +encodeURIComponent(symbol)
-      +"?interval=1d&range=1y&events=history";
+    let data=null;
 
-    const r=await fetch(url,{cache:"no-store"});
-    if(!r.ok)throw new Error("HTTP "+r.status);
+    // iPhoneアプリ内ではCapacitorHttpを優先
+    const cap=window.Capacitor;
+    const http=cap?.Plugins?.CapacitorHttp;
 
-    const j=await r.json();
-    const result=j?.chart?.result?.[0];
+    if(http?.get){
+      const url=
+        "https://query1.finance.yahoo.com/v8/finance/chart/"
+        +encodeURIComponent(symbol)
+        +"?interval=1d&range=1y&events=history&_="
+        +Date.now();
+
+      const r=await http.get({
+        url,
+        headers:{"Accept":"application/json"}
+      });
+
+      data=typeof r.data==="string"
+        ?JSON.parse(r.data)
+        :r.data;
+    }else{
+      // Web版・PWA版
+      const url=
+        "https://query1.finance.yahoo.com/v8/finance/chart/"
+        +encodeURIComponent(symbol)
+        +"?interval=1d&range=1y&events=history&_="
+        +Date.now();
+
+      const r=await fetch(url,{cache:"no-store"});
+      if(!r.ok)throw new Error("HTTP "+r.status);
+
+      data=await r.json();
+    }
+
+    const result=data?.chart?.result?.[0];
     const q=result?.indicators?.quote?.[0];
 
     if(!q)throw new Error("no data");
@@ -75,7 +101,8 @@ async function fetchHistory(){
       .map(Number)
       .filter(Number.isFinite);
 
-    if(closes.length<20)throw new Error("insufficient data");
+    if(closes.length<20)
+      throw new Error("insufficient data");
 
     applyScore(closes,volumes);
 
@@ -83,7 +110,6 @@ async function fetchHistory(){
     console.log("auto score fetch failed",e);
   }
 }
-
 function applyScore(prices,volumes){
   const current=prices[prices.length-1];
 

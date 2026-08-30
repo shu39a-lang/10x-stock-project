@@ -384,24 +384,33 @@ def rank(universe, market):
 
         for x in rows:
 
-            if horizon == "short":
+                        if horizon == "short":
                 ok = (
-                    x["price"] > x["ma20"] * 0.97
-                    and 38 <= x["rsi"] <= 82
+                    x["price"] > x["ma20"]
+                    and 42 <= x["rsi"] <= 72
+                    and x["technical"] >= 50
+                    and x["ret20"] > -5
+                    and x["vol_ratio"] >= 0.70
+                    and x["drawdown"] > -40
                 )
 
             elif horizon == "medium":
                 ok = (
-                    x["price"] > x["ma50"] * 0.95
-                    and x["ret60"] > -12
+                    x["price"] > x["ma50"]
+                    and x["ma20"] >= x["ma50"] * 0.97
+                    and x["technical"] >= 48
+                    and x["ret60"] > -8
+                    and x["drawdown"] > -45
                 )
 
             else:
                 ok = (
-                    x["price"] > x["ma200"] * 0.90
-                    and x["drawdown"] > -55
+                    x["price"] > x["ma200"]
+                    and x["ma50"] >= x["ma200"] * 0.95
+                    and x["risk"] >= 35
+                    and x["ret200"] > -15
+                    and x["drawdown"] > -50
                 )
-
             if ok:
                 candidates.append(
                     make_row(

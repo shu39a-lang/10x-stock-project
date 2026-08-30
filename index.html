@@ -331,7 +331,16 @@ a{text-decoration:none;color:inherit}
       <div class="formtitle">📈 銘柄を確認・入力して分析</div>
       <div class="note">外部サイトで情報を確認し、5項目を0〜100で評価すると自動で総合スコアを計算します。</div>
       <div class="formgrid">
-        <label>市場<select id="marketInput"><option value="japan" selected>日本株</option><option value="usa">米国株</option></select></label>
+        <label>市場
+  <select id="marketInput" class="hidden">
+    <option value="japan" selected>日本株</option>
+    <option value="usa">米国株</option>
+  </select>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:5px">
+    <button type="button" class="marketbtn jp active" onclick="const s=document.getElementById('marketInput');s.value='japan';s.dispatchEvent(new Event('change',{bubbles:true}));this.classList.add('active');this.nextElementSibling.classList.remove('active');">🇯🇵 日本株</button>
+    <button type="button" class="marketbtn" onclick="const s=document.getElementById('marketInput');s.value='usa';s.dispatchEvent(new Event('change',{bubbles:true}));this.classList.add('active');this.previousElementSibling.classList.remove('active');">🇺🇸 米国株</button>
+  </div>
+</label>
         <label>銘柄コード<input id="codeInput" autocomplete="off" autocapitalize="characters" placeholder="7203 / AAPL"></label>
         <label class="full">会社名<input id="nameInput" placeholder="会社名"></label>
         <div id="lookupStatus" class="full" style="font-size:10px;color:#93a2b5;min-height:1.4em;margin-top:-3px">コードを入力すると会社名と現在値を確認します。</div>

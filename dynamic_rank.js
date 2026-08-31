@@ -58,29 +58,4 @@ async function updateDynamicRanking(){
 
 if(document.readyState === "loading"){
   document.addEventListener(
-    "DOMContentLoaded",
-    updateDynamicRanking
-  );
-}else{
-  updateDynamicRanking();
-}
-
-})();
-
-document.addEventListener("DOMContentLoaded",function(){
-  window.updateHoldingNow=function(i){
-    const h=holdings();
-    const el=document.getElementById("holdNow"+i);
-    const n=Number(String(el?.value||"").replace(/,/g,""));
-
-    if(!h[i]||!Number.isFinite(n)||n<=0){
-      alert("現在値を正しく入力してください");
-      return;
-    }
-
-    h[i].now=n;
-    setJSON("tenx_zero_holdings",h);
-    renderPortfolio();
-    alert("現在値を反映しました");
-  };
-});
+   

@@ -344,9 +344,16 @@ async function fetchHoldingPrice(market,code){
     .toUpperCase()
     .replace(/\.T$/i,"");
 
-  return await quoteFromSameOrigin(market,clean)
-      ?? await quoteFromBundledFile(market,clean)
-      ?? await quoteFromCapacitor(market,clean);
+  const p1=await quoteFromCapacitor(market,clean);
+  if(Number.isFinite(p1)&&p1>0) return p1;
+
+  const p2=await quoteFromSameOrigin(market,clean);
+  if(Number.isFinite(p2)&&p2>0) return p2;
+
+  const p3=await quoteFromBundledFile(market,clean);
+  if(Number.isFinite(p3)&&p3>0) return p3;
+
+  return null;
 }
 
 window.updateHoldingNow=async function(i){

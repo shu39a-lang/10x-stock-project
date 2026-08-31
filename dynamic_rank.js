@@ -43,34 +43,59 @@ function convertRows(rows){
 }
 
 function decorateRanking(){
-  const rows=document.querySelectorAll("#rankingTable .trow:not(.thead)");
-  const arr=DATA?.[state?.market]?.[state?.term] || [];
-  const shown=state?.showAll ? arr : arr.slice(0,5);
+  try{
+    const arr=DATA[state.market][state.term];
+    if(!Array.isArray(arr)) return;
 
-  rows.forEach((row,i)=>{
-    const item=shown[i];
-    if(!item) return;
+    const shown=state.showAll ? arr : arr.slice(0,5);
+    const rows=document.querySelectorAll(
+      "#rankingTable .trow:not(.thead)"
+    );
 
-    const nameCell=row.querySelector(".sname");
-    if(!nameCell) return;
+    rows.forEach((row,i)=>{
+      const item=shown[i];
+      if(!item) return;
 
-    const old=nameCell.querySelector(".stockClassBadge");
-    if(old) old.remove();
+      const nameCell=row.querySelector(".sname");
+      if(!nameCell) return;
 
-    const badge=document.createElement("span");
-    badge.className="stockClassBadge";
-    badge.textContent=item[3] || "";
-    badge.style.display="inline-block";
-    badge.style.marginLeft="6px";
-    badge.style.padding="2px 6px";
-    badge.style.border="1px solid currentColor";
-    badge.style.borderRadius="999px";
-    badge.style.fontSize="11px";
-    badge.style.fontWeight="700";
-    badge.style.whiteSpace="nowrap";
+      const originalName=item[1];
+      const category=item[3] || "";
 
-    nameCell.appendChild(badge);
-  });
+      nameCell.style.whiteSpace="normal";
+      nameCell.style.overflow="visible";
+      nameCell.style.textOverflow="clip";
+      nameCell.style.lineHeight="1.25";
+
+      nameCell.innerHTML="";
+
+      const title=document.createElement("span");
+      title.textContent=originalName;
+      title.style.display="block";
+      title.style.whiteSpace="nowrap";
+      title.style.overflow="hidden";
+      title.style.textOverflow="ellipsis";
+
+      const badge=document.createElement("span");
+      badge.textContent=category;
+      badge.style.display="inline-block";
+      badge.style.marginTop="4px";
+      badge.style.padding="2px 6px";
+      badge.style.border="1px solid #ffc73d";
+      badge.style.borderRadius="999px";
+      badge.style.fontSize="9px";
+      badge.style.fontWeight="800";
+      badge.style.lineHeight="1.3";
+      badge.style.color="#ffc73d";
+      badge.style.whiteSpace="nowrap";
+
+      nameCell.appendChild(title);
+      nameCell.appendChild(badge);
+    });
+
+  }catch(e){
+    console.log("classification display failed:",e);
+  }
 }
 
 function installRankingDecorator(){
@@ -121,7 +146,7 @@ async function updateDynamicRanking(){
       renderRanking();
     }
 
-    decorateRanking();
+    setTimeout(decorateRanking,0);
 
     console.log(
       "dynamic ranking updated:",

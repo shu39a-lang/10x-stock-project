@@ -55,7 +55,14 @@ async function updateDynamicRanking(){
     );
   }
 }
-
 if(document.readyState === "loading"){
   document.addEventListener(
-   
+    "DOMContentLoaded",
+    updateDynamicRanking
+  );
+}else{
+  updateDynamicRanking();
+}
+
+})();
+

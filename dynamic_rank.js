@@ -11,20 +11,9 @@ function classifyStock(x){
   const technical=Number(x.technical)||50;
   const catalyst=Number(x.catalyst)||50;
 
-  const rise=
-    technical*0.45+
-    catalyst*0.30+
-    score*0.25;
-
-  const stable=
-    financial*0.40+
-    technical*0.30+
-    score*0.30;
-
-  const growth=
-    quality*0.50+
-    catalyst*0.25+
-    score*0.25;
+  const rise=technical*0.45+catalyst*0.30+score*0.25;
+  const stable=financial*0.40+technical*0.30+score*0.30;
+  const growth=quality*0.50+catalyst*0.25+score*0.25;
 
   if(growth>=rise && growth>=stable) return "成長株";
   if(stable>=rise && stable>=growth) return "安定上昇";
@@ -42,6 +31,12 @@ function convertRows(rows){
   ]);
 }
 
+function rankColor(category){
+  if(category==="安定上昇") return "#0b73d9";
+  if(category==="成長株") return "#d9a400";
+  return "#c90035";
+}
+
 function decorateRanking(){
   try{
     const arr=DATA[state.market][state.term];
@@ -57,40 +52,27 @@ function decorateRanking(){
       if(!item) return;
 
       const nameCell=row.querySelector(".sname");
-      if(!nameCell) return;
+      const rankCell=row.querySelector(".rank");
 
-      const originalName=item[1];
-      const category=item[3] || "";
+      if(!nameCell || !rankCell) return;
 
-      nameCell.style.whiteSpace="normal";
-      nameCell.style.overflow="visible";
-      nameCell.style.textOverflow="clip";
-      nameCell.style.lineHeight="1.25";
+      nameCell.textContent=item[1];
+      nameCell.style.whiteSpace="nowrap";
+      nameCell.style.overflow="hidden";
+      nameCell.style.textOverflow="ellipsis";
+      nameCell.style.lineHeight="normal";
 
-      nameCell.innerHTML="";
-
-      const title=document.createElement("span");
-      title.textContent=originalName;
-      title.style.display="block";
-      title.style.whiteSpace="nowrap";
-      title.style.overflow="hidden";
-      title.style.textOverflow="ellipsis";
-
-      const badge=document.createElement("span");
-      badge.textContent=category;
-      badge.style.display="inline-block";
-      badge.style.marginTop="4px";
-      badge.style.padding="2px 6px";
-      badge.style.border="1px solid #ffc73d";
-      badge.style.borderRadius="999px";
-      badge.style.fontSize="9px";
-      badge.style.fontWeight="800";
-      badge.style.lineHeight="1.3";
-      badge.style.color="#ffc73d";
-      badge.style.whiteSpace="nowrap";
-
-      nameCell.appendChild(title);
-      nameCell.appendChild(badge);
+      rankCell.style.width="30px";
+      rankCell.style.height="30px";
+      rankCell.style.margin="0 auto";
+      rankCell.style.display="flex";
+      rankCell.style.alignItems="center";
+      rankCell.style.justifyContent="center";
+      rankCell.style.borderRadius="4px";
+      rankCell.style.background=rankColor(item[3] || "上昇期待");
+      rankCell.style.color="#fff";
+      rankCell.style.fontWeight="1000";
+      rankCell.style.lineHeight="1";
     });
 
   }catch(e){
@@ -116,11 +98,10 @@ function installRankingDecorator(){
 
 async function updateDynamicRanking(){
   try{
-    const url=REMOTE_DATA+"?t="+Date.now();
-
-    const r=await fetch(url,{
-      cache:"no-store"
-    });
+    const r=await fetch(
+      REMOTE_DATA+"?t="+Date.now(),
+      {cache:"no-store"}
+    );
 
     if(!r.ok){
       throw new Error("HTTP "+r.status);
@@ -148,16 +129,8 @@ async function updateDynamicRanking(){
 
     setTimeout(decorateRanking,0);
 
-    console.log(
-      "dynamic ranking updated:",
-      j.updated_at || ""
-    );
-
   }catch(e){
-    console.log(
-      "dynamic ranking update failed:",
-      e
-    );
+    console.log("dynamic ranking update failed:",e);
   }
 }
 

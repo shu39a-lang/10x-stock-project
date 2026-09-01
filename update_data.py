@@ -73,7 +73,7 @@ def rsi(series, period=14):
     return float(out.iloc[-1]) if len(out) and pd.notna(out.iloc[-1]) else 50.0
 
 def grade(v):
-    return "A" if v>=80 else "B" if v>=65 else "C" if v>=50 else "D"
+        return "A" if v>=70 else "B" if v>=67 else "C" if v>=64 else "D"
 
 def mean_with_confidence(values, expected):
     vals=[float(v) for v in values if v is not None and np.isfinite(v)]

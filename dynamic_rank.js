@@ -5,18 +5,20 @@ const REMOTE_DATA =
   "https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/main/tenx_data.json";
 
 function classifyStock(x){
-  const score=Number(x.score)||50;
-  const quality=Number(x.quality)||50;
-  const financial=Number(x.financial)||50;
-  const technical=Number(x.technical)||50;
-  const catalyst=Number(x.catalyst)||50;
+  const score=Number(x.score)||0;
+  const quality=Number(x.quality)||0;
+  const financial=Number(x.financial)||0;
+  const technical=Number(x.technical)||0;
+  const catalyst=Number(x.catalyst)||0;
 
-  const rise=technical*0.45+catalyst*0.30+score*0.25;
-  const stable=financial*0.40+technical*0.30+score*0.30;
-  const growth=quality*0.50+catalyst*0.25+score*0.25;
+  if(quality>=75 && catalyst>=70){
+    return "成長株";
+  }
 
-  if(growth>=rise && growth>=stable) return "成長株";
-  if(stable>=rise && stable>=growth) return "安定上昇";
+  if(financial>=62 && technical>=62 && score>=65){
+    return "安定上昇";
+  }
+
   return "上昇期待";
 }
 

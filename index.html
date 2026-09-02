@@ -306,34 +306,122 @@ a{text-decoration:none;color:inherit}
 
     <div style="margin:8px 0 10px;padding:9px 10px;border:1px solid #a9781b;border-radius:11px;background:#081522;text-align:center;font-weight:900;line-height:1.45"><div style="font-size:13px;color:#fff">🕒 TOP10 データ更新時間（日本時間）</div><div style="margin-top:3px;font-size:14px;color:#ffc73d">06:30頃 <span style="font-size:11px;color:#fff">（アメリカ株）</span>　｜　16:00頃 <span style="font-size:11px;color:#fff">（日本株）</span></div></div>
 
-    <div class="sectionbox">
-      <div class="sectiontitle">🔗 マーケット情報・個別リンク</div>
-      <div class="marketlinks">
-        <a id="upLink" class="marketlink red"><div class="ico">📈</div><span>値上がり<br>ランキング</span><small id="upMarket">米国株</small></a>
-        <a id="downLink" class="marketlink blue"><div class="ico">📉</div><span>値下がり<br>ランキング</span><small id="downMarket">米国株</small></a>
-        <a id="volumeLink" class="marketlink green"><div class="ico">📊</div><span>出来高<br>ランキング</span><small id="volumeMarket">米国株</small></a>
-        <button type="button" class="marketlink purple" id="individualBtn"><div class="ico">🔎</div><span>個別銘柄<br>検索</span><small>銘柄コードで検索</small></button>
-      </div>
+    <div class="sectionbox" style="background:linear-gradient(160deg,#06111d,#071423 55%,#090f1d);border-color:#29445d">
+
+  <div class="sectiontitle" style="font-size:15px;margin-bottom:9px">📊 データ・ランキング</div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #c12b50;background:linear-gradient(160deg,#b20b35,#63091f);text-align:center">
+      <div style="font-size:23px">📈</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">値上がり<br>ランキング</div>
+      <a href="https://finance.yahoo.co.jp/stocks/ranking/up?market=all" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://finance.yahoo.co.jp/stocks/us/ranking/up" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
     </div>
 
-    <div class="managegrid">
-      <button class="managebtn" data-view="favoritesView"><b>☆</b>お気に入り<br>登録銘柄一覧</button>
-      <button class="managebtn" data-view="portfolioView"><b>▣</b>保有株管理<br>保有銘柄の管理</button>
-      <button class="managebtn" data-view="analysisView"><b>⊞</b>ランキング外登録<br>新規銘柄を手入力</button>
-      <button class="managebtn" data-view="historyView"><b>↶</b>分析履歴<br>過去の分析結果</button>
-      <button class="managebtn screener" id="screenerBtn"><b>🇯🇵</b>日本株スクリーナー<br>日本語で銘柄を絞り込み</button>
-<button class="managebtn screener" onclick="location.href='https://jp.tradingview.com/markets/stocks-usa/market-movers-all-stocks/'"><b>🇺🇸</b>米国株スクリーナー<br>日本語で銘柄を絞り込み</button>
-      <button class="managebtn screener"...>🇺🇸 米国株スクリーナー...</button>
-【←ここに追加します】
-<button class="managebtn" data-view="settingsView"><b>⚙</b>設定...
-  <button class="managebtn" onclick="location.href='https://jp.tradingview.com/earnings-calendar/?countries=jp'"><b>📅</b>日本株 決算カレンダー<br>決算予定を確認</button>
-<button class="managebtn" onclick="location.href='https://jp.tradingview.com/earnings-calendar/?countries=us'"><b>📅</b>米国株 決算カレンダー<br>決算予定を確認</button>
-  <button class="managebtn" onclick="location.href='https://jp.tradingview.com/markets/stocks-japan/market-movers-52wk-high/'"><b>🚀</b>日本株 52週高値<br>高値更新銘柄を確認</button>
-<button class="managebtn" onclick="location.href='https://jp.tradingview.com/markets/stocks-usa/market-movers-52wk-high/'"><b>🚀</b>米国株 52週高値<br>高値更新銘柄を確認</button>
-  <button class="managebtn" onclick="location.href='https://jp.tradingview.com/markets/stocks-japan/sectorandindustry-sector/'"><b>🗺️</b>日本株 セクター動向<br>強い業種を確認</button>
-<button class="managebtn" onclick="location.href='https://jp.tradingview.com/markets/stocks-usa/sectorandindustry-sector/'"><b>🗺️</b>米国株 セクター動向<br>強い業種を確認</button>
-      <button class="managebtn" data-view="settingsView"><b>⚙</b>設定<br>各種設定</button>
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #287be0;background:linear-gradient(160deg,#145cbd,#08295c);text-align:center">
+      <div style="font-size:23px">📉</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">値下がり<br>ランキング</div>
+      <a href="https://finance.yahoo.co.jp/stocks/ranking/down?market=all" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://finance.yahoo.co.jp/stocks/us/ranking/down" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
     </div>
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #2a9b60;background:linear-gradient(160deg,#147243,#083c28);text-align:center">
+      <div style="font-size:23px">📊</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">出来高<br>ランキング</div>
+      <a href="https://finance.yahoo.co.jp/stocks/ranking/volume?market=all&term=daily" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://finance.yahoo.co.jp/stocks/us/ranking/volume" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
+    </div>
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #8f55ae;background:linear-gradient(160deg,#68237e,#30113e);text-align:center">
+      <div style="font-size:23px">🔥</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">出来高<br>急増</div>
+      <a href="https://jp.tradingview.com/markets/stocks-japan/market-movers-unusual-volume/" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://jp.tradingview.com/markets/stocks-usa/market-movers-unusual-volume/" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
+    </div>
+
+  </div>
+
+  <div class="sectiontitle" style="font-size:15px;margin:16px 0 9px">🔥 注目・急増・高値</div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #bd6924;background:linear-gradient(160deg,#a94d12,#4f230a);text-align:center">
+      <div style="font-size:23px">📅</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">決算カレンダー</div>
+      <a href="https://jp.tradingview.com/earnings-calendar/?countries=jp" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://jp.tradingview.com/earnings-calendar/?countries=us" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
+    </div>
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #c7951d;background:linear-gradient(160deg,#9c7009,#453208);text-align:center">
+      <div style="font-size:23px">🚀</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">52週高値</div>
+      <a href="https://jp.tradingview.com/markets/stocks-japan/market-movers-52wk-high/" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://jp.tradingview.com/markets/stocks-usa/market-movers-52wk-high/" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
+    </div>
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #1ca18b;background:linear-gradient(160deg,#087d70,#073b3a);text-align:center">
+      <div style="font-size:23px">🗺️</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">セクター動向</div>
+      <a href="https://jp.tradingview.com/markets/stocks-japan/sectorandindustry-sector/" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://jp.tradingview.com/markets/stocks-usa/sectorandindustry-sector/" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
+    </div>
+
+    <div style="padding:8px 5px;border-radius:12px;border:1px solid #3e72b0;background:linear-gradient(160deg,#174b82,#0b294c);text-align:center">
+      <div style="font-size:23px">🔎</div>
+      <div style="font-size:11px;font-weight:900;margin:4px 0 7px">スクリーナー</div>
+      <a href="https://jp.tradingview.com/markets/stocks-japan/market-movers-all-stocks/" style="display:block;padding:6px;margin-bottom:5px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇯🇵 日本株</a>
+      <a href="https://jp.tradingview.com/markets/stocks-usa/market-movers-all-stocks/" style="display:block;padding:6px;border:1px solid #ffffff55;border-radius:7px;font-size:9px">🇺🇸 米国株</a>
+    </div>
+
+  </div>
+
+  <div class="sectiontitle" style="font-size:15px;margin:16px 0 9px">📋 分析・検索</div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px">
+
+    <button type="button" id="individualBtn" style="min-height:82px;border:1px solid #8d4e9d;border-radius:12px;background:linear-gradient(150deg,#60236f,#251334);color:#fff;font-weight:900">
+      <b style="display:block;font-size:25px;margin-bottom:5px">🔍</b>
+      個別銘柄検索<br><small>銘柄コード・銘柄名で検索</small>
+    </button>
+
+    <button class="managebtn" data-view="analysisView" style="background:linear-gradient(150deg,#163f72,#0a2544);border-color:#326ca7">
+      <b>⊞</b>ランキング外登録<br>新規銘柄を手入力
+    </button>
+
+    <button class="managebtn" data-view="historyView" style="background:linear-gradient(150deg,#163f72,#0a2544);border-color:#326ca7">
+      <b>↶</b>分析履歴<br>過去の分析結果
+    </button>
+
+  </div>
+
+  <div class="sectiontitle" style="font-size:15px;margin:16px 0 9px">⚙️ 管理・設定</div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px">
+
+    <button class="managebtn" data-view="favoritesView" style="background:linear-gradient(150deg,#075b55,#073735);border-color:#168c7f">
+      <b>☆</b>お気に入り<br>登録銘柄一覧
+    </button>
+
+    <button class="managebtn" data-view="portfolioView" style="background:linear-gradient(150deg,#075b55,#073735);border-color:#168c7f">
+      <b>▣</b>保有株管理<br>保有銘柄の管理
+    </button>
+
+    <button class="managebtn" data-view="settingsView" style="background:linear-gradient(150deg,#075b55,#073735);border-color:#168c7f">
+      <b>⚙</b>設定<br>各種設定
+    </button>
+
+  </div>
+
+</div>
+
+<div style="display:none">
+  <a id="upLink"><small id="upMarket"></small></a>
+  <a id="downLink"><small id="downMarket"></small></a>
+  <a id="volumeLink"><small id="volumeMarket"></small></a>
+  <button id="screenerBtn"></button>
+</div>
+    
   </section>
 
   <section id="analysisView" class="hidden">

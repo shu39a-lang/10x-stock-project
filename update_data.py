@@ -435,7 +435,7 @@ def rank(market):
             candidates,
             key=lambda z:z["score"],
             reverse=True
-        )[:10]
+        )[:20]
 
     stats={
         "source":source,

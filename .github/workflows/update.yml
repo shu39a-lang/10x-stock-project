@@ -22,10 +22,29 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python update_data.py
-      - name: Commit updated data
+            - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          cp tenx_data.json /tmp/tenx_data.json
+          cp tenx_history.json /tmp/tenx_history.json
+
+          git fetch origin main
+          git reset --hard origin/main
+
+          cp /tmp/tenx_data.json tenx_data.json
+          cp /tmp/tenx_history.json tenx_history.json
+
           git add tenx_data.json tenx_history.json
-          git diff --cached --quiet || git commit -m "Auto update stock candidates"
-          git push
+          git diff --cached --quiet && exit 0
+
+          git commit -m "Auto update stock candidates"
+
+          for i in 1 2 3; do
+            git push && exit 0
+            git fetch origin main
+            git rebase origin/main
+          done
+
+          exit 1

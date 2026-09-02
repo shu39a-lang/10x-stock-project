@@ -273,7 +273,7 @@ a{text-decoration:none;color:inherit}
     <button class="menu" id="menuBtn">☰</button>
     <button class="guide" id="guideBtn">使い方ガイド</button>
     <div class="kicker">株式分析ツール</div>
-    <div class="logo">10X STOCK ZERO</div><div style="font-size:9px;color:#68798c;margin-top:-5px;margin-bottom:5px">FINAL COMPLETE v1.9 SUPPORT</div>
+   <div class="logo"><span style="font-size:1.08em">10</span>X STOCK ZERO</div>FINAL COMPLETE v1.9 SUPPORT</div>
   </div>
 
   <section id="homeView">
@@ -611,8 +611,8 @@ function renderRanking(){
  const arr=DATA[state.market][state.term], ml=state.market==="japan"?"日本株":"米国株", tl={short:"短期",mid:"中期",long:"長期"}[state.term];
  $("#statusText").textContent=ml+" / "+tl;
  $("#rankingTitle").textContent="🏆 "+ml+"・"+tl+" TOP10";
- const shown=state.showAll?arr:arr.slice(0,5);
- $("#allBtn").textContent=state.showAll?"5件表示":"全て見る 〉";
+ const shown=state.showAll?arr.slice(0,20):arr.slice(0,10);
+$("#allBtn").textContent=state.showAll?"TOP10に戻る":"11〜20位を見る";
  $("#rankingTable").innerHTML='<div class="trow thead"><div>順位</div><div>コード</div><div>銘柄名</div><div>スコア</div><div>格付</div><div>☆</div></div>'+
  shown.map((x,i)=>`<div class="trow">
   <div class="rank">${i+1}</div><a class="ticker" href="${stockUrl(state.market,x[0])}">${x[0]}</a>

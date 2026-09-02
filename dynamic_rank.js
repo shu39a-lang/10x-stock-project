@@ -25,7 +25,7 @@ function classifyStock(x){
 function convertRows(rows){
   if(!Array.isArray(rows)) return [];
 
-  return rows.slice(0,10).map(x => [
+  return rows.slice(0,20).map(x => [
     String(x.code || ""),
     String(x.name || ""),
     Math.round(Number(x.score) || 0),
@@ -44,7 +44,7 @@ function decorateRanking(){
     const arr=DATA[state.market][state.term];
     if(!Array.isArray(arr)) return;
 
-    const shown=state.showAll ? arr : arr.slice(0,5);
+    const shown=state.showAll ? arr.slice(0,20) : arr.slice(0,10);
     const rows=document.querySelectorAll(
       "#rankingTable .trow:not(.thead)"
     );

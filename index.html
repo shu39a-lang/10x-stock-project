@@ -1081,6 +1081,8 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigat
 
 
 
+
+
 <!-- FINAL_LIVE_QUOTES_START -->
 <script>
 (() => {
@@ -1195,92 +1197,5 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigat
 })();
 </script>
 <!-- FINAL_LIVE_QUOTES_END -->
-<!-- STABLE_LIVE_QUOTES_START -->
-<script>
-(() => {
-  let liveQuotes = {japan:{}, usa:{}};
-  const originalQuoteInfo = quoteInfo;
-
-  const liveReady = fetch('./live_quotes.json?v=' + Date.now(), {cache:'no-store'})
-    .then(r => { if (!r.ok) throw new Error('live_quotes HTTP ' + r.status); return r.json(); })
-    .then(x => { liveQuotes = x || {japan:{}, usa:{}}; })
-    .catch(e => console.warn('live quote load failed', e));
-
-  quoteInfo = function(m, c) {
-    const k = String(c || '').trim().toUpperCase().replace(/\.T$/i, '');
-    const q = liveQuotes && liveQuotes[m] && liveQuotes[m][k];
-    if (q && Number.isFinite(Number(q.price))) return q;
-    return originalQuoteInfo(m, k);
-  };
-
-  autofillCustomStock = async function() {
-    const m = $('#customMarket').value;
-    const el = $('#customCode');
-    const c = String(el.value || '').trim().toUpperCase().replace(/\.T$/i, '');
-    const st = $('#customLookup');
-    if (!c) {
-      st.className = 'lookupstatus';
-      st.textContent = 'コードを入力すると会社名と現在値を確認します。';
-      return null;
-    }
-    el.value = c;
-    st.className = 'lookupstatus';
-    st.textContent = '会社名・現在値を取得中…';
-    $('#customName').readOnly = false;
-    $('#customNow').readOnly = false;
-
-    await liveReady;
-    const q = quoteInfo(m, c);
-    let mappedName = '';
-    try {
-      const map = await loadCompanyMap(m);
-      mappedName = String((map && map[c]) || '').trim();
-    } catch (e) {}
-
-    if (q && Number.isFinite(Number(q.price))) {
-      const nm = mappedName || q.name || c;
-      $('#customName').value = nm;
-      $('#customNow').value = Number(q.price);
-      $('#customName').readOnly = true;
-      $('#customNow').readOnly = true;
-      st.className = 'lookupstatus ok';
-      st.textContent = '✓ ' + nm + ' ｜ 現在値 ' + money(q.price, m) + ' ｜ ' +
-        (Number(q.change_pct || 0) >= 0 ? '+' : '') + Number(q.change_pct || 0).toFixed(2) + '%';
-      return q;
-    }
-
-    $('#customName').value = mappedName;
-    $('#customName').readOnly = !!mappedName;
-    $('#customNow').value = '';
-    $('#customNow').readOnly = false;
-    st.className = 'lookupstatus warn';
-    st.textContent = mappedName
-      ? '✓ ' + mappedName + ' を確認しました。現在値のみ手入力してください。'
-      : '銘柄を確認できませんでした。';
-    return null;
-  };
-
-  const oldInput = document.getElementById('customCode');
-  if (oldInput) {
-    const fresh = oldInput.cloneNode(true);
-    fresh.setAttribute('autocapitalize', 'characters');
-    fresh.setAttribute('autocomplete', 'off');
-    fresh.setAttribute('spellcheck', 'false');
-    fresh.style.fontSize = '16px';
-    oldInput.replaceWith(fresh);
-
-    let composing = false;
-    fresh.addEventListener('compositionstart', () => composing = true);
-    fresh.addEventListener('compositionend', () => composing = false);
-    fresh.addEventListener('change', () => { if (!composing) autofillCustomStock(); });
-    fresh.addEventListener('blur', () => { if (!composing) autofillCustomStock(); });
-  }
-
-  document.querySelectorAll('.customgrid input,.customgrid select').forEach(el => {
-    el.style.fontSize = '16px';
-  });
-})();
-</script>
-<!-- STABLE_LIVE_QUOTES_END -->
 </body>
 </html>

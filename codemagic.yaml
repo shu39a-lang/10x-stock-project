@@ -16,27 +16,25 @@ workflows:
     scripts:
       - name: Prepare web app
         script: |
-           mkdir -p www
-           cp -f index.html www/index.html
-           cp -f *.html www/ 2>/dev/null || true
-           cp -f *.json www/ 2>/dev/null || true
-           cp -f *.js www/ 2>/dev/null || true
-           cp -f *.webmanifest www/ 2>/dev/null || true
-           cp -f *.png www/ 2>/dev/null || true
+          mkdir -p www
+          cp -f index.html www/index.html
+          cp -f *.html www/ 2>/dev/null || true
+          cp -f *.json www/ 2>/dev/null || true
+          cp -f *.js www/ 2>/dev/null || true
+          cp -f *.webmanifest www/ 2>/dev/null || true
+          cp -f *.png www/ 2>/dev/null || true
 
       - name: Create Capacitor project
         script: |
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init  "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www --skip-appid-validation
+          npx cap init "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www --skip-appid-validation
           npx cap add ios
           printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
           npx cap sync ios
           perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
-      
-        
-        
-            - name: Install finalized app icon
+
+      - name: Install finalized app icon
         script: |
           ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
           cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
@@ -56,7 +54,8 @@ workflows:
             }
           }
           EOF
-          - name: Set up code signing
+
+      - name: Set up code signing
         script: |
           cd ios/App
           xcode-project use-profiles

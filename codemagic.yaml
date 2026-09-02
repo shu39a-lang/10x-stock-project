@@ -36,7 +36,27 @@ workflows:
       
         
         
-      - name: Set up code signing
+            - name: Install finalized app icon
+        script: |
+          ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
+          cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
+          cat > "$ICONSET/Contents.json" <<'EOF'
+          {
+            "images" : [
+              {
+                "filename" : "AppIcon-512@2x.png",
+                "idiom" : "universal",
+                "platform" : "ios",
+                "size" : "1024x1024"
+              }
+            ],
+            "info" : {
+              "author" : "xcode",
+              "version" : 1
+            }
+          }
+          EOF
+          - name: Set up code signing
         script: |
           cd ios/App
           xcode-project use-profiles

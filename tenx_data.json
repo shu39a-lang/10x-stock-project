@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-03 18:58 JST",
+  "updated_at": "2026-09-03 19:28 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -1523,6 +1523,26 @@
         }
       },
       {
+        "name": "Medtronic plc.",
+        "code": "MDT",
+        "price": 92.18,
+        "change_pct": 0.15,
+        "score": 60.0,
+        "signal": "注目",
+        "valuation": 57.2,
+        "quality": 61.8,
+        "financial": 55.3,
+        "technical": 51.4,
+        "catalyst": 76.5,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
         "name": "Freeport-McMoRan, Inc.",
         "code": "FCX",
         "price": 73.93,
@@ -1540,26 +1560,6 @@
           "financial": "D",
           "technical": "C",
           "catalyst": "D"
-        }
-      },
-      {
-        "name": "Medtronic plc.",
-        "code": "MDT",
-        "price": 92.18,
-        "change_pct": 0.15,
-        "score": 58.9,
-        "signal": "注目",
-        "valuation": 57.1,
-        "quality": 60.8,
-        "financial": 55.3,
-        "technical": 51.4,
-        "catalyst": 68.1,
-        "grades": {
-          "valuation": "D",
-          "quality": "D",
-          "financial": "D",
-          "technical": "D",
-          "catalyst": "B"
         }
       },
       {

@@ -626,3 +626,79 @@ if(market){
   });
 }
 })();
+/* BUILD 51 - force score update while ticker is entered */
+(function(){
+"use strict";
+
+let timer=null;
+
+async function forceTenxScore(){
+  const market=document.querySelector("#marketInput")?.value || "japan";
+  const code=(document.querySelector("#codeInput")?.value || "")
+    .trim().toUpperCase().replace(/\.T$/i,"");
+
+  if(!code) return;
+
+  try{
+    const r=await fetch("tenx_data.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok) return;
+
+    const data=await r.json();
+    const group=data?.[market];
+    if(!group) return;
+
+    const lists=[
+      group.short,
+      group.medium,
+      group.mid,
+      group.long
+    ].filter(Array.isArray);
+
+    let stock=null;
+
+    for(const list of lists){
+      stock=list.find(x =>
+        String(x?.code || "").trim().toUpperCase().replace(/\.T$/i,"")===code
+      );
+      if(stock) break;
+    }
+
+    if(!stock) return;
+
+    const scores={
+      valuation:stock.valuation,
+      quality:stock.quality,
+      financial:stock.financial,
+      technical:stock.technical,
+      catalyst:stock.catalyst
+    };
+
+    Object.entries(scores).forEach(([id,value])=>{
+      const n=Number(value);
+      const el=document.querySelector("#"+id);
+      if(!el || !Number.isFinite(n)) return;
+
+      el.value=Math.round(n);
+      el.dispatchEvent(new Event("input",{bubbles:true}));
+    });
+
+  }catch(e){
+    console.log("force score failed",e);
+  }
+}
+
+const code=document.querySelector("#codeInput");
+
+if(code){
+  code.addEventListener("input",()=>{
+    clearTimeout(timer);
+    timer=setTimeout(forceTenxScore,300);
+  });
+
+  code.addEventListener("change",forceTenxScore);
+  code.addEventListener("blur",forceTenxScore);
+}
+
+window.forceTenxScore=forceTenxScore;
+
+})();

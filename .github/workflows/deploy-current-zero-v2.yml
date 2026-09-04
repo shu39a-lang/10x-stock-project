@@ -1,0 +1,94 @@
+name: Deploy current 10X STOCK ZERO v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/deploy-current-zero-v2.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Select existing Cloudflare credentials
+        shell: bash
+        env:
+          TOKEN_A: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TOKEN_B: ${{ secrets.CF_API_TOKEN }}
+          TOKEN_C: ${{ secrets.CLOUDFLARE_TOKEN }}
+          TOKEN_D: ${{ vars.CLOUDFLARE_API_TOKEN }}
+          TOKEN_E: ${{ vars.CF_API_TOKEN }}
+          TOKEN_F: ${{ vars.CLOUDFLARE_TOKEN }}
+          ACCOUNT_A: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ACCOUNT_B: ${{ secrets.CF_ACCOUNT_ID }}
+          ACCOUNT_C: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          ACCOUNT_D: ${{ vars.CF_ACCOUNT_ID }}
+        run: |
+          TOKEN="${TOKEN_A:-${TOKEN_B:-${TOKEN_C:-${TOKEN_D:-${TOKEN_E:-$TOKEN_F}}}}}}"
+          ACCOUNT="${ACCOUNT_A:-${ACCOUNT_B:-${ACCOUNT_C:-$ACCOUNT_D}}}"
+
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Cloudflare credential not found in existing GitHub secrets or variables."
+            exit 1
+          fi
+
+          echo "CLOUDFLARE_API_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+          if [ -n "$ACCOUNT" ]; then
+            echo "CLOUDFLARE_ACCOUNT_ID=$ACCOUNT" >> "$GITHUB_ENV"
+          fi
+
+      - name: Prepare current app files
+        shell: bash
+        run: |
+          set -e
+          rm -rf zero_build
+          mkdir zero_build
+
+          for f in \
+            index.html \
+            _worker.js \
+            tenx_data.json \
+            tenx_history.json \
+            live_quotes.json \
+            manifest.webmanifest \
+            sw.js \
+            icon-192.png \
+            icon-512.png \
+            apple-touch-icon.png
+          do
+            if [ -f "$f" ]; then
+              cp "$f" zero_build/
+            fi
+          done
+
+          test -s zero_build/index.html
+          test -s zero_build/_worker.js
+
+      - name: Create Wrangler config
+        shell: bash
+        run: |
+          cat > wrangler-current.toml <<'EOF'
+          name = "shiny-cake-fb9f"
+          main = "zero_build/_worker.js"
+          compatibility_date = "2026-09-04"
+
+          [assets]
+          directory = "zero_build"
+          binding = "ASSETS"
+          EOF
+
+      - name: Deploy current app to Cloudflare
+        run: |
+          npx --yes wrangler@4 deploy --config wrangler-current.toml

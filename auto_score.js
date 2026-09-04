@@ -648,6 +648,7 @@ async function forceTenxScore(){
     if(!group) return;
 
     const lists=[
+      group.all,
       group.short,
       group.medium,
       group.mid,

@@ -1,0 +1,263 @@
+name: Apply Japanese display and uppercase fix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/apply-japanese-display.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install name lookup dependencies
+        run: pip install pandas xlrd
+
+      - name: Apply the three fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import io
+          import json
+          import urllib.request
+
+          # 1) 英字コード入力は入力中から大文字へ固定
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          START = "<!-- TENX_UPPERCASE_FIX_START -->"
+          END = "<!-- TENX_UPPERCASE_FIX_END -->"
+
+          a = s.find(START)
+          b = s.find(END)
+          if a != -1 and b != -1 and b > a:
+              s = s[:a] + s[b + len(END):]
+
+          block = '''<!-- TENX_UPPERCASE_FIX_START -->
+          <script>
+          (() => {
+            function enableUppercaseCodeInput(){
+              const el = document.getElementById('customCode');
+              if(!el || el.dataset.tenxUppercaseFixed === '1') return;
+              el.dataset.tenxUppercaseFixed = '1';
+              el.setAttribute('autocapitalize','characters');
+              el.setAttribute('autocomplete','off');
+              el.setAttribute('spellcheck','false');
+              el.style.textTransform = 'uppercase';
+
+              el.addEventListener('input', () => {
+                const start = el.selectionStart;
+                const end = el.selectionEnd;
+                const upper = String(el.value || '').toUpperCase();
+                if(el.value !== upper){
+                  el.value = upper;
+                  try{ el.setSelectionRange(start, end); }catch(e){}
+                }
+              });
+            }
+
+            enableUppercaseCodeInput();
+            document.addEventListener('DOMContentLoaded', enableUppercaseCodeInput);
+            const observer = new MutationObserver(enableUppercaseCodeInput);
+            observer.observe(document.documentElement, {childList:true, subtree:true});
+          })();
+          </script>
+          <!-- TENX_UPPERCASE_FIX_END -->'''
+
+          if "</body>" not in s:
+              raise SystemExit("index.html missing </body>")
+
+          s = s.replace("</body>", block + "\n</body>", 1)
+          p.write_text(s, encoding="utf-8")
+
+          # 2) 日本株の会社名を日本語表示へ固定
+          # 3) 米国株の会社名も日本語表示へ固定
+          data_path = Path("tenx_data.json")
+          data = json.loads(data_path.read_text(encoding="utf-8"))
+
+          JPX_URL = (
+              "https://www.jpx.co.jp/markets/statistics-equities/misc/"
+              "tvdivq0000001vg2-att/data_j.xls"
+          )
+
+          JP_FALLBACK = {
+              "1605":"INPEX","2914":"JT","3382":"セブン＆アイ・ホールディングス",
+              "4005":"住友化学","4063":"信越化学工業","4502":"武田薬品工業",
+              "4507":"塩野義製薬","4519":"中外製薬","4568":"第一三共",
+              "4661":"オリエンタルランド","4684":"オービック","5019":"出光興産",
+              "5401":"日本製鉄","5803":"フジクラ","5831":"しずおかフィナンシャルグループ",
+              "6098":"リクルートホールディングス","6146":"ディスコ","6178":"日本郵政",
+              "6326":"クボタ","6367":"ダイキン工業","6501":"日立製作所",
+              "6503":"三菱電機","6504":"富士電機","6594":"ニデック",
+              "6701":"NEC","6758":"ソニーグループ","6762":"TDK",
+              "6857":"アドバンテスト","6890":"フェローテックホールディングス",
+              "6902":"デンソー","6920":"レーザーテック","6954":"ファナック",
+              "6981":"村田製作所","7011":"三菱重工業","7013":"IHI",
+              "7014":"名村造船所","7182":"ゆうちょ銀行",
+              "7186":"横浜フィナンシャルグループ","7203":"トヨタ自動車",
+              "7267":"本田技研工業","7269":"スズキ","7272":"ヤマハ発動機",
+              "7733":"オリンパス","7741":"HOYA","7974":"任天堂",
+              "8001":"伊藤忠商事","8031":"三井物産","8035":"東京エレクトロン",
+              "8058":"三菱商事","8306":"三菱UFJフィナンシャル・グループ",
+              "8308":"りそなホールディングス","8309":"三井住友トラストグループ",
+              "8316":"三井住友フィナンシャルグループ","8331":"千葉銀行",
+              "8411":"みずほフィナンシャルグループ","8473":"SBIホールディングス",
+              "8601":"大和証券グループ本社","8604":"野村ホールディングス",
+              "8630":"SOMPOホールディングス",
+              "8725":"MS&ADインシュアランスグループホールディングス",
+              "8750":"第一生命ホールディングス","8766":"東京海上ホールディングス",
+              "9101":"日本郵船","9104":"商船三井","9107":"川崎汽船",
+              "9432":"NTT","9433":"KDDI","9434":"ソフトバンク",
+              "9697":"カプコン","9983":"ファーストリテイリング",
+              "9984":"ソフトバンクグループ",
+          }
+
+          US_JA = {
+              "AAPL":"アップル","ABBV":"アッヴィ","ABNB":"エアビーアンドビー",
+              "ADBE":"アドビ","AMD":"アドバンスト・マイクロ・デバイセズ",
+              "AMAT":"アプライド・マテリアルズ","AMGN":"アムジェン",
+              "AMZN":"アマゾン・ドット・コム","ARM":"アーム・ホールディングス",
+              "ASML":"ASMLホールディング","AVGO":"ブロードコム","BA":"ボーイング",
+              "BAC":"バンク・オブ・アメリカ","BKNG":"ブッキング・ホールディングス",
+              "BRK.B":"バークシャー・ハサウェイ","C":"シティグループ",
+              "CAT":"キャタピラー","COIN":"コインベース・グローバル",
+              "COST":"コストコ・ホールセール","CRM":"セールスフォース",
+              "CRWD":"クラウドストライク・ホールディングス",
+              "CSCO":"シスコシステムズ","CVX":"シェブロン",
+              "DIS":"ウォルト・ディズニー","GE":"GEエアロスペース",
+              "GILD":"ギリアド・サイエンシズ","GOOG":"アルファベット",
+              "GOOGL":"アルファベット","GS":"ゴールドマン・サックス",
+              "HD":"ホーム・デポ","IBM":"IBM","INTC":"インテル",
+              "JNJ":"ジョンソン・エンド・ジョンソン",
+              "JPM":"JPモルガン・チェース","KLAC":"KLA","KO":"コカ・コーラ",
+              "LLY":"イーライ・リリー","LRCX":"ラムリサーチ",
+              "MA":"マスターカード","MCD":"マクドナルド",
+              "META":"メタ・プラットフォームズ","MRK":"メルク",
+              "MS":"モルガン・スタンレー","MSFT":"マイクロソフト",
+              "MU":"マイクロン・テクノロジー","NFLX":"ネットフリックス",
+              "NOW":"サービスナウ","NVDA":"エヌビディア","ORCL":"オラクル",
+              "PANW":"パロアルト・ネットワークス","PEP":"ペプシコ",
+              "PFE":"ファイザー","PG":"プロクター・アンド・ギャンブル",
+              "PLTR":"パランティア・テクノロジーズ","QCOM":"クアルコム",
+              "SBUX":"スターバックス","SHOP":"ショッピファイ",
+              "SMCI":"スーパー・マイクロ・コンピューター",
+              "T":"AT&T","TMO":"サーモ・フィッシャー・サイエンティフィック",
+              "TSLA":"テスラ","TSM":"台湾積体電路製造（TSMC）",
+              "TXN":"テキサス・インスツルメンツ",
+              "UBER":"ウーバー・テクノロジーズ",
+              "UNH":"ユナイテッドヘルス・グループ",
+              "V":"ビザ","VZ":"ベライゾン・コミュニケーションズ",
+              "WMT":"ウォルマート","XOM":"エクソンモービル",
+          }
+
+          def has_japanese(text):
+              return any(
+                  ("ぁ" <= ch <= "ん") or
+                  ("ァ" <= ch <= "ヶ") or
+                  ("一" <= ch <= "龯")
+                  for ch in str(text or "")
+              )
+
+          def jp_code(row):
+              for key in ("code","symbol","ticker"):
+                  v = row.get(key)
+                  if not v:
+                      continue
+                  t = str(v).strip().upper()
+                  if t.endswith(".T"):
+                      t = t[:-2]
+                  digits = "".join(ch for ch in t if ch.isdigit())
+                  if len(digits) >= 4:
+                      return digits[:4]
+              return ""
+
+          def us_symbol(row):
+              for key in ("code","symbol","ticker"):
+                  v = row.get(key)
+                  if v:
+                      return str(v).strip().upper().replace("-", ".")
+              return ""
+
+          jpx = {}
+          try:
+              import pandas as pd
+              req = urllib.request.Request(
+                  JPX_URL,
+                  headers={
+                      "User-Agent":"Mozilla/5.0",
+                      "Accept":"application/vnd.ms-excel,application/octet-stream,*/*",
+                  },
+              )
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  raw = r.read()
+              df = pd.read_excel(io.BytesIO(raw), dtype={"コード":str})
+              if "コード" in df.columns and "銘柄名" in df.columns:
+                  for _, row in df[["コード","銘柄名"]].dropna().iterrows():
+                      c = str(row["コード"]).strip()
+                      n = str(row["銘柄名"]).strip()
+                      if len(c) == 4 and c.isdigit() and n:
+                          jpx[c] = n
+          except Exception as e:
+              print("JPX lookup failed; fallback table will be used:", e)
+
+          changed_jp = 0
+          for period in ("short","medium","long"):
+              for row in data.get("japan",{}).get(period,[]) or []:
+                  if not isinstance(row,dict):
+                      continue
+                  c = jp_code(row)
+                  if not c:
+                      continue
+                  name = jpx.get(c) or JP_FALLBACK.get(c)
+                  if not name:
+                      current = str(row.get("name") or "").strip()
+                      name = current if has_japanese(current) else "日本企業"
+                  if row.get("name") != name:
+                      row["name"] = name
+                      changed_jp += 1
+
+          changed_us = 0
+          for period in ("short","medium","long"):
+              for row in data.get("usa",{}).get(period,[]) or []:
+                  if not isinstance(row,dict):
+                      continue
+                  sym = us_symbol(row)
+                  if not sym:
+                      continue
+                  name = US_JA.get(sym)
+                  if not name:
+                      current = str(row.get("name") or "").strip()
+                      name = current if has_japanese(current) else "米国企業"
+                  if row.get("name") != name:
+                      row["name"] = name
+                      changed_us += 1
+
+          data_path.write_text(
+              json.dumps(data, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
+
+          print("Japanese names changed:", changed_jp)
+          print("US Japanese names changed:", changed_us)
+          PY
+
+      - name: Commit fixes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html tenx_data.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Apply uppercase input and Japanese company names"
+          git push

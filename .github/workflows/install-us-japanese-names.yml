@@ -307,7 +307,6 @@ jobs:
 
           git add \
             fix_us_japanese_names.py \
-            
             tenx_data.json
 
           git diff --cached --quiet && exit 0

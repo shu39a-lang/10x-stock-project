@@ -1,4 +1,5 @@
-import json, time
+import json, time, re
+from urllib.parse import urljoin
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
@@ -99,7 +100,20 @@ def mean_with_confidence(values, expected):
 
 def load_jpx_japanese_names():
     try:
-        df = pd.read_excel(JPX_LIST_URL, dtype={"コード": str})
+                        page = __import__("urllib.request", fromlist=["urlopen"]).urlopen(
+            JPX_LIST_PAGE
+        ).read().decode("utf-8", errors="ignore")
+
+        match = re.search(
+            r'href=["\']([^"\']+\.(?:xls|xlsx))',
+            page,
+            re.I
+        )
+        if not match:
+            raise ValueError("JPX Excel link not found")
+
+        excel_url = urljoin(JPX_LIST_PAGE, match.group(1))
+        df = pd.read_excel(excel_url, dtype={"コード": str})
         code_col = "コード"
         name_col = "銘柄名"
 

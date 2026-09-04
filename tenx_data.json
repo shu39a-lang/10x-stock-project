@@ -35,7 +35,7 @@
   "japan": {
     "short": [
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "日本企業",
         "code": "7389",
         "price": 1988.0,
         "change_pct": 1.79,
@@ -55,7 +55,7 @@
         }
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "日本企業",
         "code": "6448",
         "price": 4864.0,
         "change_pct": -0.29,
@@ -75,7 +75,7 @@
         }
       },
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "日本企業",
         "code": "8338",
         "price": 768.0,
         "change_pct": 3.23,
@@ -95,7 +95,7 @@
         }
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "日本企業",
         "code": "7327",
         "price": 2652.0,
         "change_pct": 1.53,
@@ -115,7 +115,7 @@
         }
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "日本企業",
         "code": "8524",
         "price": 1333.0,
         "change_pct": 1.45,
@@ -155,7 +155,7 @@
         }
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "日本企業",
         "code": "7167",
         "price": 1702.0,
         "change_pct": 1.7,
@@ -175,7 +175,7 @@
         }
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "日本企業",
         "code": "8368",
         "price": 2410.0,
         "change_pct": 0.79,
@@ -195,7 +195,7 @@
         }
       },
       {
-        "name": "MATSUI SECURITIES CO",
+        "name": "日本企業",
         "code": "8628",
         "price": 1196.0,
         "change_pct": 1.1,
@@ -275,7 +275,7 @@
         }
       },
       {
-        "name": "SURUGA BANK",
+        "name": "日本企業",
         "code": "8358",
         "price": 2952.0,
         "change_pct": 0.85,
@@ -375,7 +375,7 @@
         }
       },
       {
-        "name": "TOHO BANK",
+        "name": "日本企業",
         "code": "8346",
         "price": 1003.0,
         "change_pct": 2.35,
@@ -437,7 +437,7 @@
     ],
     "medium": [
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "日本企業",
         "code": "7389",
         "price": 1988.0,
         "change_pct": 1.79,
@@ -457,7 +457,7 @@
         }
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "日本企業",
         "code": "8524",
         "price": 1333.0,
         "change_pct": 1.45,
@@ -477,7 +477,7 @@
         }
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "日本企業",
         "code": "6448",
         "price": 4864.0,
         "change_pct": -0.29,
@@ -497,7 +497,7 @@
         }
       },
       {
-        "name": "SURUGA BANK",
+        "name": "日本企業",
         "code": "8358",
         "price": 2952.0,
         "change_pct": 0.85,
@@ -537,7 +537,7 @@
         }
       },
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "日本企業",
         "code": "8338",
         "price": 768.0,
         "change_pct": 3.23,
@@ -557,7 +557,7 @@
         }
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "日本企業",
         "code": "8368",
         "price": 2410.0,
         "change_pct": 0.79,
@@ -597,7 +597,7 @@
         }
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "日本企業",
         "code": "7167",
         "price": 1702.0,
         "change_pct": 1.7,
@@ -617,7 +617,7 @@
         }
       },
       {
-        "name": "TOHO BANK",
+        "name": "日本企業",
         "code": "8346",
         "price": 1003.0,
         "change_pct": 2.35,
@@ -637,7 +637,7 @@
         }
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "日本企業",
         "code": "7327",
         "price": 2652.0,
         "change_pct": 1.53,
@@ -677,7 +677,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1856.0,
         "change_pct": 2.06,
@@ -757,7 +757,7 @@
         }
       },
       {
-        "name": "MATSUI SECURITIES CO",
+        "name": "日本企業",
         "code": "8628",
         "price": 1196.0,
         "change_pct": 1.1,
@@ -797,7 +797,7 @@
         }
       },
       {
-        "name": "AOZORA BANK",
+        "name": "日本企業",
         "code": "8304",
         "price": 3419.0,
         "change_pct": 0.44,
@@ -817,7 +817,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1632.0,
         "change_pct": 1.46,
@@ -839,7 +839,7 @@
     ],
     "long": [
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "日本企業",
         "code": "7389",
         "price": 1988.0,
         "change_pct": 1.79,
@@ -859,7 +859,7 @@
         }
       },
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "日本企業",
         "code": "8338",
         "price": 768.0,
         "change_pct": 3.23,
@@ -879,7 +879,7 @@
         }
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "日本企業",
         "code": "8524",
         "price": 1333.0,
         "change_pct": 1.45,
@@ -899,7 +899,7 @@
         }
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "日本企業",
         "code": "6448",
         "price": 4864.0,
         "change_pct": -0.29,
@@ -959,7 +959,7 @@
         }
       },
       {
-        "name": "SURUGA BANK",
+        "name": "日本企業",
         "code": "8358",
         "price": 2952.0,
         "change_pct": 0.85,
@@ -999,7 +999,7 @@
         }
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "日本企業",
         "code": "8368",
         "price": 2410.0,
         "change_pct": 0.79,
@@ -1019,7 +1019,7 @@
         }
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "日本企業",
         "code": "7327",
         "price": 2652.0,
         "change_pct": 1.53,
@@ -1039,7 +1039,7 @@
         }
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "日本企業",
         "code": "7167",
         "price": 1702.0,
         "change_pct": 1.7,
@@ -1079,7 +1079,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1856.0,
         "change_pct": 2.06,
@@ -1099,7 +1099,7 @@
         }
       },
       {
-        "name": "TOHO BANK",
+        "name": "日本企業",
         "code": "8346",
         "price": 1003.0,
         "change_pct": 2.35,
@@ -1159,7 +1159,7 @@
         }
       },
       {
-        "name": "HACHIJUNI NAGANO BK LTD",
+        "name": "日本企業",
         "code": "8359",
         "price": 2745.0,
         "change_pct": 0.62,
@@ -1179,7 +1179,7 @@
         }
       },
       {
-        "name": "SENSHU IKEDA HOLDINGS INC",
+        "name": "日本企業",
         "code": "8714",
         "price": 1088.0,
         "change_pct": 0.93,
@@ -1199,7 +1199,7 @@
         }
       },
       {
-        "name": "MATSUI SECURITIES CO",
+        "name": "日本企業",
         "code": "8628",
         "price": 1196.0,
         "change_pct": 1.1,
@@ -1219,7 +1219,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1632.0,
         "change_pct": 1.46,
@@ -6165,7 +6165,7 @@
   "usa": {
     "short": [
       {
-        "name": "Micron Technology, Inc.",
+        "name": "マイクロン・テクノロジー",
         "code": "MU",
         "price": 999.71,
         "change_pct": 4.34,
@@ -6185,7 +6185,7 @@
         }
       },
       {
-        "name": "Dell Technologies Inc.",
+        "name": "米国企業",
         "code": "DELL",
         "price": 527.4,
         "change_pct": 2.13,
@@ -6205,7 +6205,7 @@
         }
       },
       {
-        "name": "Taiwan Semiconductor Manufactur",
+        "name": "台湾積体電路製造（TSMC）",
         "code": "TSM",
         "price": 427.03,
         "change_pct": 2.4,
@@ -6225,7 +6225,7 @@
         }
       },
       {
-        "name": "Shell PLC",
+        "name": "米国企業",
         "code": "SHEL",
         "price": 93.41,
         "change_pct": 1.17,
@@ -6245,7 +6245,7 @@
         }
       },
       {
-        "name": "Tesla, Inc.",
+        "name": "テスラ",
         "code": "TSLA",
         "price": 352.6,
         "change_pct": -6.32,
@@ -6267,7 +6267,7 @@
     ],
     "medium": [
       {
-        "name": "Fortuna Mining Corp.",
+        "name": "米国企業",
         "code": "FSM",
         "price": 12.43,
         "change_pct": -1.86,
@@ -6287,7 +6287,7 @@
         }
       },
       {
-        "name": "Iamgold Corporation",
+        "name": "米国企業",
         "code": "IAG",
         "price": 20.55,
         "change_pct": -1.87,
@@ -6307,7 +6307,7 @@
         }
       },
       {
-        "name": "Micron Technology, Inc.",
+        "name": "マイクロン・テクノロジー",
         "code": "MU",
         "price": 999.71,
         "change_pct": 4.34,
@@ -6327,7 +6327,7 @@
         }
       },
       {
-        "name": "Dell Technologies Inc.",
+        "name": "米国企業",
         "code": "DELL",
         "price": 527.4,
         "change_pct": 2.13,
@@ -6347,7 +6347,7 @@
         }
       },
       {
-        "name": "Taiwan Semiconductor Manufactur",
+        "name": "台湾積体電路製造（TSMC）",
         "code": "TSM",
         "price": 427.03,
         "change_pct": 2.4,
@@ -6367,7 +6367,7 @@
         }
       },
       {
-        "name": "Cenovus Energy Inc",
+        "name": "米国企業",
         "code": "CVE",
         "price": 32.52,
         "change_pct": -0.85,
@@ -6387,7 +6387,7 @@
         }
       },
       {
-        "name": "Kinross Gold Corporation",
+        "name": "米国企業",
         "code": "KGC",
         "price": 31.16,
         "change_pct": -1.38,
@@ -6407,7 +6407,7 @@
         }
       },
       {
-        "name": "Permian Resources Corporation",
+        "name": "米国企業",
         "code": "PR",
         "price": 23.46,
         "change_pct": -1.18,
@@ -6427,7 +6427,7 @@
         }
       },
       {
-        "name": "B2Gold Corp",
+        "name": "米国企業",
         "code": "BTG",
         "price": 5.61,
         "change_pct": -1.32,
@@ -6447,7 +6447,7 @@
         }
       },
       {
-        "name": "Canadian Natural Resources Limi",
+        "name": "米国企業",
         "code": "CNQ",
         "price": 50.76,
         "change_pct": -0.73,
@@ -6467,7 +6467,7 @@
         }
       },
       {
-        "name": "Petroleo Brasileiro S.A. Petrob",
+        "name": "米国企業",
         "code": "PBR-A",
         "price": 18.38,
         "change_pct": -1.1,
@@ -6487,7 +6487,7 @@
         }
       },
       {
-        "name": "Sony Group Corporation",
+        "name": "米国企業",
         "code": "SONY",
         "price": 24.64,
         "change_pct": -1.3,
@@ -6507,7 +6507,7 @@
         }
       },
       {
-        "name": "Petroleo Brasileiro S.A. Petrob",
+        "name": "米国企業",
         "code": "PBR",
         "price": 20.26,
         "change_pct": -1.19,
@@ -6527,7 +6527,7 @@
         }
       },
       {
-        "name": "NVIDIA Corporation",
+        "name": "エヌビディア",
         "code": "NVDA",
         "price": 230.85,
         "change_pct": 1.05,
@@ -6547,7 +6547,7 @@
         }
       },
       {
-        "name": "Chevron Corporation",
+        "name": "シェブロン",
         "code": "CVX",
         "price": 209.1,
         "change_pct": -1.05,
@@ -6567,7 +6567,7 @@
         }
       },
       {
-        "name": "Barrick Mining Corporation",
+        "name": "米国企業",
         "code": "B",
         "price": 45.01,
         "change_pct": -1.64,
@@ -6587,7 +6587,7 @@
         }
       },
       {
-        "name": "Nu Holdings Ltd.",
+        "name": "米国企業",
         "code": "NU",
         "price": 15.4,
         "change_pct": -1.75,
@@ -6607,7 +6607,7 @@
         }
       },
       {
-        "name": "ConocoPhillips",
+        "name": "米国企業",
         "code": "COP",
         "price": 134.86,
         "change_pct": -0.63,
@@ -6627,7 +6627,7 @@
         }
       },
       {
-        "name": "XP Inc.",
+        "name": "米国企業",
         "code": "XP",
         "price": 19.96,
         "change_pct": -0.2,
@@ -6647,7 +6647,7 @@
         }
       },
       {
-        "name": "APA Corporation",
+        "name": "米国企業",
         "code": "APA",
         "price": 43.49,
         "change_pct": -1.56,
@@ -6669,7 +6669,7 @@
     ],
     "long": [
       {
-        "name": "United Microelectronics Corpora",
+        "name": "米国企業",
         "code": "UMC",
         "price": 20.72,
         "change_pct": 4.34,
@@ -6689,7 +6689,7 @@
         }
       },
       {
-        "name": "Taiwan Semiconductor Manufactur",
+        "name": "台湾積体電路製造（TSMC）",
         "code": "TSM",
         "price": 427.03,
         "change_pct": 2.4,
@@ -6709,7 +6709,7 @@
         }
       },
       {
-        "name": "Fortuna Mining Corp.",
+        "name": "米国企業",
         "code": "FSM",
         "price": 12.43,
         "change_pct": -1.86,
@@ -6729,7 +6729,7 @@
         }
       },
       {
-        "name": "Micron Technology, Inc.",
+        "name": "マイクロン・テクノロジー",
         "code": "MU",
         "price": 999.71,
         "change_pct": 4.34,
@@ -6749,7 +6749,7 @@
         }
       },
       {
-        "name": "Iamgold Corporation",
+        "name": "米国企業",
         "code": "IAG",
         "price": 20.55,
         "change_pct": -1.87,
@@ -6769,7 +6769,7 @@
         }
       },
       {
-        "name": "Canadian Natural Resources Limi",
+        "name": "米国企業",
         "code": "CNQ",
         "price": 50.76,
         "change_pct": -0.73,
@@ -6789,7 +6789,7 @@
         }
       },
       {
-        "name": "Cenovus Energy Inc",
+        "name": "米国企業",
         "code": "CVE",
         "price": 32.52,
         "change_pct": -0.85,
@@ -6809,7 +6809,7 @@
         }
       },
       {
-        "name": "Petroleo Brasileiro S.A. Petrob",
+        "name": "米国企業",
         "code": "PBR",
         "price": 20.26,
         "change_pct": -1.19,
@@ -6829,7 +6829,7 @@
         }
       },
       {
-        "name": "Dell Technologies Inc.",
+        "name": "米国企業",
         "code": "DELL",
         "price": 527.4,
         "change_pct": 2.13,
@@ -6849,7 +6849,7 @@
         }
       },
       {
-        "name": "Petroleo Brasileiro S.A. Petrob",
+        "name": "米国企業",
         "code": "PBR-A",
         "price": 18.38,
         "change_pct": -1.1,
@@ -6869,7 +6869,7 @@
         }
       },
       {
-        "name": "Permian Resources Corporation",
+        "name": "米国企業",
         "code": "PR",
         "price": 23.46,
         "change_pct": -1.18,
@@ -6889,7 +6889,7 @@
         }
       },
       {
-        "name": "Chevron Corporation",
+        "name": "シェブロン",
         "code": "CVX",
         "price": 209.1,
         "change_pct": -1.05,
@@ -6909,7 +6909,7 @@
         }
       },
       {
-        "name": "ConocoPhillips",
+        "name": "米国企業",
         "code": "COP",
         "price": 134.86,
         "change_pct": -0.63,
@@ -6929,7 +6929,7 @@
         }
       },
       {
-        "name": "Western Digital Corporation",
+        "name": "米国企業",
         "code": "WDC",
         "price": 462.02,
         "change_pct": 4.63,
@@ -6949,7 +6949,7 @@
         }
       },
       {
-        "name": "Occidental Petroleum Corporatio",
+        "name": "米国企業",
         "code": "OXY",
         "price": 60.1,
         "change_pct": -0.85,
@@ -6969,7 +6969,7 @@
         }
       },
       {
-        "name": "B2Gold Corp",
+        "name": "米国企業",
         "code": "BTG",
         "price": 5.61,
         "change_pct": -1.32,
@@ -6989,7 +6989,7 @@
         }
       },
       {
-        "name": "Devon Energy Corporation",
+        "name": "米国企業",
         "code": "DVN",
         "price": 48.28,
         "change_pct": -1.06,
@@ -7009,7 +7009,7 @@
         }
       },
       {
-        "name": "Shell PLC",
+        "name": "米国企業",
         "code": "SHEL",
         "price": 93.41,
         "change_pct": 1.17,
@@ -7029,7 +7029,7 @@
         }
       },
       {
-        "name": "NVIDIA Corporation",
+        "name": "エヌビディア",
         "code": "NVDA",
         "price": 230.85,
         "change_pct": 1.05,
@@ -7049,7 +7049,7 @@
         }
       },
       {
-        "name": "Citigroup, Inc.",
+        "name": "シティグループ",
         "code": "C",
         "price": 137.81,
         "change_pct": -0.24,

@@ -1398,36 +1398,7 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigat
 
 
 
-<!-- TENX_UPPERCASE_FIX_START -->
-<script>
-(() => {
-  function enableUppercaseCodeInput(){
-    const el = document.getElementById('customCode');
-    if(!el || el.dataset.tenxUppercaseFixed === '1') return;
-    el.dataset.tenxUppercaseFixed = '1';
-    el.setAttribute('autocapitalize','characters');
-    el.setAttribute('autocomplete','off');
-    el.setAttribute('spellcheck','false');
-    el.style.textTransform = 'uppercase';
 
-    el.addEventListener('input', () => {
-      const start = el.selectionStart;
-      const end = el.selectionEnd;
-      const upper = String(el.value || '').toUpperCase();
-      if(el.value !== upper){
-        el.value = upper;
-        try{ el.setSelectionRange(start, end); }catch(e){}
-      }
-    });
-  }
-
-  enableUppercaseCodeInput();
-  document.addEventListener('DOMContentLoaded', enableUppercaseCodeInput);
-  const observer = new MutationObserver(enableUppercaseCodeInput);
-  observer.observe(document.documentElement, {childList:true, subtree:true});
-})();
-</script>
-<!-- TENX_UPPERCASE_FIX_END -->
 
 
 
@@ -1572,5 +1543,35 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigat
 })();
 </script>
 <!-- FINAL_LIVE_QUOTES_END -->
+<!-- TENX_UPPERCASE_FIX_START -->
+<script>
+(() => {
+  function enableUppercaseCodeInput(){
+    const el = document.getElementById('customCode');
+    if(!el || el.dataset.tenxUppercaseFixed === '1') return;
+    el.dataset.tenxUppercaseFixed = '1';
+    el.setAttribute('autocapitalize','characters');
+    el.setAttribute('autocomplete','off');
+    el.setAttribute('spellcheck','false');
+    el.style.textTransform = 'uppercase';
+
+    el.addEventListener('input', () => {
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      const upper = String(el.value || '').toUpperCase();
+      if(el.value !== upper){
+        el.value = upper;
+        try{ el.setSelectionRange(start, end); }catch(e){}
+      }
+    });
+  }
+
+  enableUppercaseCodeInput();
+  document.addEventListener('DOMContentLoaded', enableUppercaseCodeInput);
+  const observer = new MutationObserver(enableUppercaseCodeInput);
+  observer.observe(document.documentElement, {childList:true, subtree:true});
+})();
+</script>
+<!-- TENX_UPPERCASE_FIX_END -->
 </body>
 </html>

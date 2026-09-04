@@ -131,10 +131,11 @@ def main():
     japan = data.get("japan", {})
 
     for period in (
-        "short",
-        "medium",
-        "long"
-    ):
+    "short",
+    "medium",
+    "long",
+    "all"
+):
 
         rows = japan.get(period, [])
 

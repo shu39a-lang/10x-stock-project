@@ -33,10 +33,7 @@ try:
                     PREV_US_NAMES[code] = name
 except Exception as e:
     print("Previous US Japanese-name cache load failed:", e)
-JPX_LIST_URL = (
-    "https://www.jpx.co.jp/markets/statistics-equities/misc/"
-    "tvdivq0000001vg2-att/data_j.xls"
-)
+JPX_LIST_PAGE = "https://www.jpx.co.jp/markets/statistics-equities/misc/01.html"
 
 JP_FALLBACK = {
     "6857.T":"アドバンテスト","8035.T":"東京エレクトロン","6920.T":"レーザーテック",
@@ -100,7 +97,7 @@ def mean_with_confidence(values, expected):
 
 def load_jpx_japanese_names():
     try:
-                        page = __import__("urllib.request", fromlist=["urlopen"]).urlopen(
+        page = __import__("urllib.request", fromlist=["urlopen"]).urlopen(
             JPX_LIST_PAGE
         ).read().decode("utf-8", errors="ignore")
 

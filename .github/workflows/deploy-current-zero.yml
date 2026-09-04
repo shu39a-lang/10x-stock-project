@@ -1,0 +1,88 @@
+name: Deploy current 10X STOCK ZERO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/deploy-current-zero.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Prepare current app files
+        shell: bash
+        run: |
+          set -e
+          rm -rf zero_build
+          mkdir zero_build
+
+          for f in \
+            index.html \
+            _worker.js \
+            tenx_data.json \
+            tenx_history.json \
+            live_quotes.json \
+            manifest.webmanifest \
+            sw.js \
+            icon-192.png \
+            icon-512.png \
+            apple-touch-icon.png
+          do
+            if [ -f "$f" ]; then
+              cp "$f" zero_build/
+            fi
+          done
+
+          test -s zero_build/index.html
+          test -s zero_build/_worker.js
+
+      - name: Create Wrangler config
+        shell: bash
+        run: |
+          cat > wrangler-current.toml <<'EOF'
+          name = "shiny-cake-fb9f"
+          main = "zero_build/_worker.js"
+          compatibility_date = "2026-09-04"
+
+          [assets]
+          directory = "zero_build"
+          binding = "ASSETS"
+          EOF
+
+      - name: Deploy current app to Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          TOKEN="${CLOUDFLARE_API_TOKEN:-${CF_API_TOKEN:-$CLOUDFLARE_TOKEN}}"
+          ACCOUNT="${CLOUDFLARE_ACCOUNT_ID:-$CF_ACCOUNT_ID}"
+
+          test -n "$TOKEN" || {
+            echo "Cloudflare token missing"
+            exit 1
+          }
+
+          export CLOUDFLARE_API_TOKEN="$TOKEN"
+
+          if [ -n "$ACCOUNT" ]; then
+            export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT"
+          fi
+
+          npx --yes wrangler@4 deploy \
+            --config wrangler-current.toml

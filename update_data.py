@@ -152,12 +152,12 @@ def screen_universe(market):
                         )
                 else:
                    name=(
-    PREV_US_NAMES.get(symbol)
-    or item.get("shortName")
-    or item.get("longName")
-    or item.get("displayName")
-    or symbol
-)
+                       PREV_US_NAMES.get(symbol)
+                       or item.get("shortName")
+                       or item.get("longName")
+                       or item.get("displayName")
+                       or symbol
+                   )
 
                 universe[symbol]=str(name)
             if len(quotes)<250:

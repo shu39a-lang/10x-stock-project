@@ -13,7 +13,25 @@ JST = timezone(timedelta(hours=9))
 SCREEN_TARGET = 500
 LIQUIDITY_KEEP = 500
 BATCH_SIZE = 50
+# 前回取得済みの米国株日本語社名を再利用する
+PREV_US_NAMES = {}
 
+try:
+    prev_path = R / "tenx_data.json"
+    if prev_path.exists():
+        prev_data = json.loads(prev_path.read_text(encoding="utf-8"))
+        for period in ("short", "medium", "long", "all"):
+            for row in prev_data.get("usa", {}).get(period, []) or []:
+                code = str(row.get("code") or "").strip().upper()
+                name = str(row.get("name") or "").strip()
+                if code and name and any(
+                    ("\u3040" <= ch <= "\u30ff") or
+                    ("\u4e00" <= ch <= "\u9fff")
+                    for ch in name
+                ):
+                    PREV_US_NAMES[code] = name
+except Exception as e:
+    print("Previous US Japanese-name cache load failed:", e)
 JPX_LIST_URL = (
     "https://www.jpx.co.jp/markets/statistics-equities/misc/"
     "tvdivq0000001vg2-att/data_j.xls"
@@ -133,12 +151,13 @@ def screen_universe(market):
                             or symbol.replace(".T","")
                         )
                 else:
-                    name=(
-                        item.get("shortName")
-                        or item.get("longName")
-                        or item.get("displayName")
-                        or symbol
-                    )
+                   name=(
+    PREV_US_NAMES.get(symbol)
+    or item.get("shortName")
+    or item.get("longName")
+    or item.get("displayName")
+    or symbol
+)
 
                 universe[symbol]=str(name)
             if len(quotes)<250:

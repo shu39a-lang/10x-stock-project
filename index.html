@@ -1497,7 +1497,8 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigat
     } catch (e) {}
 
     if (q && Number.isFinite(Number(q.price))) {
-      const name = mappedName || q.name || c;
+      const rawName = String(q.name || "").trim();
+const name = mappedName || ((rawName && rawName !== "米国企業") ? rawName : c);
       $("#customName").value = name;
       $("#customNow").value = Number(q.price);
       $("#customName").readOnly = true;

@@ -1,0 +1,236 @@
+import json
+import re
+import time
+from pathlib import Path
+
+import requests
+import yfinance as yf
+
+DATA = Path("tenx_data.json")
+
+# 主要銘柄は通信状況に左右されないよう固定辞書を優先
+MANUAL = {
+    "AAPL":"アップル",
+    "ABBV":"アッヴィ",
+    "ABNB":"エアビーアンドビー",
+    "ADBE":"アドビ",
+    "AMD":"アドバンスト・マイクロ・デバイセズ",
+    "AMAT":"アプライド・マテリアルズ",
+    "AMGN":"アムジェン",
+    "AMZN":"アマゾン・ドット・コム",
+    "ARM":"アーム・ホールディングス",
+    "ASML":"ASMLホールディング",
+    "AVGO":"ブロードコム",
+    "B":"バーリック・マイニング",
+    "BA":"ボーイング",
+    "BAC":"バンク・オブ・アメリカ",
+    "BKNG":"ブッキング・ホールディングス",
+    "BMY":"ブリストル・マイヤーズ スクイブ",
+    "BRK.B":"バークシャー・ハサウェイ",
+    "C":"シティグループ",
+    "CAT":"キャタピラー",
+    "CNQ":"カナディアン・ナチュラル・リソーシズ",
+    "COIN":"コインベース・グローバル",
+    "COP":"コノコフィリップス",
+    "COST":"コストコ・ホールセール",
+    "CRM":"セールスフォース",
+    "CRWD":"クラウドストライク・ホールディングス",
+    "CSCO":"シスコシステムズ",
+    "CVX":"シェブロン",
+    "DELL":"デル・テクノロジーズ",
+    "DIS":"ウォルト・ディズニー",
+    "DVN":"デボン・エナジー",
+    "GE":"GEエアロスペース",
+    "GILD":"ギリアド・サイエンシズ",
+    "GOOG":"アルファベット",
+    "GOOGL":"アルファベット",
+    "GS":"ゴールドマン・サックス",
+    "HAL":"ハリバートン",
+    "HD":"ホーム・デポ",
+    "IBM":"IBM",
+    "INTC":"インテル",
+    "JNJ":"ジョンソン・エンド・ジョンソン",
+    "JPM":"JPモルガン・チェース",
+    "KLAC":"KLA",
+    "KO":"コカ・コーラ",
+    "LLY":"イーライリリー",
+    "LRCX":"ラムリサーチ",
+    "MA":"マスターカード",
+    "MCD":"マクドナルド",
+    "MDT":"メドトロニック",
+    "META":"メタ・プラットフォームズ",
+    "MRK":"メルク",
+    "MS":"モルガン・スタンレー",
+    "MSFT":"マイクロソフト",
+    "MU":"マイクロン・テクノロジー",
+    "NEM":"ニューモント",
+    "NFLX":"ネットフリックス",
+    "NOW":"サービスナウ",
+    "NU":"ヌー・ホールディングス",
+    "NVDA":"エヌビディア",
+    "ORCL":"オラクル",
+    "OXY":"オキシデンタル・ペトロリアム",
+    "PAAS":"パン・アメリカン・シルバー",
+    "PANW":"パロアルトネットワークス",
+    "PBR":"ペトロブラス",
+    "PEP":"ペプシコ",
+    "PFE":"ファイザー",
+    "PG":"プロクター・アンド・ギャンブル",
+    "PLTR":"パランティア・テクノロジーズ",
+    "QCOM":"クアルコム",
+    "SBUX":"スターバックス",
+    "SHEL":"シェル",
+    "SHOP":"ショッピファイ",
+    "SMCI":"スーパー・マイクロ・コンピューター",
+    "T":"AT&T",
+    "TMO":"サーモ・フィッシャー・サイエンティフィック",
+    "TSLA":"テスラ",
+    "TSM":"台湾積体電路製造（TSMC）",
+    "TXN":"テキサス・インスツルメンツ",
+    "UBER":"ウーバー・テクノロジーズ",
+    "UNH":"ユナイテッドヘルス・グループ",
+    "V":"ビザ",
+    "VZ":"ベライゾン・コミュニケーションズ",
+    "WFC":"ウェルズ・ファーゴ",
+    "WMT":"ウォルマート",
+    "XOM":"エクソンモービル",
+}
+
+def has_japanese(text):
+    s = str(text or "")
+    return bool(re.search(r"[ぁ-んァ-ヶ一-龯]", s))
+
+session = requests.Session()
+session.headers.update({
+    "User-Agent": "10X-STOCK-ZERO/1.0 (GitHub Actions; Japanese name lookup)"
+})
+
+wiki_cache = {}
+
+def wikipedia_ja_title(english_name):
+    if not english_name:
+        return None
+    key = english_name.strip()
+    if key in wiki_cache:
+        return wiki_cache[key]
+
+    try:
+        # 英語版Wikipediaで会社ページを検索
+        r = session.get(
+            "https://en.wikipedia.org/w/api.php",
+            params={
+                "action":"query",
+                "list":"search",
+                "srsearch": key,
+                "srlimit": 5,
+                "format":"json",
+                "utf8": 1,
+            },
+            timeout=15,
+        )
+        r.raise_for_status()
+        hits = r.json().get("query", {}).get("search", [])
+
+        for hit in hits:
+            title = hit.get("title")
+            if not title:
+                continue
+
+            rr = session.get(
+                "https://en.wikipedia.org/w/api.php",
+                params={
+                    "action":"query",
+                    "prop":"langlinks",
+                    "titles":title,
+                    "lllang":"ja",
+                    "lllimit":1,
+                    "format":"json",
+                    "utf8":1,
+                },
+                timeout=15,
+            )
+            rr.raise_for_status()
+            pages = rr.json().get("query", {}).get("pages", {})
+            for page in pages.values():
+                links = page.get("langlinks") or []
+                if links:
+                    ja = links[0].get("*")
+                    if ja and ja.strip():
+                        wiki_cache[key] = ja.strip()
+                        return ja.strip()
+    except Exception as e:
+        print("Wikipedia lookup failed:", key, e)
+
+    wiki_cache[key] = None
+    return None
+
+yf_cache = {}
+
+def yahoo_name(symbol):
+    if symbol in yf_cache:
+        return yf_cache[symbol]
+    try:
+        info = yf.Ticker(symbol.replace(".", "-")).get_info()
+        name = (
+            info.get("longName")
+            or info.get("shortName")
+            or ""
+        ).strip()
+        yf_cache[symbol] = name
+        return name
+    except Exception as e:
+        print("Yahoo name lookup failed:", symbol, e)
+        yf_cache[symbol] = ""
+        return ""
+
+def japanese_name(symbol, current):
+    symbol = symbol.upper().replace("-", ".")
+
+    if symbol in MANUAL:
+        return MANUAL[symbol]
+
+    if has_japanese(current) and current not in ("米国企業", "米国上場企業"):
+        return current
+
+    en_name = yahoo_name(symbol)
+    ja = wikipedia_ja_title(en_name)
+    if ja:
+        return ja
+
+    # 会社名が取得できない場合でも「米国企業」のような
+    # 汎用表示には戻さず、ティッカーを明示した日本語表示にする。
+    return f"{symbol}（米国上場企業）"
+
+data = json.loads(DATA.read_text(encoding="utf-8"))
+changed = 0
+
+for period in ("short", "medium", "long", "all"):
+    for row in data.get("usa", {}).get(period, []) or []:
+        if not isinstance(row, dict):
+            continue
+
+        symbol = str(
+            row.get("code")
+            or row.get("symbol")
+            or row.get("ticker")
+            or ""
+        ).strip().upper()
+
+        if not symbol:
+            continue
+
+        old = str(row.get("name") or "").strip()
+        new = japanese_name(symbol, old)
+
+        if new and new != old:
+            row["name"] = new
+            changed += 1
+
+        time.sleep(0.05)
+
+DATA.write_text(
+    json.dumps(data, ensure_ascii=False, indent=2),
+    encoding="utf-8",
+)
+
+print("US Japanese company names changed:", changed)

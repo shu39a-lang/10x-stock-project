@@ -6185,7 +6185,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "デル・テクノロジーズ",
         "code": "DELL",
         "price": 527.4,
         "change_pct": 2.13,
@@ -6225,7 +6225,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "シェル",
         "code": "SHEL",
         "price": 93.41,
         "change_pct": 1.17,
@@ -6267,7 +6267,7 @@
     ],
     "medium": [
       {
-        "name": "米国企業",
+        "name": "S&P トロント総合指数",
         "code": "FSM",
         "price": 12.43,
         "change_pct": -1.86,
@@ -6287,7 +6287,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "S&P トロント総合指数",
         "code": "IAG",
         "price": 20.55,
         "change_pct": -1.87,
@@ -6327,7 +6327,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "デル・テクノロジーズ",
         "code": "DELL",
         "price": 527.4,
         "change_pct": 2.13,
@@ -6367,7 +6367,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "ハスキー・エナジー",
         "code": "CVE",
         "price": 32.52,
         "change_pct": -0.85,
@@ -6387,7 +6387,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "KGC（米国上場企業）",
         "code": "KGC",
         "price": 31.16,
         "change_pct": -1.38,
@@ -6407,7 +6407,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "PR（米国上場企業）",
         "code": "PR",
         "price": 23.46,
         "change_pct": -1.18,
@@ -6427,7 +6427,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "BTG（米国上場企業）",
         "code": "BTG",
         "price": 5.61,
         "change_pct": -1.32,
@@ -6447,7 +6447,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "カナディアン・ナチュラル・リソーシズ",
         "code": "CNQ",
         "price": 50.76,
         "change_pct": -0.73,
@@ -6467,7 +6467,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "PBR.A（米国上場企業）",
         "code": "PBR-A",
         "price": 18.38,
         "change_pct": -1.1,
@@ -6487,7 +6487,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "SONY（米国上場企業）",
         "code": "SONY",
         "price": 24.64,
         "change_pct": -1.3,
@@ -6507,7 +6507,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "ペトロブラス",
         "code": "PBR",
         "price": 20.26,
         "change_pct": -1.19,
@@ -6567,7 +6567,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "バーリック・マイニング",
         "code": "B",
         "price": 45.01,
         "change_pct": -1.64,
@@ -6587,7 +6587,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "ヌー・ホールディングス",
         "code": "NU",
         "price": 15.4,
         "change_pct": -1.75,
@@ -6607,7 +6607,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "コノコフィリップス",
         "code": "COP",
         "price": 134.86,
         "change_pct": -0.63,
@@ -6627,7 +6627,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "XP（米国上場企業）",
         "code": "XP",
         "price": 19.96,
         "change_pct": -0.2,
@@ -6647,7 +6647,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "APA（米国上場企業）",
         "code": "APA",
         "price": 43.49,
         "change_pct": -1.56,
@@ -6669,7 +6669,7 @@
     ],
     "long": [
       {
-        "name": "米国企業",
+        "name": "UMC（米国上場企業）",
         "code": "UMC",
         "price": 20.72,
         "change_pct": 4.34,
@@ -6709,7 +6709,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "S&P トロント総合指数",
         "code": "FSM",
         "price": 12.43,
         "change_pct": -1.86,
@@ -6749,7 +6749,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "S&P トロント総合指数",
         "code": "IAG",
         "price": 20.55,
         "change_pct": -1.87,
@@ -6769,7 +6769,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "カナディアン・ナチュラル・リソーシズ",
         "code": "CNQ",
         "price": 50.76,
         "change_pct": -0.73,
@@ -6789,7 +6789,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "ハスキー・エナジー",
         "code": "CVE",
         "price": 32.52,
         "change_pct": -0.85,
@@ -6809,7 +6809,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "ペトロブラス",
         "code": "PBR",
         "price": 20.26,
         "change_pct": -1.19,
@@ -6829,7 +6829,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "デル・テクノロジーズ",
         "code": "DELL",
         "price": 527.4,
         "change_pct": 2.13,
@@ -6849,7 +6849,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "PBR.A（米国上場企業）",
         "code": "PBR-A",
         "price": 18.38,
         "change_pct": -1.1,
@@ -6869,7 +6869,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "PR（米国上場企業）",
         "code": "PR",
         "price": 23.46,
         "change_pct": -1.18,
@@ -6909,7 +6909,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "コノコフィリップス",
         "code": "COP",
         "price": 134.86,
         "change_pct": -0.63,
@@ -6929,7 +6929,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "WDC（米国上場企業）",
         "code": "WDC",
         "price": 462.02,
         "change_pct": 4.63,
@@ -6949,7 +6949,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "オキシデンタル・ペトロリアム",
         "code": "OXY",
         "price": 60.1,
         "change_pct": -0.85,
@@ -6969,7 +6969,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "BTG（米国上場企業）",
         "code": "BTG",
         "price": 5.61,
         "change_pct": -1.32,
@@ -6989,7 +6989,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "デボン・エナジー",
         "code": "DVN",
         "price": 48.28,
         "change_pct": -1.06,
@@ -7009,7 +7009,7 @@
         }
       },
       {
-        "name": "米国企業",
+        "name": "シェル",
         "code": "SHEL",
         "price": 93.41,
         "change_pct": 1.17,
@@ -7071,7 +7071,7 @@
     ],
     "all": [
       {
-        "name": "NVIDIA Corporation",
+        "name": "エヌビディア",
         "code": "NVDA",
         "price": 230.85,
         "valuation": 30.6,
@@ -7081,7 +7081,7 @@
         "catalyst": 91.1
       },
       {
-        "name": "Micron Technology, Inc.",
+        "name": "マイクロン・テクノロジー",
         "code": "MU",
         "price": 999.71,
         "valuation": 39.3,
@@ -7091,7 +7091,7 @@
         "catalyst": 92.0
       },
       {
-        "name": "Sandisk Corporation",
+        "name": "SNDK（米国上場企業）",
         "code": "SNDK",
         "price": 1717.34,
         "valuation": 36.1,
@@ -7101,7 +7101,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Tesla, Inc.",
+        "name": "テスラ",
         "code": "TSLA",
         "price": 352.6,
         "valuation": 23.0,
@@ -7111,7 +7111,7 @@
         "catalyst": 58.0
       },
       {
-        "name": "Apple Inc.",
+        "name": "アップル",
         "code": "AAPL",
         "price": 321.71,
         "valuation": 32.6,
@@ -7121,7 +7121,7 @@
         "catalyst": 67.9
       },
       {
-        "name": "Microsoft Corporation",
+        "name": "マイクロソフト",
         "code": "MSFT",
         "price": 501.08,
         "valuation": 41.5,
@@ -7131,7 +7131,7 @@
         "catalyst": 69.3
       },
       {
-        "name": "Intel Corporation",
+        "name": "インテル",
         "code": "INTC",
         "price": 94.77,
         "valuation": 46.4,
@@ -7141,7 +7141,7 @@
         "catalyst": 59.3
       },
       {
-        "name": "Meta Platforms, Inc.",
+        "name": "メタ・プラットフォームズ",
         "code": "META",
         "price": 609.79,
         "valuation": 50.7,
@@ -7151,7 +7151,7 @@
         "catalyst": 54.1
       },
       {
-        "name": "Broadcom Inc.",
+        "name": "ブロードコム",
         "code": "AVGO",
         "price": 355.06,
         "valuation": 27.3,
@@ -7161,7 +7161,7 @@
         "catalyst": 90.4
       },
       {
-        "name": "Amazon.com, Inc.",
+        "name": "アマゾン・ドット・コム",
         "code": "AMZN",
         "price": 257.02,
         "valuation": 56.2,
@@ -7171,7 +7171,7 @@
         "catalyst": 78.4
       },
       {
-        "name": "Advanced Micro Devices, Inc.",
+        "name": "アドバンスト・マイクロ・デバイセズ",
         "code": "AMD",
         "price": 474.09,
         "valuation": 24.1,
@@ -7181,7 +7181,7 @@
         "catalyst": 86.4
       },
       {
-        "name": "Alphabet Inc.",
+        "name": "アルファベット",
         "code": "GOOGL",
         "price": 338.75,
         "valuation": 48.8,
@@ -7191,7 +7191,7 @@
         "catalyst": 79.9
       },
       {
-        "name": "Palantir Technologies Inc.",
+        "name": "パランティア・テクノロジーズ",
         "code": "PLTR",
         "price": 174.66,
         "valuation": 18.8,
@@ -7201,7 +7201,7 @@
         "catalyst": 90.7
       },
       {
-        "name": "Marvell Technology, Inc.",
+        "name": "MRVL（米国上場企業）",
         "code": "MRVL",
         "price": 220.67,
         "valuation": 26.5,
@@ -7211,7 +7211,7 @@
         "catalyst": 79.2
       },
       {
-        "name": "Alphabet Inc.",
+        "name": "アルファベット",
         "code": "GOOG",
         "price": 335.41,
         "valuation": 49.1,
@@ -7221,7 +7221,7 @@
         "catalyst": 79.9
       },
       {
-        "name": "Nebius Group N.V.",
+        "name": "NBIS（米国上場企業）",
         "code": "NBIS",
         "price": 218.56,
         "valuation": 39.6,
@@ -7231,7 +7231,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Moderna, Inc.",
+        "name": "MRNA（米国上場企業）",
         "code": "MRNA",
         "price": 144.93,
         "valuation": 37.5,
@@ -7241,7 +7241,7 @@
         "catalyst": 50.8
       },
       {
-        "name": "Lumentum Holdings Inc.",
+        "name": "LITE（米国上場企業）",
         "code": "LITE",
         "price": 882.67,
         "valuation": 30.7,
@@ -7251,7 +7251,7 @@
         "catalyst": 70.3
       },
       {
-        "name": "Dell Technologies Inc.",
+        "name": "デル・テクノロジーズ",
         "code": "DELL",
         "price": 527.4,
         "valuation": 53.7,
@@ -7261,7 +7261,7 @@
         "catalyst": 87.7
       },
       {
-        "name": "Taiwan Semiconductor Manufactur",
+        "name": "台湾積体電路製造（TSMC）",
         "code": "TSM",
         "price": 427.03,
         "valuation": 54.5,
@@ -7271,7 +7271,7 @@
         "catalyst": 82.0
       },
       {
-        "name": "Salesforce, Inc.",
+        "name": "セールスフォース",
         "code": "CRM",
         "price": 261.29,
         "valuation": 51.7,
@@ -7281,7 +7281,7 @@
         "catalyst": 75.0
       },
       {
-        "name": "Applied Materials, Inc.",
+        "name": "アプライド・マテリアルズ",
         "code": "AMAT",
         "price": 451.75,
         "valuation": 33.5,
@@ -7291,7 +7291,7 @@
         "catalyst": 74.5
       },
       {
-        "name": "Oracle Corporation",
+        "name": "オラクル",
         "code": "ORCL",
         "price": 157.6,
         "valuation": 39.2,
@@ -7301,7 +7301,7 @@
         "catalyst": 67.1
       },
       {
-        "name": "Strategy Inc",
+        "name": "MSTR（米国上場企業）",
         "code": "MSTR",
         "price": 142.4,
         "valuation": 43.9,
@@ -7311,7 +7311,7 @@
         "catalyst": 52.7
       },
       {
-        "name": "Seagate Technology Holdings PLC",
+        "name": "STX（米国上場企業）",
         "code": "STX",
         "price": 837.55,
         "valuation": 23.9,
@@ -7321,7 +7321,7 @@
         "catalyst": 86.1
       },
       {
-        "name": "Western Digital Corporation",
+        "name": "WDC（米国上場企業）",
         "code": "WDC",
         "price": 462.02,
         "valuation": 45.9,
@@ -7331,7 +7331,7 @@
         "catalyst": 85.2
       },
       {
-        "name": "Walmart Inc.",
+        "name": "ウォルマート",
         "code": "WMT",
         "price": 107.33,
         "valuation": 48.9,
@@ -7341,7 +7341,7 @@
         "catalyst": 48.2
       },
       {
-        "name": "CoreWeave, Inc.",
+        "name": "CRWV（米国上場企業）",
         "code": "CRWV",
         "price": 88.9,
         "valuation": 35.8,
@@ -7351,7 +7351,7 @@
         "catalyst": 70.4
       },
       {
-        "name": "Bloom Energy Corporation",
+        "name": "BE（米国上場企業）",
         "code": "BE",
         "price": 244.74,
         "valuation": 18.7,
@@ -7361,7 +7361,7 @@
         "catalyst": 70.9
       },
       {
-        "name": "Visa Inc.",
+        "name": "ビザ",
         "code": "V",
         "price": 376.41,
         "valuation": 30.8,
@@ -7371,7 +7371,7 @@
         "catalyst": 60.1
       },
       {
-        "name": "ServiceNow, Inc.",
+        "name": "サービスナウ",
         "code": "NOW",
         "price": 141.7,
         "valuation": 28.8,
@@ -7381,7 +7381,7 @@
         "catalyst": 49.5
       },
       {
-        "name": "Lam Research Corporation",
+        "name": "ラムリサーチ",
         "code": "LRCX",
         "price": 302.73,
         "valuation": 25.3,
@@ -7391,7 +7391,7 @@
         "catalyst": 74.2
       },
       {
-        "name": "Palo Alto Networks, Inc.",
+        "name": "パロアルトネットワークス",
         "code": "PANW",
         "price": 333.43,
         "valuation": 24.9,
@@ -7401,7 +7401,7 @@
         "catalyst": 61.9
       },
       {
-        "name": "ExxonMobil Holdings Corporation",
+        "name": "エクソンモービル",
         "code": "XOM",
         "price": 160.31,
         "valuation": 61.1,
@@ -7411,7 +7411,7 @@
         "catalyst": 85.0
       },
       {
-        "name": "Cisco Systems, Inc.",
+        "name": "シスコシステムズ",
         "code": "CSCO",
         "price": 109.38,
         "valuation": 44.5,
@@ -7421,7 +7421,7 @@
         "catalyst": 73.8
       },
       {
-        "name": "Robinhood Markets, Inc.",
+        "name": "HOOD（米国上場企業）",
         "code": "HOOD",
         "price": 123.62,
         "valuation": 28.2,
@@ -7431,7 +7431,7 @@
         "catalyst": 77.7
       },
       {
-        "name": "Netflix, Inc.",
+        "name": "ネットフリックス",
         "code": "NFLX",
         "price": 79.0,
         "valuation": 44.2,
@@ -7441,7 +7441,7 @@
         "catalyst": 60.2
       },
       {
-        "name": "CrowdStrike Holdings, Inc.",
+        "name": "クラウドストライク・ホールディングス",
         "code": "CRWD",
         "price": 213.4,
         "valuation": 18.8,
@@ -7451,7 +7451,7 @@
         "catalyst": 59.4
       },
       {
-        "name": "Coherent Corp.",
+        "name": "COHR（米国上場企業）",
         "code": "COHR",
         "price": 280.46,
         "valuation": 40.7,
@@ -7461,7 +7461,7 @@
         "catalyst": 61.7
       },
       {
-        "name": "Super Micro Computer, Inc.",
+        "name": "スーパー・マイクロ・コンピューター",
         "code": "SMCI",
         "price": 40.65,
         "valuation": 64.1,
@@ -7471,7 +7471,7 @@
         "catalyst": 90.8
       },
       {
-        "name": "JP Morgan Chase & Co.",
+        "name": "JPモルガン・チェース",
         "code": "JPM",
         "price": 358.44,
         "valuation": 61.3,
@@ -7481,7 +7481,7 @@
         "catalyst": 77.0
       },
       {
-        "name": "IREN LIMITED",
+        "name": "IREN（米国上場企業）",
         "code": "IREN",
         "price": 43.69,
         "valuation": 41.1,
@@ -7491,7 +7491,7 @@
         "catalyst": 40.3
       },
       {
-        "name": "Bank of America Corporation",
+        "name": "バンク・オブ・アメリカ",
         "code": "BAC",
         "price": 62.67,
         "valuation": 64.2,
@@ -7501,7 +7501,7 @@
         "catalyst": 69.7
       },
       {
-        "name": "Coinbase Global, Inc.",
+        "name": "コインベース・グローバル",
         "code": "COIN",
         "price": 184.7,
         "valuation": 50.5,
@@ -7511,7 +7511,7 @@
         "catalyst": 43.4
       },
       {
-        "name": "Snowflake Inc.",
+        "name": "SNOW（米国上場企業）",
         "code": "SNOW",
         "price": 342.97,
         "valuation": 29.3,
@@ -7521,7 +7521,7 @@
         "catalyst": 62.1
       },
       {
-        "name": "Johnson & Johnson",
+        "name": "ジョンソン・エンド・ジョンソン",
         "code": "JNJ",
         "price": 275.74,
         "valuation": 45.6,
@@ -7531,7 +7531,7 @@
         "catalyst": 52.2
       },
       {
-        "name": "KLA Corporation",
+        "name": "KLA",
         "code": "KLAC",
         "price": 185.6,
         "valuation": 25.1,
@@ -7541,7 +7541,7 @@
         "catalyst": 62.0
       },
       {
-        "name": "Applovin Corporation",
+        "name": "APP（米国上場企業）",
         "code": "APP",
         "price": 322.54,
         "valuation": 32.1,
@@ -7551,7 +7551,7 @@
         "catalyst": 83.7
       },
       {
-        "name": "Merck & Company, Inc.",
+        "name": "メルク",
         "code": "MRK",
         "price": 150.27,
         "valuation": 34.7,
@@ -7561,7 +7561,7 @@
         "catalyst": 52.0
       },
       {
-        "name": "Alibaba Group Holding Limited",
+        "name": "BABA（米国上場企業）",
         "code": "BABA",
         "price": 113.05,
         "valuation": 68.0,
@@ -7571,7 +7571,7 @@
         "catalyst": 33.6
       },
       {
-        "name": "Chevron Corporation",
+        "name": "シェブロン",
         "code": "CVX",
         "price": 209.1,
         "valuation": 61.3,
@@ -7581,7 +7581,7 @@
         "catalyst": 87.0
       },
       {
-        "name": "UnitedHealth Group Incorporated",
+        "name": "ユナイテッドヘルス・グループ",
         "code": "UNH",
         "price": 397.45,
         "valuation": 58.8,
@@ -7591,7 +7591,7 @@
         "catalyst": 68.5
       },
       {
-        "name": "QUALCOMM Incorporated",
+        "name": "クアルコム",
         "code": "QCOM",
         "price": 167.93,
         "valuation": 54.2,
@@ -7601,7 +7601,7 @@
         "catalyst": 38.7
       },
       {
-        "name": "Texas Instruments Incorporated",
+        "name": "テキサス・インスツルメンツ",
         "code": "TXN",
         "price": 257.67,
         "valuation": 33.2,
@@ -7611,7 +7611,7 @@
         "catalyst": 75.5
       },
       {
-        "name": "Credo Technology Group Holding ",
+        "name": "CRDO（米国上場企業）",
         "code": "CRDO",
         "price": 170.43,
         "valuation": 27.6,
@@ -7621,7 +7621,7 @@
         "catalyst": 90.8
       },
       {
-        "name": "Corning Incorporated",
+        "name": "コーニング (企業)",
         "code": "GLW",
         "price": 152.45,
         "valuation": 33.0,
@@ -7631,7 +7631,7 @@
         "catalyst": 64.4
       },
       {
-        "name": "Circle Internet Group, Inc.",
+        "name": "Circle (会社)",
         "code": "CRCL",
         "price": 101.74,
         "valuation": 47.3,
@@ -7641,7 +7641,7 @@
         "catalyst": 52.6
       },
       {
-        "name": "Procter & Gamble Company (The)",
+        "name": "プロクター・アンド・ギャンブル",
         "code": "PG",
         "price": 146.37,
         "valuation": 53.3,
@@ -7651,7 +7651,7 @@
         "catalyst": 43.7
       },
       {
-        "name": "Rocket Lab Corporation",
+        "name": "ロケット・ラボ",
         "code": "RKLB",
         "price": 64.05,
         "valuation": 34.6,
@@ -7661,7 +7661,7 @@
         "catalyst": 67.3
       },
       {
-        "name": "Coca-Cola Company (The)",
+        "name": "コカ・コーラ",
         "code": "KO",
         "price": 87.96,
         "valuation": 42.6,
@@ -7671,7 +7671,7 @@
         "catalyst": 60.1
       },
       {
-        "name": "Applied Optoelectronics, Inc.",
+        "name": "AAOI（米国上場企業）",
         "code": "AAOI",
         "price": 104.92,
         "valuation": 42.8,
@@ -7681,7 +7681,7 @@
         "catalyst": 69.4
       },
       {
-        "name": "Uber Technologies, Inc.",
+        "name": "ウーバー・テクノロジーズ",
         "code": "UBER",
         "price": 76.12,
         "valuation": 57.0,
@@ -7691,7 +7691,7 @@
         "catalyst": 74.7
       },
       {
-        "name": "Adobe Inc.",
+        "name": "アドビ",
         "code": "ADBE",
         "price": 268.91,
         "valuation": 51.6,
@@ -7701,7 +7701,7 @@
         "catalyst": 58.5
       },
       {
-        "name": "Hewlett Packard Enterprise Comp",
+        "name": "HPE（米国上場企業）",
         "code": "HPE",
         "price": 52.65,
         "valuation": 57.5,
@@ -7711,7 +7711,7 @@
         "catalyst": 82.7
       },
       {
-        "name": "International Business Machines",
+        "name": "IBM",
         "code": "IBM",
         "price": 234.85,
         "valuation": 52.2,
@@ -7721,7 +7721,7 @@
         "catalyst": 49.6
       },
       {
-        "name": "UiPath, Inc.",
+        "name": "PATH（米国上場企業）",
         "code": "PATH",
         "price": 15.15,
         "valuation": 58.3,
@@ -7731,7 +7731,7 @@
         "catalyst": 76.2
       },
       {
-        "name": "Reddit, Inc.",
+        "name": "RDDT（米国上場企業）",
         "code": "RDDT",
         "price": 155.05,
         "valuation": 40.4,
@@ -7741,7 +7741,7 @@
         "catalyst": 88.1
       },
       {
-        "name": "Arista Networks, Inc.",
+        "name": "ANET（米国上場企業）",
         "code": "ANET",
         "price": 192.3,
         "valuation": 24.9,
@@ -7751,7 +7751,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "Citigroup, Inc.",
+        "name": "シティグループ",
         "code": "C",
         "price": 137.81,
         "valuation": 71.9,
@@ -7761,7 +7761,7 @@
         "catalyst": 74.2
       },
       {
-        "name": "Nike, Inc.",
+        "name": "NKE（米国上場企業）",
         "code": "NKE",
         "price": 38.46,
         "valuation": 61.0,
@@ -7771,7 +7771,7 @@
         "catalyst": 70.6
       },
       {
-        "name": "AbbVie Inc.",
+        "name": "アッヴィ",
         "code": "ABBV",
         "price": 256.42,
         "valuation": 38.0,
@@ -7781,7 +7781,7 @@
         "catalyst": 75.0
       },
       {
-        "name": "Wells Fargo & Company",
+        "name": "ウェルズ・ファーゴ",
         "code": "WFC",
         "price": 89.62,
         "valuation": 63.6,
@@ -7791,7 +7791,7 @@
         "catalyst": 64.2
       },
       {
-        "name": "Nu Holdings Ltd.",
+        "name": "ヌー・ホールディングス",
         "code": "NU",
         "price": 15.4,
         "valuation": 50.9,
@@ -7801,7 +7801,7 @@
         "catalyst": 84.6
       },
       {
-        "name": "Vertiv Holdings, LLC",
+        "name": "VRT（米国上場企業）",
         "code": "VRT",
         "price": 275.65,
         "valuation": 28.4,
@@ -7811,7 +7811,7 @@
         "catalyst": 76.1
       },
       {
-        "name": "Boeing Company (The)",
+        "name": "ボーイング",
         "code": "BA",
         "price": 210.3,
         "valuation": 33.5,
@@ -7821,7 +7821,7 @@
         "catalyst": 53.1
       },
       {
-        "name": "TJX Companies, Inc. (The)",
+        "name": "TJX（米国上場企業）",
         "code": "TJX",
         "price": 132.54,
         "valuation": 47.1,
@@ -7831,7 +7831,7 @@
         "catalyst": 62.1
       },
       {
-        "name": "Freeport-McMoRan, Inc.",
+        "name": "FCX（米国上場企業）",
         "code": "FCX",
         "price": 73.13,
         "valuation": 51.2,
@@ -7841,7 +7841,7 @@
         "catalyst": 58.6
       },
       {
-        "name": "Newmont Corporation",
+        "name": "ニューモント",
         "code": "NEM",
         "price": 128.43,
         "valuation": 57.5,
@@ -7851,7 +7851,7 @@
         "catalyst": 60.9
       },
       {
-        "name": "Shopify Inc.",
+        "name": "ショッピファイ",
         "code": "SHOP",
         "price": 146.17,
         "valuation": 23.8,
@@ -7861,7 +7861,7 @@
         "catalyst": 80.7
       },
       {
-        "name": "Astera Labs, Inc.",
+        "name": "ALAB（米国上場企業）",
         "code": "ALAB",
         "price": 313.14,
         "valuation": 18.9,
@@ -7871,7 +7871,7 @@
         "catalyst": 91.2
       },
       {
-        "name": "Workday, Inc.",
+        "name": "WDAY（米国上場企業）",
         "code": "WDAY",
         "price": 198.76,
         "valuation": 47.0,
@@ -7881,7 +7881,7 @@
         "catalyst": 75.9
       },
       {
-        "name": "BitMine Immersion Technologies,",
+        "name": "BMNR（米国上場企業）",
         "code": "BMNR",
         "price": 24.93,
         "valuation": 45.6,
@@ -7891,7 +7891,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Pfizer, Inc.",
+        "name": "ファイザー",
         "code": "PFE",
         "price": 28.5,
         "valuation": 53.3,
@@ -7901,7 +7901,7 @@
         "catalyst": 51.0
       },
       {
-        "name": "Booking Holdings Inc. Common St",
+        "name": "ブッキング・ホールディングス",
         "code": "BKNG",
         "price": 193.8,
         "valuation": 52.6,
@@ -7911,7 +7911,7 @@
         "catalyst": 74.0
       },
       {
-        "name": "Boston Scientific Corporation",
+        "name": "BSX（米国上場企業）",
         "code": "BSX",
         "price": 47.62,
         "valuation": 57.9,
@@ -7921,7 +7921,7 @@
         "catalyst": 59.6
       },
       {
-        "name": "Arm Holdings plc",
+        "name": "アーム・ホールディングス",
         "code": "ARM",
         "price": 250.8,
         "valuation": 18.7,
@@ -7931,7 +7931,7 @@
         "catalyst": 79.0
       },
       {
-        "name": "Pepsico, Inc.",
+        "name": "ペプシコ",
         "code": "PEP",
         "price": 137.79,
         "valuation": 51.9,
@@ -7941,7 +7941,7 @@
         "catalyst": 73.4
       },
       {
-        "name": "Accenture plc",
+        "name": "ACN（米国上場企業）",
         "code": "ACN",
         "price": 188.48,
         "valuation": 62.4,
@@ -7951,7 +7951,7 @@
         "catalyst": 56.3
       },
       {
-        "name": "Amphenol Corporation",
+        "name": "APH（米国上場企業）",
         "code": "APH",
         "price": 82.76,
         "valuation": 37.2,
@@ -7961,7 +7961,7 @@
         "catalyst": 84.3
       },
       {
-        "name": "RTX Corporation",
+        "name": "RTX（米国上場企業）",
         "code": "RTX",
         "price": 200.5,
         "valuation": 53.6,
@@ -7971,7 +7971,7 @@
         "catalyst": 67.3
       },
       {
-        "name": "NextEra Energy, Inc.",
+        "name": "NEE（米国上場企業）",
         "code": "NEE",
         "price": 83.43,
         "valuation": 49.6,
@@ -7981,7 +7981,7 @@
         "catalyst": 72.0
       },
       {
-        "name": "ConocoPhillips",
+        "name": "コノコフィリップス",
         "code": "COP",
         "price": 134.86,
         "valuation": 60.5,
@@ -7991,7 +7991,7 @@
         "catalyst": 82.8
       },
       {
-        "name": "Abbott Laboratories",
+        "name": "ABT（米国上場企業）",
         "code": "ABT",
         "price": 109.39,
         "valuation": 52.2,
@@ -8001,7 +8001,7 @@
         "catalyst": 38.7
       },
       {
-        "name": "Verizon Communications Inc.",
+        "name": "ベライゾン・コミュニケーションズ",
         "code": "VZ",
         "price": 50.29,
         "valuation": 55.9,
@@ -8011,7 +8011,7 @@
         "catalyst": 40.3
       },
       {
-        "name": "State Street SPDR Portfolio S&P",
+        "name": "SPYM（米国上場企業）",
         "code": "SPYM",
         "price": 90.65,
         "valuation": 51.7,
@@ -8021,7 +8021,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "American Airlines Group, Inc.",
+        "name": "AAL（米国上場企業）",
         "code": "AAL",
         "price": 13.13,
         "valuation": 45.6,
@@ -8031,7 +8031,7 @@
         "catalyst": 36.1
       },
       {
-        "name": "Walt Disney Company (The)",
+        "name": "ウォルト・ディズニー",
         "code": "DIS",
         "price": 105.71,
         "valuation": 59.5,
@@ -8041,7 +8041,7 @@
         "catalyst": 36.2
       },
       {
-        "name": "Morgan Stanley",
+        "name": "モルガン・スタンレー",
         "code": "MS",
         "price": 217.03,
         "valuation": 63.5,
@@ -8051,7 +8051,7 @@
         "catalyst": 78.5
       },
       {
-        "name": "Charles Schwab Corporation (The",
+        "name": "SCHW（米国上場企業）",
         "code": "SCHW",
         "price": 109.24,
         "valuation": 54.6,
@@ -8061,7 +8061,7 @@
         "catalyst": 73.2
       },
       {
-        "name": "AT&T Inc.",
+        "name": "AT&T",
         "code": "T",
         "price": 25.92,
         "valuation": 57.7,
@@ -8071,7 +8071,7 @@
         "catalyst": 53.7
       },
       {
-        "name": "SoFi Technologies, Inc.",
+        "name": "SOFI（米国上場企業）",
         "code": "SOFI",
         "price": 18.18,
         "valuation": 53.4,
@@ -8081,7 +8081,7 @@
         "catalyst": 78.8
       },
       {
-        "name": "Philip Morris International Inc",
+        "name": "PM（米国上場企業）",
         "code": "PM",
         "price": 182.73,
         "valuation": 48.1,
@@ -8091,7 +8091,7 @@
         "catalyst": 50.6
       },
       {
-        "name": "Coeur Mining, Inc.",
+        "name": "CDE（米国上場企業）",
         "code": "CDE",
         "price": 21.59,
         "valuation": 56.6,
@@ -8101,7 +8101,7 @@
         "catalyst": 74.1
       },
       {
-        "name": "Gilead Sciences, Inc.",
+        "name": "ギリアド・サイエンシズ",
         "code": "GILD",
         "price": 150.51,
         "valuation": 39.0,
@@ -8111,7 +8111,7 @@
         "catalyst": 54.0
       },
       {
-        "name": "Pacific Gas & Electric Co.",
+        "name": "PCG（米国上場企業）",
         "code": "PCG",
         "price": 13.96,
         "valuation": 56.0,
@@ -8121,7 +8121,7 @@
         "catalyst": 64.8
       },
       {
-        "name": "IonQ, Inc.",
+        "name": "IONQ（米国上場企業）",
         "code": "IONQ",
         "price": 39.1,
         "valuation": 43.5,
@@ -8131,7 +8131,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Medtronic plc.",
+        "name": "メドトロニック",
         "code": "MDT",
         "price": 94.35,
         "valuation": 57.5,
@@ -8141,7 +8141,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "PayPal Holdings, Inc.",
+        "name": "PYPL（米国上場企業）",
         "code": "PYPL",
         "price": 54.64,
         "valuation": 63.9,
@@ -8151,7 +8151,7 @@
         "catalyst": 50.5
       },
       {
-        "name": "Hecla Mining Company",
+        "name": "HL（米国上場企業）",
         "code": "HL",
         "price": 20.8,
         "valuation": 50.2,
@@ -8161,7 +8161,7 @@
         "catalyst": 86.1
       },
       {
-        "name": "Nokia Corporation Sponsored",
+        "name": "NOK（米国上場企業）",
         "code": "NOK",
         "price": 10.02,
         "valuation": 50.7,
@@ -8171,7 +8171,7 @@
         "catalyst": 32.9
       },
       {
-        "name": "Fortinet, Inc.",
+        "name": "FTNT（米国上場企業）",
         "code": "FTNT",
         "price": 156.63,
         "valuation": 25.4,
@@ -8181,7 +8181,7 @@
         "catalyst": 75.0
       },
       {
-        "name": "AXT Inc",
+        "name": "AXTI（米国上場企業）",
         "code": "AXTI",
         "price": 61.37,
         "valuation": 32.4,
@@ -8191,7 +8191,7 @@
         "catalyst": 70.9
       },
       {
-        "name": "T-Mobile US, Inc.",
+        "name": "TMUS（米国上場企業）",
         "code": "TMUS",
         "price": 182.2,
         "valuation": 54.1,
@@ -8201,7 +8201,7 @@
         "catalyst": 55.5
       },
       {
-        "name": "AST SpaceMobile, Inc.",
+        "name": "ASTS（米国上場企業）",
         "code": "ASTS",
         "price": 62.09,
         "valuation": 34.7,
@@ -8211,7 +8211,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "SLB Limited",
+        "name": "SLB（米国上場企業）",
         "code": "SLB",
         "price": 57.08,
         "valuation": 57.3,
@@ -8221,7 +8221,7 @@
         "catalyst": 40.0
       },
       {
-        "name": "CVS Health Corporation",
+        "name": "CVS（米国上場企業）",
         "code": "CVS",
         "price": 97.28,
         "valuation": 57.2,
@@ -8231,7 +8231,7 @@
         "catalyst": 73.8
       },
       {
-        "name": "Ondas Inc",
+        "name": "ONDS（米国上場企業）",
         "code": "ONDS",
         "price": 7.57,
         "valuation": 48.1,
@@ -8241,7 +8241,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Microchip Technology Incorporat",
+        "name": "MCHP（米国上場企業）",
         "code": "MCHP",
         "price": 73.92,
         "valuation": 35.3,
@@ -8251,7 +8251,7 @@
         "catalyst": 62.9
       },
       {
-        "name": "Altria Group, Inc.",
+        "name": "MO（米国上場企業）",
         "code": "MO",
         "price": 68.83,
         "valuation": 51.5,
@@ -8261,7 +8261,7 @@
         "catalyst": 49.2
       },
       {
-        "name": "PDD Holdings Inc.",
+        "name": "PDD（米国上場企業）",
         "code": "PDD",
         "price": 82.3,
         "valuation": 77.2,
@@ -8271,7 +8271,7 @@
         "catalyst": 48.1
       },
       {
-        "name": "Starbucks Corporation",
+        "name": "スターバックス",
         "code": "SBUX",
         "price": 105.42,
         "valuation": 44.3,
@@ -8281,7 +8281,7 @@
         "catalyst": 69.5
       },
       {
-        "name": "Carvana Co.",
+        "name": "CVNA（米国上場企業）",
         "code": "CVNA",
         "price": 74.25,
         "valuation": 43.0,
@@ -8291,7 +8291,7 @@
         "catalyst": 84.2
       },
       {
-        "name": "Ford Motor Company",
+        "name": "F（米国上場企業）",
         "code": "F",
         "price": 14.55,
         "valuation": 51.0,
@@ -8301,7 +8301,7 @@
         "catalyst": 48.5
       },
       {
-        "name": "Cipher Digital Inc.",
+        "name": "CIFR（米国上場企業）",
         "code": "CIFR",
         "price": 17.68,
         "valuation": 25.2,
@@ -8311,7 +8311,7 @@
         "catalyst": 36.0
       },
       {
-        "name": "Barrick Mining Corporation",
+        "name": "バーリック・マイニング",
         "code": "B",
         "price": 45.01,
         "valuation": 61.8,
@@ -8321,7 +8321,7 @@
         "catalyst": 81.8
       },
       {
-        "name": "Bristol-Myers Squibb Company",
+        "name": "ブリストル・マイヤーズ スクイブ",
         "code": "BMY",
         "price": 66.61,
         "valuation": 54.6,
@@ -8331,7 +8331,7 @@
         "catalyst": 73.2
       },
       {
-        "name": "Comcast Corporation",
+        "name": "CMCSA（米国上場企業）",
         "code": "CMCSA",
         "price": 26.58,
         "valuation": 58.6,
@@ -8341,7 +8341,7 @@
         "catalyst": 30.7
       },
       {
-        "name": "ON Semiconductor Corporation",
+        "name": "ON（米国上場企業）",
         "code": "ON",
         "price": 74.53,
         "valuation": 49.3,
@@ -8351,7 +8351,7 @@
         "catalyst": 67.5
       },
       {
-        "name": "Shell PLC",
+        "name": "シェル",
         "code": "SHEL",
         "price": 93.41,
         "valuation": 64.1,
@@ -8361,7 +8361,7 @@
         "catalyst": 85.4
       },
       {
-        "name": "MARA Holdings, Inc.",
+        "name": "MARA（米国上場企業）",
         "code": "MARA",
         "price": 11.28,
         "valuation": 49.1,
@@ -8371,7 +8371,7 @@
         "catalyst": 40.3
       },
       {
-        "name": "Warner Bros. Discovery, Inc. - ",
+        "name": "WBD（米国上場企業）",
         "code": "WBD",
         "price": 28.27,
         "valuation": 54.4,
@@ -8381,7 +8381,7 @@
         "catalyst": 25.4
       },
       {
-        "name": "Chipotle Mexican Grill, Inc.",
+        "name": "CMG（米国上場企業）",
         "code": "CMG",
         "price": 37.26,
         "valuation": 40.0,
@@ -8391,7 +8391,7 @@
         "catalyst": 53.0
       },
       {
-        "name": "Novo Nordisk A/S",
+        "name": "NVO（米国上場企業）",
         "code": "NVO",
         "price": 46.51,
         "valuation": 55.4,
@@ -8401,7 +8401,7 @@
         "catalyst": 42.0
       },
       {
-        "name": "Williams Companies, Inc. (The)",
+        "name": "WMB（米国上場企業）",
         "code": "WMB",
         "price": 73.54,
         "valuation": 43.2,
@@ -8411,7 +8411,7 @@
         "catalyst": 70.0
       },
       {
-        "name": "Tempus AI, Inc.",
+        "name": "TEM（米国上場企業）",
         "code": "TEM",
         "price": 64.49,
         "valuation": 35.6,
@@ -8421,7 +8421,7 @@
         "catalyst": 58.1
       },
       {
-        "name": "TeraWulf Inc.",
+        "name": "WULF（米国上場企業）",
         "code": "WULF",
         "price": 16.33,
         "valuation": 25.0,
@@ -8431,7 +8431,7 @@
         "catalyst": 47.6
       },
       {
-        "name": "Devon Energy Corporation",
+        "name": "デボン・エナジー",
         "code": "DVN",
         "price": 48.28,
         "valuation": 61.5,
@@ -8441,7 +8441,7 @@
         "catalyst": 83.2
       },
       {
-        "name": "Southern Company (The)",
+        "name": "SO（米国上場企業）",
         "code": "SO",
         "price": 87.99,
         "valuation": 52.3,
@@ -8451,7 +8451,7 @@
         "catalyst": 62.3
       },
       {
-        "name": "Carnival Corporation Ltd.",
+        "name": "CCL（米国上場企業）",
         "code": "CCL",
         "price": 23.52,
         "valuation": 57.1,
@@ -8461,7 +8461,7 @@
         "catalyst": 49.1
       },
       {
-        "name": "CSX Corporation",
+        "name": "CSX（米国上場企業）",
         "code": "CSX",
         "price": 49.38,
         "valuation": 46.8,
@@ -8471,7 +8471,7 @@
         "catalyst": 63.6
       },
       {
-        "name": "Unity Software Inc.",
+        "name": "U（米国上場企業）",
         "code": "U",
         "price": 41.49,
         "valuation": 46.0,
@@ -8481,7 +8481,7 @@
         "catalyst": 58.8
       },
       {
-        "name": "HP Inc.",
+        "name": "HPQ（米国上場企業）",
         "code": "HPQ",
         "price": 32.72,
         "valuation": 57.7,
@@ -8491,7 +8491,7 @@
         "catalyst": 49.7
       },
       {
-        "name": "Monster Beverage Corporation",
+        "name": "MNST（米国上場企業）",
         "code": "MNST",
         "price": 43.74,
         "valuation": 39.8,
@@ -8501,7 +8501,7 @@
         "catalyst": 65.5
       },
       {
-        "name": "General Motors Company",
+        "name": "GM（米国上場企業）",
         "code": "GM",
         "price": 87.12,
         "valuation": 50.0,
@@ -8511,7 +8511,7 @@
         "catalyst": 39.9
       },
       {
-        "name": "United Parcel Service, Inc.",
+        "name": "UPS（米国上場企業）",
         "code": "UPS",
         "price": 102.68,
         "valuation": 55.6,
@@ -8521,7 +8521,7 @@
         "catalyst": 35.7
       },
       {
-        "name": "Applied Digital Corporation",
+        "name": "APLD（米国上場企業）",
         "code": "APLD",
         "price": 26.21,
         "valuation": 39.7,
@@ -8531,7 +8531,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Riot Platforms, Inc.",
+        "name": "RIOT（米国上場企業）",
         "code": "RIOT",
         "price": 21.54,
         "valuation": 45.5,
@@ -8541,7 +8541,7 @@
         "catalyst": 55.4
       },
       {
-        "name": "Roblox Corporation",
+        "name": "RBLX（米国上場企業）",
         "code": "RBLX",
         "price": 43.05,
         "valuation": 40.1,
@@ -8551,7 +8551,7 @@
         "catalyst": 62.3
       },
       {
-        "name": "Mondelez International, Inc.",
+        "name": "MDLZ（米国上場企業）",
         "code": "MDLZ",
         "price": 61.47,
         "valuation": 57.4,
@@ -8561,7 +8561,7 @@
         "catalyst": 72.5
       },
       {
-        "name": "Occidental Petroleum Corporatio",
+        "name": "オキシデンタル・ペトロリアム",
         "code": "OXY",
         "price": 60.1,
         "valuation": 60.2,
@@ -8571,7 +8571,7 @@
         "catalyst": 87.0
       },
       {
-        "name": "O'Reilly Automotive, Inc.",
+        "name": "ORLY（米国上場企業）",
         "code": "ORLY",
         "price": 87.71,
         "valuation": 51.4,
@@ -8581,7 +8581,7 @@
         "catalyst": 57.8
       },
       {
-        "name": "Figma, Inc.",
+        "name": "FIG（米国上場企業）",
         "code": "FIG",
         "price": 24.35,
         "valuation": 43.0,
@@ -8591,7 +8591,7 @@
         "catalyst": 65.1
       },
       {
-        "name": "Cognizant Technology Solutions ",
+        "name": "CTSH（米国上場企業）",
         "code": "CTSH",
         "price": 62.92,
         "valuation": 64.1,
@@ -8601,7 +8601,7 @@
         "catalyst": 53.5
       },
       {
-        "name": "BP p.l.c.",
+        "name": "BP（米国上場企業）",
         "code": "BP",
         "price": 43.89,
         "valuation": 52.5,
@@ -8611,7 +8611,7 @@
         "catalyst": 86.0
       },
       {
-        "name": "VALE S.A.",
+        "name": "VALE（米国上場企業）",
         "code": "VALE",
         "price": 15.44,
         "valuation": 51.9,
@@ -8621,7 +8621,7 @@
         "catalyst": 37.0
       },
       {
-        "name": "Baker Hughes Company",
+        "name": "BKR（米国上場企業）",
         "code": "BKR",
         "price": 63.0,
         "valuation": 60.9,
@@ -8631,7 +8631,7 @@
         "catalyst": 47.1
       },
       {
-        "name": "Oklo Inc.",
+        "name": "OKLO（米国上場企業）",
         "code": "OKLO",
         "price": 40.74,
         "valuation": 48.4,
@@ -8641,7 +8641,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Delta Air Lines, Inc.",
+        "name": "DAL（米国上場企業）",
         "code": "DAL",
         "price": 79.93,
         "valuation": 60.8,
@@ -8651,7 +8651,7 @@
         "catalyst": 46.5
       },
       {
-        "name": "Hims & Hers Health, Inc.",
+        "name": "HIMS（米国上場企業）",
         "code": "HIMS",
         "price": 27.56,
         "valuation": 42.5,
@@ -8661,7 +8661,7 @@
         "catalyst": 62.9
       },
       {
-        "name": "Petroleo Brasileiro S.A. Petrob",
+        "name": "ペトロブラス",
         "code": "PBR",
         "price": 20.26,
         "valuation": 57.3,
@@ -8671,7 +8671,7 @@
         "catalyst": 84.3
       },
       {
-        "name": "Zoetis Inc.",
+        "name": "ZTS（米国上場企業）",
         "code": "ZTS",
         "price": 75.51,
         "valuation": 54.4,
@@ -8681,7 +8681,7 @@
         "catalyst": 50.5
       },
       {
-        "name": "The Kraft Heinz Company",
+        "name": "KHC（米国上場企業）",
         "code": "KHC",
         "price": 24.86,
         "valuation": 55.1,
@@ -8691,7 +8691,7 @@
         "catalyst": 49.4
       },
       {
-        "name": "Kenvue Inc.",
+        "name": "KVUE（米国上場企業）",
         "code": "KVUE",
         "price": 18.89,
         "valuation": 57.2,
@@ -8701,7 +8701,7 @@
         "catalyst": 55.0
       },
       {
-        "name": "STMicroelectronics N.V.",
+        "name": "STM（米国上場企業）",
         "code": "STM",
         "price": 52.16,
         "valuation": 57.5,
@@ -8711,7 +8711,7 @@
         "catalyst": 59.5
       },
       {
-        "name": "Skyworks Solutions, Inc.",
+        "name": "SWKS（米国上場企業）",
         "code": "SWKS",
         "price": 73.86,
         "valuation": 56.9,
@@ -8721,7 +8721,7 @@
         "catalyst": 29.8
       },
       {
-        "name": "U.S. Bancorp",
+        "name": "USB（米国上場企業）",
         "code": "USB",
         "price": 63.53,
         "valuation": 58.7,
@@ -8731,7 +8731,7 @@
         "catalyst": 63.3
       },
       {
-        "name": "Halliburton Company",
+        "name": "ハリバートン",
         "code": "HAL",
         "price": 37.03,
         "valuation": 59.7,
@@ -8741,7 +8741,7 @@
         "catalyst": 58.6
       },
       {
-        "name": "DexCom, Inc.",
+        "name": "DXCM（米国上場企業）",
         "code": "DXCM",
         "price": 88.15,
         "valuation": 40.7,
@@ -8751,7 +8751,7 @@
         "catalyst": 70.6
       },
       {
-        "name": "Xcel Energy Inc.",
+        "name": "XEL（米国上場企業）",
         "code": "XEL",
         "price": 75.57,
         "valuation": 52.5,
@@ -8761,7 +8761,7 @@
         "catalyst": 58.1
       },
       {
-        "name": "Colgate-Palmolive Company",
+        "name": "CL（米国上場企業）",
         "code": "CL",
         "price": 89.18,
         "valuation": 40.0,
@@ -8771,7 +8771,7 @@
         "catalyst": 49.4
       },
       {
-        "name": "Tractor Supply Company",
+        "name": "TSCO（米国上場企業）",
         "code": "TSCO",
         "price": 35.4,
         "valuation": 53.2,
@@ -8781,7 +8781,7 @@
         "catalyst": 44.3
       },
       {
-        "name": "Dynatrace, Inc.",
+        "name": "DT（米国上場企業）",
         "code": "DT",
         "price": 52.12,
         "valuation": 38.7,
@@ -8791,7 +8791,7 @@
         "catalyst": 45.8
       },
       {
-        "name": "Huntington Bancshares Incorpora",
+        "name": "HBAN（米国上場企業）",
         "code": "HBAN",
         "price": 17.12,
         "valuation": 60.4,
@@ -8801,7 +8801,7 @@
         "catalyst": 63.6
       },
       {
-        "name": "Fox Corporation",
+        "name": "FOXA（米国上場企業）",
         "code": "FOXA",
         "price": 65.98,
         "valuation": 61.4,
@@ -8811,7 +8811,7 @@
         "catalyst": 61.6
       },
       {
-        "name": "Block, Inc.",
+        "name": "XYZ（米国上場企業）",
         "code": "XYZ",
         "price": 83.29,
         "valuation": 48.6,
@@ -8821,7 +8821,7 @@
         "catalyst": 33.7
       },
       {
-        "name": "MP Materials Corp.",
+        "name": "MP（米国上場企業）",
         "code": "MP",
         "price": 54.79,
         "valuation": 42.0,
@@ -8831,7 +8831,7 @@
         "catalyst": 70.5
       },
       {
-        "name": "EQT Corporation",
+        "name": "EQT（米国上場企業）",
         "code": "EQT",
         "price": 54.89,
         "valuation": 60.5,
@@ -8841,7 +8841,7 @@
         "catalyst": 29.1
       },
       {
-        "name": "Rocket Companies, Inc.",
+        "name": "RKT（米国上場企業）",
         "code": "RKT",
         "price": 13.88,
         "valuation": 49.8,
@@ -8851,7 +8851,7 @@
         "catalyst": 69.7
       },
       {
-        "name": "Rivian Automotive, Inc.",
+        "name": "RIVN（米国上場企業）",
         "code": "RIVN",
         "price": 15.7,
         "valuation": 54.8,
@@ -8861,7 +8861,7 @@
         "catalyst": 59.9
       },
       {
-        "name": "Kinder Morgan, Inc.",
+        "name": "KMI（米国上場企業）",
         "code": "KMI",
         "price": 31.35,
         "valuation": 54.3,
@@ -8871,7 +8871,7 @@
         "catalyst": 63.3
       },
       {
-        "name": "Realty Income Corporation",
+        "name": "O（米国上場企業）",
         "code": "O",
         "price": 61.48,
         "valuation": 41.2,
@@ -8881,7 +8881,7 @@
         "catalyst": 72.8
       },
       {
-        "name": "Flex Ltd.",
+        "name": "FLEX（米国上場企業）",
         "code": "FLEX",
         "price": 108.44,
         "valuation": 49.9,
@@ -8891,7 +8891,7 @@
         "catalyst": 74.8
       },
       {
-        "name": "General Mills, Inc.",
+        "name": "GIS（米国上場企業）",
         "code": "GIS",
         "price": 38.58,
         "valuation": 58.7,
@@ -8901,7 +8901,7 @@
         "catalyst": 44.4
       },
       {
-        "name": "Kroger Company (The)",
+        "name": "KR（米国上場企業）",
         "code": "KR",
         "price": 58.78,
         "valuation": 48.5,
@@ -8911,7 +8911,7 @@
         "catalyst": 56.8
       },
       {
-        "name": "Copart, Inc.",
+        "name": "CPRT（米国上場企業）",
         "code": "CPRT",
         "price": 33.75,
         "valuation": 56.1,
@@ -8921,7 +8921,7 @@
         "catalyst": 51.9
       },
       {
-        "name": "Fiserv, Inc.",
+        "name": "FISV（米国上場企業）",
         "code": "FISV",
         "price": 53.44,
         "valuation": 61.1,
@@ -8931,7 +8931,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Fastenal Company",
+        "name": "FAST（米国上場企業）",
         "code": "FAST",
         "price": 49.4,
         "valuation": 38.0,
@@ -8941,7 +8941,7 @@
         "catalyst": 62.1
       },
       {
-        "name": "Keurig Dr Pepper Inc.",
+        "name": "KDP（米国上場企業）",
         "code": "KDP",
         "price": 32.63,
         "valuation": 51.4,
@@ -8951,7 +8951,7 @@
         "catalyst": 48.5
       },
       {
-        "name": "NuScale Power Corporation",
+        "name": "SMR（米国上場企業）",
         "code": "SMR",
         "price": 9.52,
         "valuation": 47.5,
@@ -8961,7 +8961,7 @@
         "catalyst": 30.0
       },
       {
-        "name": "On Holding AG",
+        "name": "ONON（米国上場企業）",
         "code": "ONON",
         "price": 28.01,
         "valuation": 60.2,
@@ -8971,7 +8971,7 @@
         "catalyst": 55.2
       },
       {
-        "name": "Carrier Global Corporation",
+        "name": "CARR（米国上場企業）",
         "code": "CARR",
         "price": 59.15,
         "valuation": 51.6,
@@ -8981,7 +8981,7 @@
         "catalyst": 46.2
       },
       {
-        "name": "Toast, Inc.",
+        "name": "TOST（米国上場企業）",
         "code": "TOST",
         "price": 33.73,
         "valuation": 47.2,
@@ -8991,7 +8991,7 @@
         "catalyst": 79.0
       },
       {
-        "name": "Canadian Natural Resources Limi",
+        "name": "カナディアン・ナチュラル・リソーシズ",
         "code": "CNQ",
         "price": 50.76,
         "valuation": 60.3,
@@ -9001,7 +9001,7 @@
         "catalyst": 88.1
       },
       {
-        "name": "The Trade Desk, Inc.",
+        "name": "TTD（米国上場企業）",
         "code": "TTD",
         "price": 14.54,
         "valuation": 63.8,
@@ -9011,7 +9011,7 @@
         "catalyst": 41.2
       },
       {
-        "name": "Celsius Holdings, Inc.",
+        "name": "CELH（米国上場企業）",
         "code": "CELH",
         "price": 30.75,
         "valuation": 42.9,
@@ -9021,7 +9021,7 @@
         "catalyst": 36.3
       },
       {
-        "name": "CNH Industrial N.V.",
+        "name": "CNH（米国上場企業）",
         "code": "CNH",
         "price": 14.29,
         "valuation": 44.7,
@@ -9031,7 +9031,7 @@
         "catalyst": 37.2
       },
       {
-        "name": "Truist Financial Corporation",
+        "name": "TFC（米国上場企業）",
         "code": "TFC",
         "price": 51.8,
         "valuation": 59.0,
@@ -9041,7 +9041,7 @@
         "catalyst": 67.2
       },
       {
-        "name": "Pan American Silver Corp.",
+        "name": "パン・アメリカン・シルバー",
         "code": "PAAS",
         "price": 51.65,
         "valuation": 59.3,
@@ -9051,7 +9051,7 @@
         "catalyst": 77.4
       },
       {
-        "name": "Exelon Corporation",
+        "name": "EXC（米国上場企業）",
         "code": "EXC",
         "price": 43.74,
         "valuation": 54.6,
@@ -9061,7 +9061,7 @@
         "catalyst": 53.8
       },
       {
-        "name": "GitLab Inc.",
+        "name": "GTLB（米国上場企業）",
         "code": "GTLB",
         "price": 50.02,
         "valuation": 45.9,
@@ -9071,7 +9071,7 @@
         "catalyst": 58.0
       },
       {
-        "name": "PPL Corporation",
+        "name": "PPL（米国上場企業）",
         "code": "PPL",
         "price": 34.95,
         "valuation": 53.8,
@@ -9081,7 +9081,7 @@
         "catalyst": 60.7
       },
       {
-        "name": "Banco Santander, S.A. Sponsored",
+        "name": "SAN（米国上場企業）",
         "code": "SAN",
         "price": 14.93,
         "valuation": 55.9,
@@ -9091,7 +9091,7 @@
         "catalyst": 57.9
       },
       {
-        "name": "Fifth Third Bancorp",
+        "name": "FITB（米国上場企業）",
         "code": "FITB",
         "price": 55.06,
         "valuation": 55.5,
@@ -9101,7 +9101,7 @@
         "catalyst": 63.1
       },
       {
-        "name": "Roivant Sciences Ltd.",
+        "name": "ROIV（米国上場企業）",
         "code": "ROIV",
         "price": 34.6,
         "valuation": 41.9,
@@ -9111,7 +9111,7 @@
         "catalyst": 38.3
       },
       {
-        "name": "Rigetti Computing, Inc.",
+        "name": "RGTI（米国上場企業）",
         "code": "RGTI",
         "price": 15.17,
         "valuation": 36.5,
@@ -9121,7 +9121,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "D-Wave Quantum Inc.",
+        "name": "QBTS（米国上場企業）",
         "code": "QBTS",
         "price": 16.61,
         "valuation": 41.3,
@@ -9131,7 +9131,7 @@
         "catalyst": 49.8
       },
       {
-        "name": "JD.com, Inc.",
+        "name": "JD（米国上場企業）",
         "code": "JD",
         "price": 28.25,
         "valuation": 75.8,
@@ -9141,7 +9141,7 @@
         "catalyst": 58.0
       },
       {
-        "name": "Kinross Gold Corporation",
+        "name": "KGC（米国上場企業）",
         "code": "KGC",
         "price": 31.16,
         "valuation": 60.0,
@@ -9151,7 +9151,7 @@
         "catalyst": 79.2
       },
       {
-        "name": "Amer Sports, Inc.",
+        "name": "AS（米国上場企業）",
         "code": "AS",
         "price": 29.38,
         "valuation": 58.5,
@@ -9161,7 +9161,7 @@
         "catalyst": 82.3
       },
       {
-        "name": "Samsara Inc.",
+        "name": "IOT（米国上場企業）",
         "code": "IOT",
         "price": 39.69,
         "valuation": 24.0,
@@ -9171,7 +9171,7 @@
         "catalyst": 60.7
       },
       {
-        "name": "Dow Inc.",
+        "name": "DOW（米国上場企業）",
         "code": "DOW",
         "price": 30.25,
         "valuation": 54.1,
@@ -9181,7 +9181,7 @@
         "catalyst": 57.4
       },
       {
-        "name": "Transocean Ltd (Switzerland)",
+        "name": "RIG（米国上場企業）",
         "code": "RIG",
         "price": 5.83,
         "valuation": 53.6,
@@ -9191,7 +9191,7 @@
         "catalyst": 49.1
       },
       {
-        "name": "USA Rare Earth, Inc.",
+        "name": "USAR（米国上場企業）",
         "code": "USAR",
         "price": 17.45,
         "valuation": 49.0,
@@ -9201,7 +9201,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Dominion Energy, Inc.",
+        "name": "D（米国上場企業）",
         "code": "D",
         "price": 65.78,
         "valuation": 51.6,
@@ -9211,7 +9211,7 @@
         "catalyst": 38.8
       },
       {
-        "name": "Centene Corporation",
+        "name": "CNC（米国上場企業）",
         "code": "CNC",
         "price": 67.62,
         "valuation": 65.8,
@@ -9221,7 +9221,7 @@
         "catalyst": 51.8
       },
       {
-        "name": "DraftKings Inc.",
+        "name": "DKNG（米国上場企業）",
         "code": "DKNG",
         "price": 23.95,
         "valuation": 43.4,
@@ -9231,7 +9231,7 @@
         "catalyst": 48.2
       },
       {
-        "name": "Chime Financial, Inc.",
+        "name": "CHYM（米国上場企業）",
         "code": "CHYM",
         "price": 33.53,
         "valuation": 53.8,
@@ -9241,7 +9241,7 @@
         "catalyst": 59.7
       },
       {
-        "name": "Archer Aviation Inc.",
+        "name": "ACHR（米国上場企業）",
         "code": "ACHR",
         "price": 5.64,
         "valuation": 48.4,
@@ -9251,7 +9251,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Alcoa Corporation",
+        "name": "AA（米国上場企業）",
         "code": "AA",
         "price": 50.11,
         "valuation": 64.8,
@@ -9261,7 +9261,7 @@
         "catalyst": 82.0
       },
       {
-        "name": "EchoStar Corporation",
+        "name": "ECHO（米国上場企業）",
         "code": "ECHO",
         "price": 89.9,
         "valuation": 52.7,
@@ -9271,7 +9271,7 @@
         "catalyst": 48.4
       },
       {
-        "name": "Norwegian Cruise Line Holdings ",
+        "name": "NCLH（米国上場企業）",
         "code": "NCLH",
         "price": 15.7,
         "valuation": 54.7,
@@ -9281,7 +9281,7 @@
         "catalyst": 72.9
       },
       {
-        "name": "ASE Technology Holding Co., Ltd",
+        "name": "ASX（米国上場企業）",
         "code": "ASX",
         "price": 37.42,
         "valuation": 41.6,
@@ -9291,7 +9291,7 @@
         "catalyst": 80.7
       },
       {
-        "name": "Coupang, Inc.",
+        "name": "CPNG（米国上場企業）",
         "code": "CPNG",
         "price": 15.2,
         "valuation": 52.2,
@@ -9301,7 +9301,7 @@
         "catalyst": 51.5
       },
       {
-        "name": "Zeta Global Holdings Corp.",
+        "name": "ZETA（米国上場企業）",
         "code": "ZETA",
         "price": 31.42,
         "valuation": 37.5,
@@ -9311,7 +9311,7 @@
         "catalyst": 64.1
       },
       {
-        "name": "CleanSpark, Inc.",
+        "name": "CLSK（米国上場企業）",
         "code": "CLSK",
         "price": 12.65,
         "valuation": 47.8,
@@ -9321,7 +9321,7 @@
         "catalyst": 39.1
       },
       {
-        "name": "NiSource Inc",
+        "name": "NI（米国上場企業）",
         "code": "NI",
         "price": 41.22,
         "valuation": 52.4,
@@ -9331,7 +9331,7 @@
         "catalyst": 33.8
       },
       {
-        "name": "VICI Properties Inc.",
+        "name": "VICI（米国上場企業）",
         "code": "VICI",
         "price": 25.52,
         "valuation": 52.6,
@@ -9341,7 +9341,7 @@
         "catalyst": 37.1
       },
       {
-        "name": "LyondellBasell Industries NV",
+        "name": "LYB（米国上場企業）",
         "code": "LYB",
         "price": 64.82,
         "valuation": 54.5,
@@ -9351,7 +9351,7 @@
         "catalyst": 78.5
       },
       {
-        "name": "HDFC Bank Limited",
+        "name": "HDB（米国上場企業）",
         "code": "HDB",
         "price": 23.15,
         "valuation": 45.7,
@@ -9361,7 +9361,7 @@
         "catalyst": 64.2
       },
       {
-        "name": "Pinterest, Inc.",
+        "name": "PINS（米国上場企業）",
         "code": "PINS",
         "price": 20.33,
         "valuation": 50.3,
@@ -9371,7 +9371,7 @@
         "catalyst": 56.9
       },
       {
-        "name": "Blue Owl Capital Inc.",
+        "name": "OWL（米国上場企業）",
         "code": "OWL",
         "price": 11.77,
         "valuation": 39.3,
@@ -9381,7 +9381,7 @@
         "catalyst": 46.5
       },
       {
-        "name": "APA Corporation",
+        "name": "APA（米国上場企業）",
         "code": "APA",
         "price": 43.49,
         "valuation": 61.9,
@@ -9391,7 +9391,7 @@
         "catalyst": 64.5
       },
       {
-        "name": "CenterPoint Energy, Inc (Holdin",
+        "name": "CNP（米国上場企業）",
         "code": "CNP",
         "price": 39.63,
         "valuation": 51.8,
@@ -9401,7 +9401,7 @@
         "catalyst": 64.0
       },
       {
-        "name": "Amkor Technology, Inc.",
+        "name": "AMKR（米国上場企業）",
         "code": "AMKR",
         "price": 47.39,
         "valuation": 61.7,
@@ -9411,7 +9411,7 @@
         "catalyst": 80.4
       },
       {
-        "name": "Smurfit WestRock plc",
+        "name": "SW（米国上場企業）",
         "code": "SW",
         "price": 46.1,
         "valuation": 50.6,
@@ -9421,7 +9421,7 @@
         "catalyst": 50.4
       },
       {
-        "name": "Regions Financial Corporation",
+        "name": "RF（米国上場企業）",
         "code": "RF",
         "price": 30.58,
         "valuation": 60.4,
@@ -9431,7 +9431,7 @@
         "catalyst": 55.2
       },
       {
-        "name": "CoStar Group, Inc.",
+        "name": "CSGP（米国上場企業）",
         "code": "CSGP",
         "price": 30.98,
         "valuation": 47.7,
@@ -9441,7 +9441,7 @@
         "catalyst": 78.0
       },
       {
-        "name": "Core Scientific, Inc.",
+        "name": "CORZ（米国上場企業）",
         "code": "CORZ",
         "price": 17.83,
         "valuation": 36.8,
@@ -9451,7 +9451,7 @@
         "catalyst": 70.3
       },
       {
-        "name": "Permian Resources Corporation",
+        "name": "PR（米国上場企業）",
         "code": "PR",
         "price": 23.46,
         "valuation": 60.1,
@@ -9461,7 +9461,7 @@
         "catalyst": 87.3
       },
       {
-        "name": "Fidelity National Information S",
+        "name": "FIS（米国上場企業）",
         "code": "FIS",
         "price": 42.03,
         "valuation": 57.4,
@@ -9471,7 +9471,7 @@
         "catalyst": 60.4
       },
       {
-        "name": "KeyCorp",
+        "name": "KEY（米国上場企業）",
         "code": "KEY",
         "price": 22.27,
         "valuation": 57.0,
@@ -9481,7 +9481,7 @@
         "catalyst": 64.5
       },
       {
-        "name": "QXO, Inc.",
+        "name": "QXO（米国上場企業）",
         "code": "QXO",
         "price": 13.44,
         "valuation": 57.1,
@@ -9491,7 +9491,7 @@
         "catalyst": 68.2
       },
       {
-        "name": "First Majestic Silver Corp.",
+        "name": "AG（米国上場企業）",
         "code": "AG",
         "price": 21.04,
         "valuation": 53.9,
@@ -9501,7 +9501,7 @@
         "catalyst": 87.1
       },
       {
-        "name": "United Microelectronics Corpora",
+        "name": "UMC（米国上場企業）",
         "code": "UMC",
         "price": 20.72,
         "valuation": 72.3,
@@ -9511,7 +9511,7 @@
         "catalyst": 77.5
       },
       {
-        "name": "Las Vegas Sands Corp.",
+        "name": "LVS（米国上場企業）",
         "code": "LVS",
         "price": 44.58,
         "valuation": 42.3,
@@ -9521,7 +9521,7 @@
         "catalyst": 41.2
       },
       {
-        "name": "Joby Aviation, Inc.",
+        "name": "JOBY（米国上場企業）",
         "code": "JOBY",
         "price": 6.78,
         "valuation": 45.5,
@@ -9531,7 +9531,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Snap Inc.",
+        "name": "SNAP（米国上場企業）",
         "code": "SNAP",
         "price": 5.49,
         "valuation": 54.6,
@@ -9541,7 +9541,7 @@
         "catalyst": 57.1
       },
       {
-        "name": "Venture Global, Inc.",
+        "name": "VG（米国上場企業）",
         "code": "VG",
         "price": 14.38,
         "valuation": 52.5,
@@ -9551,7 +9551,7 @@
         "catalyst": 86.0
       },
       {
-        "name": "Cenovus Energy Inc",
+        "name": "ハスキー・エナジー",
         "code": "CVE",
         "price": 32.52,
         "valuation": 62.6,
@@ -9561,7 +9561,7 @@
         "catalyst": 84.7
       },
       {
-        "name": "Host Hotels & Resorts, Inc.",
+        "name": "HST（米国上場企業）",
         "code": "HST",
         "price": 22.06,
         "valuation": 59.6,
@@ -9571,7 +9571,7 @@
         "catalyst": 55.2
       },
       {
-        "name": "SentinelOne, Inc.",
+        "name": "S（米国上場企業）",
         "code": "S",
         "price": 19.8,
         "valuation": 52.2,
@@ -9581,7 +9581,7 @@
         "catalyst": 57.7
       },
       {
-        "name": "Teva Pharmaceutical Industries ",
+        "name": "TEVA（米国上場企業）",
         "code": "TEVA",
         "price": 36.58,
         "valuation": 44.3,
@@ -9591,7 +9591,7 @@
         "catalyst": 49.7
       },
       {
-        "name": "Aurora Innovation, Inc.",
+        "name": "AUR（米国上場企業）",
         "code": "AUR",
         "price": 6.28,
         "valuation": 40.5,
@@ -9601,7 +9601,7 @@
         "catalyst": 70.0
       },
       {
-        "name": "Strive, Inc.",
+        "name": "ASST（米国上場企業）",
         "code": "ASST",
         "price": 27.18,
         "valuation": 44.0,
@@ -9611,7 +9611,7 @@
         "catalyst": 69.8
       },
       {
-        "name": "Gap, Inc. (The)",
+        "name": "GAP（米国上場企業）",
         "code": "GAP",
         "price": 22.58,
         "valuation": 61.7,
@@ -9621,7 +9621,7 @@
         "catalyst": 70.1
       },
       {
-        "name": "Mosaic Company (The)",
+        "name": "MOS（米国上場企業）",
         "code": "MOS",
         "price": 25.83,
         "valuation": 54.5,
@@ -9631,7 +9631,7 @@
         "catalyst": 47.6
       },
       {
-        "name": "SoundHound AI, Inc.",
+        "name": "SOUN（米国上場企業）",
         "code": "SOUN",
         "price": 6.64,
         "valuation": 42.8,
@@ -9641,7 +9641,7 @@
         "catalyst": 64.4
       },
       {
-        "name": "Southwest Airlines Company",
+        "name": "LUV（米国上場企業）",
         "code": "LUV",
         "price": 39.48,
         "valuation": 59.7,
@@ -9651,7 +9651,7 @@
         "catalyst": 65.1
       },
       {
-        "name": "James Hardie Industries plc.",
+        "name": "JHX（米国上場企業）",
         "code": "JHX",
         "price": 30.17,
         "valuation": 43.9,
@@ -9661,7 +9661,7 @@
         "catalyst": 77.4
       },
       {
-        "name": "Infosys Limited",
+        "name": "INFY（米国上場企業）",
         "code": "INFY",
         "price": 11.77,
         "valuation": 54.2,
@@ -9671,7 +9671,7 @@
         "catalyst": 53.6
       },
       {
-        "name": "Lyft, Inc.",
+        "name": "LYFT（米国上場企業）",
         "code": "LYFT",
         "price": 17.06,
         "valuation": 67.9,
@@ -9681,7 +9681,7 @@
         "catalyst": 69.6
       },
       {
-        "name": "Cleveland-Cliffs Inc.",
+        "name": "CLF（米国上場企業）",
         "code": "CLF",
         "price": 12.43,
         "valuation": 52.6,
@@ -9691,7 +9691,7 @@
         "catalyst": 52.3
       },
       {
-        "name": "Energy Transfer LP",
+        "name": "ET（米国上場企業）",
         "code": "ET",
         "price": 21.38,
         "valuation": 55.9,
@@ -9701,7 +9701,7 @@
         "catalyst": 88.9
       },
       {
-        "name": "The Campbell's Company",
+        "name": "CPB（米国上場企業）",
         "code": "CPB",
         "price": 21.42,
         "valuation": 55.8,
@@ -9711,7 +9711,7 @@
         "catalyst": 46.9
       },
       {
-        "name": "B2Gold Corp",
+        "name": "BTG（米国上場企業）",
         "code": "BTG",
         "price": 5.61,
         "valuation": 64.4,
@@ -9721,7 +9721,7 @@
         "catalyst": 76.4
       },
       {
-        "name": "Webull Corporation",
+        "name": "BULL（米国上場企業）",
         "code": "BULL",
         "price": 9.74,
         "valuation": 57.3,
@@ -9731,7 +9731,7 @@
         "catalyst": 66.0
       },
       {
-        "name": "Itau Unibanco Banco Holding SA",
+        "name": "ITUB（米国上場企業）",
         "code": "ITUB",
         "price": 8.18,
         "valuation": 55.3,
@@ -9741,7 +9741,7 @@
         "catalyst": 60.3
       },
       {
-        "name": "Navitas Semiconductor Corporati",
+        "name": "NVTS（米国上場企業）",
         "code": "NVTS",
         "price": 11.78,
         "valuation": 44.9,
@@ -9751,7 +9751,7 @@
         "catalyst": 40.1
       },
       {
-        "name": "Gen Digital Inc.",
+        "name": "GEN（米国上場企業）",
         "code": "GEN",
         "price": 30.71,
         "valuation": 49.9,
@@ -9761,7 +9761,7 @@
         "catalyst": 71.1
       },
       {
-        "name": "Rollins, Inc.",
+        "name": "ROL（米国上場企業）",
         "code": "ROL",
         "price": 36.06,
         "valuation": 43.7,
@@ -9771,7 +9771,7 @@
         "catalyst": 54.5
       },
       {
-        "name": "Intuitive Machines, Inc.",
+        "name": "LUNR（米国上場企業）",
         "code": "LUNR",
         "price": 14.76,
         "valuation": 50.2,
@@ -9781,7 +9781,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Bitdeer Technologies Group",
+        "name": "BTDR（米国上場企業）",
         "code": "BTDR",
         "price": 12.32,
         "valuation": 50.5,
@@ -9791,7 +9791,7 @@
         "catalyst": 64.9
       },
       {
-        "name": "AGNC Investment Corp.",
+        "name": "AGNC（米国上場企業）",
         "code": "AGNC",
         "price": 10.69,
         "valuation": 51.7,
@@ -9801,7 +9801,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "NIO Inc.",
+        "name": "NIO（米国上場企業）",
         "code": "NIO",
         "price": 3.77,
         "valuation": 57.8,
@@ -9811,7 +9811,7 @@
         "catalyst": 68.1
       },
       {
-        "name": "Element Solutions Inc.",
+        "name": "ESI（米国上場企業）",
         "code": "ESI",
         "price": 35.72,
         "valuation": 50.3,
@@ -9821,7 +9821,7 @@
         "catalyst": 84.9
       },
       {
-        "name": "Equinox Gold Corp.",
+        "name": "EQX（米国上場企業）",
         "code": "EQX",
         "price": 12.86,
         "valuation": 58.6,
@@ -9831,7 +9831,7 @@
         "catalyst": 91.9
       },
       {
-        "name": "Redwire Corporation",
+        "name": "RDW（米国上場企業）",
         "code": "RDW",
         "price": 10.54,
         "valuation": 56.9,
@@ -9841,7 +9841,7 @@
         "catalyst": 69.6
       },
       {
-        "name": "FuelCell Energy, Inc.",
+        "name": "FCEL（米国上場企業）",
         "code": "FCEL",
         "price": 14.77,
         "valuation": 58.0,
@@ -9851,7 +9851,7 @@
         "catalyst": 39.5
       },
       {
-        "name": "Oscar Health, Inc.",
+        "name": "OSCR（米国上場企業）",
         "code": "OSCR",
         "price": 31.67,
         "valuation": 67.6,
@@ -9861,7 +9861,7 @@
         "catalyst": 68.2
       },
       {
-        "name": "\"Sprott Physical Silver Trust\"",
+        "name": "PSLV（米国上場企業）",
         "code": "PSLV",
         "price": 21.67,
         "valuation": 56.4,
@@ -9871,7 +9871,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Viavi Solutions Inc.",
+        "name": "VIAV（米国上場企業）",
         "code": "VIAV",
         "price": 34.76,
         "valuation": 50.2,
@@ -9881,7 +9881,7 @@
         "catalyst": 86.9
       },
       {
-        "name": "Chewy, Inc.",
+        "name": "CHWY（米国上場企業）",
         "code": "CHWY",
         "price": 24.03,
         "valuation": 43.1,
@@ -9891,7 +9891,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "Planet Labs PBC",
+        "name": "PL（米国上場企業）",
         "code": "PL",
         "price": 17.98,
         "valuation": 33.3,
@@ -9901,7 +9901,7 @@
         "catalyst": 66.7
       },
       {
-        "name": "ConAgra Brands, Inc.",
+        "name": "CAG（米国上場企業）",
         "code": "CAG",
         "price": 15.57,
         "valuation": 52.8,
@@ -9911,7 +9911,7 @@
         "catalyst": 51.4
       },
       {
-        "name": "International Paper Company",
+        "name": "IP（米国上場企業）",
         "code": "IP",
         "price": 37.58,
         "valuation": 55.8,
@@ -9921,7 +9921,7 @@
         "catalyst": 49.1
       },
       {
-        "name": "Elanco Animal Health Incorporat",
+        "name": "ELAN（米国上場企業）",
         "code": "ELAN",
         "price": 24.42,
         "valuation": 55.3,
@@ -9931,7 +9931,7 @@
         "catalyst": 75.0
       },
       {
-        "name": "ICICI Bank Limited",
+        "name": "IBN（米国上場企業）",
         "code": "IBN",
         "price": 30.31,
         "valuation": 53.3,
@@ -9941,7 +9941,7 @@
         "catalyst": 60.6
       },
       {
-        "name": "Plug Power, Inc.",
+        "name": "PLUG（米国上場企業）",
         "code": "PLUG",
         "price": 2.16,
         "valuation": 49.6,
@@ -9951,7 +9951,7 @@
         "catalyst": 51.0
       },
       {
-        "name": "Alamos Gold Inc.",
+        "name": "AGI（米国上場企業）",
         "code": "AGI",
         "price": 37.23,
         "valuation": 56.7,
@@ -9961,7 +9961,7 @@
         "catalyst": 81.3
       },
       {
-        "name": "Viatris Inc.",
+        "name": "VTRS（米国上場企業）",
         "code": "VTRS",
         "price": 16.95,
         "valuation": 53.9,
@@ -9971,7 +9971,7 @@
         "catalyst": 51.9
       },
       {
-        "name": "Enphase Energy, Inc.",
+        "name": "ENPH（米国上場企業）",
         "code": "ENPH",
         "price": 36.19,
         "valuation": 55.1,
@@ -9981,7 +9981,7 @@
         "catalyst": 41.0
       },
       {
-        "name": "Galaxy Digital Inc.",
+        "name": "GLXY（米国上場企業）",
         "code": "GLXY",
         "price": 25.99,
         "valuation": 57.4,
@@ -9991,7 +9991,7 @@
         "catalyst": 48.5
       },
       {
-        "name": "Petroleo Brasileiro S.A. Petrob",
+        "name": "PBR.A（米国上場企業）",
         "code": "PBR-A",
         "price": 18.38,
         "valuation": 57.5,
@@ -10001,7 +10001,7 @@
         "catalyst": 84.3
       },
       {
-        "name": "Baxter International Inc.",
+        "name": "BAX（米国上場企業）",
         "code": "BAX",
         "price": 26.05,
         "valuation": 53.8,
@@ -10011,7 +10011,7 @@
         "catalyst": 66.1
       },
       {
-        "name": "Klarna Group plc",
+        "name": "KLAR（米国上場企業）",
         "code": "KLAR",
         "price": 14.31,
         "valuation": 66.3,
@@ -10021,7 +10021,7 @@
         "catalyst": 59.7
       },
       {
-        "name": "Annaly Capital Management Inc.",
+        "name": "NLY（米国上場企業）",
         "code": "NLY",
         "price": 22.8,
         "valuation": 51.7,
@@ -10031,7 +10031,7 @@
         "catalyst": 92.0
       },
       {
-        "name": "Keel Infrastructure Corp.",
+        "name": "KEEL（米国上場企業）",
         "code": "KEEL",
         "price": 3.45,
         "valuation": 41.3,
@@ -10041,7 +10041,7 @@
         "catalyst": 34.6
       },
       {
-        "name": "Bath & Body Works, Inc.",
+        "name": "BBWI（米国上場企業）",
         "code": "BBWI",
         "price": 19.76,
         "valuation": 52.9,
@@ -10051,7 +10051,7 @@
         "catalyst": 69.4
       },
       {
-        "name": "Fastly, Inc.",
+        "name": "FSLY（米国上場企業）",
         "code": "FSLY",
         "price": 20.61,
         "valuation": 54.4,
@@ -10061,7 +10061,7 @@
         "catalyst": 58.6
       },
       {
-        "name": "Opendoor Technologies Inc",
+        "name": "OPEN（米国上場企業）",
         "code": "OPEN",
         "price": 3.16,
         "valuation": 54.8,
@@ -10071,7 +10071,7 @@
         "catalyst": 35.8
       },
       {
-        "name": "Hudbay Minerals Inc.",
+        "name": "HBM（米国上場企業）",
         "code": "HBM",
         "price": 27.78,
         "valuation": 58.6,
@@ -10081,7 +10081,7 @@
         "catalyst": 63.0
       },
       {
-        "name": "Iovance Biotherapeutics, Inc.",
+        "name": "IOVA（米国上場企業）",
         "code": "IOVA",
         "price": 8.72,
         "valuation": 44.9,
@@ -10091,7 +10091,7 @@
         "catalyst": 67.7
       },
       {
-        "name": "Macy's Inc",
+        "name": "M（米国上場企業）",
         "code": "M",
         "price": 22.91,
         "valuation": 60.2,
@@ -10101,7 +10101,7 @@
         "catalyst": 70.4
       },
       {
-        "name": "Invesco Ltd",
+        "name": "IVZ（米国上場企業）",
         "code": "IVZ",
         "price": 33.16,
         "valuation": 59.2,
@@ -10111,7 +10111,7 @@
         "catalyst": 57.7
       },
       {
-        "name": "Fermi Inc.",
+        "name": "FRMI（米国上場企業）",
         "code": "FRMI",
         "price": 4.98,
         "valuation": 51.9,
@@ -10121,7 +10121,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Vishay Intertechnology, Inc.",
+        "name": "VSH（米国上場企業）",
         "code": "VSH",
         "price": 31.43,
         "valuation": 50.4,
@@ -10131,7 +10131,7 @@
         "catalyst": 77.3
       },
       {
-        "name": "GameStop Corporation",
+        "name": "GME（米国上場企業）",
         "code": "GME",
         "price": 19.09,
         "valuation": 69.4,
@@ -10141,7 +10141,7 @@
         "catalyst": 76.4
       },
       {
-        "name": "Klaviyo, Inc. Series A",
+        "name": "KVYO（米国上場企業）",
         "code": "KVYO",
         "price": 18.89,
         "valuation": 43.8,
@@ -10151,7 +10151,7 @@
         "catalyst": 59.6
       },
       {
-        "name": "Compass, Inc.",
+        "name": "COMP（米国上場企業）",
         "code": "COMP",
         "price": 11.12,
         "valuation": 44.4,
@@ -10161,7 +10161,7 @@
         "catalyst": 88.5
       },
       {
-        "name": "Grab Holdings Limited",
+        "name": "GRAB（米国上場企業）",
         "code": "GRAB",
         "price": 3.44,
         "valuation": 61.2,
@@ -10171,7 +10171,7 @@
         "catalyst": 58.2
       },
       {
-        "name": "Weyerhaeuser Company",
+        "name": "WY（米国上場企業）",
         "code": "WY",
         "price": 23.09,
         "valuation": 54.5,
@@ -10181,7 +10181,7 @@
         "catalyst": 69.7
       },
       {
-        "name": "AbCellera Biologics Inc.",
+        "name": "ABCL（米国上場企業）",
         "code": "ABCL",
         "price": 11.41,
         "valuation": 43.9,
@@ -10191,7 +10191,7 @@
         "catalyst": 31.3
       },
       {
-        "name": "Tencent Music Entertainment Gro",
+        "name": "TME（米国上場企業）",
         "code": "TME",
         "price": 8.28,
         "valuation": 76.0,
@@ -10201,7 +10201,7 @@
         "catalyst": 53.4
       },
       {
-        "name": "Iamgold Corporation",
+        "name": "S&P トロント総合指数",
         "code": "IAG",
         "price": 20.55,
         "valuation": 62.4,
@@ -10211,7 +10211,7 @@
         "catalyst": 85.9
       },
       {
-        "name": "Wolfspeed, Inc.",
+        "name": "WOLF（米国上場企業）",
         "code": "WOLF",
         "price": 28.18,
         "valuation": 54.2,
@@ -10221,7 +10221,7 @@
         "catalyst": 41.1
       },
       {
-        "name": "Almonty Industries Inc.",
+        "name": "ALM（米国上場企業）",
         "code": "ALM",
         "price": 17.4,
         "valuation": 24.9,
@@ -10231,7 +10231,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "The AES Corporation",
+        "name": "AES（米国上場企業）",
         "code": "AES",
         "price": 14.79,
         "valuation": 56.0,
@@ -10241,7 +10241,7 @@
         "catalyst": 57.5
       },
       {
-        "name": "T1 Energy Inc.",
+        "name": "TE（米国上場企業）",
         "code": "TE",
         "price": 4.61,
         "valuation": 50.1,
@@ -10251,7 +10251,7 @@
         "catalyst": 69.5
       },
       {
-        "name": "Stellantis N.V.",
+        "name": "STLA（米国上場企業）",
         "code": "STLA",
         "price": 5.53,
         "valuation": 54.0,
@@ -10261,7 +10261,7 @@
         "catalyst": 55.1
       },
       {
-        "name": "JetBlue Airways Corporation",
+        "name": "JBLU（米国上場企業）",
         "code": "JBLU",
         "price": 4.63,
         "valuation": 51.6,
@@ -10271,7 +10271,7 @@
         "catalyst": 55.6
       },
       {
-        "name": "First Horizon Corporation",
+        "name": "FHN（米国上場企業）",
         "code": "FHN",
         "price": 25.05,
         "valuation": 62.8,
@@ -10281,7 +10281,7 @@
         "catalyst": 62.2
       },
       {
-        "name": "News Corporation",
+        "name": "NWSA（米国上場企業）",
         "code": "NWSA",
         "price": 30.73,
         "valuation": 59.5,
@@ -10291,7 +10291,7 @@
         "catalyst": 34.7
       },
       {
-        "name": "SiriusXM Holdings Inc.",
+        "name": "SIRI（米国上場企業）",
         "code": "SIRI",
         "price": 29.25,
         "valuation": 57.4,
@@ -10301,7 +10301,7 @@
         "catalyst": 60.4
       },
       {
-        "name": "Paramount Skydance Corporation",
+        "name": "PSKY（米国上場企業）",
         "code": "PSKY",
         "price": 10.81,
         "valuation": 41.9,
@@ -10311,7 +10311,7 @@
         "catalyst": 33.0
       },
       {
-        "name": "GoPro, Inc.",
+        "name": "GPRO（米国上場企業）",
         "code": "GPRO",
         "price": 1.8,
         "valuation": 53.6,
@@ -10321,7 +10321,7 @@
         "catalyst": 38.9
       },
       {
-        "name": "Endeavour Silver Corporation",
+        "name": "EXK（米国上場企業）",
         "code": "EXK",
         "price": 11.23,
         "valuation": 47.6,
@@ -10331,7 +10331,7 @@
         "catalyst": 70.8
       },
       {
-        "name": "Sony Group Corporation",
+        "name": "SONY（米国上場企業）",
         "code": "SONY",
         "price": 24.64,
         "valuation": 73.5,
@@ -10341,7 +10341,7 @@
         "catalyst": 69.5
       },
       {
-        "name": "Kimco Realty Corporation (HC)",
+        "name": "KIM（米国上場企業）",
         "code": "KIM",
         "price": 23.82,
         "valuation": 48.2,
@@ -10351,7 +10351,7 @@
         "catalyst": 49.3
       },
       {
-        "name": "SELLAS Life Sciences Group, Inc",
+        "name": "SLS（米国上場企業）",
         "code": "SLS",
         "price": 14.05,
         "valuation": 40.7,
@@ -10361,7 +10361,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Banco Bradesco Sa",
+        "name": "BBD（米国上場企業）",
         "code": "BBD",
         "price": 3.45,
         "valuation": 56.9,
@@ -10371,7 +10371,7 @@
         "catalyst": 60.6
       },
       {
-        "name": "Uranium Energy Corp.",
+        "name": "UEC（米国上場企業）",
         "code": "UEC",
         "price": 11.52,
         "valuation": 43.5,
@@ -10381,7 +10381,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "XP Inc.",
+        "name": "XP（米国上場企業）",
         "code": "XP",
         "price": 19.96,
         "valuation": 76.3,
@@ -10391,7 +10391,7 @@
         "catalyst": 58.0
       },
       {
-        "name": "Energy Fuels Inc",
+        "name": "UUUU（米国上場企業）",
         "code": "UUUU",
         "price": 14.39,
         "valuation": 42.2,
@@ -10401,7 +10401,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "QuantumScape Corporation",
+        "name": "QS（米国上場企業）",
         "code": "QS",
         "price": 5.45,
         "valuation": 56.8,
@@ -10411,7 +10411,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Vistance Networks, Inc.",
+        "name": "VISN（米国上場企業）",
         "code": "VISN",
         "price": 6.36,
         "valuation": 62.7,
@@ -10421,7 +10421,7 @@
         "catalyst": 70.4
       },
       {
-        "name": "Ambev S.A.",
+        "name": "ABEV（米国上場企業）",
         "code": "ABEV",
         "price": 3.03,
         "valuation": 68.2,
@@ -10431,7 +10431,7 @@
         "catalyst": 60.4
       },
       {
-        "name": "Patterson-UTI Energy, Inc.",
+        "name": "PTEN（米国上場企業）",
         "code": "PTEN",
         "price": 12.38,
         "valuation": 58.0,
@@ -10441,7 +10441,7 @@
         "catalyst": 50.3
       },
       {
-        "name": "Summit Therapeutics Inc.",
+        "name": "SMMT（米国上場企業）",
         "code": "SMMT",
         "price": 17.39,
         "valuation": 40.5,
@@ -10451,7 +10451,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Healthpeak Properties, Inc.",
+        "name": "DOC（米国上場企業）",
         "code": "DOC",
         "price": 20.8,
         "valuation": 43.0,
@@ -10461,7 +10461,7 @@
         "catalyst": 73.3
       },
       {
-        "name": "Denison Mines Corp",
+        "name": "DNN（米国上場企業）",
         "code": "DNN",
         "price": 3.42,
         "valuation": 30.6,
@@ -10471,7 +10471,7 @@
         "catalyst": 56.8
       },
       {
-        "name": "XPeng Inc.",
+        "name": "XPEV（米国上場企業）",
         "code": "XPEV",
         "price": 10.93,
         "valuation": 62.4,
@@ -10481,7 +10481,7 @@
         "catalyst": 53.1
       },
       {
-        "name": "Avantor, Inc.",
+        "name": "AVTR（米国上場企業）",
         "code": "AVTR",
         "price": 15.01,
         "valuation": 56.0,
@@ -10491,7 +10491,7 @@
         "catalyst": 36.0
       },
       {
-        "name": "Ericsson",
+        "name": "ERIC（米国上場企業）",
         "code": "ERIC",
         "price": 10.12,
         "valuation": 61.1,
@@ -10501,7 +10501,7 @@
         "catalyst": 42.7
       },
       {
-        "name": "Eos Energy Enterprises, Inc.",
+        "name": "EOSE（米国上場企業）",
         "code": "EOSE",
         "price": 3.6,
         "valuation": 46.0,
@@ -10511,7 +10511,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Capricor Therapeutics, Inc.",
+        "name": "CAPR（米国上場企業）",
         "code": "CAPR",
         "price": 9.47,
         "valuation": 58.2,
@@ -10521,7 +10521,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Haleon plc",
+        "name": "HLN（米国上場企業）",
         "code": "HLN",
         "price": 9.59,
         "valuation": 58.1,
@@ -10531,7 +10531,7 @@
         "catalyst": 48.8
       },
       {
-        "name": "Hertz Global Holdings, Inc",
+        "name": "HTZ（米国上場企業）",
         "code": "HTZ",
         "price": 2.3,
         "valuation": 45.7,
@@ -10541,7 +10541,7 @@
         "catalyst": 53.8
       },
       {
-        "name": "Wendy's Company (The)",
+        "name": "WEN（米国上場企業）",
         "code": "WEN",
         "price": 8.07,
         "valuation": 49.8,
@@ -10551,7 +10551,7 @@
         "catalyst": 35.7
       },
       {
-        "name": "Valley National Bancorp",
+        "name": "VLY（米国上場企業）",
         "code": "VLY",
         "price": 14.02,
         "valuation": 58.9,
@@ -10561,7 +10561,7 @@
         "catalyst": 68.4
       },
       {
-        "name": "V.F. Corporation",
+        "name": "VFC（米国上場企業）",
         "code": "VFC",
         "price": 13.39,
         "valuation": 56.5,
@@ -10571,7 +10571,7 @@
         "catalyst": 48.0
       },
       {
-        "name": "Red Cat Holdings, Inc.",
+        "name": "RCAT（米国上場企業）",
         "code": "RCAT",
         "price": 8.4,
         "valuation": 47.8,
@@ -10581,7 +10581,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "JBS N.V.",
+        "name": "JBS（米国上場企業）",
         "code": "JBS",
         "price": 13.19,
         "valuation": 56.0,
@@ -10591,7 +10591,7 @@
         "catalyst": 55.3
       },
       {
-        "name": "POET Technologies Inc.",
+        "name": "POET（米国上場企業）",
         "code": "POET",
         "price": 7.73,
         "valuation": 51.6,
@@ -10601,7 +10601,7 @@
         "catalyst": 70.4
       },
       {
-        "name": "Defiance Daily Target 2X Long I",
+        "name": "IRE（米国上場企業）",
         "code": "IRE",
         "price": 10.86,
         "valuation": 50.0,
@@ -10611,7 +10611,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "BlackBerry Limited",
+        "name": "BB（米国上場企業）",
         "code": "BB",
         "price": 7.76,
         "valuation": 39.0,
@@ -10621,7 +10621,7 @@
         "catalyst": 80.4
       },
       {
-        "name": "Lumen Technologies, Inc.",
+        "name": "LUMN（米国上場企業）",
         "code": "LUMN",
         "price": 6.79,
         "valuation": 45.6,
@@ -10631,7 +10631,7 @@
         "catalyst": 46.4
       },
       {
-        "name": "Netskope, Inc.",
+        "name": "NTSK（米国上場企業）",
         "code": "NTSK",
         "price": 13.97,
         "valuation": 38.2,
@@ -10641,7 +10641,7 @@
         "catalyst": 60.5
       },
       {
-        "name": "Albertsons Companies, Inc.",
+        "name": "ACI（米国上場企業）",
         "code": "ACI",
         "price": 12.55,
         "valuation": 40.2,
@@ -10651,7 +10651,7 @@
         "catalyst": 32.1
       },
       {
-        "name": "HIVE Digital Technologies Ltd",
+        "name": "HIVE（米国上場企業）",
         "code": "HIVE",
         "price": 3.06,
         "valuation": 56.5,
@@ -10661,7 +10661,7 @@
         "catalyst": 68.5
       },
       {
-        "name": "SharpLink, Inc.",
+        "name": "SBET（米国上場企業）",
         "code": "SBET",
         "price": 8.59,
         "valuation": 45.7,
@@ -10671,7 +10671,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Freshworks Inc.",
+        "name": "FRSH（米国上場企業）",
         "code": "FRSH",
         "price": 12.78,
         "valuation": 60.8,
@@ -10681,7 +10681,7 @@
         "catalyst": 56.1
       },
       {
-        "name": "Sunrun Inc.",
+        "name": "RUN（米国上場企業）",
         "code": "RUN",
         "price": 8.81,
         "valuation": 57.5,
@@ -10691,7 +10691,7 @@
         "catalyst": 47.7
       },
       {
-        "name": "Crescent Energy Company",
+        "name": "CRGY（米国上場企業）",
         "code": "CRGY",
         "price": 13.77,
         "valuation": 42.2,
@@ -10701,7 +10701,7 @@
         "catalyst": 87.1
       },
       {
-        "name": "Full Truck Alliance Co. Ltd.",
+        "name": "YMM（米国上場企業）",
         "code": "YMM",
         "price": 8.68,
         "valuation": 75.9,
@@ -10711,7 +10711,7 @@
         "catalyst": 51.9
       },
       {
-        "name": "StoneCo Ltd.",
+        "name": "STNE（米国上場企業）",
         "code": "STNE",
         "price": 10.18,
         "valuation": 57.9,
@@ -10721,7 +10721,7 @@
         "catalyst": 43.3
       },
       {
-        "name": "Fortuna Mining Corp.",
+        "name": "S&P トロント総合指数",
         "code": "FSM",
         "price": 12.43,
         "valuation": 64.5,
@@ -10731,7 +10731,7 @@
         "catalyst": 83.4
       },
       {
-        "name": "Lloyds Banking Group Plc",
+        "name": "LYG（米国上場企業）",
         "code": "LYG",
         "price": 6.07,
         "valuation": 61.5,
@@ -10741,7 +10741,7 @@
         "catalyst": 62.5
       },
       {
-        "name": "Brookdale Senior Living Inc.",
+        "name": "BKD（米国上場企業）",
         "code": "BKD",
         "price": 11.9,
         "valuation": 45.1,
@@ -10751,7 +10751,7 @@
         "catalyst": 46.5
       },
       {
-        "name": "Cemex, S.A.B. de C.V. Sponsored",
+        "name": "CX（米国上場企業）",
         "code": "CX",
         "price": 11.05,
         "valuation": 56.4,
@@ -10761,7 +10761,7 @@
         "catalyst": 54.7
       },
       {
-        "name": "Fluence Energy, Inc.",
+        "name": "FLNC（米国上場企業）",
         "code": "FLNC",
         "price": 10.28,
         "valuation": 58.1,
@@ -10771,7 +10771,7 @@
         "catalyst": 53.1
       },
       {
-        "name": "Baytex Energy Corp",
+        "name": "BTE（米国上場企業）",
         "code": "BTE",
         "price": 4.85,
         "valuation": 61.4,
@@ -10781,7 +10781,7 @@
         "catalyst": 74.7
       },
       {
-        "name": "D/B/A Sibanye-Stillwater Limite",
+        "name": "SBSW（米国上場企業）",
         "code": "SBSW",
         "price": 12.95,
         "valuation": 49.6,
@@ -10791,7 +10791,7 @@
         "catalyst": 67.5
       },
       {
-        "name": "Quantum Computing Inc.",
+        "name": "QUBT（米国上場企業）",
         "code": "QUBT",
         "price": 7.97,
         "valuation": 51.4,
@@ -10801,7 +10801,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "CCC Intelligent Solutions Holdi",
+        "name": "CCC（米国上場企業）",
         "code": "CCC",
         "price": 7.3,
         "valuation": 43.1,
@@ -10811,7 +10811,7 @@
         "catalyst": 73.7
       },
       {
-        "name": "CID HoldCo, Inc.",
+        "name": "DAIC（米国上場企業）",
         "code": "DAIC",
         "price": 3.39,
         "valuation": 51.6,
@@ -10821,7 +10821,7 @@
         "catalyst": 30.1
       },
       {
-        "name": "F.N.B. Corporation",
+        "name": "FNB（米国上場企業）",
         "code": "FNB",
         "price": 18.68,
         "valuation": 58.2,
@@ -10831,7 +10831,7 @@
         "catalyst": 59.8
       },
       {
-        "name": "Companhia de saneamento Basico ",
+        "name": "SBS（米国上場企業）",
         "code": "SBS",
         "price": 5.18,
         "valuation": 55.4,
@@ -10841,7 +10841,7 @@
         "catalyst": 42.1
       },
       {
-        "name": "Dynex Capital, Inc.",
+        "name": "DX（米国上場企業）",
         "code": "DX",
         "price": 12.94,
         "valuation": 50.6,
@@ -10851,7 +10851,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Rezolve AI PLC",
+        "name": "RZLV（米国上場企業）",
         "code": "RZLV",
         "price": 2.2,
         "valuation": 53.3,
@@ -10861,7 +10861,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "ImmunityBio, Inc.",
+        "name": "IBRX（米国上場企業）",
         "code": "IBRX",
         "price": 8.07,
         "valuation": 38.2,
@@ -10871,7 +10871,7 @@
         "catalyst": 69.8
       },
       {
-        "name": "Park Hotels & Resorts Inc.",
+        "name": "PK（米国上場企業）",
         "code": "PK",
         "price": 15.26,
         "valuation": 51.6,
@@ -10881,7 +10881,7 @@
         "catalyst": 50.4
       },
       {
-        "name": "Alignment Healthcare, Inc.",
+        "name": "AIアライメント",
         "code": "ALHC",
         "price": 13.53,
         "valuation": 44.2,
@@ -10891,7 +10891,7 @@
         "catalyst": 82.1
       },
       {
-        "name": "Western Union Company (The)",
+        "name": "WU（米国上場企業）",
         "code": "WU",
         "price": 7.22,
         "valuation": 58.4,
@@ -10901,7 +10901,7 @@
         "catalyst": 35.9
       },
       {
-        "name": "Critical Metals Corp.",
+        "name": "CRML（米国上場企業）",
         "code": "CRML",
         "price": 7.44,
         "valuation": 40.4,
@@ -10911,7 +10911,7 @@
         "catalyst": 66.7
       },
       {
-        "name": "Nexgen Energy Ltd.",
+        "name": "NXE（米国上場企業）",
         "code": "NXE",
         "price": 10.73,
         "valuation": 51.8,
@@ -10921,7 +10921,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Lucid Group, Inc.",
+        "name": "LCID（米国上場企業）",
         "code": "LCID",
         "price": 4.59,
         "valuation": 45.1,
@@ -10931,7 +10931,7 @@
         "catalyst": 66.4
       },
       {
-        "name": "C3.ai, Inc.",
+        "name": "AI（米国上場企業）",
         "code": "AI",
         "price": 10.6,
         "valuation": 56.7,
@@ -10941,7 +10941,7 @@
         "catalyst": 40.7
       },
       {
-        "name": "StubHub Holdings, Inc.",
+        "name": "STUB（米国上場企業）",
         "code": "STUB",
         "price": 6.49,
         "valuation": 62.3,
@@ -10951,7 +10951,7 @@
         "catalyst": 61.6
       },
       {
-        "name": "Telus Corporation",
+        "name": "TU（米国上場企業）",
         "code": "TU",
         "price": 9.69,
         "valuation": 50.7,
@@ -10961,7 +10961,7 @@
         "catalyst": 49.1
       },
       {
-        "name": "BigBear.ai, Inc.",
+        "name": "BBAI（米国上場企業）",
         "code": "BBAI",
         "price": 2.93,
         "valuation": 52.0,
@@ -10971,7 +10971,7 @@
         "catalyst": 55.1
       },
       {
-        "name": "Flagstar Bank, N.A.",
+        "name": "FLG（米国上場企業）",
         "code": "FLG",
         "price": 13.56,
         "valuation": 39.9,
@@ -10981,7 +10981,7 @@
         "catalyst": 55.9
       },
       {
-        "name": "Amprius Technologies, Inc.",
+        "name": "AMPX（米国上場企業）",
         "code": "AMPX",
         "price": 9.81,
         "valuation": 36.9,
@@ -10991,7 +10991,7 @@
         "catalyst": 70.6
       },
       {
-        "name": "Recursion Pharmaceuticals, Inc.",
+        "name": "RXRX（米国上場企業）",
         "code": "RXRX",
         "price": 3.62,
         "valuation": 47.6,
@@ -11001,7 +11001,7 @@
         "catalyst": 33.0
       },
       {
-        "name": "AtaiBeckley Inc.",
+        "name": "ATAI（米国上場企業）",
         "code": "ATAI",
         "price": 7.34,
         "valuation": 32.0,
@@ -11011,7 +11011,7 @@
         "catalyst": 70.8
       },
       {
-        "name": "Gerdau S.A.",
+        "name": "GGB（米国上場企業）",
         "code": "GGB",
         "price": 4.98,
         "valuation": 55.6,
@@ -11021,7 +11021,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "Trekor Metals Limited",
+        "name": "TGB（米国上場企業）",
         "code": "TGB",
         "price": 8.46,
         "valuation": 41.7,
@@ -11031,7 +11031,7 @@
         "catalyst": 65.0
       },
       {
-        "name": "AMC Entertainment Holdings, Inc",
+        "name": "AMC（米国上場企業）",
         "code": "AMC",
         "price": 2.68,
         "valuation": 45.4,
@@ -11041,7 +11041,7 @@
         "catalyst": 55.5
       },
       {
-        "name": "The Goodyear Tire & Rubber Comp",
+        "name": "GT（米国上場企業）",
         "code": "GT",
         "price": 6.24,
         "valuation": 52.0,
@@ -11051,7 +11051,7 @@
         "catalyst": 48.1
       },
       {
-        "name": "Columbia Financial, Inc.",
+        "name": "CLBK（米国上場企業）",
         "code": "CLBK",
         "price": 11.68,
         "valuation": 58.3,
@@ -11061,7 +11061,7 @@
         "catalyst": 62.4
       },
       {
-        "name": "Bit Digital, Inc.",
+        "name": "BTBT（米国上場企業）",
         "code": "BTBT",
         "price": 1.62,
         "valuation": 49.5,
@@ -11071,7 +11071,7 @@
         "catalyst": 59.4
       },
       {
-        "name": "Flowers Foods, Inc.",
+        "name": "FLO（米国上場企業）",
         "code": "FLO",
         "price": 6.33,
         "valuation": 55.1,
@@ -11081,7 +11081,7 @@
         "catalyst": 52.7
       },
       {
-        "name": "ADT Inc.",
+        "name": "ADT（米国上場企業）",
         "code": "ADT",
         "price": 7.45,
         "valuation": 55.9,
@@ -11091,7 +11091,7 @@
         "catalyst": 51.6
       },
       {
-        "name": "Asana, Inc.",
+        "name": "ASAN（米国上場企業）",
         "code": "ASAN",
         "price": 8.68,
         "valuation": 46.4,
@@ -11101,7 +11101,7 @@
         "catalyst": 53.9
       },
       {
-        "name": "Sable Offshore Corp.",
+        "name": "SOC（米国上場企業）",
         "code": "SOC",
         "price": 4.77,
         "valuation": 44.8,
@@ -11111,7 +11111,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Under Armour, Inc.",
+        "name": "UAA（米国上場企業）",
         "code": "UAA",
         "price": 5.23,
         "valuation": 56.2,
@@ -11121,7 +11121,7 @@
         "catalyst": 48.7
       },
       {
-        "name": "Butterfly Network, Inc.",
+        "name": "BFLY（米国上場企業）",
         "code": "BFLY",
         "price": 7.32,
         "valuation": 36.4,
@@ -11131,7 +11131,7 @@
         "catalyst": 63.2
       },
       {
-        "name": "United States Antimony Corporat",
+        "name": "UAMY（米国上場企業）",
         "code": "UAMY",
         "price": 5.22,
         "valuation": 41.4,
@@ -11141,7 +11141,7 @@
         "catalyst": 24.3
       },
       {
-        "name": "Graphic Packaging Holding Compa",
+        "name": "GPK（米国上場企業）",
         "code": "GPK",
         "price": 10.45,
         "valuation": 55.6,
@@ -11151,7 +11151,7 @@
         "catalyst": 30.2
       },
       {
-        "name": "BTC Digital Ltd.",
+        "name": "BTCT（米国上場企業）",
         "code": "BTCT",
         "price": 1.78,
         "valuation": 61.2,
@@ -11161,7 +11161,7 @@
         "catalyst": 50.2
       },
       {
-        "name": "DENTSPLY SIRONA Inc.",
+        "name": "XRAY（米国上場企業）",
         "code": "XRAY",
         "price": 11.43,
         "valuation": 52.5,
@@ -11171,7 +11171,7 @@
         "catalyst": 48.4
       },
       {
-        "name": "Novagold Resources Inc.",
+        "name": "NG（米国上場企業）",
         "code": "NG",
         "price": 8.09,
         "valuation": 47.9,
@@ -11181,7 +11181,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Rithm Capital Corp.",
+        "name": "RITM（米国上場企業）",
         "code": "RITM",
         "price": 10.09,
         "valuation": 54.4,
@@ -11191,7 +11191,7 @@
         "catalyst": 33.5
       },
       {
-        "name": "Newell Brands Inc.",
+        "name": "NWL（米国上場企業）",
         "code": "NWL",
         "price": 6.14,
         "valuation": 51.5,
@@ -11201,7 +11201,7 @@
         "catalyst": 72.0
       },
       {
-        "name": "Aegon Ltd. New York Registry Sh",
+        "name": "AEG（米国上場企業）",
         "code": "AEG",
         "price": 9.22,
         "valuation": 65.3,
@@ -11211,7 +11211,7 @@
         "catalyst": 50.4
       },
       {
-        "name": "Peloton Interactive, Inc.",
+        "name": "PTON（米国上場企業）",
         "code": "PTON",
         "price": 5.38,
         "valuation": 50.8,
@@ -11221,7 +11221,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Medical Properties Trust, Inc.",
+        "name": "MPT（米国上場企業）",
         "code": "MPT",
         "price": 4.01,
         "valuation": 50.1,
@@ -11231,7 +11231,7 @@
         "catalyst": 50.7
       },
       {
-        "name": "Genius Sports Limited",
+        "name": "GENI（米国上場企業）",
         "code": "GENI",
         "price": 7.43,
         "valuation": 53.7,
@@ -11241,7 +11241,7 @@
         "catalyst": 67.6
       },
       {
-        "name": "VNET Group, Inc.",
+        "name": "VNET（米国上場企業）",
         "code": "VNET",
         "price": 6.36,
         "valuation": 49.7,
@@ -11251,7 +11251,7 @@
         "catalyst": 55.5
       },
       {
-        "name": "Nuvation Bio Inc.",
+        "name": "NUVB（米国上場企業）",
         "code": "NUVB",
         "price": 6.78,
         "valuation": 39.3,
@@ -11261,7 +11261,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Precigen, Inc.",
+        "name": "PGEN（米国上場企業）",
         "code": "PGEN",
         "price": 7.14,
         "valuation": 28.7,
@@ -11271,7 +11271,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Shoals Technologies Group, Inc.",
+        "name": "SHLS（米国上場企業）",
         "code": "SHLS",
         "price": 7.11,
         "valuation": 55.5,
@@ -11281,7 +11281,7 @@
         "catalyst": 59.3
       },
       {
-        "name": "TMC the metals company Inc.",
+        "name": "TMC（米国上場企業）",
         "code": "TMC",
         "price": 4.43,
         "valuation": 50.5,
@@ -11291,7 +11291,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Sweetgreen, Inc.",
+        "name": "SG（米国上場企業）",
         "code": "SG",
         "price": 6.93,
         "valuation": 48.6,
@@ -11301,7 +11301,7 @@
         "catalyst": 51.5
       },
       {
-        "name": "Enovix Corporation",
+        "name": "ENVX（米国上場企業）",
         "code": "ENVX",
         "price": 3.38,
         "valuation": 42.3,
@@ -11311,7 +11311,7 @@
         "catalyst": 57.8
       },
       {
-        "name": "Kosmos Energy Ltd.",
+        "name": "KOS（米国上場企業）",
         "code": "KOS",
         "price": 2.78,
         "valuation": 49.9,
@@ -11321,7 +11321,7 @@
         "catalyst": 66.2
       },
       {
-        "name": "BellRing Brands, Inc.",
+        "name": "BRBR（米国上場企業）",
         "code": "BRBR",
         "price": 10.34,
         "valuation": 52.8,
@@ -11331,7 +11331,7 @@
         "catalyst": 71.5
       },
       {
-        "name": "Mobileye Global Inc.",
+        "name": "MBLY（米国上場企業）",
         "code": "MBLY",
         "price": 8.48,
         "valuation": 61.2,
@@ -11341,7 +11341,7 @@
         "catalyst": 50.2
       },
       {
-        "name": "indie Semiconductor, Inc.",
+        "name": "INDI（米国上場企業）",
         "code": "INDI",
         "price": 3.59,
         "valuation": 52.6,
@@ -11351,7 +11351,7 @@
         "catalyst": 58.9
       },
       {
-        "name": "New Era Energy & Digital, Inc.",
+        "name": "NUAI（米国上場企業）",
         "code": "NUAI",
         "price": 5.38,
         "valuation": 43.4,
@@ -11361,7 +11361,7 @@
         "catalyst": 30.8
       },
       {
-        "name": "Lithium Americas Corp.",
+        "name": "LAC（米国上場企業）",
         "code": "LAC",
         "price": 2.97,
         "valuation": 52.3,
@@ -11371,7 +11371,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Array Technologies, Inc.",
+        "name": "ARRY（米国上場企業）",
         "code": "ARRY",
         "price": 4.56,
         "valuation": 48.8,
@@ -11381,7 +11381,7 @@
         "catalyst": 28.4
       },
       {
-        "name": "Borr Drilling Limited",
+        "name": "BORR（米国上場企業）",
         "code": "BORR",
         "price": 4.55,
         "valuation": 50.5,
@@ -11391,7 +11391,7 @@
         "catalyst": 44.9
       },
       {
-        "name": "Rackspace Technology, Inc.",
+        "name": "RXT（米国上場企業）",
         "code": "RXT",
         "price": 3.23,
         "valuation": 45.5,
@@ -11401,7 +11401,7 @@
         "catalyst": 50.2
       },
       {
-        "name": "Inter & Co. Inc.",
+        "name": "INTR（米国上場企業）",
         "code": "INTR",
         "price": 5.72,
         "valuation": 56.6,
@@ -11411,7 +11411,7 @@
         "catalyst": 71.6
       },
       {
-        "name": "Orchid Island Capital, Inc.",
+        "name": "ORC（米国上場企業）",
         "code": "ORC",
         "price": 6.55,
         "valuation": 52.8,
@@ -11421,7 +11421,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Coursera, Inc.",
+        "name": "COUR（米国上場企業）",
         "code": "COUR",
         "price": 5.87,
         "valuation": 66.7,
@@ -11431,7 +11431,7 @@
         "catalyst": 66.9
       },
       {
-        "name": "Satellogic Inc.",
+        "name": "SATL（米国上場企業）",
         "code": "SATL",
         "price": 4.62,
         "valuation": 35.1,
@@ -11441,7 +11441,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Payoneer Global Inc.",
+        "name": "PAYO（米国上場企業）",
         "code": "PAYO",
         "price": 7.18,
         "valuation": 53.8,
@@ -11451,7 +11451,7 @@
         "catalyst": 52.0
       },
       {
-        "name": "PureCycle Technologies, Inc.",
+        "name": "PCT（米国上場企業）",
         "code": "PCT",
         "price": 6.38,
         "valuation": 25.9,
@@ -11461,7 +11461,7 @@
         "catalyst": 70.9
       },
       {
-        "name": "Clear Channel Outdoor Holdings,",
+        "name": "CCO（米国上場企業）",
         "code": "CCO",
         "price": 2.38,
         "valuation": 45.1,
@@ -11471,7 +11471,7 @@
         "catalyst": 53.4
       },
       {
-        "name": "Virgin Galactic Holdings, Inc.",
+        "name": "SPCE（米国上場企業）",
         "code": "SPCE",
         "price": 3.03,
         "valuation": 45.2,
@@ -11481,7 +11481,7 @@
         "catalyst": 32.1
       },
       {
-        "name": "UWM Holdings Corporation",
+        "name": "UWMC（米国上場企業）",
         "code": "UWMC",
         "price": 1.46,
         "valuation": 47.7,
@@ -11491,7 +11491,7 @@
         "catalyst": 31.8
       },
       {
-        "name": "ZoomInfo Technologies Inc.",
+        "name": "GTM（米国上場企業）",
         "code": "GTM",
         "price": 4.05,
         "valuation": 51.7,
@@ -11501,7 +11501,7 @@
         "catalyst": 50.5
       },
       {
-        "name": "Huntsman Corporation",
+        "name": "HUN（米国上場企業）",
         "code": "HUN",
         "price": 9.69,
         "valuation": 52.7,
@@ -11511,7 +11511,7 @@
         "catalyst": 55.4
       },
       {
-        "name": "Vizsla Silver Corp.",
+        "name": "VZLA（米国上場企業）",
         "code": "VZLA",
         "price": 4.05,
         "valuation": 55.5,
@@ -11521,7 +11521,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Tenax Therapeutics, Inc.",
+        "name": "TENX（米国上場企業）",
         "code": "TENX",
         "price": 1.86,
         "valuation": 66.4,
@@ -11531,7 +11531,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "i-80 Gold Corp.",
+        "name": "IAUX（米国上場企業）",
         "code": "IAUX",
         "price": 1.77,
         "valuation": 43.6,
@@ -11541,7 +11541,7 @@
         "catalyst": 45.2
       },
       {
-        "name": "Kopin Corporation",
+        "name": "KOPN（米国上場企業）",
         "code": "KOPN",
         "price": 4.29,
         "valuation": 24.9,
@@ -11551,7 +11551,7 @@
         "catalyst": 65.5
       },
       {
-        "name": "SEALSQ Corp",
+        "name": "LAES（米国上場企業）",
         "code": "LAES",
         "price": 2.4,
         "valuation": 53.5,
@@ -11561,7 +11561,7 @@
         "catalyst": 70.5
       },
       {
-        "name": "Coty Inc.",
+        "name": "COTY（米国上場企業）",
         "code": "COTY",
         "price": 2.95,
         "valuation": 52.5,
@@ -11571,7 +11571,7 @@
         "catalyst": 50.5
       },
       {
-        "name": "Energy Vault Holdings, Inc.",
+        "name": "NRGV（米国上場企業）",
         "code": "NRGV",
         "price": 3.89,
         "valuation": 39.8,
@@ -11581,7 +11581,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "Clover Health Investments, Corp",
+        "name": "CLOV（米国上場企業）",
         "code": "CLOV",
         "price": 4.24,
         "valuation": 57.2,
@@ -11591,7 +11591,7 @@
         "catalyst": 66.4
       },
       {
-        "name": "Cabaletta Bio, Inc.",
+        "name": "CABA（米国上場企業）",
         "code": "CABA",
         "price": 3.43,
         "valuation": 58.6,
@@ -11601,7 +11601,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Cypherpunk Technologies Inc.",
+        "name": "CYPH（米国上場企業）",
         "code": "CYPH",
         "price": 2.38,
         "valuation": 61.9,
@@ -11611,7 +11611,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Geron Corporation",
+        "name": "GERN（米国上場企業）",
         "code": "GERN",
         "price": 1.5,
         "valuation": 55.6,
@@ -11621,7 +11621,7 @@
         "catalyst": 56.5
       },
       {
-        "name": "Verra Mobility Corporation",
+        "name": "VRRM（米国上場企業）",
         "code": "VRRM",
         "price": 4.07,
         "valuation": 53.9,
@@ -11631,7 +11631,7 @@
         "catalyst": 54.5
       },
       {
-        "name": "Wipro Limited",
+        "name": "WIT（米国上場企業）",
         "code": "WIT",
         "price": 1.79,
         "valuation": 76.0,
@@ -11641,7 +11641,7 @@
         "catalyst": 54.5
       },
       {
-        "name": "Richtech Robotics Inc.",
+        "name": "RR（米国上場企業）",
         "code": "RR",
         "price": 1.76,
         "valuation": 55.3,
@@ -11651,7 +11651,7 @@
         "catalyst": 56.4
       },
       {
-        "name": "Soluna Holdings, Inc.",
+        "name": "SLNH（米国上場企業）",
         "code": "SLNH",
         "price": 1.2,
         "valuation": 56.7,
@@ -11661,7 +11661,7 @@
         "catalyst": 70.8
       },
       {
-        "name": "Sidus Space, Inc.",
+        "name": "SIDU（米国上場企業）",
         "code": "SIDU",
         "price": 2.08,
         "valuation": 53.3,
@@ -11671,7 +11671,7 @@
         "catalyst": 33.9
       },
       {
-        "name": "Allogene Therapeutics, Inc.",
+        "name": "ALLO（米国上場企業）",
         "code": "ALLO",
         "price": 2.0,
         "valuation": 49.5,
@@ -11681,7 +11681,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Pacific Biosciences of Californ",
+        "name": "PACB（米国上場企業）",
         "code": "PACB",
         "price": 1.32,
         "valuation": 44.3,
@@ -11691,7 +11691,7 @@
         "catalyst": 49.3
       },
       {
-        "name": "Comp En De Mn Cemig",
+        "name": "CIG（米国上場企業）",
         "code": "CIG",
         "price": 2.15,
         "valuation": 57.3,
@@ -11701,7 +11701,7 @@
         "catalyst": 42.5
       },
       {
-        "name": "American Battery Technology Com",
+        "name": "ABAT（米国上場企業）",
         "code": "ABAT",
         "price": 2.82,
         "valuation": 44.7,
@@ -11711,7 +11711,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "Ur Energy Inc",
+        "name": "URG（米国上場企業）",
         "code": "URG",
         "price": 1.38,
         "valuation": 40.7,
@@ -11721,7 +11721,7 @@
         "catalyst": 62.8
       },
       {
-        "name": "Clarivate Plc",
+        "name": "CLVT（米国上場企業）",
         "code": "CLVT",
         "price": 2.09,
         "valuation": 51.9,
@@ -11731,7 +11731,7 @@
         "catalyst": 47.8
       },
       {
-        "name": "Ballard Power Systems, Inc.",
+        "name": "BLDP（米国上場企業）",
         "code": "BLDP",
         "price": 2.36,
         "valuation": 61.5,
@@ -11741,7 +11741,7 @@
         "catalyst": 55.9
       },
       {
-        "name": "Linkhome Holdings Inc.",
+        "name": "LHAI（米国上場企業）",
         "code": "LHAI",
         "price": 1.12,
         "valuation": 63.5,
@@ -11751,7 +11751,7 @@
         "catalyst": 54.9
       },
       {
-        "name": "Autozi Internet Technology (Glo",
+        "name": "AZI（米国上場企業）",
         "code": "AZI",
         "price": 1.25,
         "valuation": 45.7,
@@ -11761,7 +11761,7 @@
         "catalyst": 32.6
       },
       {
-        "name": "Northern Dynasty Minerals, Ltd.",
+        "name": "NAK（米国上場企業）",
         "code": "NAK",
         "price": 1.48,
         "valuation": 40.3,
@@ -11771,7 +11771,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Battalion Oil Corporation",
+        "name": "BATL（米国上場企業）",
         "code": "BATL",
         "price": 1.29,
         "valuation": 46.9,
@@ -11781,7 +11781,7 @@
         "catalyst": 54.8
       },
       {
-        "name": "Ocugen, Inc.",
+        "name": "OCGN（米国上場企業）",
         "code": "OCGN",
         "price": 1.33,
         "valuation": 39.9,
@@ -11791,7 +11791,7 @@
         "catalyst": 53.3
       },
       {
-        "name": "Eshallgo Inc.",
+        "name": "EHGO（米国上場企業）",
         "code": "EHGO",
         "price": 1.11,
         "valuation": 70.8,
@@ -11801,7 +11801,7 @@
         "catalyst": 59.6
       },
       {
-        "name": "Sky Quarry Inc.",
+        "name": "SKYQ（米国上場企業）",
         "code": "SKYQ",
         "price": 2.63,
         "valuation": 48.1,
@@ -11811,7 +11811,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "Laser Photonics Corporation",
+        "name": "LASE（米国上場企業）",
         "code": "LASE",
         "price": 1.4,
         "valuation": 42.9,
@@ -11821,7 +11821,7 @@
         "catalyst": 39.1
       },
       {
-        "name": "Optimum Communications, Inc.",
+        "name": "OPTU（米国上場企業）",
         "code": "OPTU",
         "price": 1.03,
         "valuation": 45.7,
@@ -11831,7 +11831,7 @@
         "catalyst": 47.7
       },
       {
-        "name": "Creative Medical Technology Hol",
+        "name": "CELZ（米国上場企業）",
         "code": "CELZ",
         "price": 1.11,
         "valuation": 55.2,
@@ -11841,7 +11841,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "CervoMed Inc.",
+        "name": "CRVO（米国上場企業）",
         "code": "CRVO",
         "price": 2.56,
         "valuation": 52.1,
@@ -11851,7 +11851,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "SUNation Energy, Inc.",
+        "name": "SUNE（米国上場企業）",
         "code": "SUNE",
         "price": 2.36,
         "valuation": 65.1,
@@ -11861,7 +11861,7 @@
         "catalyst": 37.3
       },
       {
-        "name": "Zhengye Biotechnology Holding L",
+        "name": "ZYBT（米国上場企業）",
         "code": "ZYBT",
         "price": 1.66,
         "valuation": 56.9,
@@ -11871,7 +11871,7 @@
         "catalyst": 36.5
       },
       {
-        "name": "Baiya International Group Inc.",
+        "name": "BIYA（米国上場企業）",
         "code": "BIYA",
         "price": 2.3,
         "valuation": 58.7,
@@ -11881,7 +11881,7 @@
         "catalyst": 66.0
       },
       {
-        "name": "VS Media Holdings Limited",
+        "name": "VSME（米国上場企業）",
         "code": "VSME",
         "price": 1.03,
         "valuation": 55.1,

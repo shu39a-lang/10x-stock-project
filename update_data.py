@@ -11,7 +11,7 @@ R = Path(__file__).parent
 JST = timezone(timedelta(hours=9))
 
 SCREEN_TARGET = 500
-LIQUIDITY_KEEP = 200
+LIQUIDITY_KEEP = 500
 BATCH_SIZE = 50
 
 JPX_LIST_URL = (
@@ -411,8 +411,7 @@ def rank(market):
 
     fundamentals={}
     for i,x in enumerate(rows,1):
-        if x["symbol"] not in eligible:
-            continue
+        
         try:
             fundamentals[x["symbol"]]=info_scores(x["symbol"])
         except Exception:
@@ -436,7 +435,20 @@ def rank(market):
             key=lambda z:z["score"],
             reverse=True
         )[:20]
-
+    out["all"]=[
+        {
+            "name":x["name"],
+            "code":x["code"],
+            "price":x["price"],
+            "valuation":fundamentals[x["symbol"]]["valuation"],
+            "quality":fundamentals[x["symbol"]]["quality"],
+            "financial":fundamentals[x["symbol"]]["financial"],
+            "technical":x["technical"],
+            "catalyst":fundamentals[x["symbol"]]["catalyst"]
+        }
+        for x in rows
+        if x["symbol"] in fundamentals
+    ]
     stats={
         "source":source,
         "screen_target":SCREEN_TARGET,

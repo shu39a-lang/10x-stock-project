@@ -551,3 +551,78 @@ if(document.readyState==="loading"){
 }
 
 })();
+/* BUILD 50 - use analyzed scores from tenx_data.json */
+(function(){
+"use strict";
+
+async function applyTenxScore(){
+  const market=document.querySelector("#marketInput")?.value || "japan";
+  const code=(document.querySelector("#codeInput")?.value || "")
+    .trim().toUpperCase().replace(/\.T$/i,"");
+
+  if(!code) return;
+
+  try{
+    const r=await fetch("tenx_data.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok) return;
+
+    const data=await r.json();
+    const group=data?.[market];
+    if(!group) return;
+
+    const lists=[
+      group.short,
+      group.medium,
+      group.mid,
+      group.long
+    ].filter(Array.isArray);
+
+    let stock=null;
+
+    for(const list of lists){
+      stock=list.find(x =>
+        String(x?.code || "").toUpperCase().replace(/\.T$/i,"")===code
+      );
+      if(stock) break;
+    }
+
+    if(!stock) return;
+
+    const values={
+      valuation:Number(stock.valuation),
+      quality:Number(stock.quality),
+      financial:Number(stock.financial),
+      technical:Number(stock.technical),
+      catalyst:Number(stock.catalyst)
+    };
+
+    Object.entries(values).forEach(([id,val])=>{
+      if(!Number.isFinite(val)) return;
+      const el=document.querySelector("#"+id);
+      if(!el) return;
+      el.value=Math.round(val);
+      el.dispatchEvent(new Event("input",{bubbles:true}));
+    });
+
+  }catch(e){
+    console.log("tenx score load failed",e);
+  }
+}
+
+const code=document.querySelector("#codeInput");
+const market=document.querySelector("#marketInput");
+
+if(code){
+  code.addEventListener("change",applyTenxScore);
+  code.addEventListener("blur",applyTenxScore);
+  code.addEventListener("keyup",e=>{
+    if(e.key==="Enter") applyTenxScore();
+  });
+}
+
+if(market){
+  market.addEventListener("change",()=>{
+    if(code?.value.trim()) applyTenxScore();
+  });
+}
+})();

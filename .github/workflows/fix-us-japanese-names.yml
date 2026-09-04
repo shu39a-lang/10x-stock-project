@@ -1,0 +1,126 @@
+name: Fix US Japanese company names
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fix-us-japanese-names.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Convert US company names to Japanese
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("tenx_data.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          names = {
+              "DELL":"デル・テクノロジーズ",
+              "CNQ":"カナディアン・ナチュラル・リソーシズ",
+              "PBR":"ペトロブラス",
+              "COP":"コノコフィリップス",
+              "DVN":"デボン・エナジー",
+              "NEM":"ニューモント",
+              "NU":"ヌー・ホールディングス",
+              "OXY":"オキシデンタル・ペトロリアム",
+              "PAAS":"パン・アメリカン・シルバー",
+              "HAL":"ハリバートン",
+              "SHEL":"シェル",
+              "MDT":"メドトロニック",
+              "BMY":"ブリストル・マイヤーズ スクイブ",
+              "WFC":"ウェルズ・ファーゴ",
+              "B":"バーリック・マイニング",
+              "AAPL":"アップル",
+              "MSFT":"マイクロソフト",
+              "NVDA":"エヌビディア",
+              "AMZN":"アマゾン・ドット・コム",
+              "META":"メタ・プラットフォームズ",
+              "TSLA":"テスラ",
+              "GOOG":"アルファベット",
+              "GOOGL":"アルファベット",
+              "MU":"マイクロン・テクノロジー",
+              "C":"シティグループ",
+              "JPM":"JPモルガン・チェース",
+              "XOM":"エクソンモービル",
+              "CVX":"シェブロン",
+              "AMD":"アドバンスト・マイクロ・デバイセズ",
+              "AVGO":"ブロードコム",
+              "ORCL":"オラクル",
+              "PLTR":"パランティア・テクノロジーズ",
+              "COIN":"コインベース・グローバル",
+              "COST":"コストコ・ホールセール",
+              "CRM":"セールスフォース",
+              "NFLX":"ネットフリックス",
+              "QCOM":"クアルコム",
+              "INTC":"インテル",
+              "BA":"ボーイング",
+              "BAC":"バンク・オブ・アメリカ",
+              "GS":"ゴールドマン・サックス",
+              "MS":"モルガン・スタンレー",
+              "WMT":"ウォルマート",
+              "DIS":"ウォルト・ディズニー",
+              "IBM":"IBM",
+              "KO":"コカ・コーラ",
+              "PEP":"ペプシコ",
+              "PFE":"ファイザー",
+              "PG":"プロクター・アンド・ギャンブル",
+              "V":"ビザ",
+              "MA":"マスターカード",
+              "UBER":"ウーバー・テクノロジーズ",
+              "TSM":"台湾積体電路製造（TSMC）",
+              "ASML":"ASMLホールディング",
+              "ARM":"アーム・ホールディングス"
+          }
+
+          changed = 0
+
+          for period in ("short", "medium", "long"):
+              rows = data.get("usa", {}).get(period, []) or []
+              for row in rows:
+                  if not isinstance(row, dict):
+                      continue
+                  symbol = str(
+                      row.get("code")
+                      or row.get("symbol")
+                      or row.get("ticker")
+                      or ""
+                  ).strip().upper()
+
+                  if symbol in names and row.get("name") != names[symbol]:
+                      row["name"] = names[symbol]
+                      changed += 1
+
+          path.write_text(
+              json.dumps(data, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
+
+          print("Changed US names:", changed)
+          PY
+
+      - name: Commit data only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add tenx_data.json
+          git diff --cached --quiet && exit 0
+
+          git commit -m "Fix US Japanese company names"
+          git push

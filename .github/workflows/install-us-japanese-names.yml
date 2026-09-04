@@ -236,7 +236,7 @@ jobs:
           data = json.loads(DATA.read_text(encoding="utf-8"))
           changed = 0
 
-          for period in ("short", "medium", "long"):
+          for period in ("short", "medium", "long", "all"):
               for row in data.get("usa", {}).get(period, []) or []:
                   if not isinstance(row, dict):
                       continue

@@ -23,6 +23,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python update_data.py
       - run: python fix_japanese_names.py
+      - run: python fix_us_japanese_names.py
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"

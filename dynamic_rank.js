@@ -1,8 +1,7 @@
 (function(){
 "use strict";
 
-const REMOTE_DATA =
-  "https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/main/tenx_data.json";
+const REMOTE_DATA = "tenx_data.json";
 
 function classifyStock(x){
   const score=Number(x.score)||0;

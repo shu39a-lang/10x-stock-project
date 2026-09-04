@@ -1,0 +1,60 @@
+name: Fix 10X logo zero
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fix-10x-logo-zero.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make 10X zero clearly readable
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          old = '.logo{font-family:Georgia,"Times New Roman",serif;'
+          new = '.logo{font-family:"Arial Black","Helvetica Neue",Arial,sans-serif;letter-spacing:.01em;'
+
+          if old in s:
+              s = s.replace(old, new, 1)
+          else:
+              s2, n = re.subn(
+                  r'(\.logo\{)font-family:[^;]+;',
+                  r'\1font-family:"Arial Black","Helvetica Neue",Arial,sans-serif;letter-spacing:.01em;',
+                  s,
+                  count=1
+              )
+              if n == 0:
+                  raise SystemExit("Could not find .logo font-family rule")
+              s = s2
+
+          p.write_text(s, encoding="utf-8")
+          print("10X logo font fixed")
+          PY
+
+      - name: Commit index only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add index.html
+          git diff --cached --quiet && exit 0
+
+          git commit -m "Fix 10X logo zero readability"
+          git push

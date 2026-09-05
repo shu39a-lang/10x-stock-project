@@ -518,6 +518,7 @@ def diversified_top20(candidates,strongest_group):
         used.add(item["code"])
 
     return selected[:20]
+    
 def main():
     data = json.loads(
         DATA.read_text(
@@ -599,9 +600,9 @@ def main():
         }[h]
 
         heat_w = {
-            "short":0.28,
-            "medium":0.10,
-            "long":0.04
+            "short":0.32,
+            "medium":0.12,
+            "long":0.05
         }[h]
 
         candidates = []

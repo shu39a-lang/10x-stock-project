@@ -83,7 +83,7 @@ function balancedTop10(arr){
         const dc=selected[i][3];
         const diff=Number(selected[i][2])-Number(cand[2]);
 
-        if(dc!==c && count[dc]>target[dc] && diff<=2){
+        if(dc!==c && count[dc]>target[dc]){
           swap=i;
           break;
         }

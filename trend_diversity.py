@@ -475,6 +475,7 @@ def build_group_trends(rows,prices,sectors,h):
 def diversified_top20(candidates,strongest_group):
     selected = []
     counts = {}
+    skipped = []
 
     for item in candidates:
         group = item["_group"]
@@ -486,37 +487,37 @@ def diversified_top20(candidates,strongest_group):
         )
 
         if counts.get(group,0)>=cap:
+            skipped.append(item)
             continue
 
         selected.append(item)
         counts[group] = counts.get(group,0)+1
 
         if len(selected)==20:
+            return selected
+
+    used = {
+        x["code"]
+        for x in selected
+    }
+
+    for item in skipped:
+        if len(selected)>=20:
             break
 
-    if len(selected)<20:
-        used = {
-            x["code"]
-            for x in selected
-        }
+        if item["code"] in used:
+            continue
 
-        for item in candidates:
-            if item["code"] in used:
-                continue
+        group = item["_group"]
 
-            group = item["_group"]
+        if group=="銀行" and counts.get("銀行",0)>=4:
+            continue
 
-            if counts.get(group,0)>=4:
-                continue
+        selected.append(item)
+        counts[group] = counts.get(group,0)+1
+        used.add(item["code"])
 
-            selected.append(item)
-            counts[group] = counts.get(group,0)+1
-
-            if len(selected)==20:
-                break
-
-    return selected
-
+    return selected[:20]
 def main():
     data = json.loads(
         DATA.read_text(

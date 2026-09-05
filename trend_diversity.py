@@ -75,8 +75,7 @@ def theme_for(code, name, sector):
     code = str(code)
     name = str(name or "")
     sector = str(sector or "その他")
-
-        bank_keywords = (
+    bank_keywords = (
         "銀行",
         "フィナンシャルグループ",
         "フィナンシャル・グループ",

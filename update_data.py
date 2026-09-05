@@ -1,4 +1,4 @@
-import json, time, re
+import json, time, re, io
 from urllib.parse import urljoin
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
@@ -97,12 +97,19 @@ def mean_with_confidence(values, expected):
 
 def load_jpx_japanese_names():
     try:
-        page = __import__("urllib.request", fromlist=["urlopen"]).urlopen(
-            JPX_LIST_PAGE
-        ).read().decode("utf-8", errors="ignore")
+                urllib_request = __import__(
+            "urllib.request",
+            fromlist=["Request", "urlopen"]
+        )
+
+        headers = {"User-Agent": "Mozilla/5.0"}
+        req = urllib_request.Request(JPX_LIST_PAGE, headers=headers)
+
+        with urllib_request.urlopen(req, timeout=30) as response:
+            page = response.read().decode("utf-8", errors="ignore")
 
         match = re.search(
-            r'href=["\']([^"\']+\.(?:xls|xlsx))',
+            r'href=["\']([^"\']+\.(?:xls|xlsx)(?:\?[^"\']*)?)',
             page,
             re.I
         )
@@ -110,7 +117,15 @@ def load_jpx_japanese_names():
             raise ValueError("JPX Excel link not found")
 
         excel_url = urljoin(JPX_LIST_PAGE, match.group(1))
-        df = pd.read_excel(excel_url, dtype={"コード": str})
+        excel_req = urllib_request.Request(excel_url, headers=headers)
+
+        with urllib_request.urlopen(excel_req, timeout=30) as response:
+            excel_bytes = response.read()
+
+        df = pd.read_excel(
+            io.BytesIO(excel_bytes),
+            dtype={"コード": str}
+        )
         code_col = "コード"
         name_col = "銘柄名"
 

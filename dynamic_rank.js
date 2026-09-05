@@ -45,12 +45,66 @@ function rankColor(category){
   return "#c90035";
 }
 
-function decorateRanking(){
+function balancedTop10(arr){
+  const top20=arr.slice(0,20);
+  const selected=top20.slice(0,10);
+  const cats=["上昇期待","安定上昇","成長株"];
+
+  const total={};
+  const target={};
+  const count={};
+
+  cats.forEach(c=>{
+    total[c]=top20.filter(x=>x[3]===c).length;
+    target[c]=Math.floor(total[c]/2);
+    count[c]=selected.filter(x=>x[3]===c).length;
+  });
+
+  let remain=10-cats.reduce((s,c)=>s+target[c],0);
+  cats
+    .slice()
+    .sort((a,b)=>(total[b]%2)-(total[a]%2)||total[b]-total[a])
+    .forEach(c=>{
+      if(remain>0){
+        target[c]++;
+        remain--;
+      }
+    });
+
+  cats.forEach(c=>{
+    while(count[c]<target[c]){
+      const cand=top20.slice(10).find(x=>
+        x[3]===c && !selected.includes(x)
+      );
+      if(!cand) break;
+
+      let swap=-1;
+      for(let i=selected.length-1;i>=0;i--){
+        const dc=selected[i][3];
+        const diff=Number(selected[i][2])-Number(cand[2]);
+
+        if(dc!==c && count[dc]>target[dc] && diff<=2){
+          swap=i;
+          break;
+        }
+      }
+
+      if(swap<0) break;
+
+      count[selected[swap][3]]--;
+      selected[swap]=cand;
+      count[c]++;
+    }
+  });
+
+  return selected.sort((a,b)=>Number(b[2])-Number(a[2]));
+}
+  function decorateRanking(){
   try{
     const arr=DATA[state.market][state.term];
     if(!Array.isArray(arr)) return;
 
-    const shown=state.showAll ? arr.slice(0,20) : arr.slice(0,10);
+    const shown=state.showAll ? arr.slice(0,20) : balancedTop10(arr);
     const rows=document.querySelectorAll(
       "#rankingTable .trow:not(.thead)"
     );

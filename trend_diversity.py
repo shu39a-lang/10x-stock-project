@@ -132,12 +132,44 @@ def theme_for(code,name,sector):
         "8551","8558","8562","8563","8600","8713"
     }
 
+    securities_codes = {
+        "8473","8601","8604","8613","8614","8616",
+        "8622","8624","8628","8697","8698"
+    }
+
+    finance_keywords = (
+        "証券",
+        "ＳＢＩホールディングス",
+        "SBIホールディングス",
+        "野村ホールディングス",
+        "大和証券グループ",
+        "マネックスグループ",
+        "松井証券",
+        "ＳＯＭＰＯ",
+        "SOMPO",
+        "ＭＳ＆ＡＤ",
+        "MS&AD",
+        "Ｔ＆Ｄホールディングス",
+        "T&Dホールディングス"
+    )
+
     if (
         sector=="銀行業"
         or code in bank_codes
         or any(k in name for k in bank_keywords)
     ):
         return "銀行"
+
+    if (
+        sector in (
+            "証券、商品先物取引業",
+            "その他金融業",
+            "保険業"
+        )
+        or code in securities_codes
+        or any(k in name for k in finance_keywords)
+    ):
+        return "金融・証券"
 
     if code in SEMICONDUCTOR_CODES or any(
         k in name for k in (
@@ -160,7 +192,8 @@ def theme_for(code,name,sector):
             "さくらインターネット",
             "オービック",
             "NEC",
-            "日本電気"
+            "日本電気",
+            "富士通"
         )
     ):
         return "AI・データセンター"
@@ -170,10 +203,20 @@ def theme_for(code,name,sector):
             "フジクラ",
             "住友電気",
             "古河電気",
+            "古河電工",
             "富士電機"
         )
     ):
-        return "電力・送配電"
+        return "電線・電力インフラ"
+
+    if sector in (
+        "電気機器",
+        "機械",
+        "精密機器",
+        "輸送用機器",
+        "情報・通信業"
+    ):
+        return "製造・IT"
 
     return sector if sector and sector!="nan" else "その他"
 

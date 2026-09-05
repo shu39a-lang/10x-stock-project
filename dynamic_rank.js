@@ -3,32 +3,40 @@
 
 const REMOTE_DATA = "tenx_data.json";
 
-function classifyStock(x){
+function classifyStock(x,market){
   const score=Number(x.score)||0;
   const quality=Number(x.quality)||0;
   const financial=Number(x.financial)||0;
   const technical=Number(x.technical)||0;
   const catalyst=Number(x.catalyst)||0;
 
-  if(quality>=75 && catalyst>=70){
+  if(market==="usa"){
+  if(quality>=72 && catalyst>=67){
     return "成長株";
   }
-
   if(financial>=62 && technical>=62 && score>=65){
     return "安定上昇";
   }
+}else{
+  if(quality>=75 && catalyst>=70){
+    return "成長株";
+  }
+  if(financial>=60 && technical>=60 && score>=64){
+    return "安定上昇";
+  }
+}
 
   return "上昇期待";
 }
 
-function convertRows(rows){
+function convertRows(rows,market){
   if(!Array.isArray(rows)) return [];
 
   return rows.slice(0,20).map(x => [
     String(x.code || ""),
     String(x.name || ""),
     Math.round(Number(x.score) || 0),
-    classifyStock(x)
+    classifyStock(x,market)
   ]);
 }
 
@@ -114,13 +122,13 @@ async function updateDynamicRanking(){
       throw new Error("ranking data invalid");
     }
 
-    DATA.japan.short=convertRows(j.japan.short);
-    DATA.japan.mid=convertRows(j.japan.medium);
-    DATA.japan.long=convertRows(j.japan.long);
+    DATA.japan.short=convertRows(j.japan.short,"japan");
+DATA.japan.mid=convertRows(j.japan.medium,"japan");
+DATA.japan.long=convertRows(j.japan.long,"japan");
 
-    DATA.usa.short=convertRows(j.usa.short);
-    DATA.usa.mid=convertRows(j.usa.medium);
-    DATA.usa.long=convertRows(j.usa.long);
+DATA.usa.short=convertRows(j.usa.short,"usa");
+DATA.usa.mid=convertRows(j.usa.medium,"usa");
+DATA.usa.long=convertRows(j.usa.long,"usa");
 
     installRankingDecorator();
 

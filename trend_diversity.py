@@ -516,49 +516,78 @@ def build_group_trends(rows,prices,sectors,h):
     }
 
 def diversified_top20(candidates,strongest_group):
+    if not candidates:
+        return []
+
+    # 市場で実際に注目されている上位100銘柄を優先
+    market_top100 = sorted(
+        candidates,
+        key=lambda x:(
+            x.get("market_heat",0),
+            x.get("score",0)
+        ),
+        reverse=True
+    )[:100]
+
     selected = []
     counts = {}
-    skipped = []
+    used = set()
 
-    for item in candidates:
+    # TOP20は市場上位100の中から、業種の偏りを抑えて選ぶ
+    for item in market_top100:
         group = item["_group"]
 
-        cap = (
-            4
-            if group==strongest_group
-            else 3
+        # 金融系は銀行＋金融・証券を合計で最大4
+        finance_count = (
+            counts.get("銀行",0)
+            + counts.get("金融・証券",0)
         )
 
-        if counts.get(group,0)>=cap:
-            skipped.append(item)
+        if (
+            group in ("銀行","金融・証券")
+            and finance_count>=4
+        ):
             continue
 
-        selected.append(item)
-        counts[group] = counts.get(group,0)+1
-
-        if len(selected)==20:
-            return selected
-
-    used = {
-        x["code"]
-        for x in selected
-    }
-
-    for item in skipped:
-        if len(selected)>=20:
-            break
-
-        if item["code"] in used:
-            continue
-
-        group = item["_group"]
-
-        if group=="銀行" and counts.get("銀行",0)>=4:
+        # その他の同一業種は原則最大3
+        if (
+            group not in ("銀行","金融・証券")
+            and counts.get(group,0)>=3
+        ):
             continue
 
         selected.append(item)
         counts[group] = counts.get(group,0)+1
         used.add(item["code"])
+
+        if len(selected)>=20:
+            break
+
+    # 20銘柄に届かなければ、市場上位100から制限を少し緩めて補充
+    if len(selected)<20:
+        for item in market_top100:
+            if item["code"] in used:
+                continue
+
+            group = item["_group"]
+
+            finance_count = (
+                counts.get("銀行",0)
+                + counts.get("金融・証券",0)
+            )
+
+            if (
+                group in ("銀行","金融・証券")
+                and finance_count>=4
+            ):
+                continue
+
+            selected.append(item)
+            counts[group] = counts.get(group,0)+1
+            used.add(item["code"])
+
+            if len(selected)>=20:
+                break
 
     return selected[:20]
     

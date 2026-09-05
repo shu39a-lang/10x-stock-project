@@ -3,6 +3,7 @@
 
 const box=document.createElement("div");
 box.id="quickBuyCheck";
+
 box.innerHTML=`
 <style>
 #quickBuyCheck{
@@ -11,7 +12,7 @@ box.innerHTML=`
  border:2px solid #ffc73d;
  border-radius:14px;
  background:linear-gradient(145deg,#07131f,#091b2b);
- box-shadow:0 0 16px rgba(255,199,61,.15)
+ box-shadow:0 0 18px rgba(255,199,61,.18)
 }
 #quickBuyCheck .qb-title{
  font-size:18px;
@@ -43,6 +44,7 @@ box.innerHTML=`
  border:1px solid #e0ac2b;
  border-radius:10px;
  background:linear-gradient(135deg,#ffd76a,#e9a91d);
+ color:#151009;
  font-weight:1000
 }
 #qbStatus{
@@ -71,46 +73,74 @@ box.innerHTML=`
 }
 .qb-main{
  margin-top:9px;
- padding:10px;
- border:1px solid #69364b;
+ padding:11px;
  border-radius:11px;
- background:linear-gradient(110deg,#3d0b1c,#0a1b31)
+ text-align:center
 }
 .qb-main small{
  display:block;
- color:#9dacbc
+ color:#d5dde6;
+ font-size:10px
 }
 .qb-main strong{
  display:block;
  margin-top:3px;
- font-size:24px
+ font-size:25px
 }
-.qb-buy{color:#ff6077}
-.qb-watch{color:#ffc73d}
-.qb-care{color:#a9b6c5}
-.qb-three{
+.qb-main.buy{
+ border:1px solid #ff3454;
+ background:linear-gradient(110deg,#6f091f,#260914)
+}
+.qb-main.watch{
+ border:1px solid #ffc73d;
+ background:linear-gradient(110deg,#57410a,#251d08)
+}
+.qb-main.care{
+ border:1px solid #2688ff;
+ background:linear-gradient(110deg,#092c62,#07182c)
+}
+.qb-main.buy strong{color:#ff526c}
+.qb-main.watch strong{color:#ffd34f}
+.qb-main.care strong{color:#4fa2ff}
+
+.qb-gauges{
  display:grid;
  grid-template-columns:repeat(3,1fr);
  gap:6px;
- margin-top:9px
+ margin-top:10px
 }
-.qb-card{
- padding:8px 4px;
- text-align:center;
+.qb-gauge{
  border:1px solid #294157;
- border-radius:10px;
- background:#081522
+ border-radius:11px;
+ background:#081522;
+ padding:8px 3px 7px;
+ text-align:center
 }
-.qb-card span{
- display:block;
- font-size:9px;
- color:#9aa9b8
+.qb-gauge-title{
+ font-size:10px;
+ font-weight:1000;
+ margin-bottom:3px
 }
-.qb-card b{
- display:block;
- margin-top:4px;
- font-size:14px
+.qb-gauge svg{
+ width:100%;
+ height:auto;
+ display:block
 }
+.qb-gauge-value{
+ margin-top:-2px;
+ font-size:13px;
+ font-weight:1000
+}
+.qb-zone{
+ display:flex;
+ justify-content:space-between;
+ gap:2px;
+ padding:0 3px;
+ margin-top:1px;
+ font-size:6px;
+ color:#7e8fa1
+}
+
 .qb-reason{
  margin-top:9px;
  padding:9px;
@@ -120,7 +150,9 @@ box.innerHTML=`
  font-size:10px;
  line-height:1.55
 }
-.qb-reason b{color:#ffc73d}
+.qb-reason b{
+ color:#ffc73d
+}
 .qb-detail{
  display:grid;
  grid-template-columns:1fr 1fr;
@@ -145,7 +177,9 @@ box.innerHTML=`
 </style>
 
 <div class="qb-title">📊 買い判断クイック診断 ⚡</div>
-<div class="qb-sub">気になる銘柄コードを入力して、現在の買い条件を確認</div>
+<div class="qb-sub">
+ 気になる銘柄コードを入力して、現在の買い条件を確認
+</div>
 
 <div class="qb-input">
  <input id="qbCode"
@@ -179,6 +213,7 @@ const n=(v,d=50)=>{
 const clamp=v=>Math.max(0,Math.min(100,v));
 
 async function loadData(){
+
  if(DATA_CACHE)return DATA_CACHE;
 
  const r=await fetch(
@@ -189,10 +224,12 @@ async function loadData(){
  if(!r.ok)throw new Error();
 
  DATA_CACHE=await r.json();
+
  return DATA_CACHE;
 }
 
 function findStock(data,code){
+
  code=String(code)
   .trim()
   .toUpperCase()
@@ -251,14 +288,14 @@ function judge(x){
  );
 
  let text="慎重";
- let cls="qb-care";
+ let cls="care";
 
  if(total>=69 && technical>=60){
   text="買い優勢";
-  cls="qb-buy";
+  cls="buy";
  }else if(total>=62){
   text="様子見";
-  cls="qb-watch";
+  cls="watch";
  }
 
  return{
@@ -275,12 +312,103 @@ function judge(x){
 }
 
 function level(v){
- if(v>=70)return"強い";
- if(v>=62)return"中立";
- return"弱い";
+
+ if(v>=69)return{
+  text:"買い優勢",
+  color:"#ff3d5e"
+ };
+
+ if(v>=62)return{
+  text:"様子見",
+  color:"#ffc73d"
+ };
+
+ return{
+  text:"慎重",
+  color:"#288cff"
+ };
+}
+
+function gaugeHTML(title,value){
+
+ value=clamp(value);
+
+ const angle=-90+(value/100)*180;
+ const rad=angle*Math.PI/180;
+
+ const cx=50;
+ const cy=48;
+ const len=30;
+
+ const x2=cx+Math.cos(rad)*len;
+ const y2=cy+Math.sin(rad)*len;
+
+ const lv=level(value);
+
+ return`
+ <div class="qb-gauge">
+
+  <div class="qb-gauge-title">
+   ${title}
+  </div>
+
+  <svg viewBox="0 0 100 58">
+
+   <path
+    d="M15 48 A35 35 0 0 1 28 21"
+    fill="none"
+    stroke="#288cff"
+    stroke-width="9"
+    stroke-linecap="round"/>
+
+   <path
+    d="M31 18 A35 35 0 0 1 69 18"
+    fill="none"
+    stroke="#ffc73d"
+    stroke-width="9"/>
+
+   <path
+    d="M72 21 A35 35 0 0 1 85 48"
+    fill="none"
+    stroke="#ff3d5e"
+    stroke-width="9"
+    stroke-linecap="round"/>
+
+   <line
+    x1="50"
+    y1="48"
+    x2="${x2}"
+    y2="${y2}"
+    stroke="#ffffff"
+    stroke-width="3"
+    stroke-linecap="round"/>
+
+   <circle
+    cx="50"
+    cy="48"
+    r="4"
+    fill="#ffffff"/>
+
+  </svg>
+
+  <div
+   class="qb-gauge-value"
+   style="color:${lv.color}">
+   ${lv.text}
+  </div>
+
+  <div class="qb-zone">
+   <span>慎重</span>
+   <span>様子見</span>
+   <span>買い優勢</span>
+  </div>
+
+ </div>
+ `;
 }
 
 function reasons(j){
+
  const a=[];
 
  if(j.score>=70)
@@ -320,9 +448,11 @@ function render(found){
   .join("<br>");
 
  document.querySelector("#qbResult").innerHTML=`
+
  <div class="qb-stock">
 
   <div>
+
    <div class="qb-name">
     ${x.code||""}　${x.name||""}
    </div>
@@ -335,48 +465,53 @@ function render(found){
      ?"日本株"
      :"米国株"}
    </div>
+
   </div>
 
   <div class="qb-price">
+
    ${Number.isFinite(price)
-     ?price.toLocaleString()
-     :"－"}
+    ?price.toLocaleString()
+    :"－"}
+
    ${found.market==="japan"
-     ?"円"
-     :"USD"}
+    ?"円"
+    :"USD"}
+
   </div>
 
  </div>
 
- <div class="qb-main">
+ <div class="qb-main ${j.cls}">
   <small>総合判断</small>
-  <strong class="${j.cls}">
-   ${j.text}
-  </strong>
+  <strong>${j.text}</strong>
  </div>
 
- <div class="qb-three">
+ <div class="qb-gauges">
 
-  <div class="qb-card">
-   <span>総合</span>
-   <b>${f(j.total)}</b>
-  </div>
+  ${gaugeHTML(
+   "総合",
+   j.total
+  )}
 
-  <div class="qb-card">
-   <span>テクニカル</span>
-   <b>${level(j.technical)}</b>
-  </div>
+  ${gaugeHTML(
+   "テクニカル",
+   j.technical
+  )}
 
-  <div class="qb-card">
-   <span>トレンド</span>
-   <b>${level(j.trend)}</b>
-  </div>
+  ${gaugeHTML(
+   "トレンド",
+   j.trend
+  )}
 
  </div>
 
  <div class="qb-reason">
+
   <b>💡 判断の理由</b><br>
+
   ${reason}
+
  </div>
 
  <div class="qb-detail">
@@ -414,12 +549,15 @@ function render(found){
  </div>
 
  <div class="qb-note">
+
   ※この診断は現在の分析データによる判断目安です。
   将来の株価上昇や利益を保証するものではありません。
+
  </div>
  `;
 
- document.querySelector("#qbResult").hidden=false;
+ document.querySelector("#qbResult")
+  .hidden=false;
 }
 
 async function run(){
@@ -433,8 +571,10 @@ async function run(){
   .querySelector("#qbStatus");
 
  if(!code){
+
   status.textContent=
    "銘柄コードを入力してください。";
+
   return;
  }
 
@@ -444,10 +584,16 @@ async function run(){
  try{
 
   const data=await loadData();
-  const hit=findStock(data,code);
+
+  const hit=findStock(
+   data,
+   code
+  );
 
   if(!hit){
-   document.querySelector("#qbResult")
+
+   document
+    .querySelector("#qbResult")
     .hidden=true;
 
    status.textContent=

@@ -1,13 +1,14 @@
 import io
 import json
 import time
+import urllib.parse
 import urllib.request
 
 import pandas as pd
 
-JPX_LIST_URL = (
-    "https://www.jpx.co.jp/markets/statistics-equities/misc/"
-    "tvdivq0000001vg2-att/data_j.xls"
+JPX_SEARCH_URL = (
+    "https://www2.jpx.co.jp/tseHpFront/StockSearch.do"
+    "?method=topsearch&topSearchStr={code}"
 )
 
 FALLBACK_NAMES = {
@@ -27,128 +28,129 @@ FALLBACK_NAMES = {
 }
 
 
-def download_jpx_names():
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 Chrome/139.0 Safari/537.36"
-        ),
-        "Accept": "application/vnd.ms-excel,application/octet-stream,*/*",
-    }
-
-    last_error = None
-
-    for attempt in range(3):
-        try:
-            req = urllib.request.Request(JPX_LIST_URL, headers=headers)
-
-            with urllib.request.urlopen(req, timeout=30) as response:
-                data = response.read()
-
-            df = pd.read_excel(
-                io.BytesIO(data),
-                dtype={"コード": str}
-            )
-
-            if "コード" not in df.columns or "銘柄名" not in df.columns:
-                raise ValueError("JPX columns not found")
-
-            names = {}
-
-            for _, row in df[["コード", "銘柄名"]].dropna().iterrows():
-                code = str(row["コード"]).strip()
-                name = str(row["銘柄名"]).strip()
-
-                if len(code) == 4 and code.isdigit() and name:
-                    names[code] = name
-
-            if len(names) < 1000:
-                raise ValueError(
-                    f"Too few JPX names loaded: {len(names)}"
-                )
-
-            print(
-                f"JPX Japanese names loaded: {len(names)}"
-            )
-
-            return names
-
-        except Exception as exc:
-            last_error = exc
-            print(
-                f"JPX name download attempt "
-                f"{attempt + 1} failed: {exc}"
-            )
-            time.sleep(2)
-
-    print(
-        "JPX name download failed; "
-        f"using fallback names only: {last_error}"
-    )
-
-    return {}
-
-
 def normalize_code(row):
     for key in ("code", "symbol", "ticker"):
-
         value = row.get(key)
-
         if not value:
             continue
 
         text = str(value).strip().upper()
-
         if text.endswith(".T"):
             text = text[:-2]
 
-        digits = "".join(
-            ch for ch in text if ch.isdigit()
-        )
-
+        digits = "".join(ch for ch in text if ch.isdigit())
         if len(digits) >= 4:
             return digits[:4]
 
     return ""
 
 
-def main():
+def has_japanese(text):
+    return any(
+        ("\u3040" <= ch <= "\u30ff")
+        or ("\u4e00" <= ch <= "\u9fff")
+        for ch in str(text or "")
+    )
 
-    path = "tenx_data.json"
 
-    with open(
-        path,
-        "r",
-        encoding="utf-8"
-    ) as f:
-        data = json.load(f)
+def lookup_jpx_name(code):
+    url = JPX_SEARCH_URL.format(
+        code=urllib.parse.quote(str(code))
+    )
 
-    jpx_names = download_jpx_names()
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
 
-    changed = 0
-    checked = 0
+    req = urllib.request.Request(url, headers=headers)
 
+    with urllib.request.urlopen(req, timeout=30) as response:
+        html = response.read().decode("utf-8", errors="ignore")
+
+    tables = pd.read_html(io.StringIO(html))
+
+    for df in tables:
+        df.columns = [str(c).strip() for c in df.columns]
+
+        if "コード" not in df.columns or "銘柄名" not in df.columns:
+            continue
+
+        if df.empty:
+            continue
+
+        name = str(df.iloc[0]["銘柄名"]).strip()
+
+        if name and name.lower() != "nan":
+            return name
+
+    return ""
+
+
+def collect_codes_needing_names(data):
+    codes = set()
     japan = data.get("japan", {})
 
-    for period in (
-    "short",
-    "medium",
-    "long",
-    "all"
-):
-
+    for period in ("short", "medium", "long", "all"):
         rows = japan.get(period, [])
 
         if not isinstance(rows, list):
             continue
 
         for row in rows:
+            if not isinstance(row, dict):
+                continue
 
+            code = normalize_code(row)
+
+            if code and not has_japanese(row.get("name")):
+                codes.add(code)
+
+    return sorted(codes)
+
+
+def download_jpx_names(data):
+    codes = collect_codes_needing_names(data)
+    names = {}
+
+    for code in codes:
+        try:
+            name = lookup_jpx_name(code)
+
+            if name:
+                names[code] = name
+
+        except Exception as exc:
+            print(f"JPX lookup failed {code}: {exc}")
+
+        time.sleep(0.08)
+
+    print(f"JPX Japanese names loaded: {len(names)}")
+    return names
+
+
+def main():
+    path = "tenx_data.json"
+
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    jpx_names = download_jpx_names(data)
+
+    changed = 0
+    checked = 0
+    japan = data.get("japan", {})
+
+    for period in ("short", "medium", "long", "all"):
+        rows = japan.get(period, [])
+
+        if not isinstance(rows, list):
+            continue
+
+        for row in rows:
             if not isinstance(row, dict):
                 continue
 
             checked += 1
-
             code = normalize_code(row)
 
             if not code:
@@ -159,19 +161,11 @@ def main():
                 or FALLBACK_NAMES.get(code)
             )
 
-            if not japanese_name:
-                continue
-
-            if row.get("name") != japanese_name:
+            if japanese_name and row.get("name") != japanese_name:
                 row["name"] = japanese_name
                 changed += 1
 
-    with open(
-        path,
-        "w",
-        encoding="utf-8"
-    ) as f:
-
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(
             data,
             f,

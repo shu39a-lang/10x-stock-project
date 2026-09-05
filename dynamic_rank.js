@@ -14,11 +14,11 @@ function classifyStock(x,market){
   if(quality>=75 && catalyst>=70){
     return "成長株";
   }
-  if(financial>=60 && technical>=60 && score>=64){
+  if(financial>=58 && technical>=58 && score>=63){
     return "安定上昇";
   }
 }else{
-  if(quality>=72 && catalyst>=67){
+  if(quality>=70 && catalyst>=65){
     return "成長株";
   }
   if(financial>=62 && technical>=62 && score>=65){

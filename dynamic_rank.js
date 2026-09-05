@@ -11,21 +11,20 @@ function classifyStock(x,market){
   const catalyst=Number(x.catalyst)||0;
 
   if(market==="usa"){
-  if(quality>=72 && catalyst>=67){
-    return "成長株";
-  }
-  if(financial>=62 && technical>=62 && score>=65){
-    return "安定上昇";
-  }
-}else{
   if(quality>=75 && catalyst>=70){
     return "成長株";
   }
   if(financial>=60 && technical>=60 && score>=64){
     return "安定上昇";
   }
+}else{
+  if(quality>=72 && catalyst>=67){
+    return "成長株";
+  }
+  if(financial>=62 && technical>=62 && score>=65){
+    return "安定上昇";
+  }
 }
-
   return "上昇期待";
 }
 

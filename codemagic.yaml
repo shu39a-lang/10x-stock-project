@@ -37,7 +37,7 @@ workflows:
       - name: Install finalized app icon
         script: |
           ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
-          sips -z 1024 1024 icon-512.png --out "$ICONSET/AppIcon-512@2x.png"
+          sips -z 1024 1024 apple-touch-icon.png --out "$ICONSET/AppIcon-512@2x.png"
           cat > "$ICONSET/Contents.json" <<'EOF'
           {
             "images" : [

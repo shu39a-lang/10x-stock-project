@@ -97,7 +97,7 @@ def mean_with_confidence(values, expected):
 
 def load_jpx_japanese_names():
     try:
-                urllib_request = __import__(
+        urllib_request = __import__(
             "urllib.request",
             fromlist=["Request", "urlopen"]
         )

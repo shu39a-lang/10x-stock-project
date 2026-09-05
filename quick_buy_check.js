@@ -333,7 +333,7 @@ function gaugeHTML(title,value){
 
  value=clamp(value);
 
- const angle=-90+(value/100)*180;
+ const angle=180+(value/100)*180;
  const rad=angle*Math.PI/180;
 
  const cx=50;

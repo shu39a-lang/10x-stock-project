@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-05 10:13 JST",
+  "updated_at": "2026-09-05 10:31 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -35,7 +35,7 @@
   "japan": {
     "short": [
       {
-        "name": "SBIホールディングス",
+        "name": "ＳＢＩホールディングス",
         "code": "8473",
         "price": 3390.0,
         "change_pct": 3.86,
@@ -55,7 +55,7 @@
         }
       },
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "あいちフィナンシャルグループ",
         "code": "7389",
         "price": 1923.0,
         "change_pct": -3.27,
@@ -75,7 +75,7 @@
         }
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "ブラザー工業",
         "code": "6448",
         "price": 4893.0,
         "change_pct": 0.6,
@@ -95,7 +95,7 @@
         }
       },
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "筑波銀行",
         "code": "8338",
         "price": 769.0,
         "change_pct": 0.13,
@@ -115,7 +115,7 @@
         }
       },
       {
-        "name": "SURUGA BANK",
+        "name": "スルガ銀行",
         "code": "8358",
         "price": 2979.0,
         "change_pct": 0.91,
@@ -135,7 +135,7 @@
         }
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "第四北越フィナンシャルグループ",
         "code": "7327",
         "price": 2646.0,
         "change_pct": -0.23,
@@ -215,7 +215,7 @@
         }
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "北洋銀行",
         "code": "8524",
         "price": 1318.0,
         "change_pct": -1.13,
@@ -235,7 +235,7 @@
         }
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "百五銀行",
         "code": "8368",
         "price": 2376.0,
         "change_pct": -1.41,
@@ -335,7 +335,7 @@
         }
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "めぶきフィナンシャルグループ",
         "code": "7167",
         "price": 1707.0,
         "change_pct": 0.29,
@@ -355,7 +355,7 @@
         }
       },
       {
-        "name": "HACHIJUNI NAGANO BK LTD",
+        "name": "八十二長野銀行",
         "code": "8359",
         "price": 2732.0,
         "change_pct": -0.47,
@@ -375,7 +375,7 @@
         }
       },
       {
-        "name": "SHIZUOKA FINANCIAL GROUP INC.",
+        "name": "しずおかフィナンシャルグループ",
         "code": "5831",
         "price": 3671.0,
         "change_pct": 0.36,
@@ -395,7 +395,7 @@
         }
       },
       {
-        "name": "IDEMITSU KOSAN CO.LTD",
+        "name": "出光興産",
         "code": "5019",
         "price": 1470.0,
         "change_pct": -1.31,
@@ -415,7 +415,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1669.0,
         "change_pct": 2.27,
@@ -437,7 +437,7 @@
     ],
     "medium": [
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "あいちフィナンシャルグループ",
         "code": "7389",
         "price": 1923.0,
         "change_pct": -3.27,
@@ -457,7 +457,7 @@
         }
       },
       {
-        "name": "SURUGA BANK",
+        "name": "スルガ銀行",
         "code": "8358",
         "price": 2979.0,
         "change_pct": 0.91,
@@ -477,7 +477,7 @@
         }
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "北洋銀行",
         "code": "8524",
         "price": 1318.0,
         "change_pct": -1.13,
@@ -497,7 +497,7 @@
         }
       },
       {
-        "name": "SBIホールディングス",
+        "name": "ＳＢＩホールディングス",
         "code": "8473",
         "price": 3390.0,
         "change_pct": 3.86,
@@ -517,7 +517,7 @@
         }
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "ブラザー工業",
         "code": "6448",
         "price": 4893.0,
         "change_pct": 0.6,
@@ -577,7 +577,7 @@
         }
       },
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "筑波銀行",
         "code": "8338",
         "price": 769.0,
         "change_pct": 0.13,
@@ -597,7 +597,7 @@
         }
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "第四北越フィナンシャルグループ",
         "code": "7327",
         "price": 2646.0,
         "change_pct": -0.23,
@@ -637,7 +637,7 @@
         }
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "めぶきフィナンシャルグループ",
         "code": "7167",
         "price": 1707.0,
         "change_pct": 0.29,
@@ -657,7 +657,7 @@
         }
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "百五銀行",
         "code": "8368",
         "price": 2376.0,
         "change_pct": -1.41,
@@ -677,7 +677,7 @@
         }
       },
       {
-        "name": "TOHO BANK",
+        "name": "東邦銀行",
         "code": "8346",
         "price": 992.0,
         "change_pct": -1.1,
@@ -697,7 +697,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1867.0,
         "change_pct": 0.59,
@@ -717,7 +717,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1669.0,
         "change_pct": 2.27,
@@ -737,7 +737,7 @@
         }
       },
       {
-        "name": "MATSUI SECURITIES CO",
+        "name": "松井証券",
         "code": "8628",
         "price": 1205.0,
         "change_pct": 0.75,
@@ -797,7 +797,7 @@
         }
       },
       {
-        "name": "HACHIJUNI NAGANO BK LTD",
+        "name": "八十二長野銀行",
         "code": "8359",
         "price": 2732.0,
         "change_pct": -0.47,
@@ -839,7 +839,7 @@
     ],
     "long": [
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "筑波銀行",
         "code": "8338",
         "price": 769.0,
         "change_pct": 0.13,
@@ -859,7 +859,7 @@
         }
       },
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "あいちフィナンシャルグループ",
         "code": "7389",
         "price": 1923.0,
         "change_pct": -3.27,
@@ -899,7 +899,7 @@
         }
       },
       {
-        "name": "SURUGA BANK",
+        "name": "スルガ銀行",
         "code": "8358",
         "price": 2979.0,
         "change_pct": 0.91,
@@ -939,7 +939,7 @@
         }
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "北洋銀行",
         "code": "8524",
         "price": 1318.0,
         "change_pct": -1.13,
@@ -979,7 +979,7 @@
         }
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "ブラザー工業",
         "code": "6448",
         "price": 4893.0,
         "change_pct": 0.6,
@@ -1019,7 +1019,7 @@
         }
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "第四北越フィナンシャルグループ",
         "code": "7327",
         "price": 2646.0,
         "change_pct": -0.23,
@@ -1039,7 +1039,7 @@
         }
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1867.0,
         "change_pct": 0.59,
@@ -1059,7 +1059,7 @@
         }
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "めぶきフィナンシャルグループ",
         "code": "7167",
         "price": 1707.0,
         "change_pct": 0.29,
@@ -1079,7 +1079,7 @@
         }
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "百五銀行",
         "code": "8368",
         "price": 2376.0,
         "change_pct": -1.41,
@@ -1119,7 +1119,7 @@
         }
       },
       {
-        "name": "TOHO BANK",
+        "name": "東邦銀行",
         "code": "8346",
         "price": 992.0,
         "change_pct": -1.1,
@@ -1159,7 +1159,7 @@
         }
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1669.0,
         "change_pct": 2.27,
@@ -1179,7 +1179,7 @@
         }
       },
       {
-        "name": "HACHIJUNI NAGANO BK LTD",
+        "name": "八十二長野銀行",
         "code": "8359",
         "price": 2732.0,
         "change_pct": -0.47,
@@ -1199,7 +1199,7 @@
         }
       },
       {
-        "name": "MATSUI SECURITIES CO",
+        "name": "松井証券",
         "code": "8628",
         "price": 1205.0,
         "change_pct": 0.75,
@@ -1219,7 +1219,7 @@
         }
       },
       {
-        "name": "TOKAI TOKYO FINANCIAL HLDG INC",
+        "name": "東海東京フィナンシャル・ホールディングス",
         "code": "8616",
         "price": 903.0,
         "change_pct": 1.35,
@@ -1271,7 +1271,7 @@
         "catalyst": 83.5
       },
       {
-        "name": "TAIYO YUDEN CO LTD",
+        "name": "太陽誘電",
         "code": "6976",
         "price": 9426.0,
         "valuation": 47.0,
@@ -1311,7 +1311,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "IBIDEN CO LTD",
+        "name": "イビデン",
         "code": "4062",
         "price": 20475.0,
         "valuation": 28.4,
@@ -1331,7 +1331,7 @@
         "catalyst": 77.3
       },
       {
-        "name": "FURUKAWA ELECTRIC CO",
+        "name": "古河電気工業",
         "code": "5801",
         "price": 3844.0,
         "valuation": 52.0,
@@ -1421,7 +1421,7 @@
         "catalyst": 72.8
       },
       {
-        "name": "JX ADVANCED METALS CORPORATION",
+        "name": "ＪＸ金属",
         "code": "5016",
         "price": 3619.0,
         "valuation": 52.8,
@@ -1431,7 +1431,7 @@
         "catalyst": 83.4
       },
       {
-        "name": "KOKUSAI ELECTRIC CORPORATION",
+        "name": "ＫＯＫＵＳＡＩ　ＥＬＥＣＴＲＩＣ",
         "code": "6525",
         "price": 8295.0,
         "valuation": 37.3,
@@ -1481,7 +1481,7 @@
         "catalyst": 57.8
       },
       {
-        "name": "MITSUI KINZOKU CO LTD",
+        "name": "三井金属",
         "code": "5706",
         "price": 25635.0,
         "valuation": 61.2,
@@ -1491,7 +1491,7 @@
         "catalyst": 57.3
       },
       {
-        "name": "SUMITOMO ELECTRIC INDUSTRIES",
+        "name": "住友電気工業",
         "code": "5802",
         "price": 2133.0,
         "valuation": 62.3,
@@ -1501,7 +1501,7 @@
         "catalyst": 76.2
       },
       {
-        "name": "SUMCO CORPORATION",
+        "name": "ＳＵＭＣＯ",
         "code": "3436",
         "price": 3229.0,
         "valuation": 55.8,
@@ -1511,7 +1511,7 @@
         "catalyst": 54.0
       },
       {
-        "name": "SUMITOMO METAL MINING CO",
+        "name": "住友金属鉱山",
         "code": "5713",
         "price": 10075.0,
         "valuation": 61.9,
@@ -1531,7 +1531,7 @@
         "catalyst": 34.5
       },
       {
-        "name": "NTT",
+        "name": "ＮＴＴ",
         "code": "9432",
         "price": 172.6,
         "valuation": 56.2,
@@ -1541,7 +1541,7 @@
         "catalyst": 57.6
       },
       {
-        "name": "RENESAS ELECTRONICS CORP",
+        "name": "ルネサスエレクトロニクス",
         "code": "6723",
         "price": 3302.0,
         "valuation": 58.6,
@@ -1551,7 +1551,7 @@
         "catalyst": 60.3
       },
       {
-        "name": "RESONAC HOLDINGS CORPORATION",
+        "name": "レゾナック・ホールディングス",
         "code": "4004",
         "price": 15530.0,
         "valuation": 49.4,
@@ -1571,7 +1571,7 @@
         "catalyst": 76.4
       },
       {
-        "name": "PANASONIC HOLDINGS CORP",
+        "name": "パナソニック　ホールディングス",
         "code": "6752",
         "price": 4163.0,
         "valuation": 54.9,
@@ -1581,7 +1581,7 @@
         "catalyst": 72.7
       },
       {
-        "name": "SANRIO CO LTD",
+        "name": "サンリオ",
         "code": "8136",
         "price": 1265.5,
         "valuation": 45.1,
@@ -1611,7 +1611,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "IHI",
+        "name": "ＩＨＩ",
         "code": "7013",
         "price": 2624.5,
         "valuation": 59.4,
@@ -1621,7 +1621,7 @@
         "catalyst": 75.2
       },
       {
-        "name": "UNITIKA LTD",
+        "name": "ユニチカ",
         "code": "3103",
         "price": 1425.0,
         "valuation": 61.8,
@@ -1631,7 +1631,7 @@
         "catalyst": 62.8
       },
       {
-        "name": "NEC",
+        "name": "日本電気",
         "code": "6701",
         "price": 4828.0,
         "valuation": 60.5,
@@ -1641,7 +1641,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "KAWASAKI HEAVY INDUSTRIES",
+        "name": "川崎重工業",
         "code": "7012",
         "price": 2433.5,
         "valuation": 58.7,
@@ -1651,7 +1651,7 @@
         "catalyst": 75.4
       },
       {
-        "name": "ASICS CORP",
+        "name": "アシックス",
         "code": "7936",
         "price": 4266.0,
         "valuation": 52.2,
@@ -1671,7 +1671,7 @@
         "catalyst": 55.4
       },
       {
-        "name": "SCREEN HOLDINGS CO LTD",
+        "name": "ＳＣＲＥＥＮホールディングス",
         "code": "7735",
         "price": 13030.0,
         "valuation": 55.7,
@@ -1721,7 +1721,7 @@
         "catalyst": 55.7
       },
       {
-        "name": "KDDI",
+        "name": "ＫＤＤＩ",
         "code": "9433",
         "price": 2981.0,
         "valuation": 58.3,
@@ -1751,7 +1751,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "TDK",
+        "name": "ＴＤＫ",
         "code": "6762",
         "price": 2907.5,
         "valuation": 60.0,
@@ -1771,7 +1771,7 @@
         "catalyst": 72.1
       },
       {
-        "name": "HOYA",
+        "name": "ＨＯＹＡ",
         "code": "7741",
         "price": 24140.0,
         "valuation": 44.8,
@@ -1781,7 +1781,7 @@
         "catalyst": 68.3
       },
       {
-        "name": "FUJITSU",
+        "name": "富士通",
         "code": "6702",
         "price": 3900.0,
         "valuation": 61.4,
@@ -1791,7 +1791,7 @@
         "catalyst": 32.0
       },
       {
-        "name": "JT",
+        "name": "日本たばこ産業",
         "code": "2914",
         "price": 6803.0,
         "valuation": 59.1,
@@ -1821,7 +1821,7 @@
         "catalyst": 49.5
       },
       {
-        "name": "FUJIFILM HOLDINGS CORPORATION",
+        "name": "富士フイルムホールディングス",
         "code": "4901",
         "price": 3313.0,
         "valuation": 62.3,
@@ -1831,7 +1831,7 @@
         "catalyst": 41.9
       },
       {
-        "name": "ORIX CORPORATION",
+        "name": "オリックス",
         "code": "8591",
         "price": 6242.0,
         "valuation": 56.9,
@@ -1841,7 +1841,7 @@
         "catalyst": 77.6
       },
       {
-        "name": "TOKYO ELEC POWER CO HLDGS INC",
+        "name": "東京電力ホールディングス",
         "code": "9501",
         "price": 555.0,
         "valuation": 52.3,
@@ -1851,7 +1851,7 @@
         "catalyst": 51.5
       },
       {
-        "name": "MS&AD",
+        "name": "ＭＳ＆ＡＤインシュアランスグループホールディングス",
         "code": "8725",
         "price": 5240.0,
         "valuation": 67.2,
@@ -1871,7 +1871,7 @@
         "catalyst": 79.8
       },
       {
-        "name": "MARUBENI CORP",
+        "name": "丸紅",
         "code": "8002",
         "price": 5073.0,
         "valuation": 61.4,
@@ -1881,7 +1881,7 @@
         "catalyst": 67.2
       },
       {
-        "name": "INPEX",
+        "name": "ＩＮＰＥＸ",
         "code": "1605",
         "price": 3780.0,
         "valuation": 62.0,
@@ -1891,7 +1891,7 @@
         "catalyst": 67.5
       },
       {
-        "name": "NITTO BOSEKI CO",
+        "name": "日東紡績",
         "code": "3110",
         "price": 3060.0,
         "valuation": 59.6,
@@ -1901,7 +1901,7 @@
         "catalyst": 77.7
       },
       {
-        "name": "MICRONICS JAPAN CO",
+        "name": "日本マイクロニクス",
         "code": "6871",
         "price": 11940.0,
         "valuation": 53.8,
@@ -1911,7 +1911,7 @@
         "catalyst": 79.9
       },
       {
-        "name": "KOMATSU",
+        "name": "小松製作所",
         "code": "6301",
         "price": 7493.0,
         "valuation": 61.1,
@@ -1921,7 +1921,7 @@
         "catalyst": 59.4
       },
       {
-        "name": "YASKAWA ELECTRIC CORP",
+        "name": "安川電機",
         "code": "6506",
         "price": 4570.0,
         "valuation": 57.5,
@@ -1941,7 +1941,7 @@
         "catalyst": 58.7
       },
       {
-        "name": "EBARA CORP",
+        "name": "荏原製作所",
         "code": "6361",
         "price": 4436.0,
         "valuation": 59.4,
@@ -1961,7 +1961,7 @@
         "catalyst": 47.5
       },
       {
-        "name": "MITSUBISHI MATERIALS CORP",
+        "name": "三菱マテリアル",
         "code": "5711",
         "price": 5231.0,
         "valuation": 57.6,
@@ -1971,7 +1971,7 @@
         "catalyst": 63.0
       },
       {
-        "name": "SUMITOMO CORP",
+        "name": "住友商事",
         "code": "8053",
         "price": 1820.0,
         "valuation": 58.8,
@@ -1981,7 +1981,7 @@
         "catalyst": 59.4
       },
       {
-        "name": "AJINOMOTO CO INC",
+        "name": "味の素",
         "code": "2802",
         "price": 5174.0,
         "valuation": 50.4,
@@ -1991,7 +1991,7 @@
         "catalyst": 62.5
       },
       {
-        "name": "RAKUTEN GROUP INC",
+        "name": "楽天グループ",
         "code": "4755",
         "price": 754.4,
         "valuation": 61.5,
@@ -2001,7 +2001,7 @@
         "catalyst": 54.5
       },
       {
-        "name": "BANDAI NAMCO HOLDINGS INC",
+        "name": "バンダイナムコホールディングス",
         "code": "7832",
         "price": 5565.0,
         "valuation": 59.4,
@@ -2021,7 +2021,7 @@
         "catalyst": 55.2
       },
       {
-        "name": "DAIICHI LIFE GROUP INC",
+        "name": "第一ライフグループ",
         "code": "8750",
         "price": 1877.5,
         "valuation": 66.2,
@@ -2041,7 +2041,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "JFE HOLDINGS INC",
+        "name": "ＪＦＥホールディングス",
         "code": "5411",
         "price": 1835.0,
         "valuation": 55.6,
@@ -2051,7 +2051,7 @@
         "catalyst": 72.6
       },
       {
-        "name": "BRIDGESTONE CORP",
+        "name": "ブリヂストン",
         "code": "5108",
         "price": 3961.0,
         "valuation": 63.5,
@@ -2061,7 +2061,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "TOYO ENGINEERING CORP",
+        "name": "東洋エンジニアリング",
         "code": "6330",
         "price": 2476.0,
         "valuation": 62.5,
@@ -2091,7 +2091,7 @@
         "catalyst": 65.3
       },
       {
-        "name": "TOYOTA TSUSHO CORP",
+        "name": "豊田通商",
         "code": "8015",
         "price": 7588.0,
         "valuation": 59.7,
@@ -2101,7 +2101,7 @@
         "catalyst": 77.6
       },
       {
-        "name": "ROHM CO LTD",
+        "name": "ローム",
         "code": "6963",
         "price": 4865.0,
         "valuation": 57.4,
@@ -2111,7 +2111,7 @@
         "catalyst": 77.4
       },
       {
-        "name": "KYOCERA CORP",
+        "name": "京セラ",
         "code": "6971",
         "price": 3503.0,
         "valuation": 59.4,
@@ -2121,7 +2121,7 @@
         "catalyst": 73.3
       },
       {
-        "name": "SOMPO HD",
+        "name": "ＳＯＭＰＯホールディングス",
         "code": "8630",
         "price": 6856.0,
         "valuation": 62.8,
@@ -2131,7 +2131,7 @@
         "catalyst": 79.5
       },
       {
-        "name": "MITSUBISHI ESTATE CO",
+        "name": "三菱地所",
         "code": "8802",
         "price": 3693.0,
         "valuation": 54.2,
@@ -2141,7 +2141,7 @@
         "catalyst": 84.2
       },
       {
-        "name": "MITSUI FUDOSAN",
+        "name": "三井不動産",
         "code": "8801",
         "price": 1510.0,
         "valuation": 55.1,
@@ -2151,7 +2151,7 @@
         "catalyst": 27.3
       },
       {
-        "name": "ASTELLAS PHARMA",
+        "name": "アステラス製薬",
         "code": "4503",
         "price": 2355.5,
         "valuation": 62.4,
@@ -2161,7 +2161,7 @@
         "catalyst": 80.3
       },
       {
-        "name": "CANON INC",
+        "name": "キヤノン",
         "code": "7751",
         "price": 4615.0,
         "valuation": 64.4,
@@ -2171,7 +2171,7 @@
         "catalyst": 69.0
       },
       {
-        "name": "NOMURA HOLDINGS INC.",
+        "name": "野村ホールディングス",
         "code": "8604",
         "price": 1669.0,
         "valuation": 75.2,
@@ -2181,7 +2181,7 @@
         "catalyst": 76.3
       },
       {
-        "name": "HITACHI CONSTRUCTION MACHINERY",
+        "name": "日立建機",
         "code": "6305",
         "price": 5977.0,
         "valuation": 60.6,
@@ -2191,7 +2191,7 @@
         "catalyst": 73.9
       },
       {
-        "name": "AEON CO LTD",
+        "name": "イオン",
         "code": "8267",
         "price": 1409.0,
         "valuation": 49.9,
@@ -2201,7 +2201,7 @@
         "catalyst": 55.6
       },
       {
-        "name": "OTSUKA HLDGS CO LTD",
+        "name": "大塚ホールディングス",
         "code": "4578",
         "price": 12030.0,
         "valuation": 63.5,
@@ -2211,7 +2211,7 @@
         "catalyst": 69.6
       },
       {
-        "name": "YAMAHA MOTOR CO",
+        "name": "ヤマハ発動機",
         "code": "7272",
         "price": 1884.5,
         "valuation": 62.5,
@@ -2231,7 +2231,7 @@
         "catalyst": 70.8
       },
       {
-        "name": "PAN PACIFIC INTL HLDGS CORP",
+        "name": "パン・パシフィック・インターナショナルホールディングス",
         "code": "7532",
         "price": 776.2,
         "valuation": 61.0,
@@ -2251,7 +2251,7 @@
         "catalyst": 48.8
       },
       {
-        "name": "FOOD & LIFE COMPANIES LTD",
+        "name": "ＦＯＯＤ　＆　ＬＩＦＥ　ＣＯＭＰＡＮＩＥＳ",
         "code": "3563",
         "price": 6022.0,
         "valuation": 42.4,
@@ -2291,7 +2291,7 @@
         "catalyst": 72.9
       },
       {
-        "name": "SOCIONEXT INC",
+        "name": "ソシオネクスト",
         "code": "6526",
         "price": 1954.0,
         "valuation": 58.5,
@@ -2301,7 +2301,7 @@
         "catalyst": 55.0
       },
       {
-        "name": "KAO CORP",
+        "name": "花王",
         "code": "4452",
         "price": 3495.0,
         "valuation": 60.7,
@@ -2311,7 +2311,7 @@
         "catalyst": 66.6
       },
       {
-        "name": "SBIホールディングス",
+        "name": "ＳＢＩホールディングス",
         "code": "8473",
         "price": 3390.0,
         "valuation": 77.1,
@@ -2321,7 +2321,7 @@
         "catalyst": 79.0
       },
       {
-        "name": "TERUMO CORP",
+        "name": "テルモ",
         "code": "4543",
         "price": 2432.0,
         "valuation": 58.9,
@@ -2331,7 +2331,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "NISSAN MOTOR CO",
+        "name": "日産自動車",
         "code": "7201",
         "price": 315.0,
         "valuation": 52.4,
@@ -2341,7 +2341,7 @@
         "catalyst": 53.7
       },
       {
-        "name": "FERROTEC CORPORATION",
+        "name": "フェローテック",
         "code": "6890",
         "price": 8930.0,
         "valuation": 59.1,
@@ -2351,7 +2351,7 @@
         "catalyst": 91.9
       },
       {
-        "name": "DAIFUKU CO LTD",
+        "name": "ダイフク",
         "code": "6383",
         "price": 5661.0,
         "valuation": 58.5,
@@ -2361,7 +2361,7 @@
         "catalyst": 60.0
       },
       {
-        "name": "METAPLANET INC",
+        "name": "メタプラネット",
         "code": "3350",
         "price": 293.0,
         "valuation": 45.4,
@@ -2371,7 +2371,7 @@
         "catalyst": 31.2
       },
       {
-        "name": "NOMURA RESEARCH INSTITUTE",
+        "name": "野村総合研究所",
         "code": "4307",
         "price": 5244.0,
         "valuation": 39.5,
@@ -2381,7 +2381,7 @@
         "catalyst": 58.8
       },
       {
-        "name": "ASAHI GROUP HLDGS",
+        "name": "アサヒグループホールディングス",
         "code": "2502",
         "price": 1639.0,
         "valuation": 59.2,
@@ -2391,7 +2391,7 @@
         "catalyst": 75.4
       },
       {
-        "name": "KAJIMA CORP",
+        "name": "鹿島建設",
         "code": "1812",
         "price": 4938.0,
         "valuation": 63.7,
@@ -2401,7 +2401,7 @@
         "catalyst": 57.2
       },
       {
-        "name": "KANSAI ELECTRIC POWER CO INC",
+        "name": "関西電力",
         "code": "9503",
         "price": 2947.0,
         "valuation": 57.6,
@@ -2411,7 +2411,7 @@
         "catalyst": 68.2
       },
       {
-        "name": "RYOHIN KEIKAKU CO",
+        "name": "良品計画",
         "code": "7453",
         "price": 4238.0,
         "valuation": 48.4,
@@ -2421,7 +2421,7 @@
         "catalyst": 48.7
       },
       {
-        "name": "NITORI HOLDINGS CO LTD",
+        "name": "ニトリホールディングス",
         "code": "9843",
         "price": 3254.0,
         "valuation": 62.3,
@@ -2431,7 +2431,7 @@
         "catalyst": 48.4
       },
       {
-        "name": "NEXON CO LTD",
+        "name": "ネクソン",
         "code": "3659",
         "price": 3120.0,
         "valuation": 63.2,
@@ -2451,7 +2451,7 @@
         "catalyst": 77.1
       },
       {
-        "name": "LY CORPORATION",
+        "name": "ＬＩＮＥヤフー",
         "code": "4689",
         "price": 531.1,
         "valuation": 59.8,
@@ -2461,7 +2461,7 @@
         "catalyst": 65.2
       },
       {
-        "name": "SUBARU CORPORATION",
+        "name": "ＳＵＢＡＲＵ",
         "code": "7270",
         "price": 2637.5,
         "valuation": 72.7,
@@ -2471,7 +2471,7 @@
         "catalyst": 47.5
       },
       {
-        "name": "ISETAN MITSUKOSHI HOLDINGS LTD",
+        "name": "三越伊勢丹ホールディングス",
         "code": "3099",
         "price": 3203.0,
         "valuation": 63.2,
@@ -2481,7 +2481,7 @@
         "catalyst": 61.2
       },
       {
-        "name": "DATASECTION INC",
+        "name": "データセクション",
         "code": "3905",
         "price": 1529.0,
         "valuation": 63.7,
@@ -2491,7 +2491,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "ENEOS HOLDINGS INC",
+        "name": "ＥＮＥＯＳホールディングス",
         "code": "5020",
         "price": 1345.5,
         "valuation": 60.2,
@@ -2501,7 +2501,7 @@
         "catalyst": 57.1
       },
       {
-        "name": "TOWA CORP",
+        "name": "ＴＯＷＡ",
         "code": "6315",
         "price": 2212.0,
         "valuation": 57.9,
@@ -2511,7 +2511,7 @@
         "catalyst": 70.0
       },
       {
-        "name": "SHISEIDO COMPANY LIMITED",
+        "name": "資生堂",
         "code": "4911",
         "price": 3445.0,
         "valuation": 57.7,
@@ -2521,7 +2521,7 @@
         "catalyst": 75.1
       },
       {
-        "name": "EAST JAPAN RAILWAY CO",
+        "name": "東日本旅客鉄道",
         "code": "9020",
         "price": 3520.0,
         "valuation": 55.1,
@@ -2531,7 +2531,7 @@
         "catalyst": 47.1
       },
       {
-        "name": "SUMITOMO REALTY & DEVELOPMENT C",
+        "name": "住友不動産",
         "code": "8830",
         "price": 3238.0,
         "valuation": 53.7,
@@ -2541,7 +2541,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "M3 INC",
+        "name": "エムスリー",
         "code": "2413",
         "price": 1789.5,
         "valuation": 58.6,
@@ -2551,7 +2551,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "CYBER AGENT",
+        "name": "サイバーエージェント",
         "code": "4751",
         "price": 1292.5,
         "valuation": 65.6,
@@ -2561,7 +2561,7 @@
         "catalyst": 56.3
       },
       {
-        "name": "SONY FINANCIAL GROUP INC",
+        "name": "ソニーフィナンシャルグループ",
         "code": "8729",
         "price": 165.1,
         "valuation": 55.5,
@@ -2571,7 +2571,7 @@
         "catalyst": 64.2
       },
       {
-        "name": "OMRON CORP",
+        "name": "オムロン",
         "code": "6645",
         "price": 6217.0,
         "valuation": 58.7,
@@ -2581,7 +2581,7 @@
         "catalyst": 71.9
       },
       {
-        "name": "TOPPAN HOLDINGS INC",
+        "name": "ＴＯＰＰＡＮホールディングス",
         "code": "7911",
         "price": 5071.0,
         "valuation": 63.0,
@@ -2601,7 +2601,7 @@
         "catalyst": 74.2
       },
       {
-        "name": "YOKOHAMA RUBBER CO",
+        "name": "横浜ゴム",
         "code": "5101",
         "price": 7095.0,
         "valuation": 62.0,
@@ -2611,7 +2611,7 @@
         "catalyst": 74.8
       },
       {
-        "name": "KIRIN HOLDINGS COMPANY LIMITED",
+        "name": "キリンホールディングス",
         "code": "2503",
         "price": 2912.0,
         "valuation": 61.9,
@@ -2621,7 +2621,7 @@
         "catalyst": 74.6
       },
       {
-        "name": "MINEBEA MITSUMI INC",
+        "name": "ミネベアミツミ",
         "code": "6479",
         "price": 3332.0,
         "valuation": 63.3,
@@ -2631,7 +2631,7 @@
         "catalyst": 76.6
       },
       {
-        "name": "MERCARI INC",
+        "name": "メルカリ",
         "code": "4385",
         "price": 4443.0,
         "valuation": 55.2,
@@ -2651,7 +2651,7 @@
         "catalyst": 71.8
       },
       {
-        "name": "CAPCOM CO LTD",
+        "name": "カプコン",
         "code": "9697",
         "price": 4248.0,
         "valuation": 47.7,
@@ -2661,7 +2661,7 @@
         "catalyst": 85.3
       },
       {
-        "name": "MITSUI E&S CO LTD",
+        "name": "三井Ｅ＆Ｓ",
         "code": "7003",
         "price": 4287.0,
         "valuation": 63.9,
@@ -2671,7 +2671,7 @@
         "catalyst": 60.9
       },
       {
-        "name": "DAIWA HOUSE INDUSTRY CO",
+        "name": "大和ハウス工業",
         "code": "1925",
         "price": 4697.0,
         "valuation": 58.3,
@@ -2681,7 +2681,7 @@
         "catalyst": 57.6
       },
       {
-        "name": "FUTURE INNOVATION GROUP INC",
+        "name": "ＦＩＧ",
         "code": "4392",
         "price": 1035.0,
         "valuation": 50.8,
@@ -2691,7 +2691,7 @@
         "catalyst": 57.2
       },
       {
-        "name": "NITTO DENKO CORP",
+        "name": "日東電工",
         "code": "6988",
         "price": 3436.0,
         "valuation": 64.4,
@@ -2701,7 +2701,7 @@
         "catalyst": 59.0
       },
       {
-        "name": "CHUBU ELECTRIC POWER CO INC",
+        "name": "中部電力",
         "code": "9502",
         "price": 2926.0,
         "valuation": 57.6,
@@ -2721,7 +2721,7 @@
         "catalyst": 63.5
       },
       {
-        "name": "MITSUBISHI GAS CHEMICAL CO INC",
+        "name": "三菱瓦斯化学",
         "code": "4182",
         "price": 3847.0,
         "valuation": 58.7,
@@ -2731,7 +2731,7 @@
         "catalyst": 80.2
       },
       {
-        "name": "NITERRA CO LTD",
+        "name": "日本特殊陶業",
         "code": "5334",
         "price": 7852.0,
         "valuation": 63.7,
@@ -2741,7 +2741,7 @@
         "catalyst": 78.5
       },
       {
-        "name": "CENTRAL JAPAN RAILWAY CO",
+        "name": "東海旅客鉄道",
         "code": "9022",
         "price": 3857.0,
         "valuation": 57.0,
@@ -2751,7 +2751,7 @@
         "catalyst": 51.7
       },
       {
-        "name": "BAYCURRENT INC",
+        "name": "ベイカレント",
         "code": "6532",
         "price": 7824.0,
         "valuation": 43.1,
@@ -2761,7 +2761,7 @@
         "catalyst": 69.2
       },
       {
-        "name": "DAIWA SECURITIES GROUP",
+        "name": "大和証券グループ本社",
         "code": "8601",
         "price": 1867.0,
         "valuation": 73.6,
@@ -2771,7 +2771,7 @@
         "catalyst": 86.5
       },
       {
-        "name": "SECOM CO",
+        "name": "セコム",
         "code": "9735",
         "price": 6401.0,
         "valuation": 64.1,
@@ -2781,7 +2781,7 @@
         "catalyst": 51.1
       },
       {
-        "name": "NGK CORP",
+        "name": "ＮＧＫ",
         "code": "5333",
         "price": 5244.0,
         "valuation": 61.4,
@@ -2791,7 +2791,7 @@
         "catalyst": 73.2
       },
       {
-        "name": "ASAHI KASEI CORP",
+        "name": "旭化成",
         "code": "3407",
         "price": 1612.0,
         "valuation": 61.1,
@@ -2801,7 +2801,7 @@
         "catalyst": 75.6
       },
       {
-        "name": "OBAYASHI CORP",
+        "name": "大林組",
         "code": "1802",
         "price": 3011.0,
         "valuation": 66.4,
@@ -2811,7 +2811,7 @@
         "catalyst": 78.0
       },
       {
-        "name": "MAZDA MOTOR CORP",
+        "name": "マツダ",
         "code": "7261",
         "price": 1175.5,
         "valuation": 70.9,
@@ -2821,7 +2821,7 @@
         "catalyst": 56.4
       },
       {
-        "name": "RAKUTEN BANK LTD",
+        "name": "楽天銀行",
         "code": "5838",
         "price": 6658.0,
         "valuation": 67.5,
@@ -2831,7 +2831,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "SEIKOH GIKEN CO",
+        "name": "精工技研",
         "code": "6834",
         "price": 5170.0,
         "valuation": 47.3,
@@ -2841,7 +2841,7 @@
         "catalyst": 87.2
       },
       {
-        "name": "QD LASER INC",
+        "name": "ＱＤレーザ",
         "code": "6613",
         "price": 2003.0,
         "valuation": 30.6,
@@ -2851,7 +2851,7 @@
         "catalyst": 63.0
       },
       {
-        "name": "T&D HOLDINGS INC",
+        "name": "Ｔ＆Ｄホールディングス",
         "code": "8795",
         "price": 4952.0,
         "valuation": 65.7,
@@ -2861,7 +2861,7 @@
         "catalyst": 54.1
       },
       {
-        "name": "SUMITOMO CHEMICAL COMPANY",
+        "name": "住友化学",
         "code": "4005",
         "price": 594.7,
         "valuation": 57.4,
@@ -2871,7 +2871,7 @@
         "catalyst": 53.9
       },
       {
-        "name": "NAMURA SHIPBUILDING CO",
+        "name": "名村造船所",
         "code": "7014",
         "price": 4800.0,
         "valuation": 66.8,
@@ -2881,7 +2881,7 @@
         "catalyst": 75.6
       },
       {
-        "name": "AGC INC",
+        "name": "ＡＧＣ",
         "code": "5201",
         "price": 5591.0,
         "valuation": 60.7,
@@ -2901,7 +2901,7 @@
         "catalyst": 42.0
       },
       {
-        "name": "HARMONIC DRIVE SYSTEMS",
+        "name": "ハーモニック・ドライブ・システムズ",
         "code": "6324",
         "price": 5730.0,
         "valuation": 35.2,
@@ -2911,7 +2911,7 @@
         "catalyst": 58.7
       },
       {
-        "name": "THK CO LTD",
+        "name": "ＴＨＫ",
         "code": "6481",
         "price": 6348.0,
         "valuation": 57.5,
@@ -2921,7 +2921,7 @@
         "catalyst": 67.0
       },
       {
-        "name": "NIPPON EXPRESS HLDGS INC",
+        "name": "ＮＩＰＰＯＮ　ＥＸＰＲＥＳＳホールディングス",
         "code": "9147",
         "price": 5612.0,
         "valuation": 47.6,
@@ -2931,7 +2931,7 @@
         "catalyst": 75.8
       },
       {
-        "name": "SHIONOGI & CO",
+        "name": "塩野義製薬",
         "code": "4507",
         "price": 2909.0,
         "valuation": 59.8,
@@ -2941,7 +2941,7 @@
         "catalyst": 88.4
       },
       {
-        "name": "JAPAN EXCHANGE GROUP",
+        "name": "日本取引所グループ",
         "code": "8697",
         "price": 2239.0,
         "valuation": 41.9,
@@ -2951,7 +2951,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "SEIBU HOLDINGS INC",
+        "name": "西武ホールディングス",
         "code": "9024",
         "price": 3515.0,
         "valuation": 54.8,
@@ -2961,7 +2961,7 @@
         "catalyst": 67.9
       },
       {
-        "name": "TOKYO OHKA KOGYO CO",
+        "name": "東京応化工業",
         "code": "4186",
         "price": 8276.0,
         "valuation": 53.2,
@@ -2971,7 +2971,7 @@
         "catalyst": 73.5
       },
       {
-        "name": "TOYO TIRE CORPORATION",
+        "name": "ＴＯＹＯ　ＴＩＲＥ",
         "code": "5105",
         "price": 3650.0,
         "valuation": 67.8,
@@ -2981,7 +2981,7 @@
         "catalyst": 39.4
       },
       {
-        "name": "MITSUBISHI CHEMICAL GROUP CORP",
+        "name": "三菱ケミカルグループ",
         "code": "4188",
         "price": 1237.5,
         "valuation": 54.1,
@@ -2991,7 +2991,7 @@
         "catalyst": 76.4
       },
       {
-        "name": "SHIBAURA MECHATRONICS CO",
+        "name": "芝浦メカトロニクス",
         "code": "6590",
         "price": 3950.0,
         "valuation": 58.1,
@@ -3001,7 +3001,7 @@
         "catalyst": 34.4
       },
       {
-        "name": "SEKISUI HOUSE",
+        "name": "積水ハウス",
         "code": "1928",
         "price": 3379.0,
         "valuation": 59.7,
@@ -3011,7 +3011,7 @@
         "catalyst": 70.2
       },
       {
-        "name": "DMG MORI CO LTD",
+        "name": "ＤＭＧ森精機",
         "code": "6141",
         "price": 2877.5,
         "valuation": 52.4,
@@ -3021,7 +3021,7 @@
         "catalyst": 79.2
       },
       {
-        "name": "YOKOHAMA FINANCIAL GROUP INC",
+        "name": "横浜フィナンシャルグループ",
         "code": "7186",
         "price": 1956.5,
         "valuation": 64.1,
@@ -3031,7 +3031,7 @@
         "catalyst": 64.2
       },
       {
-        "name": "SHIZUOKA FINANCIAL GROUP INC.",
+        "name": "しずおかフィナンシャルグループ",
         "code": "5831",
         "price": 3671.0,
         "valuation": 51.5,
@@ -3051,7 +3051,7 @@
         "catalyst": 88.5
       },
       {
-        "name": "SHIMIZU CORP",
+        "name": "清水建設",
         "code": "1803",
         "price": 2370.5,
         "valuation": 64.5,
@@ -3061,7 +3061,7 @@
         "catalyst": 74.6
       },
       {
-        "name": "SOJITZ CORPORATION",
+        "name": "双日",
         "code": "2768",
         "price": 5762.0,
         "valuation": 57.5,
@@ -3071,7 +3071,7 @@
         "catalyst": 78.9
       },
       {
-        "name": "TREND MICRO INC",
+        "name": "トレンドマイクロ",
         "code": "4704",
         "price": 6100.0,
         "valuation": 58.9,
@@ -3081,7 +3081,7 @@
         "catalyst": 41.1
       },
       {
-        "name": "CHIBA BANK",
+        "name": "千葉銀行",
         "code": "8331",
         "price": 2861.0,
         "valuation": 60.2,
@@ -3091,7 +3091,7 @@
         "catalyst": 80.6
       },
       {
-        "name": "HAMAMATSU PHOTONICS",
+        "name": "浜松ホトニクス",
         "code": "6965",
         "price": 2298.5,
         "valuation": 53.8,
@@ -3101,7 +3101,7 @@
         "catalyst": 59.0
       },
       {
-        "name": "TORAY INDUSTRIES INC",
+        "name": "東レ",
         "code": "3402",
         "price": 1244.5,
         "valuation": 59.2,
@@ -3111,7 +3111,7 @@
         "catalyst": 75.7
       },
       {
-        "name": "RORZE CORP",
+        "name": "ローツェ",
         "code": "6323",
         "price": 3750.0,
         "valuation": 53.0,
@@ -3121,7 +3121,7 @@
         "catalyst": 72.8
       },
       {
-        "name": "WEST JAPAN RAILWAY CO",
+        "name": "西日本旅客鉄道",
         "code": "9021",
         "price": 3020.0,
         "valuation": 57.6,
@@ -3131,7 +3131,7 @@
         "catalyst": 41.9
       },
       {
-        "name": "TOKYO GAS CO",
+        "name": "東京瓦斯",
         "code": "9531",
         "price": 6128.0,
         "valuation": 61.0,
@@ -3141,7 +3141,7 @@
         "catalyst": 33.2
       },
       {
-        "name": "KIKKOMAN CORP",
+        "name": "キッコーマン",
         "code": "2801",
         "price": 1784.5,
         "valuation": 59.5,
@@ -3151,7 +3151,7 @@
         "catalyst": 66.7
       },
       {
-        "name": "SYSMEX CORP",
+        "name": "シスメックス",
         "code": "6869",
         "price": 1948.0,
         "valuation": 58.1,
@@ -3161,7 +3161,7 @@
         "catalyst": 79.1
       },
       {
-        "name": "ANA HOLDINGS INC",
+        "name": "ＡＮＡホールディングス",
         "code": "9202",
         "price": 2999.5,
         "valuation": 67.4,
@@ -3171,7 +3171,7 @@
         "catalyst": 50.1
       },
       {
-        "name": "ONCOLYS BIOPHARMA INC",
+        "name": "オンコリスバイオファーマ",
         "code": "4588",
         "price": 4595.0,
         "valuation": 29.2,
@@ -3181,7 +3181,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "YOKOGAWA ELECTRIC CORP",
+        "name": "横河電機",
         "code": "6841",
         "price": 4724.0,
         "valuation": 63.7,
@@ -3191,7 +3191,7 @@
         "catalyst": 45.4
       },
       {
-        "name": "IDEMITSU KOSAN CO.LTD",
+        "name": "出光興産",
         "code": "5019",
         "price": 1470.0,
         "valuation": 57.8,
@@ -3201,7 +3201,7 @@
         "catalyst": 79.6
       },
       {
-        "name": "MITSUBISHI HC CAPITAL INC",
+        "name": "三菱ＨＣキャピタル",
         "code": "8593",
         "price": 1394.0,
         "valuation": 55.1,
@@ -3211,7 +3211,7 @@
         "catalyst": 31.1
       },
       {
-        "name": "TOTO LTD",
+        "name": "ＴＯＴＯ",
         "code": "5332",
         "price": 5907.0,
         "valuation": 63.2,
@@ -3221,7 +3221,7 @@
         "catalyst": 56.3
       },
       {
-        "name": "ISUZU MOTORS",
+        "name": "いすゞ自動車",
         "code": "7202",
         "price": 2222.5,
         "valuation": 61.8,
@@ -3231,7 +3231,7 @@
         "catalyst": 63.9
       },
       {
-        "name": "AMADA CO LTD",
+        "name": "アマダ",
         "code": "6113",
         "price": 2508.5,
         "valuation": 63.2,
@@ -3241,7 +3241,7 @@
         "catalyst": 81.3
       },
       {
-        "name": "AIMECHATEC LTD",
+        "name": "ＡＩメカテック",
         "code": "6227",
         "price": 5950.0,
         "valuation": 51.8,
@@ -3251,7 +3251,7 @@
         "catalyst": 37.2
       },
       {
-        "name": "ASAHI INTECC CO LTD",
+        "name": "朝日インテック",
         "code": "7747",
         "price": 3521.0,
         "valuation": 51.0,
@@ -3261,7 +3261,7 @@
         "catalyst": 81.3
       },
       {
-        "name": "JAPAN AIRLINES CO LTD",
+        "name": "日本航空",
         "code": "9201",
         "price": 3003.0,
         "valuation": 70.4,
@@ -3271,7 +3271,7 @@
         "catalyst": 34.2
       },
       {
-        "name": "EISAI CO LTD",
+        "name": "エーザイ",
         "code": "4523",
         "price": 4694.0,
         "valuation": 60.0,
@@ -3281,7 +3281,7 @@
         "catalyst": 66.8
       },
       {
-        "name": "JAPAN STEEL WORKS",
+        "name": "日本製鋼所",
         "code": "5631",
         "price": 7303.0,
         "valuation": 59.5,
@@ -3291,7 +3291,7 @@
         "catalyst": 58.3
       },
       {
-        "name": "CITIZEN WATCH CO LTD",
+        "name": "シチズン時計",
         "code": "7762",
         "price": 2613.0,
         "valuation": 63.1,
@@ -3301,7 +3301,7 @@
         "catalyst": 59.5
       },
       {
-        "name": "SUMITOMO FORESTRY CO",
+        "name": "住友林業",
         "code": "1911",
         "price": 1300.5,
         "valuation": 63.8,
@@ -3321,7 +3321,7 @@
         "catalyst": 40.9
       },
       {
-        "name": "BROTHER INDUSTRIES",
+        "name": "ブラザー工業",
         "code": "6448",
         "price": 4893.0,
         "valuation": 66.1,
@@ -3331,7 +3331,7 @@
         "catalyst": 78.1
       },
       {
-        "name": "TOHO CO LTD",
+        "name": "東宝",
         "code": "9602",
         "price": 1601.0,
         "valuation": 59.2,
@@ -3341,7 +3341,7 @@
         "catalyst": 40.3
       },
       {
-        "name": "SUMITOMO PHARMA CO LTD",
+        "name": "住友ファーマ",
         "code": "4506",
         "price": 1653.0,
         "valuation": 64.4,
@@ -3351,7 +3351,7 @@
         "catalyst": 71.9
       },
       {
-        "name": "SAKURA INTERNET INC",
+        "name": "さくらインターネット",
         "code": "3778",
         "price": 3650.0,
         "valuation": 41.9,
@@ -3361,7 +3361,7 @@
         "catalyst": 65.2
       },
       {
-        "name": "FUJI CORPORATION",
+        "name": "ＦＵＪＩ",
         "code": "6134",
         "price": 6886.0,
         "valuation": 57.3,
@@ -3371,7 +3371,7 @@
         "catalyst": 85.4
       },
       {
-        "name": "AOZORA BANK",
+        "name": "あおぞら銀行",
         "code": "8304",
         "price": 3405.0,
         "valuation": 72.0,
@@ -3391,7 +3391,7 @@
         "catalyst": 66.9
       },
       {
-        "name": "KINDEN CORPORATION",
+        "name": "きんでん",
         "code": "1944",
         "price": 7047.0,
         "valuation": 61.9,
@@ -3401,7 +3401,7 @@
         "catalyst": 76.6
       },
       {
-        "name": "SQUARE ENIX HOLDINGS CO.LTD.",
+        "name": "スクウェア・エニックス・ホールディングス",
         "code": "9684",
         "price": 2890.0,
         "valuation": 59.0,
@@ -3411,7 +3411,7 @@
         "catalyst": 82.3
       },
       {
-        "name": "MEIJI HOLDINGS CO LTD",
+        "name": "明治ホールディングス",
         "code": "2269",
         "price": 4408.0,
         "valuation": 59.3,
@@ -3421,7 +3421,7 @@
         "catalyst": 69.2
       },
       {
-        "name": "SEIKO EPSON CORP",
+        "name": "セイコーエプソン",
         "code": "6724",
         "price": 3237.0,
         "valuation": 56.2,
@@ -3431,7 +3431,7 @@
         "catalyst": 75.9
       },
       {
-        "name": "UNICHARM CORP",
+        "name": "ユニ・チャーム",
         "code": "8113",
         "price": 968.9,
         "valuation": 62.9,
@@ -3441,7 +3441,7 @@
         "catalyst": 64.1
       },
       {
-        "name": "DAITO TRUST CONSTRUCTION CO",
+        "name": "大東建託",
         "code": "1878",
         "price": 3311.0,
         "valuation": 65.0,
@@ -3451,7 +3451,7 @@
         "catalyst": 50.1
       },
       {
-        "name": "OSAKA GAS CO",
+        "name": "大阪瓦斯",
         "code": "9532",
         "price": 5719.0,
         "valuation": 61.7,
@@ -3461,7 +3461,7 @@
         "catalyst": 40.5
       },
       {
-        "name": "KOBE BUSSAN CO LTD",
+        "name": "神戸物産",
         "code": "3038",
         "price": 3032.0,
         "valuation": 63.4,
@@ -3471,7 +3471,7 @@
         "catalyst": 72.3
       },
       {
-        "name": "MISUMI GROUP INC",
+        "name": "ミスミグループ本社",
         "code": "9962",
         "price": 3670.0,
         "valuation": 62.0,
@@ -3481,7 +3481,7 @@
         "catalyst": 80.3
       },
       {
-        "name": "ROHTO PHARMACEUTICAL CO",
+        "name": "ロート製薬",
         "code": "4527",
         "price": 2918.5,
         "valuation": 62.8,
@@ -3491,7 +3491,7 @@
         "catalyst": 50.3
       },
       {
-        "name": "SUNTORY BEVERAGE & FOOD LIMITED",
+        "name": "サントリービバレッジ＆フード",
         "code": "2587",
         "price": 4514.0,
         "valuation": 66.8,
@@ -3501,7 +3501,7 @@
         "catalyst": 57.2
       },
       {
-        "name": "INFRONEER HLDGS INC",
+        "name": "インフロニア・ホールディングス",
         "code": "5076",
         "price": 2739.0,
         "valuation": 62.5,
@@ -3511,7 +3511,7 @@
         "catalyst": 88.1
       },
       {
-        "name": "JAPAN ELECTRONIC MATERIALS CORP",
+        "name": "日本電子材料",
         "code": "6855",
         "price": 6230.0,
         "valuation": 65.4,
@@ -3521,7 +3521,7 @@
         "catalyst": 89.0
       },
       {
-        "name": "AISIN CORPORATION",
+        "name": "アイシン",
         "code": "7259",
         "price": 2249.5,
         "valuation": 65.1,
@@ -3531,7 +3531,7 @@
         "catalyst": 46.4
       },
       {
-        "name": "KANDENKO CO LTD",
+        "name": "関電工",
         "code": "1942",
         "price": 5630.0,
         "valuation": 63.3,
@@ -3541,7 +3541,7 @@
         "catalyst": 51.4
       },
       {
-        "name": "SUMITOMO HEAVY INDUSTRIES",
+        "name": "住友重機械工業",
         "code": "6302",
         "price": 5830.0,
         "valuation": 62.8,
@@ -3551,7 +3551,7 @@
         "catalyst": 77.7
       },
       {
-        "name": "SKY PERFECT JSAT CORPORATION",
+        "name": "スカパーＪＳＡＴ",
         "code": "9412",
         "price": 2033.0,
         "valuation": 59.3,
@@ -3561,7 +3561,7 @@
         "catalyst": 71.3
       },
       {
-        "name": "ASTERISK INC",
+        "name": "アスタリスク",
         "code": "6522",
         "price": 1500.0,
         "valuation": 47.3,
@@ -3571,7 +3571,7 @@
         "catalyst": 49.4
       },
       {
-        "name": "MITSUI CHEMICALS INC",
+        "name": "三井化学",
         "code": "4183",
         "price": 2224.0,
         "valuation": 56.1,
@@ -3581,7 +3581,7 @@
         "catalyst": 75.2
       },
       {
-        "name": "DENTSU GROUP INC",
+        "name": "電通グループ",
         "code": "4324",
         "price": 3761.0,
         "valuation": 59.4,
@@ -3591,7 +3591,7 @@
         "catalyst": 52.5
       },
       {
-        "name": "DEXERIALS CORPORATION",
+        "name": "デクセリアルズ",
         "code": "4980",
         "price": 2901.5,
         "valuation": 57.3,
@@ -3601,7 +3601,7 @@
         "catalyst": 57.5
       },
       {
-        "name": "J FRONT RETAILING CO LTD",
+        "name": "Ｊ．フロント　リテイリング",
         "code": "3086",
         "price": 2767.5,
         "valuation": 56.4,
@@ -3611,7 +3611,7 @@
         "catalyst": 46.2
       },
       {
-        "name": "DAI NIPPON PRINTING CO",
+        "name": "大日本印刷",
         "code": "7912",
         "price": 3056.0,
         "valuation": 66.4,
@@ -3621,7 +3621,7 @@
         "catalyst": 34.8
       },
       {
-        "name": "JAPAN POST INSURANCE CO LTD",
+        "name": "かんぽ生命保険",
         "code": "7181",
         "price": 1735.5,
         "valuation": 57.0,
@@ -3631,7 +3631,7 @@
         "catalyst": 56.1
       },
       {
-        "name": "SUMITOMO RUBBER INDUSTRIES",
+        "name": "住友ゴム工業",
         "code": "5110",
         "price": 2099.0,
         "valuation": 62.1,
@@ -3641,7 +3641,7 @@
         "catalyst": 72.7
       },
       {
-        "name": "CKD CORP",
+        "name": "ＣＫＤ",
         "code": "6407",
         "price": 5210.0,
         "valuation": 61.0,
@@ -3651,7 +3651,7 @@
         "catalyst": 83.1
       },
       {
-        "name": "MEBUKI FINANCIAL GROUP INC",
+        "name": "めぶきフィナンシャルグループ",
         "code": "7167",
         "price": 1707.0,
         "valuation": 68.0,
@@ -3661,7 +3661,7 @@
         "catalyst": 81.9
       },
       {
-        "name": "SHIFT INC",
+        "name": "ＳＨＩＦＴ",
         "code": "3697",
         "price": 906.5,
         "valuation": 55.8,
@@ -3671,7 +3671,7 @@
         "catalyst": 60.7
       },
       {
-        "name": "NIPPON PAINT HOLDINGS CO LTD",
+        "name": "日本ペイントホールディングス",
         "code": "4612",
         "price": 1142.0,
         "valuation": 59.7,
@@ -3681,7 +3681,7 @@
         "catalyst": 60.8
       },
       {
-        "name": "CASIO COMPUTER CO",
+        "name": "カシオ計算機",
         "code": "6952",
         "price": 2331.0,
         "valuation": 62.5,
@@ -3691,7 +3691,7 @@
         "catalyst": 78.4
       },
       {
-        "name": "KYOTO FINANCIAL GROUP INC",
+        "name": "京都フィナンシャルグループ",
         "code": "5844",
         "price": 4961.0,
         "valuation": 61.9,
@@ -3701,7 +3701,7 @@
         "catalyst": 76.8
       },
       {
-        "name": "MAKITA CORP",
+        "name": "マキタ",
         "code": "6586",
         "price": 5247.0,
         "valuation": 66.1,
@@ -3711,7 +3711,7 @@
         "catalyst": 63.9
       },
       {
-        "name": "OTSUKA CORPORATION",
+        "name": "大塚商会",
         "code": "4768",
         "price": 3654.0,
         "valuation": 64.1,
@@ -3721,7 +3721,7 @@
         "catalyst": 54.8
       },
       {
-        "name": "RICOH CO",
+        "name": "リコー",
         "code": "7752",
         "price": 1690.0,
         "valuation": 61.8,
@@ -3731,7 +3731,7 @@
         "catalyst": 74.3
       },
       {
-        "name": "ROUND ONE CORP",
+        "name": "ラウンドワン",
         "code": "4680",
         "price": 1298.5,
         "valuation": 55.5,
@@ -3741,7 +3741,7 @@
         "catalyst": 56.4
       },
       {
-        "name": "SKYLARK HOLDINGS CO LTD",
+        "name": "すかいらーくホールディングス",
         "code": "3197",
         "price": 3384.0,
         "valuation": 53.6,
@@ -3751,7 +3751,7 @@
         "catalyst": 67.0
       },
       {
-        "name": "NABTESCO CORP",
+        "name": "ナブテスコ",
         "code": "6268",
         "price": 4457.0,
         "valuation": 62.4,
@@ -3761,7 +3761,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "TOHOKU ELECTRIC POWER CO INC",
+        "name": "東北電力",
         "code": "9506",
         "price": 1367.5,
         "valuation": 57.4,
@@ -3771,7 +3771,7 @@
         "catalyst": 62.8
       },
       {
-        "name": "TAKASHIMAYA CO",
+        "name": "高島屋",
         "code": "8233",
         "price": 2227.0,
         "valuation": 54.7,
@@ -3781,7 +3781,7 @@
         "catalyst": 72.6
       },
       {
-        "name": "SUNCALL CORP",
+        "name": "サンコール",
         "code": "5985",
         "price": 2033.0,
         "valuation": 65.7,
@@ -3791,7 +3791,7 @@
         "catalyst": 34.7
       },
       {
-        "name": "TOKYU CORP",
+        "name": "東急",
         "code": "9005",
         "price": 1629.0,
         "valuation": 56.5,
@@ -3801,7 +3801,7 @@
         "catalyst": 67.7
       },
       {
-        "name": "MATSUKIYOCOCOKARA & CO",
+        "name": "マツキヨココカラ＆カンパニー",
         "code": "3088",
         "price": 2598.0,
         "valuation": 65.2,
@@ -3811,7 +3811,7 @@
         "catalyst": 59.5
       },
       {
-        "name": "IYOGIN HOLDINGS INC",
+        "name": "いよぎんホールディングス",
         "code": "5830",
         "price": 3939.0,
         "valuation": 66.6,
@@ -3821,7 +3821,7 @@
         "catalyst": 42.4
       },
       {
-        "name": "KYUSHU ELECTRIC POWER CO INC",
+        "name": "九州電力",
         "code": "9508",
         "price": 2158.5,
         "valuation": 57.3,
@@ -3831,7 +3831,7 @@
         "catalyst": 65.0
       },
       {
-        "name": "KURARAY CO",
+        "name": "クラレ",
         "code": "3405",
         "price": 1838.5,
         "valuation": 49.8,
@@ -3841,7 +3841,7 @@
         "catalyst": 75.7
       },
       {
-        "name": "KYOWA KIRIN CO LTD",
+        "name": "協和キリン",
         "code": "4151",
         "price": 2403.5,
         "valuation": 66.2,
@@ -3851,7 +3851,7 @@
         "catalyst": 75.8
       },
       {
-        "name": "GS YUASA CORP",
+        "name": "ジーエス・ユアサ　コーポレーション",
         "code": "6674",
         "price": 4961.0,
         "valuation": 63.5,
@@ -3861,7 +3861,7 @@
         "catalyst": 59.9
       },
       {
-        "name": "MITSUBISHI MOTOR CORP",
+        "name": "三菱自動車工業",
         "code": "7211",
         "price": 369.2,
         "valuation": 55.0,
@@ -3871,7 +3871,7 @@
         "catalyst": 70.9
       },
       {
-        "name": "NOMURA REAL ESTATE HOLDINGS INC",
+        "name": "野村不動産ホールディングス",
         "code": "3231",
         "price": 926.0,
         "valuation": 56.4,
@@ -3881,7 +3881,7 @@
         "catalyst": 30.9
       },
       {
-        "name": "ANRITSU CORP",
+        "name": "アンリツ",
         "code": "6754",
         "price": 3220.0,
         "valuation": 57.3,
@@ -3891,7 +3891,7 @@
         "catalyst": 83.9
       },
       {
-        "name": "KYORITSU MAINTENANCE",
+        "name": "共立メンテナンス",
         "code": "9616",
         "price": 3255.0,
         "valuation": 59.9,
@@ -3901,7 +3901,7 @@
         "catalyst": 46.2
       },
       {
-        "name": "ONO PHARMACEUTICAL CO",
+        "name": "小野薬品工業",
         "code": "4528",
         "price": 2448.5,
         "valuation": 64.6,
@@ -3911,7 +3911,7 @@
         "catalyst": 60.5
       },
       {
-        "name": "KOBE STEEL",
+        "name": "神戸製鋼所",
         "code": "5406",
         "price": 2029.5,
         "valuation": 60.4,
@@ -3921,7 +3921,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "HULIC CO LTD",
+        "name": "ヒューリック",
         "code": "3003",
         "price": 1768.0,
         "valuation": 55.2,
@@ -3931,7 +3931,7 @@
         "catalyst": 68.0
       },
       {
-        "name": "NISSIN FOODS HOLDINGS CO. LTD.",
+        "name": "日清食品ホールディングス",
         "code": "2897",
         "price": 2980.5,
         "valuation": 62.4,
@@ -3941,7 +3941,7 @@
         "catalyst": 62.7
       },
       {
-        "name": "SEKISUI CHEMICAL CO",
+        "name": "積水化学工業",
         "code": "4204",
         "price": 2549.0,
         "valuation": 64.5,
@@ -3951,7 +3951,7 @@
         "catalyst": 53.7
       },
       {
-        "name": "MONOTARO CO.LTD",
+        "name": "ＭｏｎｏｔａＲＯ",
         "code": "3064",
         "price": 1909.5,
         "valuation": 53.4,
@@ -3961,7 +3961,7 @@
         "catalyst": 67.7
       },
       {
-        "name": "SHIMADZU CORP",
+        "name": "島津製作所",
         "code": "7701",
         "price": 3846.0,
         "valuation": 64.5,
@@ -3971,7 +3971,7 @@
         "catalyst": 73.0
       },
       {
-        "name": "HANKYU HANSHIN HOLDINGS INC",
+        "name": "阪急阪神ホールディングス",
         "code": "9042",
         "price": 4705.0,
         "valuation": 56.0,
@@ -3981,7 +3981,7 @@
         "catalyst": 57.7
       },
       {
-        "name": "JGC HOLDINGS CORPORATION",
+        "name": "日揮ホールディングス",
         "code": "1963",
         "price": 2344.0,
         "valuation": 72.8,
@@ -3991,7 +3991,7 @@
         "catalyst": 64.5
       },
       {
-        "name": "GNI GROUP LTD",
+        "name": "ジーエヌアイグループ",
         "code": "2160",
         "price": 2872.0,
         "valuation": 51.7,
@@ -4001,7 +4001,7 @@
         "catalyst": 47.1
       },
       {
-        "name": "TOKYU FUDOSAN HOLDINGS CORPORAT",
+        "name": "東急不動産ホールディングス",
         "code": "3289",
         "price": 1312.0,
         "valuation": 56.5,
@@ -4011,7 +4011,7 @@
         "catalyst": 42.5
       },
       {
-        "name": "UBE CORPORATION",
+        "name": "ＵＢＥ",
         "code": "4208",
         "price": 3442.0,
         "valuation": 58.1,
@@ -4021,7 +4021,7 @@
         "catalyst": 56.2
       },
       {
-        "name": "HACHIJUNI NAGANO BK LTD",
+        "name": "八十二長野銀行",
         "code": "8359",
         "price": 2732.0,
         "valuation": 66.4,
@@ -4031,7 +4031,7 @@
         "catalyst": 75.2
       },
       {
-        "name": "YAKULT HONSHA CO",
+        "name": "ヤクルト本社",
         "code": "2267",
         "price": 2822.0,
         "valuation": 65.2,
@@ -4041,7 +4041,7 @@
         "catalyst": 59.7
       },
       {
-        "name": "FUSO CHEMICAL CO",
+        "name": "扶桑化学工業",
         "code": "4368",
         "price": 2883.0,
         "valuation": 60.4,
@@ -4051,7 +4051,7 @@
         "catalyst": 79.0
       },
       {
-        "name": "PERSOL HOLDINGS CO LTD",
+        "name": "パーソルホールディングス",
         "code": "2181",
         "price": 299.3,
         "valuation": 63.8,
@@ -4061,7 +4061,7 @@
         "catalyst": 61.2
       },
       {
-        "name": "NIKON CORP",
+        "name": "ニコン",
         "code": "7731",
         "price": 1880.0,
         "valuation": 60.1,
@@ -4071,7 +4071,7 @@
         "catalyst": 31.4
       },
       {
-        "name": "LIXIL CORPORATION",
+        "name": "ＬＩＸＩＬ",
         "code": "5938",
         "price": 1758.5,
         "valuation": 46.1,
@@ -4091,7 +4091,7 @@
         "catalyst": 51.6
       },
       {
-        "name": "PENTA OCEAN CONSTRUCTION",
+        "name": "五洋建設",
         "code": "1893",
         "price": 1445.5,
         "valuation": 59.9,
@@ -4101,7 +4101,7 @@
         "catalyst": 54.6
       },
       {
-        "name": "ALPS ALPINE CO LTD",
+        "name": "アルプスアルパイン",
         "code": "6770",
         "price": 2258.0,
         "valuation": 66.8,
@@ -4111,7 +4111,7 @@
         "catalyst": 49.8
       },
       {
-        "name": "TISI INC",
+        "name": "ＴＩＳＩ",
         "code": "3626",
         "price": 4022.0,
         "valuation": 62.4,
@@ -4121,7 +4121,7 @@
         "catalyst": 63.1
       },
       {
-        "name": "SEGA SAMMY HLDGS INC",
+        "name": "セガサミーホールディングス",
         "code": "6460",
         "price": 3166.0,
         "valuation": 60.4,
@@ -4131,7 +4131,7 @@
         "catalyst": 56.6
       },
       {
-        "name": "TSURUHA HOLDINGS INC",
+        "name": "ツルハホールディングス",
         "code": "3391",
         "price": 2318.5,
         "valuation": 65.8,
@@ -4141,7 +4141,7 @@
         "catalyst": 57.3
       },
       {
-        "name": "GUNMA BANK",
+        "name": "群馬銀行",
         "code": "8334",
         "price": 2899.5,
         "valuation": 59.6,
@@ -4151,7 +4151,7 @@
         "catalyst": 63.3
       },
       {
-        "name": "YAMAHA CORP",
+        "name": "ヤマハ",
         "code": "7951",
         "price": 1325.0,
         "valuation": 64.9,
@@ -4161,7 +4161,7 @@
         "catalyst": 75.6
       },
       {
-        "name": "DENKA COMPANY LIMITED",
+        "name": "デンカ",
         "code": "4061",
         "price": 3245.0,
         "valuation": 57.6,
@@ -4171,7 +4171,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "SUGI HOLDINGS CO.LTD.",
+        "name": "スギホールディングス",
         "code": "7649",
         "price": 1330.0,
         "valuation": 67.1,
@@ -4181,7 +4181,7 @@
         "catalyst": 35.0
       },
       {
-        "name": "MACNICA HOLDINGS INC",
+        "name": "マクニカホールディングス",
         "code": "3132",
         "price": 3547.0,
         "valuation": 62.1,
@@ -4191,7 +4191,7 @@
         "catalyst": 84.0
       },
       {
-        "name": "DENA CO LTD",
+        "name": "ディー・エヌ・エー",
         "code": "2432",
         "price": 2620.0,
         "valuation": 68.1,
@@ -4201,7 +4201,7 @@
         "catalyst": 66.8
       },
       {
-        "name": "APPIER GROUP INC",
+        "name": "Ａｐｐｉｅｒ　Ｇｒｏｕｐ",
         "code": "4180",
         "price": 1512.0,
         "valuation": 53.2,
@@ -4211,7 +4211,7 @@
         "catalyst": 80.0
       },
       {
-        "name": "COCA-COLA BOTTLERS JAPAN HLDGS ",
+        "name": "コカ・コーラ　ボトラーズジャパンホールディングス",
         "code": "2579",
         "price": 3795.0,
         "valuation": 58.1,
@@ -4221,7 +4221,7 @@
         "catalyst": 49.7
       },
       {
-        "name": "OJI HOLDINGS CORP",
+        "name": "王子ホールディングス",
         "code": "3861",
         "price": 875.2,
         "valuation": 56.7,
@@ -4231,7 +4231,7 @@
         "catalyst": 50.9
       },
       {
-        "name": "MABUCHI MOTOR CO",
+        "name": "マブチモーター",
         "code": "6592",
         "price": 1758.5,
         "valuation": 67.9,
@@ -4241,7 +4241,7 @@
         "catalyst": 66.9
       },
       {
-        "name": "LION CORP",
+        "name": "ライオン",
         "code": "4912",
         "price": 1828.5,
         "valuation": 65.5,
@@ -4251,7 +4251,7 @@
         "catalyst": 62.8
       },
       {
-        "name": "MARUI GROUP CO LTD",
+        "name": "丸井グループ",
         "code": "8252",
         "price": 2921.5,
         "valuation": 52.7,
@@ -4261,7 +4261,7 @@
         "catalyst": 59.3
       },
       {
-        "name": "NICHIREI CORP",
+        "name": "ニチレイ",
         "code": "2871",
         "price": 2108.5,
         "valuation": 61.6,
@@ -4271,7 +4271,7 @@
         "catalyst": 71.4
       },
       {
-        "name": "YAMADA HOLDINGS CO LTD",
+        "name": "ヤマダホールディングス",
         "code": "9831",
         "price": 709.0,
         "valuation": 55.8,
@@ -4281,7 +4281,7 @@
         "catalyst": 61.8
       },
       {
-        "name": "MUSASHI SEIMITSU IND",
+        "name": "武蔵精密工業",
         "code": "7220",
         "price": 2926.0,
         "valuation": 46.6,
@@ -4291,7 +4291,7 @@
         "catalyst": 57.8
       },
       {
-        "name": "ZOZO INC",
+        "name": "ＺＯＺＯ",
         "code": "3092",
         "price": 1142.5,
         "valuation": 49.6,
@@ -4301,7 +4301,7 @@
         "catalyst": 53.9
       },
       {
-        "name": "TOSOH CORP",
+        "name": "東ソー",
         "code": "4042",
         "price": 2655.5,
         "valuation": 63.0,
@@ -4311,7 +4311,7 @@
         "catalyst": 75.6
       },
       {
-        "name": "UACJ CORPORATION",
+        "name": "ＵＡＣＪ",
         "code": "5741",
         "price": 2240.0,
         "valuation": 43.0,
@@ -4321,7 +4321,7 @@
         "catalyst": 85.3
       },
       {
-        "name": "SAPPORO BREWERIES LTD",
+        "name": "サッポロビール",
         "code": "2501",
         "price": 1857.5,
         "valuation": 50.8,
@@ -4331,7 +4331,7 @@
         "catalyst": 71.3
       },
       {
-        "name": "TOKYO TATEMONO CO",
+        "name": "東京建物",
         "code": "8804",
         "price": 3376.0,
         "valuation": 55.2,
@@ -4341,7 +4341,7 @@
         "catalyst": 77.3
       },
       {
-        "name": "TOKAI CARBON CO",
+        "name": "東海カーボン",
         "code": "5301",
         "price": 1819.5,
         "valuation": 59.6,
@@ -4351,7 +4351,7 @@
         "catalyst": 59.5
       },
       {
-        "name": "NIPPON CHEMI-CON CORP",
+        "name": "日本ケミコン",
         "code": "6997",
         "price": 2743.0,
         "valuation": 52.6,
@@ -4371,7 +4371,7 @@
         "catalyst": 41.9
       },
       {
-        "name": "SANSAN INC",
+        "name": "Ｓａｎｓａｎ",
         "code": "4443",
         "price": 2228.0,
         "valuation": 42.1,
@@ -4381,7 +4381,7 @@
         "catalyst": 57.6
       },
       {
-        "name": "NOMURA MICRO SCIENCE CO LTD",
+        "name": "野村マイクロ・サイエンス",
         "code": "6254",
         "price": 3455.0,
         "valuation": 52.1,
@@ -4391,7 +4391,7 @@
         "catalyst": 23.9
       },
       {
-        "name": "AIR WATER INC",
+        "name": "エア・ウォーター",
         "code": "4088",
         "price": 3010.0,
         "valuation": 57.9,
@@ -4401,7 +4401,7 @@
         "catalyst": 60.8
       },
       {
-        "name": "NICHICON CORP",
+        "name": "ニチコン",
         "code": "6996",
         "price": 2600.0,
         "valuation": 62.6,
@@ -4411,7 +4411,7 @@
         "catalyst": 75.6
       },
       {
-        "name": "COVER CORPORATION",
+        "name": "カバー",
         "code": "5253",
         "price": 1654.0,
         "valuation": 55.8,
@@ -4431,7 +4431,7 @@
         "catalyst": 63.8
       },
       {
-        "name": "SURUGA BANK",
+        "name": "スルガ銀行",
         "code": "8358",
         "price": 2979.0,
         "valuation": 68.4,
@@ -4441,7 +4441,7 @@
         "catalyst": 84.3
       },
       {
-        "name": "HASEKO CORPORATION",
+        "name": "長谷工コーポレーション",
         "code": "1808",
         "price": 2854.0,
         "valuation": 62.6,
@@ -4451,7 +4451,7 @@
         "catalyst": 73.0
       },
       {
-        "name": "FUTURE CORPORATION",
+        "name": "フューチャー",
         "code": "4722",
         "price": 2446.0,
         "valuation": 62.0,
@@ -4461,7 +4461,7 @@
         "catalyst": 57.8
       },
       {
-        "name": "HOKKAIDO ELECTRIC POWER CO INC",
+        "name": "北海道電力",
         "code": "9509",
         "price": 1125.0,
         "valuation": 58.0,
@@ -4471,7 +4471,7 @@
         "catalyst": 34.3
       },
       {
-        "name": "SHIMAMURA CO",
+        "name": "しまむら",
         "code": "8227",
         "price": 3249.0,
         "valuation": 69.0,
@@ -4481,7 +4481,7 @@
         "catalyst": 64.0
       },
       {
-        "name": "AZBIL CORP",
+        "name": "アズビル",
         "code": "6845",
         "price": 1474.5,
         "valuation": 61.9,
@@ -4491,7 +4491,7 @@
         "catalyst": 50.4
       },
       {
-        "name": "SG HOLDINGS CO LTD",
+        "name": "ＳＧホールディングス",
         "code": "9143",
         "price": 1481.0,
         "valuation": 61.2,
@@ -4501,7 +4501,7 @@
         "catalyst": 67.9
       },
       {
-        "name": "SANTEN PHARMACEUTICAL CO",
+        "name": "参天製薬",
         "code": "4536",
         "price": 1829.5,
         "valuation": 64.9,
@@ -4511,7 +4511,7 @@
         "catalyst": 61.9
       },
       {
-        "name": "DAIDO STEEL CO",
+        "name": "大同特殊鋼",
         "code": "5471",
         "price": 2269.5,
         "valuation": 62.0,
@@ -4521,7 +4521,7 @@
         "catalyst": 71.7
       },
       {
-        "name": "YAMATO HOLDINGS CO LTD",
+        "name": "ヤマトホールディングス",
         "code": "9064",
         "price": 1965.0,
         "valuation": 58.4,
@@ -4531,7 +4531,7 @@
         "catalyst": 50.6
       },
       {
-        "name": "NHK SPRING CO LTD",
+        "name": "日本発條",
         "code": "5991",
         "price": 3327.0,
         "valuation": 64.3,
@@ -4541,7 +4541,7 @@
         "catalyst": 72.7
       },
       {
-        "name": "JAPAN PETROLEUM EXPLORATION CO ",
+        "name": "石油資源開発",
         "code": "1662",
         "price": 1875.0,
         "valuation": 67.5,
@@ -4551,7 +4551,7 @@
         "catalyst": 22.3
       },
       {
-        "name": "JTEKT CORPORATION",
+        "name": "ジェイテクト",
         "code": "6473",
         "price": 2188.5,
         "valuation": 54.8,
@@ -4561,7 +4561,7 @@
         "catalyst": 73.9
       },
       {
-        "name": "NOF CORP",
+        "name": "日油",
         "code": "4403",
         "price": 2635.5,
         "valuation": 64.6,
@@ -4571,7 +4571,7 @@
         "catalyst": 54.3
       },
       {
-        "name": "INFOMART CORPORATION",
+        "name": "インフォマート",
         "code": "2492",
         "price": 700.0,
         "valuation": 38.6,
@@ -4581,7 +4581,7 @@
         "catalyst": 47.6
       },
       {
-        "name": "SHARP CORP",
+        "name": "シャープ",
         "code": "6753",
         "price": 644.7,
         "valuation": 61.1,
@@ -4591,7 +4591,7 @@
         "catalyst": 26.8
       },
       {
-        "name": "KONICA MINOLTA INC",
+        "name": "コニカミノルタ",
         "code": "4902",
         "price": 658.5,
         "valuation": 59.2,
@@ -4601,7 +4601,7 @@
         "catalyst": 54.2
       },
       {
-        "name": "ZEON CORPORATION",
+        "name": "日本ゼオン",
         "code": "4205",
         "price": 2458.0,
         "valuation": 65.6,
@@ -4611,7 +4611,7 @@
         "catalyst": 71.9
       },
       {
-        "name": "RAKUS CO LTD",
+        "name": "ラクス",
         "code": "3923",
         "price": 1127.5,
         "valuation": 44.4,
@@ -4621,7 +4621,7 @@
         "catalyst": 71.4
       },
       {
-        "name": "KOITO MANUFACTURING CO LTD",
+        "name": "小糸製作所",
         "code": "7276",
         "price": 2696.0,
         "valuation": 63.0,
@@ -4631,7 +4631,7 @@
         "catalyst": 71.4
       },
       {
-        "name": "KANSAI PAINT CO LTD",
+        "name": "関西ペイント",
         "code": "4613",
         "price": 2810.5,
         "valuation": 61.3,
@@ -4641,7 +4641,7 @@
         "catalyst": 43.5
       },
       {
-        "name": "KANTO DENKA KOGYO CO",
+        "name": "関東電化工業",
         "code": "4047",
         "price": 2143.0,
         "valuation": 57.2,
@@ -4651,7 +4651,7 @@
         "catalyst": 81.9
       },
       {
-        "name": "RASA INDUSTRIES",
+        "name": "ラサ工業",
         "code": "4022",
         "price": 1961.0,
         "valuation": 62.7,
@@ -4661,7 +4661,7 @@
         "catalyst": 69.8
       },
       {
-        "name": "PIGEON CORP",
+        "name": "ピジョン",
         "code": "7956",
         "price": 2056.0,
         "valuation": 61.4,
@@ -4671,7 +4671,7 @@
         "catalyst": 64.9
       },
       {
-        "name": "CHUGOKU ELECTRIC POWER CO INC",
+        "name": "中国電力",
         "code": "9504",
         "price": 1041.5,
         "valuation": 58.0,
@@ -4681,7 +4681,7 @@
         "catalyst": 51.7
       },
       {
-        "name": "TOKYO METRO CO LTD",
+        "name": "東京地下鉄",
         "code": "9023",
         "price": 1496.0,
         "valuation": 54.8,
@@ -4691,7 +4691,7 @@
         "catalyst": 40.8
       },
       {
-        "name": "NIHON DEMPA KOGYO",
+        "name": "日本電波工業",
         "code": "6779",
         "price": 2604.0,
         "valuation": 58.1,
@@ -4701,7 +4701,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "KEISEI ELECTRIC RAILWAY CO",
+        "name": "京成電鉄",
         "code": "9009",
         "price": 1367.0,
         "valuation": 58.2,
@@ -4721,7 +4721,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "ARCHITECTS STUDIO JAPAN INC",
+        "name": "アーキテクツ・スタジオ・ジャパン",
         "code": "6085",
         "price": 162.0,
         "valuation": 39.3,
@@ -4731,7 +4731,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "NSK",
+        "name": "日本精工",
         "code": "6471",
         "price": 1112.0,
         "valuation": 68.6,
@@ -4741,7 +4741,7 @@
         "catalyst": 81.9
       },
       {
-        "name": "J TRUST CO. LTD",
+        "name": "Ｊトラスト",
         "code": "8508",
         "price": 777.0,
         "valuation": 66.6,
@@ -4751,7 +4751,7 @@
         "catalyst": 56.5
       },
       {
-        "name": "ODAKYU ELECTRIC RAILWAY CO",
+        "name": "小田急電鉄",
         "code": "9007",
         "price": 1787.5,
         "valuation": 55.4,
@@ -4761,7 +4761,7 @@
         "catalyst": 44.1
       },
       {
-        "name": "NIPPON THOMPSON CO",
+        "name": "日本トムソン",
         "code": "6480",
         "price": 1706.0,
         "valuation": 60.6,
@@ -4771,7 +4771,7 @@
         "catalyst": 82.5
       },
       {
-        "name": "DAISHI HOKUETSU FINANCIAL GROUP",
+        "name": "第四北越フィナンシャルグループ",
         "code": "7327",
         "price": 2646.0,
         "valuation": 72.3,
@@ -4781,7 +4781,7 @@
         "catalyst": 71.3
       },
       {
-        "name": "NORTH PACIFIC BANK LIMITED",
+        "name": "北洋銀行",
         "code": "8524",
         "price": 1318.0,
         "valuation": 73.0,
@@ -4791,7 +4791,7 @@
         "catalyst": 83.2
       },
       {
-        "name": "MORINAGA MILK INDUSTRY CO",
+        "name": "森永乳業",
         "code": "2264",
         "price": 1100.0,
         "valuation": 62.8,
@@ -4801,7 +4801,7 @@
         "catalyst": 71.9
       },
       {
-        "name": "AICHI FINANCIAL GROUP INC",
+        "name": "あいちフィナンシャルグループ",
         "code": "7389",
         "price": 1923.0,
         "valuation": 64.7,
@@ -4811,7 +4811,7 @@
         "catalyst": 85.7
       },
       {
-        "name": "HYAKUGO BANK",
+        "name": "百五銀行",
         "code": "8368",
         "price": 2376.0,
         "valuation": 62.9,
@@ -4821,7 +4821,7 @@
         "catalyst": 85.8
       },
       {
-        "name": "NISSHIN SEIFUN GROUP INC",
+        "name": "日清製粉グループ本社",
         "code": "2002",
         "price": 2046.5,
         "valuation": 65.0,
@@ -4831,7 +4831,7 @@
         "catalyst": 43.1
       },
       {
-        "name": "USS CO LTD",
+        "name": "ユー・エス・エス",
         "code": "4732",
         "price": 1981.0,
         "valuation": 52.6,
@@ -4841,7 +4841,7 @@
         "catalyst": 59.8
       },
       {
-        "name": "IWATANI CORPORATION",
+        "name": "岩谷産業",
         "code": "8088",
         "price": 2124.0,
         "valuation": 62.1,
@@ -4851,7 +4851,7 @@
         "catalyst": 76.1
       },
       {
-        "name": "SANKYO CO LTD",
+        "name": "ＳＡＮＫＹＯ",
         "code": "6417",
         "price": 2025.0,
         "valuation": 69.7,
@@ -4861,7 +4861,7 @@
         "catalyst": 20.2
       },
       {
-        "name": "NISSUI CORPORATION",
+        "name": "ニッスイ",
         "code": "1332",
         "price": 1229.5,
         "valuation": 58.4,
@@ -4871,7 +4871,7 @@
         "catalyst": 63.0
       },
       {
-        "name": "SHIGA BANK",
+        "name": "滋賀銀行",
         "code": "8366",
         "price": 2862.0,
         "valuation": 59.5,
@@ -4881,7 +4881,7 @@
         "catalyst": 77.4
       },
       {
-        "name": "PARK 24 CO LTD",
+        "name": "パーク２４",
         "code": "4666",
         "price": 2016.0,
         "valuation": 60.0,
@@ -4891,7 +4891,7 @@
         "catalyst": 63.5
       },
       {
-        "name": "TOKYO KIRABOSHI FINANCIAL GP IN",
+        "name": "東京きらぼしフィナンシャルグループ",
         "code": "7173",
         "price": 1694.0,
         "valuation": 72.2,
@@ -4901,7 +4901,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "NISSHINBO HOLDINGS INC",
+        "name": "日清紡ホールディングス",
         "code": "3105",
         "price": 2239.0,
         "valuation": 61.1,
@@ -4911,7 +4911,7 @@
         "catalyst": 49.9
       },
       {
-        "name": "UT GROUP CO LTD",
+        "name": "ＵＴグループ",
         "code": "2146",
         "price": 227.0,
         "valuation": 63.1,
@@ -4921,7 +4921,7 @@
         "catalyst": 66.5
       },
       {
-        "name": "KYUSHU FINANCIAL GROUP INC",
+        "name": "九州フィナンシャルグループ",
         "code": "7180",
         "price": 1610.0,
         "valuation": 58.1,
@@ -4931,7 +4931,7 @@
         "catalyst": 42.2
       },
       {
-        "name": "NIHON M&A CENTER HOLDINGS INC",
+        "name": "日本Ｍ＆Ａセンターホールディングス",
         "code": "2127",
         "price": 660.0,
         "valuation": 59.7,
@@ -4951,7 +4951,7 @@
         "catalyst": 70.8
       },
       {
-        "name": "SEVEN BANK LTD",
+        "name": "セブン銀行",
         "code": "8410",
         "price": 340.3,
         "valuation": 71.3,
@@ -4961,7 +4961,7 @@
         "catalyst": 69.7
       },
       {
-        "name": "KUMAGAI GUMI CO",
+        "name": "熊谷組",
         "code": "1861",
         "price": 1291.0,
         "valuation": 67.0,
@@ -4971,7 +4971,7 @@
         "catalyst": 58.4
       },
       {
-        "name": "MITSUBISHI LOGISTICS CORP",
+        "name": "三菱倉庫",
         "code": "9301",
         "price": 1540.0,
         "valuation": 63.4,
@@ -4981,7 +4981,7 @@
         "catalyst": 32.4
       },
       {
-        "name": "CREATE RESTAURANTS HOLDINGS INC",
+        "name": "クリエイト・レストランツ・ホールディングス",
         "code": "3387",
         "price": 777.0,
         "valuation": 43.3,
@@ -4991,7 +4991,7 @@
         "catalyst": 54.2
       },
       {
-        "name": "KOEI TECMO HOLDINGS CO LTD",
+        "name": "コーエーテクモホールディングス",
         "code": "3635",
         "price": 1664.5,
         "valuation": 61.3,
@@ -5001,7 +5001,7 @@
         "catalyst": 76.2
       },
       {
-        "name": "TSUKUBA BANK LTD",
+        "name": "筑波銀行",
         "code": "8338",
         "price": 769.0,
         "valuation": 75.8,
@@ -5011,7 +5011,7 @@
         "catalyst": 79.8
       },
       {
-        "name": "GENDA INC",
+        "name": "ＧＥＮＤＡ",
         "code": "9166",
         "price": 735.0,
         "valuation": 53.3,
@@ -5021,7 +5021,7 @@
         "catalyst": 64.4
       },
       {
-        "name": "EXAWIZARDS INC",
+        "name": "エクサウィザーズ",
         "code": "4259",
         "price": 860.0,
         "valuation": 44.5,
@@ -5031,7 +5031,7 @@
         "catalyst": 70.4
       },
       {
-        "name": "IDOM INC",
+        "name": "ＩＤＯＭ",
         "code": "7599",
         "price": 1253.0,
         "valuation": 59.9,
@@ -5041,7 +5041,7 @@
         "catalyst": 63.4
       },
       {
-        "name": "ALSOK CO LTD",
+        "name": "ＡＬＳＯＫ",
         "code": "2331",
         "price": 1210.0,
         "valuation": 65.5,
@@ -5051,7 +5051,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "TODA CORP",
+        "name": "戸田建設",
         "code": "1860",
         "price": 1515.0,
         "valuation": 62.4,
@@ -5061,7 +5061,7 @@
         "catalyst": 77.9
       },
       {
-        "name": "RENGO CO",
+        "name": "レンゴー",
         "code": "3941",
         "price": 1566.5,
         "valuation": 56.2,
@@ -5071,7 +5071,7 @@
         "catalyst": 74.4
       },
       {
-        "name": "MARUICHI STEEL TUBE",
+        "name": "丸一鋼管",
         "code": "5463",
         "price": 1751.5,
         "valuation": 68.2,
@@ -5081,7 +5081,7 @@
         "catalyst": 67.3
       },
       {
-        "name": "ANYCOLOR INC",
+        "name": "ＡＮＹＣＯＬＯＲ",
         "code": "5032",
         "price": 2989.0,
         "valuation": 58.5,
@@ -5091,7 +5091,7 @@
         "catalyst": 33.8
       },
       {
-        "name": "NXERA PHARMA CO LTD",
+        "name": "ネクセラファーマ",
         "code": "4565",
         "price": 1140.0,
         "valuation": 54.2,
@@ -5101,7 +5101,7 @@
         "catalyst": 46.3
       },
       {
-        "name": "KOA CORPORATION",
+        "name": "ＫＯＡ",
         "code": "6999",
         "price": 2281.0,
         "valuation": 61.5,
@@ -5111,7 +5111,7 @@
         "catalyst": 79.9
       },
       {
-        "name": "SIMPLEX HLDGS INC",
+        "name": "シンプレクス・ホールディングス",
         "code": "4373",
         "price": 1205.0,
         "valuation": 53.3,
@@ -5121,7 +5121,7 @@
         "catalyst": 60.4
       },
       {
-        "name": "DAICEL CORPORATION",
+        "name": "ダイセル",
         "code": "4202",
         "price": 1449.0,
         "valuation": 53.1,
@@ -5131,7 +5131,7 @@
         "catalyst": 54.1
       },
       {
-        "name": "CHIYODA CORP",
+        "name": "千代田化工建設",
         "code": "6366",
         "price": 693.0,
         "valuation": 74.2,
@@ -5141,7 +5141,7 @@
         "catalyst": 69.4
       },
       {
-        "name": "JAPAN MATERIAL CO LTD",
+        "name": "ジャパンマテリアル",
         "code": "6055",
         "price": 2148.0,
         "valuation": 60.0,
@@ -5151,7 +5151,7 @@
         "catalyst": 75.2
       },
       {
-        "name": "GMO INTERNET INC",
+        "name": "ＧＭＯインターネット",
         "code": "4784",
         "price": 566.0,
         "valuation": 58.7,
@@ -5161,7 +5161,7 @@
         "catalyst": 60.3
       },
       {
-        "name": "MONEX GROUP INC",
+        "name": "マネックスグループ",
         "code": "8698",
         "price": 734.0,
         "valuation": 63.4,
@@ -5171,7 +5171,7 @@
         "catalyst": 53.3
       },
       {
-        "name": "K'S HOLDINGS CORPORATION",
+        "name": "ケーズホールディングス",
         "code": "8282",
         "price": 1902.0,
         "valuation": 63.1,
@@ -5181,7 +5181,7 @@
         "catalyst": 75.4
       },
       {
-        "name": "JVCKENWOOD CORPORATION",
+        "name": "ＪＶＣケンウッド",
         "code": "6632",
         "price": 991.1,
         "valuation": 67.5,
@@ -5191,7 +5191,7 @@
         "catalyst": 35.0
       },
       {
-        "name": "YE DIGITAL CORPORATION",
+        "name": "ＹＥ　ＤＩＧＩＴＡＬ",
         "code": "2354",
         "price": 1443.0,
         "valuation": 63.9,
@@ -5201,7 +5201,7 @@
         "catalyst": 38.3
       },
       {
-        "name": "MITSUI HIGH TEC INC",
+        "name": "三井ハイテック",
         "code": "6966",
         "price": 939.0,
         "valuation": 53.1,
@@ -5211,7 +5211,7 @@
         "catalyst": 76.1
       },
       {
-        "name": "KEIO CORPORATION",
+        "name": "京王電鉄",
         "code": "9008",
         "price": 780.5,
         "valuation": 57.6,
@@ -5221,7 +5221,7 @@
         "catalyst": 53.2
       },
       {
-        "name": "NAGASE & CO",
+        "name": "長瀬産業",
         "code": "8012",
         "price": 1143.5,
         "valuation": 61.5,
@@ -5231,7 +5231,7 @@
         "catalyst": 77.4
       },
       {
-        "name": "TEIJIN LTD",
+        "name": "帝人",
         "code": "3401",
         "price": 1737.0,
         "valuation": 56.1,
@@ -5241,7 +5241,7 @@
         "catalyst": 46.6
       },
       {
-        "name": "KANADEVIA CORPORATION",
+        "name": "カナデビア",
         "code": "7004",
         "price": 1155.0,
         "valuation": 61.7,
@@ -5251,7 +5251,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "SHO-BOND HOLDINGS CO LTD",
+        "name": "ショーボンドホールディングス",
         "code": "1414",
         "price": 1262.5,
         "valuation": 63.7,
@@ -5261,7 +5261,7 @@
         "catalyst": 53.0
       },
       {
-        "name": "MARUMAE CO.LTD",
+        "name": "マルマエ",
         "code": "6264",
         "price": 1927.0,
         "valuation": 56.0,
@@ -5271,7 +5271,7 @@
         "catalyst": 87.7
       },
       {
-        "name": "PEPTIDREAM INC",
+        "name": "ペプチドリーム",
         "code": "4587",
         "price": 1069.0,
         "valuation": 38.1,
@@ -5281,7 +5281,7 @@
         "catalyst": 51.4
       },
       {
-        "name": "FIXSTARS CORPORATION",
+        "name": "フィックスターズ",
         "code": "3687",
         "price": 2108.0,
         "valuation": 46.2,
@@ -5291,7 +5291,7 @@
         "catalyst": 44.6
       },
       {
-        "name": "TESS HOLDINGS CO LTD",
+        "name": "テスホールディングス",
         "code": "5074",
         "price": 588.0,
         "valuation": 54.4,
@@ -5301,7 +5301,7 @@
         "catalyst": 63.1
       },
       {
-        "name": "HAKUHODO DY HLDGS INC",
+        "name": "博報堂ＤＹホールディングス",
         "code": "2433",
         "price": 1354.0,
         "valuation": 62.9,
@@ -5311,7 +5311,7 @@
         "catalyst": 51.5
       },
       {
-        "name": "NTN CORP",
+        "name": "ＮＴＮ",
         "code": "6472",
         "price": 386.4,
         "valuation": 58.2,
@@ -5321,7 +5321,7 @@
         "catalyst": 71.1
       },
       {
-        "name": "ISTYLE INC",
+        "name": "アイスタイル",
         "code": "3660",
         "price": 534.0,
         "valuation": 64.9,
@@ -5331,7 +5331,7 @@
         "catalyst": 76.5
       },
       {
-        "name": "KEIKYU CORPORATION",
+        "name": "京浜急行電鉄",
         "code": "9006",
         "price": 1536.5,
         "valuation": 55.4,
@@ -5341,7 +5341,7 @@
         "catalyst": 45.7
       },
       {
-        "name": "MATSUI SECURITIES CO",
+        "name": "松井証券",
         "code": "8628",
         "price": 1205.0,
         "valuation": 57.9,
@@ -5351,7 +5351,7 @@
         "catalyst": 85.4
       },
       {
-        "name": "TOHO GAS CO",
+        "name": "東邦瓦斯",
         "code": "9533",
         "price": 1246.5,
         "valuation": 61.8,
@@ -5361,7 +5361,7 @@
         "catalyst": 31.4
       },
       {
-        "name": "NIPPON SHEET GLASS CO",
+        "name": "日本板硝子",
         "code": "5202",
         "price": 491.0,
         "valuation": 55.9,
@@ -5371,7 +5371,7 @@
         "catalyst": 56.5
       },
       {
-        "name": "PAL GROUP HOLDINGS CO LTD",
+        "name": "パルグループホールディングス",
         "code": "2726",
         "price": 1553.0,
         "valuation": 66.5,
@@ -5381,7 +5381,7 @@
         "catalyst": 53.3
       },
       {
-        "name": "NIPPON PAPER INDUSTRIES CO LTD",
+        "name": "日本製紙",
         "code": "3863",
         "price": 1306.0,
         "valuation": 56.8,
@@ -5391,7 +5391,7 @@
         "catalyst": 52.9
       },
       {
-        "name": "HOKURIKU ELECTRIC POWER CO",
+        "name": "北陸電力",
         "code": "9505",
         "price": 1054.5,
         "valuation": 58.2,
@@ -5411,7 +5411,7 @@
         "catalyst": 75.3
       },
       {
-        "name": "SENSHU IKEDA HOLDINGS INC",
+        "name": "池田泉州ホールディングス",
         "code": "8714",
         "price": 1083.0,
         "valuation": 72.4,
@@ -5421,7 +5421,7 @@
         "catalyst": 76.3
       },
       {
-        "name": "NOJIMA CORP",
+        "name": "ノジマ",
         "code": "7419",
         "price": 1253.0,
         "valuation": 66.9,
@@ -5431,7 +5431,7 @@
         "catalyst": 73.0
       },
       {
-        "name": "TOHO BANK",
+        "name": "東邦銀行",
         "code": "8346",
         "price": 992.0,
         "valuation": 72.4,
@@ -5441,7 +5441,7 @@
         "catalyst": 79.0
       },
       {
-        "name": "SANBIO COMPANY LIMITED",
+        "name": "サンバイオ",
         "code": "4592",
         "price": 925.0,
         "valuation": 53.0,
@@ -5451,7 +5451,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "RENOVA INC",
+        "name": "レノバ",
         "code": "9519",
         "price": 873.0,
         "valuation": 53.3,
@@ -5461,7 +5461,7 @@
         "catalyst": 26.9
       },
       {
-        "name": "KOKUYO CO LTD",
+        "name": "コクヨ",
         "code": "7984",
         "price": 926.3,
         "valuation": 67.4,
@@ -5471,7 +5471,7 @@
         "catalyst": 65.3
       },
       {
-        "name": "TAMURA CORP",
+        "name": "タムラ製作所",
         "code": "6768",
         "price": 781.0,
         "valuation": 58.0,
@@ -5481,7 +5481,7 @@
         "catalyst": 76.2
       },
       {
-        "name": "CMK CORP",
+        "name": "日本シイエムケイ",
         "code": "6958",
         "price": 770.0,
         "valuation": 61.5,
@@ -5491,7 +5491,7 @@
         "catalyst": 57.3
       },
       {
-        "name": "TOKAI TOKYO FINANCIAL HLDG INC",
+        "name": "東海東京フィナンシャル・ホールディングス",
         "code": "8616",
         "price": 903.0,
         "valuation": 66.1,
@@ -5501,7 +5501,7 @@
         "catalyst": 85.0
       },
       {
-        "name": "LEOPALACE 21 CORP",
+        "name": "レオパレス２１",
         "code": "8848",
         "price": 653.0,
         "valuation": 64.4,
@@ -5511,7 +5511,7 @@
         "catalyst": 72.5
       },
       {
-        "name": "REMIXPOINT INC",
+        "name": "リミックスポイント",
         "code": "3825",
         "price": 237.0,
         "valuation": 59.5,
@@ -5521,7 +5521,7 @@
         "catalyst": 47.2
       },
       {
-        "name": "JIBANNET HOLDINGS CO LTD",
+        "name": "地盤ネットホールディングス",
         "code": "6072",
         "price": 1030.0,
         "valuation": 29.0,
@@ -5531,7 +5531,7 @@
         "catalyst": 54.5
       },
       {
-        "name": "NIPPON COKE & ENGINEERING CO LT",
+        "name": "日本コークス工業",
         "code": "3315",
         "price": 100.0,
         "valuation": 51.7,
@@ -5541,7 +5541,7 @@
         "catalyst": 43.6
       },
       {
-        "name": "EOLE INC",
+        "name": "イオレ",
         "code": "2334",
         "price": 574.0,
         "valuation": 57.4,
@@ -5561,7 +5561,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "MIRARTH HOLDINGS INC",
+        "name": "ＭＩＲＡＲＴＨホールディングス",
         "code": "8897",
         "price": 455.0,
         "valuation": 56.3,
@@ -5571,7 +5571,7 @@
         "catalyst": 66.4
       },
       {
-        "name": "BUSHIROAD INC",
+        "name": "ブシロード",
         "code": "7803",
         "price": 451.0,
         "valuation": 67.0,
@@ -5581,7 +5581,7 @@
         "catalyst": 31.5
       },
       {
-        "name": "HEALIOS KK",
+        "name": "ヘリオス",
         "code": "4593",
         "price": 281.0,
         "valuation": 33.7,
@@ -5591,7 +5591,7 @@
         "catalyst": 32.0
       },
       {
-        "name": "CYBERSTEP HLDGS INC",
+        "name": "サイバーステップホールディングス",
         "code": "3810",
         "price": 179.0,
         "valuation": 56.3,
@@ -5601,7 +5601,7 @@
         "catalyst": 51.0
       },
       {
-        "name": "DAIDO METAL CO LTD",
+        "name": "大同メタル工業",
         "code": "7245",
         "price": 1178.0,
         "valuation": 59.8,
@@ -5611,7 +5611,7 @@
         "catalyst": 71.5
       },
       {
-        "name": "KLAB INC",
+        "name": "ＫＬａｂ",
         "code": "3656",
         "price": 190.0,
         "valuation": 68.2,
@@ -5621,7 +5621,7 @@
         "catalyst": 70.4
       },
       {
-        "name": "ACOM CO",
+        "name": "アコム",
         "code": "8572",
         "price": 481.0,
         "valuation": 56.7,
@@ -5631,7 +5631,7 @@
         "catalyst": 37.4
       },
       {
-        "name": "KAIZEN PLATFORM INC",
+        "name": "Ｋａｉｚｅｎ　Ｐｌａｔｆｏｒｍ",
         "code": "4170",
         "price": 131.0,
         "valuation": 70.8,
@@ -5641,7 +5641,7 @@
         "catalyst": 47.5
       },
       {
-        "name": "ENECHANGE LTD",
+        "name": "ＥＮＥＣＨＡＮＧＥ",
         "code": "4169",
         "price": 267.0,
         "valuation": 53.9,
@@ -5651,7 +5651,7 @@
         "catalyst": 45.0
       },
       {
-        "name": "3-D MATRIX LTD",
+        "name": "スリー・ディー・マトリックス",
         "code": "7777",
         "price": 361.0,
         "valuation": 56.5,
@@ -5661,7 +5661,7 @@
         "catalyst": 69.5
       },
       {
-        "name": "NIPPON PARKING DEVELOPMENT CO.L",
+        "name": "日本駐車場開発",
         "code": "2353",
         "price": 270.0,
         "valuation": 60.8,
@@ -5671,7 +5671,7 @@
         "catalyst": 66.7
       },
       {
-        "name": "BROADLEAF CO LTD",
+        "name": "ブロードリーフ",
         "code": "3673",
         "price": 485.0,
         "valuation": 50.8,
@@ -5681,7 +5681,7 @@
         "catalyst": 72.2
       },
       {
-        "name": "SYSTENA CORPORATION",
+        "name": "システナ",
         "code": "2317",
         "price": 453.0,
         "valuation": 63.8,
@@ -5691,7 +5691,7 @@
         "catalyst": 53.6
       },
       {
-        "name": "NET PROTECTIONS HLDGS INC",
+        "name": "ネットプロテクションズホールディングス",
         "code": "7383",
         "price": 407.0,
         "valuation": 66.3,
@@ -5701,7 +5701,7 @@
         "catalyst": 63.5
       },
       {
-        "name": "SANOH INDUSTRIAL CO",
+        "name": "三櫻工業",
         "code": "6584",
         "price": 775.0,
         "valuation": 56.3,
@@ -5711,7 +5711,7 @@
         "catalyst": 32.0
       },
       {
-        "name": "TORICO CO LTD",
+        "name": "ＴＯＲＩＣＯ",
         "code": "7138",
         "price": 152.0,
         "valuation": 63.3,
@@ -5721,7 +5721,7 @@
         "catalyst": 50.7
       },
       {
-        "name": "BASE INC",
+        "name": "ＢＡＳＥ",
         "code": "4477",
         "price": 347.0,
         "valuation": 68.6,
@@ -5731,7 +5731,7 @@
         "catalyst": 82.8
       },
       {
-        "name": "REYUU JAPAN INC",
+        "name": "ＲｅＹｕｕ　Ｊａｐａｎ",
         "code": "9425",
         "price": 239.0,
         "valuation": 62.1,
@@ -5741,7 +5741,7 @@
         "catalyst": 46.8
       },
       {
-        "name": "OKAMOTO GLASS CO LTD",
+        "name": "岡本硝子",
         "code": "7746",
         "price": 792.0,
         "valuation": 46.3,
@@ -5751,7 +5751,7 @@
         "catalyst": 62.4
       },
       {
-        "name": "ACCESS CO LTD",
+        "name": "ＡＣＣＥＳＳ",
         "code": "4813",
         "price": 421.0,
         "valuation": 65.0,
@@ -5761,7 +5761,7 @@
         "catalyst": 56.8
       },
       {
-        "name": "FINTECH GLOBAL INC",
+        "name": "フィンテック　グローバル",
         "code": "8789",
         "price": 159.0,
         "valuation": 65.8,
@@ -5771,7 +5771,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "W-SCOPE CORPORATION",
+        "name": "ダブル・スコープ",
         "code": "6619",
         "price": 169.0,
         "valuation": 53.4,
@@ -5781,7 +5781,7 @@
         "catalyst": 69.2
       },
       {
-        "name": "DEF CONSULTING INC",
+        "name": "Ｄｅｆ　ｃｏｎｓｕｌｔｉｎｇ",
         "code": "4833",
         "price": 59.0,
         "valuation": 64.5,
@@ -5791,7 +5791,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "CAICA DIGITAL INC",
+        "name": "ＣＡＩＣＡ　ＤＩＧＩＴＡＬ",
         "code": "2315",
         "price": 71.0,
         "valuation": 60.1,
@@ -5801,7 +5801,7 @@
         "catalyst": 36.9
       },
       {
-        "name": "DAIKOKUYA HOLDINGS CO LTD",
+        "name": "大黒屋ホールディングス",
         "code": "6993",
         "price": 86.0,
         "valuation": 44.1,
@@ -5811,7 +5811,7 @@
         "catalyst": 65.1
       },
       {
-        "name": "NIPPON DENKO CO LTD",
+        "name": "新日本電工",
         "code": "5563",
         "price": 440.0,
         "valuation": 59.5,
@@ -5821,7 +5821,7 @@
         "catalyst": 51.3
       },
       {
-        "name": "CYBERDYNE INC",
+        "name": "ＣＹＢＥＲＤＹＮＥ",
         "code": "7779",
         "price": 222.0,
         "valuation": 41.7,
@@ -5831,7 +5831,7 @@
         "catalyst": 67.6
       },
       {
-        "name": "AKEBONO BRAKE INDUSTRY CO",
+        "name": "曙ブレーキ工業",
         "code": "7238",
         "price": 106.0,
         "valuation": 55.9,
@@ -5841,7 +5841,7 @@
         "catalyst": 47.4
       },
       {
-        "name": "ISPACE INC",
+        "name": "ｉｓｐａｃｅ",
         "code": "9348",
         "price": 416.0,
         "valuation": 37.7,
@@ -5851,7 +5851,7 @@
         "catalyst": 30.6
       },
       {
-        "name": "ICHIGO INC",
+        "name": "いちご",
         "code": "2337",
         "price": 394.0,
         "valuation": 55.2,
@@ -5861,7 +5861,7 @@
         "catalyst": 56.4
       },
       {
-        "name": "RECOMM CO LTD",
+        "name": "レカム",
         "code": "3323",
         "price": 94.0,
         "valuation": 55.0,
@@ -5871,7 +5871,7 @@
         "catalyst": 88.8
       },
       {
-        "name": "ATOM CORPORATION",
+        "name": "アトム",
         "code": "7412",
         "price": 390.0,
         "valuation": 52.5,
@@ -5881,7 +5881,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "JAPAN COMMUNICATIONS INC.",
+        "name": "日本通信",
         "code": "9424",
         "price": 119.0,
         "valuation": 59.5,
@@ -5891,7 +5891,7 @@
         "catalyst": 42.4
       },
       {
-        "name": "EUGLENA CO LTD",
+        "name": "ユーグレナ",
         "code": "2931",
         "price": 351.0,
         "valuation": 59.5,
@@ -5901,7 +5901,7 @@
         "catalyst": 52.2
       },
       {
-        "name": "LIFULL CO LTD",
+        "name": "ＬＩＦＵＬＬ",
         "code": "2120",
         "price": 233.0,
         "valuation": 68.1,
@@ -5911,7 +5911,7 @@
         "catalyst": 40.0
       },
       {
-        "name": "DAISHINKU CORP",
+        "name": "大真空",
         "code": "6962",
         "price": 752.0,
         "valuation": 47.3,
@@ -5921,7 +5921,7 @@
         "catalyst": 54.9
       },
       {
-        "name": "CONVANO INC",
+        "name": "コンヴァノ",
         "code": "6574",
         "price": 121.0,
         "valuation": 55.2,
@@ -5931,7 +5931,7 @@
         "catalyst": 92.0
       },
       {
-        "name": "MONOAI TECHNOLOGY CO LTD",
+        "name": "ｍｏｎｏＡＩ　ｔｅｃｈｎｏｌｏｇｙ",
         "code": "5240",
         "price": 206.0,
         "valuation": 62.0,
@@ -5941,7 +5941,7 @@
         "catalyst": 32.0
       },
       {
-        "name": "NIKKATO CORP",
+        "name": "ニッカトー",
         "code": "5367",
         "price": 1354.0,
         "valuation": 64.0,
@@ -5951,7 +5951,7 @@
         "catalyst": 38.0
       },
       {
-        "name": "KOSAIDO HOLDINGS CO LTD",
+        "name": "広済堂ホールディングス",
         "code": "7868",
         "price": 542.0,
         "valuation": 64.3,
@@ -5961,7 +5961,7 @@
         "catalyst": 42.4
       },
       {
-        "name": "BITCOIN JPN CORP",
+        "name": "Ｂｉｔｃｏｉｎ　Ｊａｐａｎ",
         "code": "8105",
         "price": 84.0,
         "valuation": 62.8,
@@ -5971,7 +5971,7 @@
         "catalyst": 46.8
       },
       {
-        "name": "AMAZIA INC",
+        "name": "Ａｍａｚｉａ",
         "code": "4424",
         "price": 339.0,
         "valuation": 61.8,
@@ -5981,7 +5981,7 @@
         "catalyst": 62.0
       },
       {
-        "name": "SOURCENEXT CORPORATION",
+        "name": "ソースネクスト",
         "code": "4344",
         "price": 115.0,
         "valuation": 59.3,
@@ -5991,7 +5991,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "LIBERTA CO LTD",
+        "name": "リベルタ",
         "code": "4935",
         "price": 206.0,
         "valuation": 52.5,
@@ -6001,7 +6001,7 @@
         "catalyst": 55.6
       },
       {
-        "name": "KUBOTA PHARMACEUTICAL HLDGS CO ",
+        "name": "窪田製薬ホールディングス",
         "code": "4596",
         "price": 64.0,
         "valuation": 41.6,
@@ -6011,7 +6011,7 @@
         "catalyst": 34.3
       },
       {
-        "name": "S CRYPTO ENERGY INC",
+        "name": "エスクリプトエナジー",
         "code": "5721",
         "price": 57.0,
         "valuation": 53.8,
@@ -6021,7 +6021,7 @@
         "catalyst": 23.3
       },
       {
-        "name": "RIBOMIC INC",
+        "name": "リボミック",
         "code": "4591",
         "price": 85.0,
         "valuation": 51.3,
@@ -6031,7 +6031,7 @@
         "catalyst": 50.0
       },
       {
-        "name": "FRUTA FRUTA INC",
+        "name": "フルッタフルッタ",
         "code": "2586",
         "price": 73.0,
         "valuation": 55.9,
@@ -6041,7 +6041,7 @@
         "catalyst": 34.4
       },
       {
-        "name": "SYSTEMSOFT CORPORATION",
+        "name": "システムソフト",
         "code": "7527",
         "price": 55.0,
         "valuation": 64.0,
@@ -6051,7 +6051,7 @@
         "catalyst": 64.0
       },
       {
-        "name": "AXEL MARK INC",
+        "name": "アクセルマーク",
         "code": "3624",
         "price": 91.0,
         "valuation": 52.3,
@@ -6061,7 +6061,7 @@
         "catalyst": 65.7
       },
       {
-        "name": "WISE HOLDINGS CO LTD",
+        "name": "ワイズホールディングス",
         "code": "5955",
         "price": 84.0,
         "valuation": 64.7,
@@ -6071,7 +6071,7 @@
         "catalyst": 64.9
       },
       {
-        "name": "TAY TWO CO LTD",
+        "name": "テイツー",
         "code": "7610",
         "price": 141.0,
         "valuation": 65.6,
@@ -6081,7 +6081,7 @@
         "catalyst": 83.6
       },
       {
-        "name": "MEDRX CO LTD",
+        "name": "メドレックス",
         "code": "4586",
         "price": 58.0,
         "valuation": 48.2,
@@ -6091,7 +6091,7 @@
         "catalyst": 32.7
       },
       {
-        "name": "BIRDMAN INC",
+        "name": "Ｂｉｒｄｍａｎ",
         "code": "7063",
         "price": 84.0,
         "valuation": 53.4,
@@ -6101,7 +6101,7 @@
         "catalyst": 58.3
       },
       {
-        "name": "BRIGHTPATH BIOTHERAPEUTICS CO L",
+        "name": "ブライトパス・バイオ",
         "code": "4594",
         "price": 51.0,
         "valuation": 47.4,
@@ -6111,7 +6111,7 @@
         "catalyst": 30.2
       },
       {
-        "name": "JELLY BEANS GROUP CO LTD",
+        "name": "ジェリービーンズグループ",
         "code": "3070",
         "price": 68.0,
         "valuation": 60.4,
@@ -6121,7 +6121,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "KAIHAN CO LTD",
+        "name": "海帆",
         "code": "3133",
         "price": 67.0,
         "valuation": 51.8,
@@ -6131,7 +6131,7 @@
         "catalyst": 42.3
       },
       {
-        "name": "WINTEST CORP",
+        "name": "ウインテスト",
         "code": "6721",
         "price": 73.0,
         "valuation": 38.3,
@@ -6141,7 +6141,7 @@
         "catalyst": 71.0
       },
       {
-        "name": "INTRANCE CO.LTD",
+        "name": "イントランス",
         "code": "3237",
         "price": 95.0,
         "valuation": 41.3,
@@ -6151,7 +6151,7 @@
         "catalyst": 45.6
       },
       {
-        "name": "JN GROUP INC",
+        "name": "ＪＮグループ",
         "code": "6634",
         "price": 71.0,
         "valuation": 70.6,

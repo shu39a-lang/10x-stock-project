@@ -3,9 +3,7 @@ name: Update stock candidates
 on:
   workflow_dispatch:
   schedule:
-    # 日本株の引け後（16:00 JST）
     - cron: '0 7 * * 1-5'
-    # 米国株の引け後（06:30 JST、翌朝）
     - cron: '30 21 * * 1-5'
 
 permissions:
@@ -16,14 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
+
       - run: pip install -r requirements.txt
+
       - run: python update_data.py
       - run: python fix_japanese_names.py
       - run: python fix_us_japanese_names.py
+      - run: python trend_diversity.py
+
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"

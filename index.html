@@ -591,7 +591,7 @@ const DATA={
 };
 let state={market:"japan",term:"short",showAll:false};
 const $=s=>document.querySelector(s);
-function grade(s){return s>=70?"A":s>=67?"B":s>=64?"C":"D"}
+function grade(s){return s>=71?"A":s>=68?"B":s>=65?"C":"D"}
 function stockUrl(m,c){return m==="japan"?"https://finance.yahoo.co.jp/quote/"+encodeURIComponent(c)+".T":"https://finance.yahoo.co.jp/quote/"+encodeURIComponent(c)}
 function getJSON(k){try{return JSON.parse(localStorage.getItem(k)||"[]")}catch(e){return[]}}
 function setJSON(k,v){localStorage.setItem(k,JSON.stringify(v))}

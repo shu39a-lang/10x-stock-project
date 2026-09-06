@@ -535,6 +535,56 @@ def build_group_trends(rows,prices,sectors,h):
         for g,v in med.items()
     }
 
+def calibrate_horizon_scores(candidates,h):
+    if h=="short" or not candidates:
+        return
+
+    ranked = sorted(
+        candidates,
+        key=lambda x:x.get("score",0),
+        reverse=True
+    )
+
+    n = max(len(ranked)-1,1)
+    max_bonus = {
+        "medium":4.5,
+        "long":6.5
+    }[h]
+
+    for i,item in enumerate(ranked):
+        pct = 1.0-(i/n)
+
+        # 上位45%だけを相対補正。トップほど強く、下位はほぼ触らない
+        strength = max(
+            0.0,
+            min(
+                1.0,
+                (pct-0.55)/0.45
+            )
+        )
+
+        adjusted = clamp(
+            item.get("score",0)
+            +max_bonus*strength,
+            8,
+            92
+        )
+
+        item["score"] = round(
+            adjusted,
+            1
+        )
+
+        item["signal"] = (
+            "最有力"
+            if adjusted>=80
+            else "有力"
+            if adjusted>=65
+            else "注目"
+            if adjusted>=50
+            else "見送り"
+        )
+
 def diversified_top20(candidates,strongest_group,h):
     if not candidates:
         return []
@@ -551,10 +601,12 @@ def diversified_top20(candidates,strongest_group,h):
         finance_cap = 4
         trading_cap = 3
         default_cap = 3
+        volume_slots = 0
+        score_floor = 0
     else:
         score_weight = {
-            "medium":0.72,
-            "long":0.80
+            "medium":0.68,
+            "long":0.76
         }[h]
         heat_weight = 1.0-score_weight
 
@@ -571,11 +623,22 @@ def diversified_top20(candidates,strongest_group,h):
         trading_cap = 2
         default_cap = 3
 
+        # 出来高上位から一定数をTOP20候補に確保
+        volume_slots = {
+            "medium":5,
+            "long":4
+        }[h]
+
+        score_floor = {
+            "medium":60,
+            "long":58
+        }[h]
+
     selected = []
     counts = {}
     used = set()
 
-    for item in ranked:
+    def can_add(item, relaxed=False):
         group = item["_group"]
 
         finance_count = (
@@ -587,59 +650,77 @@ def diversified_top20(candidates,strongest_group,h):
             group in ("銀行","金融・証券")
             and finance_count>=finance_cap
         ):
-            continue
+            return False
 
         if (
             group=="商社"
             and counts.get("商社",0)>=trading_cap
         ):
-            continue
+            return False
+
+        cap = 4 if relaxed else default_cap
 
         if (
             group not in ("銀行","金融・証券","商社")
-            and counts.get(group,0)>=default_cap
+            and counts.get(group,0)>=cap
         ):
-            continue
+            return False
 
+        return True
+
+    def add_item(item):
+        group = item["_group"]
         selected.append(item)
         counts[group] = counts.get(group,0)+1
         used.add(item["code"])
 
+    # 中期・長期だけ、出来高上位を先に数枠確保
+    if volume_slots:
+        volume_ranked = sorted(
+            candidates,
+            key=lambda x:(
+                0.65*x.get("_volume_rank",0)
+                +0.35*x.get("market_heat",0),
+                x.get("score",0)
+            ),
+            reverse=True
+        )
+
+        for item in volume_ranked:
+            if len(selected)>=volume_slots:
+                break
+
+            if item.get("score",0)<score_floor:
+                continue
+
+            if not can_add(item):
+                continue
+
+            add_item(item)
+
+    # 残りは総合スコア + 市場熱量で選ぶ
+    for item in ranked:
+        if item["code"] in used:
+            continue
+
+        if not can_add(item):
+            continue
+
+        add_item(item)
+
         if len(selected)>=20:
             break
 
+    # 20銘柄に届かない場合のみ通常業種枠を1つ緩和
     if len(selected)<20:
         for item in ranked:
             if item["code"] in used:
                 continue
 
-            group = item["_group"]
-            finance_count = (
-                counts.get("銀行",0)
-                +counts.get("金融・証券",0)
-            )
-
-            if (
-                group in ("銀行","金融・証券")
-                and finance_count>=finance_cap
-            ):
+            if not can_add(item, relaxed=True):
                 continue
 
-            if (
-                group=="商社"
-                and counts.get("商社",0)>=trading_cap
-            ):
-                continue
-
-            if (
-                group not in ("銀行","金融・証券","商社")
-                and counts.get(group,0)>=4
-            ):
-                continue
-
-            selected.append(item)
-            counts[group] = counts.get(group,0)+1
-            used.add(item["code"])
+            add_item(item)
 
             if len(selected)>=20:
                 break
@@ -687,6 +768,13 @@ def main():
 
     market_heat = build_market_heat(
         prices
+    )
+
+    volume_rank = percentile_scores(
+        {
+            c:p["volume"]
+            for c,p in prices.items()
+        }
     )
 
     trend_summary = {}
@@ -882,6 +970,13 @@ def main():
                     heat,
                     1
                 ),
+                "_volume_rank":round(
+                    volume_rank.get(
+                        code,
+                        50
+                    ),
+                    1
+                ),
                 "grades":{
                     "valuation":grade(
                         float(
@@ -921,6 +1016,11 @@ def main():
                 item
             )
 
+        calibrate_horizon_scores(
+            candidates,
+            h
+        )
+
         candidates.sort(
             key=lambda x:x["score"],
             reverse=True
@@ -937,6 +1037,10 @@ def main():
                 "_group",
                 None
             )
+            x.pop(
+                "_volume_rank",
+                None
+            )
 
         out[h] = chosen
 
@@ -945,8 +1049,8 @@ def main():
     data["japan"] = out
 
     data["trend_engine"] = {
-        "version":"2.1-balanced-rank",
-        "description":"市場熱量 + 総合スコア + 業種分散",
+        "version":"2.2-volume-balanced-calibrated",
+        "description":"市場熱量 + 出来高上位枠 + 相対スコア補正 + 業種分散",
         "theme_weights":{
             "short":10,
             "medium":8,
@@ -963,7 +1067,7 @@ def main():
             "出来高急増率":20,
             "当日騰落率":15
         },
-        "sector_cap":"中期・長期は金融2、商社2、その他同一分類3を上限。短期は従来寄り。",
+        "sector_cap":"中期・長期は金融2、商社2、その他同一分類3を上限。出来高上位枠を確保。",
         "top_trends":trend_summary
     }
 

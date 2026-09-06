@@ -725,6 +725,48 @@ def diversified_top20(candidates,strongest_group,h):
             if len(selected)>=20:
                 break
 
+    # それでも不足する場合は、金融・商社の上限は維持したまま
+    # その他業種の上限だけ解除して必ず20銘柄まで補充
+    if len(selected)<20:
+        for item in ranked:
+            if item["code"] in used:
+                continue
+
+            group = item["_group"]
+
+            finance_count = (
+                counts.get("銀行",0)
+                +counts.get("金融・証券",0)
+            )
+
+            if (
+                group in ("銀行","金融・証券")
+                and finance_count>=finance_cap
+            ):
+                continue
+
+            if (
+                group=="商社"
+                and counts.get("商社",0)>=trading_cap
+            ):
+                continue
+
+            add_item(item)
+
+            if len(selected)>=20:
+                break
+
+    # 最終保険：候補数が20以上ある限り必ず20銘柄にする
+    if len(selected)<20:
+        for item in ranked:
+            if item["code"] in used:
+                continue
+
+            add_item(item)
+
+            if len(selected)>=20:
+                break
+
     selected.sort(
         key=lambda x:x.get("score",0),
         reverse=True
@@ -1049,8 +1091,8 @@ def main():
     data["japan"] = out
 
     data["trend_engine"] = {
-        "version":"2.2-volume-balanced-calibrated",
-        "description":"市場熱量 + 出来高上位枠 + 相対スコア補正 + 業種分散",
+        "version":"2.3-guaranteed-top20",
+        "description":"市場熱量 + 出来高上位枠 + 相対スコア補正 + 業種分散 + TOP20保証",
         "theme_weights":{
             "short":10,
             "medium":8,

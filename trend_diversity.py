@@ -515,11 +515,10 @@ def build_group_trends(rows,prices,sectors,h):
         for g,v in med.items()
     }
 
-def diversified_top20(candidates,strongest_group):
+def diversified_top20(candidates,strongest_group,h):
     if not candidates:
         return []
 
-    # 市場で実際に注目されている上位100銘柄を優先
     market_top100 = sorted(
         candidates,
         key=lambda x:(
@@ -529,46 +528,13 @@ def diversified_top20(candidates,strongest_group):
         reverse=True
     )[:100]
 
-    selected = []
-    counts = {}
-    used = set()
+    # 短期は現在の動きをそのまま維持
+    if h=="short":
+        selected = []
+        counts = {}
+        used = set()
 
-    # TOP20は市場上位100の中から、業種の偏りを抑えて選ぶ
-    for item in market_top100:
-        group = item["_group"]
-
-        # 金融系は銀行＋金融・証券を合計で最大4
-        finance_count = (
-            counts.get("銀行",0)
-            + counts.get("金融・証券",0)
-        )
-
-        if (
-            group in ("銀行","金融・証券")
-            and finance_count>=4
-        ):
-            continue
-
-        # その他の同一業種は原則最大3
-        if (
-            group not in ("銀行","金融・証券")
-            and counts.get(group,0)>=3
-        ):
-            continue
-
-        selected.append(item)
-        counts[group] = counts.get(group,0)+1
-        used.add(item["code"])
-
-        if len(selected)>=20:
-            break
-
-    # 20銘柄に届かなければ、市場上位100から制限を少し緩めて補充
-    if len(selected)<20:
         for item in market_top100:
-            if item["code"] in used:
-                continue
-
             group = item["_group"]
 
             finance_count = (
@@ -582,12 +548,93 @@ def diversified_top20(candidates,strongest_group):
             ):
                 continue
 
+            if (
+                group not in ("銀行","金融・証券")
+                and counts.get(group,0)>=3
+            ):
+                continue
+
             selected.append(item)
             counts[group] = counts.get(group,0)+1
             used.add(item["code"])
 
             if len(selected)>=20:
                 break
+
+        return selected[:20]
+
+    # 中期・長期は高スコア枠を先に確保
+    selected = []
+    used = set()
+    counts = {}
+
+    score_pool = sorted(
+        candidates,
+        key=lambda x:x.get("score",0),
+        reverse=True
+    )
+
+    # Aランク相当を優先、最大5銘柄
+    for item in score_pool:
+        if item.get("score",0)<71:
+            continue
+
+        group = item["_group"]
+
+        finance_count = (
+            counts.get("銀行",0)
+            + counts.get("金融・証券",0)
+        )
+
+        if (
+            group in ("銀行","金融・証券")
+            and finance_count>=2
+        ):
+            continue
+
+        if (
+            group not in ("銀行","金融・証券")
+            and counts.get(group,0)>=2
+        ):
+            continue
+
+        selected.append(item)
+        counts[group] = counts.get(group,0)+1
+        used.add(item["code"])
+
+        if len(selected)>=5:
+            break
+
+    # 残りは市場注目度の高い銘柄から補充
+    for item in market_top100:
+        if item["code"] in used:
+            continue
+
+        group = item["_group"]
+
+        finance_count = (
+            counts.get("銀行",0)
+            + counts.get("金融・証券",0)
+        )
+
+        if (
+            group in ("銀行","金融・証券")
+            and finance_count>=4
+        ):
+            continue
+
+        if (
+            group not in ("銀行","金融・証券")
+            and counts.get(group,0)>=3
+        ):
+            continue
+
+        selected.append(item)
+        counts[group] = counts.get(group,0)+1
+        used.add(item["code"])
+
+        if len(selected)>=20:
+            break
 
     return selected[:20]
     
@@ -868,9 +915,10 @@ def main():
         )
 
         chosen = diversified_top20(
-            candidates,
-            strongest
-        )
+    candidates,
+    strongest,
+    h
+)
 
         for x in chosen:
             x.pop(

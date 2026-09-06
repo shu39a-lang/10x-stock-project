@@ -87,21 +87,26 @@ box.innerHTML=`
  margin-top:3px;
  font-size:25px
 }
-.qb-main.buy{
+.qb-main.strong{
  border:1px solid #ff3454;
  background:linear-gradient(110deg,#6f091f,#260914)
 }
-.qb-main.watch{
+.qb-main.buy{
+ border:1px solid #49dc80;
+ background:linear-gradient(110deg,#0d5830,#082619)
+}
+.qb-main.care{
  border:1px solid #ffc73d;
  background:linear-gradient(110deg,#57410a,#251d08)
 }
-.qb-main.care{
+.qb-main.watch{
  border:1px solid #2688ff;
  background:linear-gradient(110deg,#092c62,#07182c)
 }
-.qb-main.buy strong{color:#ff526c}
-.qb-main.watch strong{color:#ffd34f}
-.qb-main.care strong{color:#4fa2ff}
+.qb-main.strong strong{color:#ff526c}
+.qb-main.buy strong{color:#55dc7f}
+.qb-main.care strong{color:#ffd34f}
+.qb-main.watch strong{color:#4fa2ff}
 
 .qb-gauges{
  display:grid;
@@ -176,7 +181,7 @@ box.innerHTML=`
 }
 </style>
 
-<div class="qb-title">📊 買い判断クイック診断 ⚡</div>
+<div class="qb-title">📊 買いタイミング診断</div>
 <div class="qb-sub">
  気になる銘柄コードを入力して、現在の買い条件を確認
 </div>
@@ -287,15 +292,18 @@ function judge(x){
   trend*.25
  );
 
- let text="慎重";
- let cls="care";
+ let text="様子見";
+ let cls="watch";
 
- if(total>=69 && technical>=60){
-  text="買い優勢";
+ if(total>=67 && technical>=60){
+  text="強い買い";
+  cls="strong";
+ }else if(total>=58 && technical>=52){
+  text="買い";
   cls="buy";
- }else if(total>=62){
-  text="様子見";
-  cls="watch";
+ }else if(total>=50){
+  text="慎重";
+  cls="care";
  }
 
  return{
@@ -313,18 +321,23 @@ function judge(x){
 
 function level(v){
 
- if(v>=69)return{
-  text:"買い優勢",
+ if(v>=67)return{
+  text:"強い買い",
   color:"#ff3d5e"
  };
 
- if(v>=62)return{
-  text:"様子見",
+ if(v>=58)return{
+  text:"買い",
+  color:"#49dc80"
+ };
+
+ if(v>=50)return{
+  text:"慎重",
   color:"#ffc73d"
  };
 
  return{
-  text:"慎重",
+  text:"様子見",
   color:"#288cff"
  };
 }
@@ -354,25 +367,21 @@ function gaugeHTML(title,value){
 
   <svg viewBox="0 0 100 58">
 
-   <path
-    d="M15 48 A35 35 0 0 1 28 21"
-    fill="none"
-    stroke="#288cff"
-    stroke-width="9"
-    stroke-linecap="round"/>
+   <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
+    fill="none" stroke="#288cff" stroke-width="9"
+    stroke-dasharray="22 78" stroke-dashoffset="0" stroke-linecap="round"/>
 
-   <path
-    d="M31 18 A35 35 0 0 1 69 18"
-    fill="none"
-    stroke="#ffc73d"
-    stroke-width="9"/>
+   <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
+    fill="none" stroke="#ffc73d" stroke-width="9"
+    stroke-dasharray="22 78" stroke-dashoffset="-25" stroke-linecap="round"/>
 
-   <path
-    d="M72 21 A35 35 0 0 1 85 48"
-    fill="none"
-    stroke="#ff3d5e"
-    stroke-width="9"
-    stroke-linecap="round"/>
+   <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
+    fill="none" stroke="#49dc80" stroke-width="9"
+    stroke-dasharray="22 78" stroke-dashoffset="-50" stroke-linecap="round"/>
+
+   <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
+    fill="none" stroke="#ff3d5e" stroke-width="9"
+    stroke-dasharray="22 78" stroke-dashoffset="-75" stroke-linecap="round"/>
 
    <line
     x1="50"
@@ -398,9 +407,10 @@ function gaugeHTML(title,value){
   </div>
 
   <div class="qb-zone">
-   <span>慎重</span>
    <span>様子見</span>
-   <span>買い優勢</span>
+   <span>慎重</span>
+   <span>買い</span>
+   <span>強い買い</span>
   </div>
 
  </div>
@@ -411,22 +421,24 @@ function reasons(j){
 
  const a=[];
 
- if(j.score>=70)
+ if(j.score>=67)
   a.push("総合スコアが高い水準です。");
- else if(j.score>=64)
-  a.push("総合スコアは中間以上です。");
- else
+ else if(j.score>=58)
+  a.push("総合スコアは買いを検討できる水準です。");
+ else if(j.score>=50)
   a.push("総合スコアは慎重に確認したい水準です。");
+ else
+  a.push("総合スコアは様子を見たい水準です。");
 
- if(j.technical>=65)
+ if(j.technical>=60)
   a.push("テクニカル面の勢いは良好です。");
- else if(j.technical<58)
+ else if(j.technical<50)
   a.push("テクニカル面はまだ弱めです。");
 
- if(j.quality>=70)
+ if(j.quality>=65)
   a.push("企業の質・成長性も高く評価されています。");
 
- if(j.financial<55)
+ if(j.financial<50)
   a.push("財務評価には確認余地があります。");
 
  return a.slice(0,3);

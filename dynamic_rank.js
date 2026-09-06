@@ -99,9 +99,15 @@ function convertRows(rows,market){
     String(x.trend_theme || "")
   ]);
 
-  return market==="japan"
-    ? diversifyJapanRows(mapped)
-    : mapped;
+  if(market==="japan"){
+  const selected=diversifyJapanRows(mapped);
+
+  return selected.sort(
+    (a,b)=>Number(b[2])-Number(a[2])
+  );
+}
+
+return mapped;
 }
 
 function rankColor(category){

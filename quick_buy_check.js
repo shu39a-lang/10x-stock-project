@@ -295,10 +295,17 @@ function judge(x){
  let text="様子見";
  let cls="watch";
 
- if(total>=67 && technical>=60){
+ if(
+  total>=70 &&
+  technical>=65 &&
+  score>=68 &&
+  quality>=60 &&
+  financial>=50 &&
+  catalyst>=70
+ ){
   text="強い買い";
   cls="strong";
- }else if(total>=58 && technical>=52){
+ }else if(total>=60 && technical>=55){
   text="買い";
   cls="buy";
  }else if(total>=50){
@@ -321,12 +328,12 @@ function judge(x){
 
 function level(v){
 
- if(v>=67)return{
+ if(v>=70)return{
   text:"強い買い",
   color:"#ff3d5e"
  };
 
- if(v>=58)return{
+ if(v>=60)return{
   text:"買い",
   color:"#49dc80"
  };
@@ -421,18 +428,18 @@ function reasons(j){
 
  const a=[];
 
- if(j.score>=67)
+ if(j.score>=70)
   a.push("総合スコアが高い水準です。");
- else if(j.score>=58)
+ else if(j.score>=60)
   a.push("総合スコアは買いを検討できる水準です。");
  else if(j.score>=50)
   a.push("総合スコアは慎重に確認したい水準です。");
  else
   a.push("総合スコアは様子を見たい水準です。");
 
- if(j.technical>=60)
+ if(j.technical>=65)
   a.push("テクニカル面の勢いは良好です。");
- else if(j.technical<50)
+ else if(j.technical<55)
   a.push("テクニカル面はまだ弱めです。");
 
  if(j.quality>=65)

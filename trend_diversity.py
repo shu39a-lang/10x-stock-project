@@ -913,8 +913,7 @@ def main():
             key=lambda x:x["score"],
             reverse=True
         )
-
-                chosen = diversified_top20(
+        chosen = diversified_top20(
             candidates,
             strongest,
             h

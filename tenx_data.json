@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-06 14:07 JST",
+  "updated_at": "2026-09-06 14:30 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -288,6 +288,29 @@
         }
       },
       {
+        "name": "第一ライフグループ",
+        "code": "8750",
+        "price": 1877.5,
+        "change_pct": -0.32,
+        "score": 66.1,
+        "signal": "有力",
+        "valuation": 66.2,
+        "quality": 64.6,
+        "financial": 57.1,
+        "technical": 62.5,
+        "catalyst": 81.1,
+        "trend_theme": "その他",
+        "trend_score": 52.2,
+        "market_heat": 78.9,
+        "grades": {
+          "valuation": "C",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
         "name": "東宝",
         "code": "9602",
         "price": 1601.0,
@@ -400,6 +423,29 @@
           "financial": "D",
           "technical": "D",
           "catalyst": "A"
+        }
+      },
+      {
+        "name": "セブン＆アイHD",
+        "code": "3382",
+        "price": 2060.5,
+        "change_pct": 0.02,
+        "score": 61.5,
+        "signal": "注目",
+        "valuation": 57.8,
+        "quality": 45.6,
+        "financial": 44.1,
+        "technical": 54.5,
+        "catalyst": 58.7,
+        "trend_theme": "その他",
+        "trend_score": 52.2,
+        "market_heat": 81.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "D"
         }
       },
       {
@@ -612,6 +658,29 @@
         }
       },
       {
+        "name": "日本郵船",
+        "code": "9101",
+        "price": 7158.0,
+        "change_pct": -1.78,
+        "score": 66.9,
+        "signal": "有力",
+        "valuation": 60.8,
+        "quality": 61.0,
+        "financial": 47.8,
+        "technical": 65.6,
+        "catalyst": 72.1,
+        "trend_theme": "その他",
+        "trend_score": 45.8,
+        "market_heat": 68.1,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
         "name": "住友商事",
         "code": "8053",
         "price": 1820.0,
@@ -632,6 +701,75 @@
           "financial": "D",
           "technical": "C",
           "catalyst": "D"
+        }
+      },
+      {
+        "name": "クボタ",
+        "code": "6326",
+        "price": 3006.0,
+        "change_pct": -0.73,
+        "score": 66.2,
+        "signal": "有力",
+        "valuation": 59.2,
+        "quality": 62.4,
+        "financial": 47.9,
+        "technical": 66.6,
+        "catalyst": 77.5,
+        "trend_theme": "その他",
+        "trend_score": 45.8,
+        "market_heat": 76.4,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "ソニーグループ",
+        "code": "6758",
+        "price": 3885.0,
+        "change_pct": -0.26,
+        "score": 66.0,
+        "signal": "有力",
+        "valuation": 61.7,
+        "quality": 65.3,
+        "financial": 61.6,
+        "technical": 54.3,
+        "catalyst": 69.5,
+        "trend_theme": "その他",
+        "trend_score": 45.8,
+        "market_heat": 74.7,
+        "grades": {
+          "valuation": "D",
+          "quality": "C",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "B"
+        }
+      },
+      {
+        "name": "ＬＩＮＥヤフー",
+        "code": "4689",
+        "price": 531.1,
+        "change_pct": -0.52,
+        "score": 65.1,
+        "signal": "有力",
+        "valuation": 59.8,
+        "quality": 58.5,
+        "financial": 52.8,
+        "technical": 58.4,
+        "catalyst": 65.2,
+        "trend_theme": "その他",
+        "trend_score": 45.8,
+        "market_heat": 74.5,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "C"
         }
       },
       {
@@ -681,6 +819,52 @@
         }
       },
       {
+        "name": "日本たばこ産業",
+        "code": "2914",
+        "price": 6803.0,
+        "change_pct": -2.09,
+        "score": 64.4,
+        "signal": "注目",
+        "valuation": 59.1,
+        "quality": 66.5,
+        "financial": 58.8,
+        "technical": 48.5,
+        "catalyst": 72.3,
+        "trend_theme": "その他",
+        "trend_score": 45.8,
+        "market_heat": 78.3,
+        "grades": {
+          "valuation": "D",
+          "quality": "C",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "ＫＤＤＩ",
+        "code": "9433",
+        "price": 2981.0,
+        "change_pct": -0.02,
+        "score": 64.4,
+        "signal": "注目",
+        "valuation": 58.3,
+        "quality": 64.9,
+        "financial": 48.3,
+        "technical": 59.9,
+        "catalyst": 59.8,
+        "trend_theme": "AI・データセンター",
+        "trend_score": 71.5,
+        "market_heat": 71.4,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "D"
+        }
+      },
+      {
         "name": "エア・ウォーター",
         "code": "4088",
         "price": 3010.0,
@@ -701,6 +885,29 @@
           "financial": "D",
           "technical": "A",
           "catalyst": "D"
+        }
+      },
+      {
+        "name": "商船三井",
+        "code": "9104",
+        "price": 6969.0,
+        "change_pct": -3.07,
+        "score": 63.4,
+        "signal": "注目",
+        "valuation": 57.4,
+        "quality": 61.7,
+        "financial": 38.8,
+        "technical": 60.2,
+        "catalyst": 75.2,
+        "trend_theme": "その他",
+        "trend_score": 45.8,
+        "market_heat": 74.5,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
         }
       },
       {
@@ -890,6 +1097,29 @@
         }
       },
       {
+        "name": "クボタ",
+        "code": "6326",
+        "price": 3006.0,
+        "change_pct": -0.73,
+        "score": 68.7,
+        "signal": "有力",
+        "valuation": 59.2,
+        "quality": 62.4,
+        "financial": 47.9,
+        "technical": 66.6,
+        "catalyst": 77.5,
+        "trend_theme": "その他",
+        "trend_score": 28.5,
+        "market_heat": 76.4,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "C",
+          "catalyst": "A"
+        }
+      },
+      {
         "name": "ローム",
         "code": "6963",
         "price": 4865.0,
@@ -999,6 +1229,29 @@
         "grades": {
           "valuation": "D",
           "quality": "A",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "イビデン",
+        "code": "4062",
+        "price": 20475.0,
+        "change_pct": 3.83,
+        "score": 63.9,
+        "signal": "注目",
+        "valuation": 28.4,
+        "quality": 66.3,
+        "financial": 61.3,
+        "technical": 62.8,
+        "catalyst": 74.8,
+        "trend_theme": "その他",
+        "trend_score": 28.5,
+        "market_heat": 87.3,
+        "grades": {
+          "valuation": "D",
+          "quality": "C",
           "financial": "D",
           "technical": "D",
           "catalyst": "A"
@@ -8131,7 +8384,7 @@
         "name": "ファイザー",
         "code": "PFE",
         "price": 28.45,
-        "valuation": 53.2,
+        "valuation": 53.3,
         "quality": 54.0,
         "financial": 51.3,
         "technical": 56.9,
@@ -12120,8 +12373,8 @@
     ]
   },
   "trend_engine": {
-    "version": "2.2-volume-balanced-calibrated",
-    "description": "市場熱量 + 出来高上位枠 + 相対スコア補正 + 業種分散",
+    "version": "2.3-guaranteed-top20",
+    "description": "市場熱量 + 出来高上位枠 + 相対スコア補正 + 業種分散 + TOP20保証",
     "theme_weights": {
       "short": 10,
       "medium": 8,

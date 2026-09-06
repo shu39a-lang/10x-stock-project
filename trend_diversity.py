@@ -732,17 +732,19 @@ def main():
                 50
             )
 
-            total = clamp(
-                (
-                    1
-                    -theme_w
-                    -heat_w
-                )*base
-                +theme_w*trend_score
-                +heat_w*heat,
-                8,
-                92
-            )
+            # 金融系の上位独占を防ぐための軽い調整
+if group in ("銀行", "金融・証券"):
+    finance_penalty = {
+        "short": 5,
+        "medium": 4,
+        "long": 3
+    }[h]
+
+    total = clamp(
+        total - finance_penalty,
+        8,
+        92
+    )
 
             signal = (
                 "最有力"

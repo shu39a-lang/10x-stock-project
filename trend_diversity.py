@@ -747,9 +747,9 @@ def main():
             # 金融系の上位独占を防ぐための軽い調整
             if group in ("銀行", "金融・証券"):
                 finance_penalty = {
-                    "short": 5,
-                    "medium": 4,
-                    "long": 3
+                    "short": 6,
+                    "medium": 6,
+                    "long": 7
                 }[h]
 
                 total = clamp(

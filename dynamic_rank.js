@@ -180,7 +180,7 @@ function decorateRanking(){
     const arr=DATA[state.market][state.term];
     if(!Array.isArray(arr)) return;
 
-    const shown=state.showAll ? arr.slice(0,20) : balancedTop10(arr);
+    const shown=state.showAll ? arr.slice(0,20) : arr.slice(0,10);
     const rows=document.querySelectorAll(
       "#rankingTable .trow:not(.thead)"
     );

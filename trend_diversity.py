@@ -914,11 +914,11 @@ def main():
             reverse=True
         )
 
-        chosen = diversified_top20(
-    candidates,
-    strongest,
-    h
-)
+                chosen = diversified_top20(
+            candidates,
+            strongest,
+            h
+        )
 
         for x in chosen:
             x.pop(

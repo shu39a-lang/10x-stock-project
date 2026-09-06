@@ -23,6 +23,10 @@ POWER_INFRA_CODES = {
     "1969","7011","7012","7013"
 }
 
+TRADING_CODES = {
+    "2768","8001","8002","8015","8031","8053","8058"
+}
+
 def clamp(v, lo=0, hi=100):
     try:
         return float(np.clip(float(v), lo, hi))
@@ -153,6 +157,16 @@ def theme_for(code,name,sector):
         "T&Dホールディングス"
     )
 
+    trading_keywords = (
+        "伊藤忠商事",
+        "丸紅",
+        "豊田通商",
+        "三井物産",
+        "住友商事",
+        "三菱商事",
+        "双日"
+    )
+
     if (
         sector=="銀行業"
         or code in bank_codes
@@ -170,6 +184,12 @@ def theme_for(code,name,sector):
         or any(k in name for k in finance_keywords)
     ):
         return "金融・証券"
+
+    if (
+        code in TRADING_CODES
+        or any(k in name for k in trading_keywords)
+    ):
+        return "商社"
 
     if code in SEMICONDUCTOR_CODES or any(
         k in name for k in (
@@ -519,113 +539,65 @@ def diversified_top20(candidates,strongest_group,h):
     if not candidates:
         return []
 
-    market_top100 = sorted(
-        candidates,
-        key=lambda x:(
-            x.get("market_heat",0),
-            x.get("score",0)
-        ),
-        reverse=True
-    )[:100]
-
-    # 短期は現在の動きをそのまま維持
     if h=="short":
-        selected = []
-        counts = {}
-        used = set()
+        ranked = sorted(
+            candidates,
+            key=lambda x:(
+                x.get("market_heat",0),
+                x.get("score",0)
+            ),
+            reverse=True
+        )
+        finance_cap = 4
+        trading_cap = 3
+        default_cap = 3
+    else:
+        score_weight = {
+            "medium":0.72,
+            "long":0.80
+        }[h]
+        heat_weight = 1.0-score_weight
 
-        for item in market_top100:
-            group = item["_group"]
+        ranked = sorted(
+            candidates,
+            key=lambda x:(
+                score_weight*x.get("score",0)
+                +heat_weight*x.get("market_heat",0),
+                x.get("score",0)
+            ),
+            reverse=True
+        )
+        finance_cap = 2
+        trading_cap = 2
+        default_cap = 3
 
-            finance_count = (
-                counts.get("銀行",0)
-                + counts.get("金融・証券",0)
-            )
-
-            if (
-                group in ("銀行","金融・証券")
-                and finance_count>=4
-            ):
-                continue
-
-            if (
-                group not in ("銀行","金融・証券")
-                and counts.get(group,0)>=3
-            ):
-                continue
-
-            selected.append(item)
-            counts[group] = counts.get(group,0)+1
-            used.add(item["code"])
-
-            if len(selected)>=20:
-                break
-
-        return selected[:20]
-
-    # 中期・長期は高スコア枠を先に確保
     selected = []
-    used = set()
     counts = {}
+    used = set()
 
-    score_pool = sorted(
-        candidates,
-        key=lambda x:x.get("score",0),
-        reverse=True
-    )
-
-    # Aランク相当を優先、最大5銘柄
-    for item in score_pool:
-        if item.get("score",0)<71:
-            continue
-
+    for item in ranked:
         group = item["_group"]
 
         finance_count = (
             counts.get("銀行",0)
-            + counts.get("金融・証券",0)
+            +counts.get("金融・証券",0)
         )
 
         if (
             group in ("銀行","金融・証券")
-            and finance_count>=2
+            and finance_count>=finance_cap
         ):
             continue
 
         if (
-            group not in ("銀行","金融・証券")
-            and counts.get(group,0)>=2
-        ):
-            continue
-
-        selected.append(item)
-        counts[group] = counts.get(group,0)+1
-        used.add(item["code"])
-
-        if len(selected)>=5:
-            break
-
-    # 残りは市場注目度の高い銘柄から補充
-    for item in market_top100:
-        if item["code"] in used:
-            continue
-
-        group = item["_group"]
-
-        finance_count = (
-            counts.get("銀行",0)
-            + counts.get("金融・証券",0)
-        )
-
-        if (
-            group in ("銀行","金融・証券")
-            and finance_count>=4
+            group=="商社"
+            and counts.get("商社",0)>=trading_cap
         ):
             continue
 
         if (
-            group not in ("銀行","金融・証券")
-            and counts.get(group,0)>=3
+            group not in ("銀行","金融・証券","商社")
+            and counts.get(group,0)>=default_cap
         ):
             continue
 
@@ -636,8 +608,49 @@ def diversified_top20(candidates,strongest_group,h):
         if len(selected)>=20:
             break
 
+    if len(selected)<20:
+        for item in ranked:
+            if item["code"] in used:
+                continue
+
+            group = item["_group"]
+            finance_count = (
+                counts.get("銀行",0)
+                +counts.get("金融・証券",0)
+            )
+
+            if (
+                group in ("銀行","金融・証券")
+                and finance_count>=finance_cap
+            ):
+                continue
+
+            if (
+                group=="商社"
+                and counts.get("商社",0)>=trading_cap
+            ):
+                continue
+
+            if (
+                group not in ("銀行","金融・証券","商社")
+                and counts.get(group,0)>=4
+            ):
+                continue
+
+            selected.append(item)
+            counts[group] = counts.get(group,0)+1
+            used.add(item["code"])
+
+            if len(selected)>=20:
+                break
+
+    selected.sort(
+        key=lambda x:x.get("score",0),
+        reverse=True
+    )
+
     return selected[:20]
-    
+
 def main():
     data = json.loads(
         DATA.read_text(
@@ -791,7 +804,6 @@ def main():
                 92
             )
 
-            # 金融系の上位独占を防ぐための軽い調整
             if group in ("銀行", "金融・証券"):
                 finance_penalty = {
                     "short": 6,
@@ -913,6 +925,7 @@ def main():
             key=lambda x:x["score"],
             reverse=True
         )
+
         chosen = diversified_top20(
             candidates,
             strongest,
@@ -932,17 +945,17 @@ def main():
     data["japan"] = out
 
     data["trend_engine"] = {
-        "version":"2.0-market-heat",
-        "description":"JPX業種分散 + 動的テーマ + 市場熱量",
+        "version":"2.1-balanced-rank",
+        "description":"市場熱量 + 総合スコア + 業種分散",
         "theme_weights":{
             "short":10,
             "medium":8,
             "long":5
         },
         "market_heat_weights":{
-            "short":28,
-            "medium":10,
-            "long":4
+            "short":32,
+            "medium":12,
+            "long":5
         },
         "market_heat_components":{
             "出来高順位":30,
@@ -950,7 +963,7 @@ def main():
             "出来高急増率":20,
             "当日騰落率":15
         },
-        "sector_cap":"通常3銘柄、最強トレンドのみ4銘柄",
+        "sector_cap":"中期・長期は金融2、商社2、その他同一分類3を上限。短期は従来寄り。",
         "top_trends":trend_summary
     }
 

@@ -1,4 +1,4 @@
-name: Update buy timing diagnosis
+name: Rebalance buy timing levels
 
 on:
   workflow_dispatch:
@@ -7,12 +7,12 @@ permissions:
   contents: write
 
 jobs:
-  update:
+  rebalance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update diagnosis name and four-stage thresholds
+      - name: Rebalance strong buy and buy thresholds
         shell: bash
         run: |
           python - <<'PY'
@@ -26,226 +26,79 @@ jobs:
                   return text
               raise SystemExit(label + " was not found")
 
-          p = Path("quick_buy_check.js")
-          s = p.read_text(encoding="utf-8")
+          path = Path("quick_buy_check.js")
+          text = path.read_text(encoding="utf-8")
 
-          s = replace_once(
-              s,
-              '<div class="qb-title">📊 買い判断クイック診断 ⚡</div>',
-              '<div class="qb-title">📊 買いタイミング診断</div>',
-              "diagnosis title",
-          )
-
-          old_css = '''.qb-main.buy{
-           border:1px solid #ff3454;
-           background:linear-gradient(110deg,#6f091f,#260914)
-          }
-          .qb-main.watch{
-           border:1px solid #ffc73d;
-           background:linear-gradient(110deg,#57410a,#251d08)
-          }
-          .qb-main.care{
-           border:1px solid #2688ff;
-           background:linear-gradient(110deg,#092c62,#07182c)
-          }
-          .qb-main.buy strong{color:#ff526c}
-          .qb-main.watch strong{color:#ffd34f}
-          .qb-main.care strong{color:#4fa2ff}'''
-
-          new_css = '''.qb-main.strong{
-           border:1px solid #ff3454;
-           background:linear-gradient(110deg,#6f091f,#260914)
-          }
-          .qb-main.buy{
-           border:1px solid #49dc80;
-           background:linear-gradient(110deg,#0d5830,#082619)
-          }
-          .qb-main.care{
-           border:1px solid #ffc73d;
-           background:linear-gradient(110deg,#57410a,#251d08)
-          }
-          .qb-main.watch{
-           border:1px solid #2688ff;
-           background:linear-gradient(110deg,#092c62,#07182c)
-          }
-          .qb-main.strong strong{color:#ff526c}
-          .qb-main.buy strong{color:#55dc7f}
-          .qb-main.care strong{color:#ffd34f}
-          .qb-main.watch strong{color:#4fa2ff}'''
-
-          s = replace_once(s, old_css, new_css, "diagnosis colors")
-
-          old_judge = ''' let text="慎重";
-           let cls="care";
-
-           if(total>=69 && technical>=60){
-            text="買い優勢";
-            cls="buy";
-           }else if(total>=62){
-            text="様子見";
-            cls="watch";
-           }'''
-
-          new_judge = ''' let text="様子見";
-           let cls="watch";
-
-           if(total>=67 && technical>=60){
+          old_judge = ''' if(total>=67 && technical>=60){
             text="強い買い";
             cls="strong";
-           }else if(total>=58 && technical>=52){
-            text="買い";
-            cls="buy";
-           }else if(total>=50){
-            text="慎重";
-            cls="care";
-           }'''
+           }else if(total>=58 && technical>=52){'''
 
-          s = replace_once(s, old_judge, new_judge, "four-stage judgment")
+          new_judge = ''' if(
+            total>=70 &&
+            technical>=65 &&
+            score>=68 &&
+            quality>=60 &&
+            financial>=50 &&
+            catalyst>=70
+           ){
+            text="強い買い";
+            cls="strong";
+           }else if(total>=60 && technical>=55){'''
 
-          old_level = '''function level(v){
+          text = replace_once(
+              text,
+              old_judge,
+              new_judge,
+              "judgment thresholds",
+          )
 
-           if(v>=69)return{
-            text:"買い優勢",
-            color:"#ff3d5e"
-           };
+          text = replace_once(
+              text,
+              ''' if(v>=67)return{''',
+              ''' if(v>=70)return{''',
+              "strong gauge threshold",
+          )
+          text = replace_once(
+              text,
+              ''' if(v>=58)return{''',
+              ''' if(v>=60)return{''',
+              "buy gauge threshold",
+          )
+          text = replace_once(
+              text,
+              ''' if(j.score>=67)''',
+              ''' if(j.score>=70)''',
+              "strong reason threshold",
+          )
+          text = replace_once(
+              text,
+              ''' else if(j.score>=58)''',
+              ''' else if(j.score>=60)''',
+              "buy reason threshold",
+          )
+          text = replace_once(
+              text,
+              ''' if(j.technical>=60)''',
+              ''' if(j.technical>=65)''',
+              "strong technical reason",
+          )
+          text = replace_once(
+              text,
+              ''' else if(j.technical<50)''',
+              ''' else if(j.technical<55)''',
+              "weak technical reason",
+          )
 
-           if(v>=62)return{
-            text:"様子見",
-            color:"#ffc73d"
-           };
-
-           return{
-            text:"慎重",
-            color:"#288cff"
-           };
-          }'''
-
-          new_level = '''function level(v){
-
-           if(v>=67)return{
-            text:"強い買い",
-            color:"#ff3d5e"
-           };
-
-           if(v>=58)return{
-            text:"買い",
-            color:"#49dc80"
-           };
-
-           if(v>=50)return{
-            text:"慎重",
-            color:"#ffc73d"
-           };
-
-           return{
-            text:"様子見",
-            color:"#288cff"
-           };
-          }'''
-
-          s = replace_once(s, old_level, new_level, "gauge levels")
-
-          old_arcs = '''   <path
-              d="M15 48 A35 35 0 0 1 28 21"
-              fill="none"
-              stroke="#288cff"
-              stroke-width="9"
-              stroke-linecap="round"/>
-
-             <path
-              d="M31 18 A35 35 0 0 1 69 18"
-              fill="none"
-              stroke="#ffc73d"
-              stroke-width="9"/>
-
-             <path
-              d="M72 21 A35 35 0 0 1 85 48"
-              fill="none"
-              stroke="#ff3d5e"
-              stroke-width="9"
-              stroke-linecap="round"/>'''
-
-          new_arcs = '''   <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
-              fill="none" stroke="#288cff" stroke-width="9"
-              stroke-dasharray="22 78" stroke-dashoffset="0" stroke-linecap="round"/>
-
-             <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
-              fill="none" stroke="#ffc73d" stroke-width="9"
-              stroke-dasharray="22 78" stroke-dashoffset="-25" stroke-linecap="round"/>
-
-             <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
-              fill="none" stroke="#49dc80" stroke-width="9"
-              stroke-dasharray="22 78" stroke-dashoffset="-50" stroke-linecap="round"/>
-
-             <path d="M15 48 A35 35 0 0 1 85 48" pathLength="100"
-              fill="none" stroke="#ff3d5e" stroke-width="9"
-              stroke-dasharray="22 78" stroke-dashoffset="-75" stroke-linecap="round"/>'''
-
-          s = replace_once(s, old_arcs, new_arcs, "four-color gauge")
-
-          old_zone = '''  <div class="qb-zone">
-             <span>慎重</span>
-             <span>様子見</span>
-             <span>買い優勢</span>
-            </div>'''
-
-          new_zone = '''  <div class="qb-zone">
-             <span>様子見</span>
-             <span>慎重</span>
-             <span>買い</span>
-             <span>強い買い</span>
-            </div>'''
-
-          s = replace_once(s, old_zone, new_zone, "four gauge labels")
-
-          old_reasons = ''' if(j.score>=70)
-            a.push("総合スコアが高い水準です。");
-           else if(j.score>=64)
-            a.push("総合スコアは中間以上です。");
-           else
-            a.push("総合スコアは慎重に確認したい水準です。");
-
-           if(j.technical>=65)
-            a.push("テクニカル面の勢いは良好です。");
-           else if(j.technical<58)
-            a.push("テクニカル面はまだ弱めです。");
-
-           if(j.quality>=70)
-            a.push("企業の質・成長性も高く評価されています。");
-
-           if(j.financial<55)
-            a.push("財務評価には確認余地があります。");'''
-
-          new_reasons = ''' if(j.score>=67)
-            a.push("総合スコアが高い水準です。");
-           else if(j.score>=58)
-            a.push("総合スコアは買いを検討できる水準です。");
-           else if(j.score>=50)
-            a.push("総合スコアは慎重に確認したい水準です。");
-           else
-            a.push("総合スコアは様子を見たい水準です。");
-
-           if(j.technical>=60)
-            a.push("テクニカル面の勢いは良好です。");
-           else if(j.technical<50)
-            a.push("テクニカル面はまだ弱めです。");
-
-           if(j.quality>=65)
-            a.push("企業の質・成長性も高く評価されています。");
-
-           if(j.financial<50)
-            a.push("財務評価には確認余地があります。");'''
-
-          s = replace_once(s, old_reasons, new_reasons, "diagnosis reasons")
-          p.write_text(s, encoding="utf-8")
+          path.write_text(text, encoding="utf-8")
 
           index_path = Path("index.html")
           index = index_path.read_text(encoding="utf-8")
           index = replace_once(
               index,
-              'quick_buy_check.js?v=3',
-              'quick_buy_check.js?v=4',
-              "script version",
+              "quick_buy_check.js?v=4",
+              "quick_buy_check.js?v=5",
+              "script cache version",
           )
           index_path.write_text(index, encoding="utf-8")
 
@@ -253,13 +106,13 @@ jobs:
           sw = sw_path.read_text(encoding="utf-8")
           sw = replace_once(
               sw,
-              'const CACHE="tenx-stock-v6";',
               'const CACHE="tenx-stock-v7";',
-              "cache version",
+              'const CACHE="tenx-stock-v8";',
+              "service worker cache version",
           )
           sw_path.write_text(sw, encoding="utf-8")
 
-          print("Buy timing diagnosis updated successfully")
+          print("Buy timing levels rebalanced successfully")
           PY
 
       - name: Validate JavaScript
@@ -272,5 +125,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add quick_buy_check.js index.html sw.js
           git diff --cached --quiet && exit 0
-          git commit -m "Update buy timing diagnosis"
+          git commit -m "Rebalance strong buy and buy thresholds"
           git push

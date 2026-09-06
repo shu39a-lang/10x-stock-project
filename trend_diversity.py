@@ -727,7 +727,7 @@ def main():
                 h
             )
 
-                        trend_score = trends.get(
+            trend_score = trends.get(
                 group,
                 50
             )

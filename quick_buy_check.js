@@ -222,7 +222,7 @@ async function loadData(){
  if(DATA_CACHE)return DATA_CACHE;
 
  const r=await fetch(
-  "tenx_data.json?t="+Date.now(),
+  "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json?t="+Date.now(),
   {cache:"no-store"}
  );
 

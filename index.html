@@ -14,6 +14,30 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=17">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=17">
 
+<!-- REMOTE_MARKET_DATA_START -->
+<script>
+(() => {
+  const originalFetch = window.fetch.bind(window);
+  const remoteRoot =
+    "https://shu39a-lang.github.io/10x-stock-project/";
+
+  window.fetch = function(input, init) {
+    try {
+      const raw = typeof input === "string" ? input : input.url;
+      const url = new URL(raw, location.href);
+      const file = url.pathname.split("/").pop();
+
+      if (file === "tenx_data.json" || file === "live_quotes.json") {
+        return originalFetch(remoteRoot + file + url.search, init);
+      }
+    } catch (e) {}
+
+    return originalFetch(input, init);
+  };
+})();
+</script>
+<!-- REMOTE_MARKET_DATA_END -->
+
 
 <title>10X STOCK ZERO</title>
 <link rel="manifest" href="manifest.webmanifest?v=17">

@@ -298,7 +298,10 @@ async function quoteFromSameOrigin(market,code){
 
 async function quoteFromBundledFile(market,code){
   try{
-    const r=await fetch("live_quotes.json?t="+Date.now(),{cache:"no-store"});
+    const r=await fetch(
+      "https://shu39a-lang.github.io/10x-stock-project/live_quotes.json?t="+Date.now(),
+      {cache:"no-store"}
+    );
     if(!r.ok) return null;
     const x=await r.json();
     const row=x?.[market]?.[code] || x?.quotes?.[market]?.[code];
@@ -563,7 +566,10 @@ async function applyTenxScore(){
   if(!code) return;
 
   try{
-    const r=await fetch("tenx_data.json?t="+Date.now(),{cache:"no-store"});
+    const r=await fetch(
+      "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json?t="+Date.now(),
+      {cache:"no-store"}
+    );
     if(!r.ok) return;
 
     const data=await r.json();
@@ -640,7 +646,10 @@ async function forceTenxScore(){
   if(!code) return;
 
   try{
-    const r=await fetch("tenx_data.json?t="+Date.now(),{cache:"no-store"});
+    const r=await fetch(
+      "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json?t="+Date.now(),
+      {cache:"no-store"}
+    );
     if(!r.ok) return;
 
     const data=await r.json();

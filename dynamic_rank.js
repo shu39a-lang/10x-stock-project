@@ -1,7 +1,10 @@
 (function(){
 "use strict";
 
-const REMOTE_DATA = "tenx_data.json";
+// The native iPhone app bundles a snapshot of the web files.  Always read the
+// published data so installed builds receive the scheduled JP/US updates.
+const REMOTE_DATA =
+  "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json";
 
 const JP_BANK_CODES = new Set([
   "7180","7182","7327","7337","7342","7380","7381","7389",

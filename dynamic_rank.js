@@ -32,29 +32,59 @@ function isBankRow(x){
   );
 }
 
-function classifyStock(x,market){
-  const score=Number(x.score)||0;
-  const quality=Number(x.quality)||0;
-  const financial=Number(x.financial)||0;
-  const technical=Number(x.technical)||0;
-  const catalyst=Number(x.catalyst)||0;
+function classifyRows(rows){
+  const items=rows.slice(0,20).map((x,index)=>({
+    x,
+    index,
+    growth:(Number(x.quality)||0)*0.55+(Number(x.catalyst)||0)*0.45,
+    stable:(Number(x.financial)||0)*0.55+(Number(x.technical)||0)*0.45,
+    category:"上昇期待"
+  }));
 
-  if(market==="usa"){
-    if(quality>=75 && catalyst>=70){
-      return "成長株";
-    }
-    if(financial>=59 && technical>=59 && score>=64){
-      return "安定上昇";
-    }
-  }else{
-    if(quality>=71 && catalyst>=66){
-      return "成長株";
-    }
-    if(financial>=62 && technical>=62 && score>=65){
-      return "安定上昇";
-    }
-  }
-  return "上昇期待";
+  if(!items.length) return items;
+
+  const mean=key=>items.reduce((sum,item)=>sum+item[key],0)/items.length;
+  const deviation=(key,avg)=>{
+    const variance=items.reduce(
+      (sum,item)=>sum+Math.pow(item[key]-avg,2),0
+    )/items.length;
+    return Math.sqrt(variance)||1;
+  };
+
+  const growthMean=mean("growth");
+  const stableMean=mean("stable");
+  const growthSd=deviation("growth",growthMean);
+  const stableSd=deviation("stable",stableMean);
+  const target=Math.min(
+    Math.max(1,Math.round(items.length*0.30)),
+    Math.floor(items.length/2)
+  );
+
+  const candidates=[];
+  items.forEach(item=>{
+    candidates.push({
+      item,
+      category:"成長株",
+      strength:(item.growth-growthMean)/growthSd
+    });
+    candidates.push({
+      item,
+      category:"安定上昇",
+      strength:(item.stable-stableMean)/stableSd
+    });
+  });
+
+  candidates.sort((a,b)=>b.strength-a.strength);
+
+  const counts={"成長株":0,"安定上昇":0};
+  candidates.forEach(candidate=>{
+    if(candidate.item.category!=="上昇期待") return;
+    if(counts[candidate.category]>=target) return;
+    candidate.item.category=candidate.category;
+    counts[candidate.category]++;
+  });
+
+  return items;
 }
 
 function diversifyJapanRows(arr){
@@ -94,23 +124,23 @@ function diversifyJapanRows(arr){
 function convertRows(rows,market){
   if(!Array.isArray(rows)) return [];
 
-  const mapped=rows.slice(0,20).map(x => [
-    String(x.code || ""),
-    String(x.name || ""),
-    Math.round(Number(x.score) || 0),
-    classifyStock(x,market),
-    String(x.trend_theme || "")
+  const mapped=classifyRows(rows).map(item => [
+    String(item.x.code || ""),
+    String(item.x.name || ""),
+    Math.round(Number(item.x.score) || 0),
+    item.category,
+    String(item.x.trend_theme || "")
   ]);
 
   if(market==="japan"){
-  const selected=diversifyJapanRows(mapped);
+    const selected=diversifyJapanRows(mapped);
 
-  return selected.sort(
-    (a,b)=>Number(b[2])-Number(a[2])
-  );
-}
+    return selected.sort(
+      (a,b)=>Number(b[2])-Number(a[2])
+    );
+  }
 
-return mapped;
+  return mapped;
 }
 
 function rankColor(category){
@@ -291,3 +321,4 @@ if(document.readyState==="loading"){
 }
 
 })();
+

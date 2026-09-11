@@ -1,0 +1,212 @@
+name: Final Live Quotes Japanese
+
+on:
+  workflow_run:
+    workflows:
+      - "Refresh Stock Prices and Publish"
+      - "Refresh Quotes Robustly and Publish"
+    types: [completed]
+  schedule:
+    - cron: "2,32 * * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: final-live-quotes-japanese
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Build Japan and US quotes with Japanese names
+        shell: bash
+        run: |
+          cat > /tmp/build_final_quotes.py <<'PY'
+          import json
+          import urllib.request
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          HEADERS = {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+              "User-Agent": "Mozilla/5.0"
+          }
+
+          def scan(url, payload):
+              req = urllib.request.Request(
+                  url,
+                  data=json.dumps(payload).encode("utf-8"),
+                  headers=HEADERS,
+                  method="POST",
+              )
+              with urllib.request.urlopen(req, timeout=90) as r:
+                  return json.loads(r.read().decode("utf-8"))
+
+          def make_quotes(data, us=False):
+              out = {}
+              allowed = {"NASDAQ", "NYSE", "AMEX", "NYSEARCA"}
+              for row in data.get("data") or []:
+                  d = row.get("d") or []
+                  if len(d) < 4:
+                      continue
+                  code = str(d[0] or "").strip().upper().replace(".T", "")
+                  price = d[2]
+                  if not code or not isinstance(price, (int, float)) or price <= 0:
+                      continue
+                  if us:
+                      exchange = str(d[4] if len(d) > 4 else "").strip().upper()
+                      if exchange and exchange not in allowed:
+                          continue
+                  out[code] = {
+                      "code": code,
+                      "name": str(d[1] or code).strip(),
+                      "price": float(price),
+                      "change_pct": float(d[3] or 0),
+                  }
+              return out
+
+          def collect_names(node, out):
+              if isinstance(node, dict):
+                  code = str(node.get("code") or "").strip().upper().replace(".T", "")
+                  name = str(node.get("name") or "").strip()
+                  if code and name:
+                      out[code] = name
+                  for v in node.values():
+                      collect_names(v, out)
+              elif isinstance(node, list):
+                  for v in node:
+                      collect_names(v, out)
+
+          jp = scan(
+              "https://scanner.tradingview.com/japan/scan",
+              {
+                  "filter": [{"left": "exchange", "operation": "equal", "right": "TSE"}],
+                  "options": {"lang": "ja"},
+                  "markets": ["japan"],
+                  "symbols": {"query": {"types": []}, "tickers": []},
+                  "columns": ["name", "description", "close", "change", "exchange"],
+                  "range": [0, 10000],
+              },
+          )
+
+          us = scan(
+              "https://scanner.tradingview.com/america/scan",
+              {
+                  "filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                  "options": {"lang": "en"},
+                  "markets": ["america"],
+                  "symbols": {"query": {"types": []}, "tickers": []},
+                  "columns": ["name", "description", "close", "change", "exchange"],
+                  "range": [0, 20000],
+              },
+          )
+
+          japan = make_quotes(jp, False)
+          usa = make_quotes(us, True)
+
+          ja_names = {}
+          data_path = Path("tenx_data.json")
+          if data_path.exists():
+              data = json.loads(data_path.read_text(encoding="utf-8"))
+              collect_names(data.get("usa", {}), ja_names)
+
+          manual = {
+              "AAPL":"アップル",
+              "MSFT":"マイクロソフト",
+              "NVDA":"エヌビディア",
+              "AMZN":"アマゾン・ドット・コム",
+              "GOOGL":"アルファベット",
+              "GOOG":"アルファベット",
+              "META":"メタ・プラットフォームズ",
+              "TSLA":"テスラ",
+              "AMD":"アドバンスト・マイクロ・デバイセズ",
+              "AVGO":"ブロードコム",
+              "PLTR":"パランティア・テクノロジーズ",
+              "NFLX":"ネットフリックス",
+              "ORCL":"オラクル",
+              "CRM":"セールスフォース",
+              "ADBE":"アドビ",
+              "INTC":"インテル",
+              "QCOM":"クアルコム",
+              "MU":"マイクロン・テクノロジー",
+              "ARM":"アーム・ホールディングス",
+              "AMAT":"アプライド・マテリアルズ",
+              "LRCX":"ラムリサーチ",
+              "KLAC":"KLA",
+              "TXN":"テキサス・インスツルメンツ",
+              "LLY":"イーライリリー",
+              "JPM":"JPモルガン・チェース",
+              "V":"ビザ",
+              "MA":"マスターカード",
+              "WMT":"ウォルマート",
+              "COST":"コストコ・ホールセール",
+              "DIS":"ウォルト・ディズニー",
+              "UBER":"ウーバー・テクノロジーズ",
+              "BA":"ボーイング"
+          }
+          ja_names.update(manual)
+
+          for code, q in usa.items():
+              name = ja_names.get(code)
+              if name:
+                  q["name"] = name
+
+          if "7203" not in japan:
+              raise SystemExit("7203 missing")
+          if "NVDA" not in usa:
+              raise SystemExit("NVDA missing")
+          if usa["NVDA"].get("name") != "エヌビディア":
+              raise SystemExit("NVDA Japanese name missing")
+
+          Path("live_quotes.json").write_text(
+              json.dumps({
+                  "updated_at": datetime.now(timezone.utc).isoformat(),
+                  "japan": japan,
+                  "usa": usa
+              }, ensure_ascii=False, separators=(",", ":")),
+              encoding="utf-8"
+          )
+          PY
+
+          python /tmp/build_final_quotes.py
+
+      - name: Verify Japanese US names and prices
+        shell: bash
+        run: |
+          grep -q '"AAPL":{"code":"AAPL","name":"アップル"' live_quotes.json
+          grep -q '"NVDA":{"code":"NVDA","name":"エヌビディア"' live_quotes.json
+          grep -q '"usa":{' live_quotes.json
+
+      - name: Save live quote cache
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live_quotes.json
+          git diff --cached --quiet || git commit -m "Publish Japanese US live quote names"
+          git push
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publish final GitHub Pages data
+        id: deployment
+        uses: actions/deploy-pages@v4

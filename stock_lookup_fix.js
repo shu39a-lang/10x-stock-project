@@ -2,24 +2,37 @@
 "use strict";
 
 const $=s=>document.querySelector(s);
-let DATA_CACHE=null;
+let TENX_CACHE=null;
+let LIVE_CACHE=null;
 
-async function loadTenxData(){
-  if(DATA_CACHE)return DATA_CACHE;
-  const url="https://shu39a-lang.github.io/10x-stock-project/tenx_data.json?t="+Date.now();
-  const r=await fetch(url,{cache:"no-store"});
-  if(!r.ok)throw new Error("tenx_data "+r.status);
-  DATA_CACHE=await r.json();
-  return DATA_CACHE;
-}
+const ROOT="https://shu39a-lang.github.io/10x-stock-project/";
 
 function cleanCode(v){
   return String(v||"").trim().toUpperCase().replace(/\.T$/i,"");
 }
 
+async function loadJson(name){
+  const r=await fetch(ROOT+name+"?t="+Date.now(),{cache:"no-store"});
+  if(!r.ok)throw new Error(name+" HTTP "+r.status);
+  return r.json();
+}
+
+async function loadTenxData(){
+  if(TENX_CACHE)return TENX_CACHE;
+  TENX_CACHE=await loadJson("tenx_data.json");
+  return TENX_CACHE;
+}
+
+async function loadLiveQuotes(){
+  if(LIVE_CACHE)return LIVE_CACHE;
+  LIVE_CACHE=await loadJson("live_quotes.json");
+  return LIVE_CACHE;
+}
+
 function findStockRecursive(node,code,seen=new Set()){
   if(!node||typeof node!=="object"||seen.has(node))return null;
   seen.add(node);
+
   if(Array.isArray(node)){
     for(const x of node){
       if(x&&typeof x==="object"&&cleanCode(x.code)===code)return x;
@@ -28,6 +41,7 @@ function findStockRecursive(node,code,seen=new Set()){
     }
     return null;
   }
+
   for(const v of Object.values(node)){
     const hit=findStockRecursive(v,code,seen);
     if(hit)return hit;
@@ -35,20 +49,35 @@ function findStockRecursive(node,code,seen=new Set()){
   return null;
 }
 
-async function dataName(market,code){
+async function tenxInfo(market,code){
   try{
     const d=await loadTenxData();
-    const hit=findStockRecursive(d?.[market],code);
-    return hit&&String(hit.name||"").trim()?String(hit.name).trim():"";
+    return findStockRecursive(d?.[market],code);
   }catch(e){
-    return "";
+    return null;
+  }
+}
+
+async function liveInfo(market,code){
+  try{
+    const d=await loadLiveQuotes();
+    const q=d?.[market]?.[code];
+    if(!q)return null;
+    return{
+      name:String(q.name||"").trim(),
+      price:Number(q.price),
+      source:"live_quotes"
+    };
+  }catch(e){
+    return null;
   }
 }
 
 async function yahooDirect(market,code){
   const symbol=market==="japan"?code+".T":code;
   const url="https://query1.finance.yahoo.com/v8/finance/chart/"+
-    encodeURIComponent(symbol)+"?interval=1d&range=5d&events=history&_="+Date.now();
+    encodeURIComponent(symbol)+
+    "?interval=1d&range=5d&events=history&_="+Date.now();
 
   try{
     let data=null;
@@ -71,7 +100,6 @@ async function yahooDirect(market,code){
     if(!meta)return null;
 
     const price=Number(meta.regularMarketPrice);
-
     return{
       price:Number.isFinite(price)&&price>0?price:null,
       name:String(meta.longName||meta.shortName||"").trim(),
@@ -80,6 +108,14 @@ async function yahooDirect(market,code){
   }catch(e){
     return null;
   }
+}
+
+function isUsEnglishFallback(name,code){
+  const s=String(name||"").trim();
+  if(!s)return true;
+  if(s===code)return true;
+  // ASCIIだけの名前は、日本語名が他に取れた場合は採用しない
+  return /^[\x00-\x7F\s.,&'()\-]+$/.test(s);
 }
 
 function renderLookup(market,name,price,source){
@@ -92,6 +128,7 @@ function renderLookup(market,name,price,source){
     nameEl.value=name;
     nameEl.readOnly=true;
   }else{
+    nameEl.value="";
     nameEl.readOnly=false;
   }
 
@@ -149,41 +186,63 @@ window.zeroLookupStock=async function(){
   }
 
   let base=null;
-
   if(oldLookup){
     try{
       base=await oldLookup();
     }catch(e){}
   }
 
-  const preferredName=await dataName(market,code);
-  const basePrice=Number(base?.price);
+  const [tenx,live]=await Promise.all([
+    tenxInfo(market,code),
+    liveInfo(market,code)
+  ]);
+
   let direct=null;
 
-  if(!(Number.isFinite(basePrice)&&basePrice>0)||market==="usa"){
+  const livePrice=Number(live?.price);
+  const basePrice=Number(base?.price);
+
+  // 価格は live_quotes を最優先。
+  // live_quotes に無い時だけ既存処理 → Yahoo の順で補う。
+  let price=
+    Number.isFinite(livePrice)&&livePrice>0
+      ?livePrice
+      :Number.isFinite(basePrice)&&basePrice>0
+        ?basePrice
+        :null;
+
+  if(!(Number.isFinite(price)&&price>0)){
     direct=await yahooDirect(market,code);
+    const p=Number(direct?.price);
+    if(Number.isFinite(p)&&p>0)price=p;
   }
 
-  const price=
-    Number.isFinite(basePrice)&&basePrice>0
-      ?basePrice
-      :Number(direct?.price);
+  const tenxName=String(tenx?.name||"").trim();
+  const liveName=String(live?.name||"").trim();
+  const baseName=String(base?.name||"").trim();
+  const directName=String(direct?.name||"").trim();
 
   let name="";
 
   if(market==="japan"){
-    name=
-      preferredName ||
-      String(base?.name||"").trim() ||
-      String(direct?.name||"").trim();
+    // 日本株は日本語データを最優先。
+    name=tenxName||liveName||baseName||directName||code;
   }else{
-    name=
-      String(base?.name||"").trim() ||
-      String(direct?.name||"").trim() ||
-      preferredName;
+    // 米国株も日本語名を優先。
+    // tenx_data / live_quotes / 既存処理の順で日本語名を採用。
+    const candidates=[tenxName,liveName,baseName];
+    name=candidates.find(n=>n&&!isUsEnglishFallback(n,code))||"";
+
+    // 日本語名が見つからない場合のみ、既存表示を維持。
+    if(!name){
+      name=tenxName||liveName||baseName||directName||code;
+    }
   }
 
-  const source=base?.source||direct?.source||"";
+  const source=
+    (Number.isFinite(livePrice)&&livePrice>0)
+      ?"live_quotes"
+      :(base?.source||direct?.source||"");
 
   renderLookup(
     market,

@@ -1,17 +1,11 @@
 workflows:
-  ios-workflow:
-    name: 10X STOCK ZERO iOS
+  android-test:
+    name: 10X STOCK ZERO Android Test
     max_build_duration: 60
 
-    integrations:
-      app_store_connect: codemagic7
-
     environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.shu39a.10xstock
-      xcode: latest
       node: latest
+      java: 17
 
     scripts:
       - name: Prepare web app
@@ -24,59 +18,24 @@ workflows:
           cp -f *.webmanifest www/ 2>/dev/null || true
           cp -f *.png www/ 2>/dev/null || true
 
-      - name: Create Capacitor project
+      - name: Create Android Capacitor project
         script: |
           npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www --skip-appid-validation
-          npx cap add ios
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "10X STOCK ZERO" "com.shu39a.10xstock" --web-dir=www --skip-appid-validation
+          npx cap add android
           printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
-          npx cap sync ios
-          perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
+          npx cap sync android
 
-      - name: Install finalized app icon
+      - name: Set Android SDK location
         script: |
-          ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
-          cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
-          cat > "$ICONSET/Contents.json" <<'EOF'
-          {
-            "images" : [
-              {
-                "filename" : "AppIcon-512@2x.png",
-                "idiom" : "universal",
-                "platform" : "ios",
-                "size" : "1024x1024"
-              }
-            ],
-            "info" : {
-              "author" : "xcode",
-              "version" : 1
-            }
-          }
-          EOF
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
 
-      - name: Set up code signing
+      - name: Build Android test APK
         script: |
-          cd ios/App
-          xcode-project use-profiles
-
-      - name: Set build number
-        script: |
-          cd ios/App
-          agvtool new-marketing-version 1.1
-          agvtool new-version -all "$BUILD_NUMBER"
-
-      - name: Build IPA
-        script: |
-          cd ios/App
-          xcode-project build-ipa \
-            --project "App.xcodeproj" \
-            --scheme "App"
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
     artifacts:
-      - ios/App/build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-
-    publishing:
-      app_store_connect:
-        auth: integration
+      - android/app/build/outputs/apk/debug/*.apk

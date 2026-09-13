@@ -39,3 +39,79 @@ workflows:
 
     artifacts:
       - android/app/build/outputs/apk/debug/*.apk
+
+  android-release:
+    name: 10X STOCK ZERO Android Release
+    max_build_duration: 60
+
+    environment:
+      android_signing:
+        - android_release
+      node: latest
+      java: 21
+
+    scripts:
+      - name: Prepare web app
+        script: |
+          mkdir -p www
+          cp -f index.html www/index.html
+          cp -f *.html www/ 2>/dev/null || true
+          cp -f *.json www/ 2>/dev/null || true
+          cp -f *.js www/ 2>/dev/null || true
+          cp -f *.webmanifest www/ 2>/dev/null || true
+          cp -f *.png www/ 2>/dev/null || true
+
+      - name: Create Android Capacitor project
+        script: |
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www
+          npx cap add android
+          printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
+          npx cap sync android
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+
+      - name: Configure Android release signing
+        script: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path("android/app/build.gradle")
+          s = p.read_text()
+
+          signing = '''
+              signingConfigs {
+                  release {
+                      if (System.getenv()["CI"]) {
+                          storeFile file(System.getenv()["CM_KEYSTORE_PATH"])
+                          storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+                          keyAlias System.getenv()["CM_KEY_ALIAS"]
+                          keyPassword System.getenv()["CM_KEY_PASSWORD"]
+                      }
+                  }
+              }
+          '''
+
+          if "signingConfigs {" not in s:
+              s = s.replace("android {", "android {\n" + signing, 1)
+
+          if "signingConfig signingConfigs.release" not in s:
+              s = re.sub(
+                  r'(buildTypes\s*\{\s*release\s*\{)',
+                  r'\1\n            signingConfig signingConfigs.release',
+                  s,
+                  count=1,
+              )
+
+          p.write_text(s)
+          PY
+
+      - name: Build signed Android AAB
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew bundleRelease
+
+    artifacts:
+      - android/app/build/outputs/bundle/release/*.aab

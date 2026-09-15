@@ -9,7 +9,7 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.shu39a.10xstockenglish
+        bundle_identifier: com.shu39a.tenxstockenglish
       xcode: latest
       node: latest
 
@@ -28,7 +28,7 @@ workflows:
         script: |
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init "10X STOCK ZERO" "com.shu39a.10xstockenglish" --web-dir=www --skip-appid-validation
+          npx cap init "10X STOCK ZERO" "com.shu39a.tenxstockenglish" --web-dir=www --skip-appid-validation
           npx cap add ios
           printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
           npx cap sync ios

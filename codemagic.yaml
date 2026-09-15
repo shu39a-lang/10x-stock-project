@@ -1,6 +1,6 @@
 workflows:
   ios-workflow:
-    name: 10X STOCK ZERO iOS
+    name: 10X STOCK ZERO English iOS
     max_build_duration: 60
 
     integrations:
@@ -9,7 +9,7 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.shu39a.10xstock
+        bundle_identifier: com.shu39a.10xstockenglish
       xcode: latest
       node: latest
 
@@ -28,11 +28,10 @@ workflows:
         script: |
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www --skip-appid-validation
+          npx cap init "10X STOCK ZERO" "com.shu39a.10xstockenglish" --web-dir=www --skip-appid-validation
           npx cap add ios
           printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
           npx cap sync ios
-          perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
 
       - name: Install finalized app icon
         script: |
@@ -63,7 +62,7 @@ workflows:
       - name: Set build number
         script: |
           cd ios/App
-          agvtool new-marketing-version 1.1
+          agvtool new-marketing-version 1.0
           agvtool new-version -all "$BUILD_NUMBER"
 
       - name: Build IPA

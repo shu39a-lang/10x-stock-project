@@ -69,6 +69,9 @@ workflows:
             #marketInfoLinks>div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
             #marketInfoLinks [style*="white-space:nowrap"]{white-space:normal!important}
             .navbtn{font-size:7px!important}
+            #marketInfoLinks .linkbtn{font-size:11px!important;line-height:1.15!important}
+            #rankingTable .sname{font-size:10px!important;overflow-wrap:anywhere!important}
+            button,a{overflow-wrap:anywhere}
           }
           </style>
           <script id="ENGLISH_DISPLAY_ONLY">
@@ -93,15 +96,33 @@ workflows:
               ["三菱UFJフィナンシャル・グループ","Mitsubishi UFJ Financial Group"],["信越化学工業","Shin-Etsu Chemical"],
               ["ダイキン工業","Daikin Industries"],["三菱商事","Mitsubishi Corporation"],["東京海上HD","Tokio Marine Holdings"],
               ["ソニーグループ","Sony Group"],["日本電信電話","NTT"],["任天堂","Nintendo"],["キーエンス","Keyence"],
-              ["リクルートホールディングス","Recruit Holdings"]
+              ["リクルートホールディングス","Recruit Holdings"],
+              ["買いタイミング診断","Buy Timing Analysis"],["気になる銘柄コードを入力して、現在の買い条件を確認","Enter a ticker to check the current buy conditions"],
+              ["診断する","Analyze"],["現在の分析データを使って判定します。","Uses current analysis data."],
+              ["診断結果を表示しました。","Analysis complete."],["総合判断","Overall Rating"],["様子見","Wait"],["慎重","Caution"],["買い","Buy"],["強い買い","Strong Buy"],
+              ["総合","Overall"],["テクニカル","Technical"],["トレンド","Trend"],["判断の理由","Reason"],["総合スコア","Overall Score"],
+              ["品質・成長","Quality & Growth"],["財務","Financial"],["割安性","Value"],["カタリスト","Catalyst"],
+              ["銘柄を確認・入力して分析","Check & Analyze a Stock"],["市場","Market"],["銘柄コード","Ticker"],["会社名","Company Name"],
+              ["株数","Shares"],["購入単価","Buy Price"],["現在値","Current Price"],["メモ","Memo"],["任意","Optional"],
+              ["株価・会社情報を確認","View Stock Info"],["入力をクリア","Clear"],
+              ["外部サイトで情報を確認し、5項目を0〜100で評価すると自動で総合スコアを計算します。","Check external information and rate 5 factors from 0–100 to calculate the overall score."],
+              ["コードを入力すると会社名と現在値を確認します。","Enter a ticker to check the company name and current price."],
+              ["注目・急増・高値","Popular Tools"],["管理・設定","Management & Settings"],["保有株管理","Holdings"],["保有銘柄の管理","Manage Holdings"],
+              ["設定","Settings"],["各種設定","App Settings"],["登録銘柄一覧","Saved Stocks"],["過去の分析結果","View past results"],
+              ["銘柄コード・銘柄名で検索","Search by Ticker or Name"]
             ]);
             const phrase = [
               ["◎ 選択中：","◎ Selected: "],
               ["🏆 日本株・短期 TOP10","🏆 Japan Stocks • Short Term TOP10"],
-              ["🟥 赤：上昇期待　　🟦 青：安定上昇　　🟨 黄：成長株","🟥 Red: Upside Potential   🟦 Blue: Steady Growth   🟨 Yellow: Growth Stock"],
+              ["🟥 赤：上昇期待　　🟦 青：安定上昇　　🟨 黄：成長株","🟥 Upside   🟦 Steady   🟨 Growth"],
               ["🕒 TOP10 データ更新時間（日本時間）","🕒 TOP10 Data Update Time (JST)"],
               ["06:30頃","Around 06:30"],["16:00頃","Around 16:00"],
-              ["（アメリカ株）","(U.S. Stocks)"],["（日本株）","(Japan Stocks)"]
+              ["（アメリカ株）","(U.S. Stocks)"],["（日本株）","(Japan Stocks)"],
+              ["米国上場企業","U.S.-listed"],["ランキング",""],["診断結果を表示しました。","Analysis complete."],
+              ["※この診断は現在の分析データによる判断目安です。将来の株価上昇や利益を保証するものではありません。","* Based on current data. Not investment advice or a guarantee of future performance."],
+              ["総合スコアは慎重に確認したい水準です。","Overall score is at a moderate level."],
+              ["テクニカル面はまだ弱めです。","Technical indicators are still weak."],
+              ["財務評価には確認余地があります。","Financial metrics require further review."]
             ];
             function translate(raw){
               let lead=(raw.match(/^\s*/)||[""])[0], tail=(raw.match(/\s*$/)||[""])[0], x=raw.trim();

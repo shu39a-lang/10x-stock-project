@@ -11,8 +11,9 @@ workflows:
       xcode: latest
       node: latest
     scripts:
-      - name: Prepare web app
+      - name: Prepare verified English web app
         script: |
+          set -e
           mkdir -p www
           cp -f index.html www/index.html
           cp -f *.html www/ 2>/dev/null || true
@@ -20,41 +21,76 @@ workflows:
           cp -f *.js www/ 2>/dev/null || true
           cp -f *.webmanifest www/ 2>/dev/null || true
           cp -f *.png www/ 2>/dev/null || true
-      - name: Apply English iPhone layout fix
+          curl -fL --retry 3 "https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/main/dynamic_rank.js" -o www/dynamic_rank.js
+          test -s www/dynamic_rank.js
+          grep -q "function balancedTop10" www/dynamic_rank.js
+          grep -q "updateDynamicRanking" www/dynamic_rank.js
+
+      - name: Apply verified English iPhone layout
         script: |
+          set -e
           python3 - <<'PY'
           from pathlib import Path
           p=Path("www/index.html")
           s=p.read_text(encoding="utf-8")
-          fix='''<style id="english-iphone-layout-fix">
+          fix=r'''<style id="english-iphone-final-layout-v3">
           html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;-webkit-text-size-adjust:100%!important}
-          body,.app,.app *{min-width:0}
+          body,.app,.app *{box-sizing:border-box;min-width:0}
           .app{width:100%!important;max-width:820px!important;overflow-x:hidden!important}
-          .marketrow,.termrow,.rankcard,.sectionbox,.formcard,.table,.trow,.managegrid,.formgrid,.actionrow{max-width:100%!important}
-          .trow{grid-template-columns:30px 54px minmax(0,1fr) 46px 34px 28px!important;gap:4px!important;font-size:10px!important}
-          .sname{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
-          .marketbtn,.termbtn,.maincta,.managebtn,.action,.marketlink,.guide,.allbtn{overflow-wrap:anywhere!important;word-break:normal!important}
+          .rankhead{min-width:0!important}
+          .rankhead h2{min-width:0!important;overflow-wrap:anywhere!important;line-height:1.15!important}
+          #topRankingSection > div[style*="white-space:nowrap"]{white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.45!important;font-size:9px!important}
+          .table,.trow{width:100%!important;max-width:100%!important}
+          .trow{grid-template-columns:28px 48px minmax(0,1fr) 42px 30px 26px!important;gap:3px!important;padding-left:4px!important;padding-right:4px!important;font-size:10px!important}
+          .trow>*{min-width:0!important}
+          .sname{min-width:0!important;max-width:100%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+          .score{font-size:14px!important}
+          #marketInfoLinks > div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+          #marketInfoLinks [style*="white-space:nowrap"]{white-space:normal!important;overflow-wrap:anywhere!important}
+          #marketInfoLinks a{min-width:0!important;max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important}
+          .marketrow,.termrow,.rankcard,.sectionbox,.formcard,.managegrid,.formgrid,.actionrow{max-width:100%!important;min-width:0!important}
+          .marketbtn,.termbtn,.maincta,.managebtn,.action,.guide,.allbtn,.navbtn{min-width:0!important;max-width:100%!important;overflow-wrap:anywhere!important}
           @media(max-width:520px){
             .app{padding-left:8px!important;padding-right:8px!important}
-            .header{padding-left:52px!important;padding-right:72px!important}
-            .logo{font-size:22px!important;white-space:nowrap!important}
-            .kicker{font-size:11px!important}
-            .marketbtn{font-size:14px!important}
-            .termbtn{font-size:12px!important}
-            .rankhead h2{font-size:17px!important}
-            #marketInfoLinks > div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-            #marketInfoLinks a{white-space:normal!important;overflow-wrap:anywhere!important}
+            .header{padding-left:52px!important;padding-right:70px!important}
+            .logo{font-size:21px!important;white-space:nowrap!important}
+            .kicker{font-size:10px!important}
+            .marketbtn{font-size:13px!important}
+            .termbtn{font-size:11px!important}
+            .rankhead{gap:5px!important;align-items:flex-start!important}
+            .rankhead h2{font-size:15px!important;flex:1!important}
+            .allbtn{font-size:8px!important;padding:6px 7px!important;flex:0 0 auto!important}
             .managegrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
             .bottomnav .inner{grid-template-columns:repeat(5,minmax(0,1fr))!important}
-            .navbtn{font-size:8px!important;overflow:hidden!important}
+            .navbtn{font-size:7px!important;padding-left:0!important;padding-right:0!important;overflow:hidden!important}
           }
           </style>'''
-          if 'id="english-iphone-layout-fix"' not in s:
+          if 'id="english-iphone-final-layout-v3"' not in s:
               s=s.replace("</head>",fix+"\n</head>",1)
           p.write_text(s,encoding="utf-8")
+          checks=['<html lang="en">','id="marketInfoLinks"','id="rankingTable"','data-market="japan"','data-market="usa"','data-term="short"','data-term="mid"','data-term="long"','english-iphone-final-layout-v3']
+          missing=[x for x in checks if x not in s]
+          if missing: raise SystemExit("VERIFY FAILED: "+", ".join(missing))
+          print("English index verification: OK")
           PY
+
+      - name: Verify interactive app before build
+        script: |
+          set -e
+          node --check www/dynamic_rank.js
+          grep -q 'data-market="japan"' www/index.html
+          grep -q 'data-market="usa"' www/index.html
+          grep -q 'data-term="short"' www/index.html
+          grep -q 'data-term="mid"' www/index.html
+          grep -q 'data-term="long"' www/index.html
+          grep -q 'id="mainCta"' www/index.html
+          grep -q 'id="menuBtn"' www/index.html
+          grep -q 'id="guideBtn"' www/index.html
+          echo "Interactive controls and ranking engine: VERIFIED"
+
       - name: Create Capacitor project
         script: |
+          set -e
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
           npx cap init "10X STOCK ZERO" "com.shu39a.tenxstockenglish" --web-dir=www --skip-appid-validation
@@ -63,6 +99,7 @@ workflows:
           npx cap sync ios
       - name: Install finalized app icon
         script: |
+          set -e
           ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
           cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
           cat > "$ICONSET/Contents.json" <<'EOF'
@@ -83,9 +120,7 @@ workflows:
       - name: Build IPA
         script: |
           cd ios/App
-          xcode-project build-ipa \
-            --project "App.xcodeproj" \
-            --scheme "App"
+          xcode-project build-ipa --project "App.xcodeproj" --scheme "App"
     artifacts:
       - ios/App/build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log

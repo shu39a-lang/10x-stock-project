@@ -116,6 +116,8 @@ workflows:
             function walk(root=document.body){
               const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
               let n; while(n=w.nextNode()){
+                const parent=n.parentElement;
+                if(parent && ["SCRIPT","STYLE","NOSCRIPT","TEMPLATE"].includes(parent.tagName)) continue;
                 if(/[\u3040-\u30ff\u3400-\u9fff]/.test(n.nodeValue)) n.nodeValue=translate(n.nodeValue);
               }
               root.querySelectorAll?.("[placeholder]").forEach(e=>e.placeholder=translate(e.placeholder));
@@ -123,7 +125,11 @@ workflows:
             document.addEventListener("DOMContentLoaded",()=>{walk();setTimeout(()=>walk(),300);setTimeout(()=>walk(),1500)});
             new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{
               if(n.nodeType===1)walk(n);
-              else if(n.nodeType===3 && /[\u3040-\u30ff\u3400-\u9fff]/.test(n.nodeValue))n.nodeValue=translate(n.nodeValue);
+              else if(n.nodeType===3){
+                const parent=n.parentElement;
+                if(parent && ["SCRIPT","STYLE","NOSCRIPT","TEMPLATE"].includes(parent.tagName)) return;
+                if(/[\u3040-\u30ff\u3400-\u9fff]/.test(n.nodeValue)) n.nodeValue=translate(n.nodeValue);
+              }
             }))).observe(document.documentElement,{childList:true,subtree:true});
           })();
           </script>
@@ -144,6 +150,7 @@ workflows:
           grep -q 'data-term="mid"' www/index.html
           grep -q 'data-term="long"' www/index.html
           grep -q 'ENGLISH_DISPLAY_ONLY' www/index.html
+          grep -q 'SCRIPT","STYLE","NOSCRIPT","TEMPLATE' www/index.html
           grep -q 'https://www.tradingview.com/markets/stocks-japan/market-movers-gainers/' www/index.html
           grep -q 'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/' www/index.html
           grep -q 'https://www.tradingview.com/symbols/TSE-' www/index.html

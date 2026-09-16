@@ -2,17 +2,14 @@ workflows:
   ios-workflow:
     name: 10X STOCK ZERO English iOS
     max_build_duration: 60
-
     integrations:
       app_store_connect: codemagic7
-
     environment:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.shu39a.tenxstockenglish
       xcode: latest
       node: latest
-
     scripts:
       - name: Prepare web app
         script: |
@@ -23,7 +20,39 @@ workflows:
           cp -f *.js www/ 2>/dev/null || true
           cp -f *.webmanifest www/ 2>/dev/null || true
           cp -f *.png www/ 2>/dev/null || true
-
+      - name: Apply English iPhone layout fix
+        script: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("www/index.html")
+          s=p.read_text(encoding="utf-8")
+          fix='''<style id="english-iphone-layout-fix">
+          html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;-webkit-text-size-adjust:100%!important}
+          body,.app,.app *{min-width:0}
+          .app{width:100%!important;max-width:820px!important;overflow-x:hidden!important}
+          .marketrow,.termrow,.rankcard,.sectionbox,.formcard,.table,.trow,.managegrid,.formgrid,.actionrow{max-width:100%!important}
+          .trow{grid-template-columns:30px 54px minmax(0,1fr) 46px 34px 28px!important;gap:4px!important;font-size:10px!important}
+          .sname{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+          .marketbtn,.termbtn,.maincta,.managebtn,.action,.marketlink,.guide,.allbtn{overflow-wrap:anywhere!important;word-break:normal!important}
+          @media(max-width:520px){
+            .app{padding-left:8px!important;padding-right:8px!important}
+            .header{padding-left:52px!important;padding-right:72px!important}
+            .logo{font-size:22px!important;white-space:nowrap!important}
+            .kicker{font-size:11px!important}
+            .marketbtn{font-size:14px!important}
+            .termbtn{font-size:12px!important}
+            .rankhead h2{font-size:17px!important}
+            #marketInfoLinks > div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+            #marketInfoLinks a{white-space:normal!important;overflow-wrap:anywhere!important}
+            .managegrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+            .bottomnav .inner{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+            .navbtn{font-size:8px!important;overflow:hidden!important}
+          }
+          </style>'''
+          if 'id="english-iphone-layout-fix"' not in s:
+              s=s.replace("</head>",fix+"\n</head>",1)
+          p.write_text(s,encoding="utf-8")
+          PY
       - name: Create Capacitor project
         script: |
           npm init -y
@@ -32,50 +61,34 @@ workflows:
           npx cap add ios
           printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
           npx cap sync ios
-
       - name: Install finalized app icon
         script: |
           ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
           cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
           cat > "$ICONSET/Contents.json" <<'EOF'
           {
-            "images" : [
-              {
-                "filename" : "AppIcon-512@2x.png",
-                "idiom" : "universal",
-                "platform" : "ios",
-                "size" : "1024x1024"
-              }
-            ],
-            "info" : {
-              "author" : "xcode",
-              "version" : 1
-            }
+            "images" : [{"filename":"AppIcon-512@2x.png","idiom":"universal","platform":"ios","size":"1024x1024"}],
+            "info" : {"author":"xcode","version":1}
           }
           EOF
-
       - name: Set up code signing
         script: |
           cd ios/App
           xcode-project use-profiles
-
       - name: Set build number
         script: |
           cd ios/App
           agvtool new-marketing-version 1.0
           agvtool new-version -all "$BUILD_NUMBER"
-
       - name: Build IPA
         script: |
           cd ios/App
           xcode-project build-ipa \
             --project "App.xcodeproj" \
             --scheme "App"
-
     artifacts:
       - ios/App/build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
-
     publishing:
       app_store_connect:
         auth: integration

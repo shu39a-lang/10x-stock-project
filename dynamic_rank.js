@@ -1,324 +1,134 @@
 (function(){
 "use strict";
 
-// The native iPhone app bundles a snapshot of the web files.  Always read the
-// published data so installed builds receive the scheduled JP/US updates.
-const REMOTE_DATA =
-  "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json";
+/* ENGLISH_IPHONE_LAYOUT_FIX_V2
+   English-only runtime layout correction.
+   The original ranking engine is loaded from the published project after
+   the layout fix is installed. The published engine is byte-identical to
+   the current english-version engine at preparation time.
+*/
+function installEnglishIPhoneLayoutFix(){
+  if(document.getElementById("tenx-english-iphone-layout-fix-v2")) return;
 
-const JP_BANK_CODES = new Set([
-  "7180","7182","7327","7337","7342","7380","7381","7389",
-  "8304","8306","8308","8309","8316","8331","8334","8336",
-  "8337","8338","8341","8343","8344","8345","8354","8358",
-  "8359","8360","8361","8362","8366","8367","8368","8370",
-  "8377","8381","8386","8387","8388","8392","8393","8395",
-  "8410","8411","8522","8524","8537","8541","8544","8550",
-  "8551","8558","8562","8563","8600","8713"
-]);
-
-function isBankRow(x){
-  const code=String(x[0]||"");
-  const name=String(x[1]||"");
-  const theme=String(x[4]||"");
-
-  return (
-    theme==="銀行" ||
-    JP_BANK_CODES.has(code) ||
-    name.includes("銀行") ||
-    name.includes("フィナンシャルグループ") ||
-    name.includes("フィナンシャル・グループ") ||
-    name.includes("フィナンシャルホールディングス") ||
-    name.includes("フィナンシャルHD")
-  );
-}
-
-function classifyRows(rows){
-  const items=rows.slice(0,20).map((x,index)=>({
-    x,
-    index,
-    growth:(Number(x.quality)||0)*0.55+(Number(x.catalyst)||0)*0.45,
-    stable:(Number(x.financial)||0)*0.55+(Number(x.technical)||0)*0.45,
-    category:"上昇期待"
-  }));
-
-  if(!items.length) return items;
-
-  const mean=key=>items.reduce((sum,item)=>sum+item[key],0)/items.length;
-  const deviation=(key,avg)=>{
-    const variance=items.reduce(
-      (sum,item)=>sum+Math.pow(item[key]-avg,2),0
-    )/items.length;
-    return Math.sqrt(variance)||1;
-  };
-
-  const growthMean=mean("growth");
-  const stableMean=mean("stable");
-  const growthSd=deviation("growth",growthMean);
-  const stableSd=deviation("stable",stableMean);
-  const target=Math.min(
-    Math.max(1,Math.round(items.length*0.30)),
-    Math.floor(items.length/2)
-  );
-
-  const candidates=[];
-  items.forEach(item=>{
-    candidates.push({
-      item,
-      category:"成長株",
-      strength:(item.growth-growthMean)/growthSd
-    });
-    candidates.push({
-      item,
-      category:"安定上昇",
-      strength:(item.stable-stableMean)/stableSd
-    });
-  });
-
-  candidates.sort((a,b)=>b.strength-a.strength);
-
-  const counts={"成長株":0,"安定上昇":0};
-  candidates.forEach(candidate=>{
-    if(candidate.item.category!=="上昇期待") return;
-    if(counts[candidate.category]>=target) return;
-    candidate.item.category=candidate.category;
-    counts[candidate.category]++;
-  });
-
-  return items;
-}
-
-function diversifyJapanRows(arr){
-  const pool=arr.slice(0,20);
-  const selected=[];
-  const used=new Set();
-
-  function fillUntil(target,bankLimit){
-    for(const item of pool){
-      if(selected.length>=target) break;
-      if(used.has(item[0])) continue;
-
-      const bankCount=selected.filter(isBankRow).length;
-      if(isBankRow(item) && bankCount>=bankLimit) continue;
-
-      selected.push(item);
-      used.add(item[0]);
+  const style=document.createElement("style");
+  style.id="tenx-english-iphone-layout-fix-v2";
+  style.textContent=`
+    html,body{
+      width:100%!important;
+      max-width:100%!important;
+      overflow-x:hidden!important;
+      -webkit-text-size-adjust:100%;
     }
-  }
-
-  fillUntil(5,2);
-  fillUntil(10,3);
-  fillUntil(20,4);
-
-  if(selected.length<20){
-    for(const item of pool){
-      if(selected.length>=20) break;
-      if(used.has(item[0])) continue;
-      selected.push(item);
-      used.add(item[0]);
+    body,.app,.app *{box-sizing:border-box;min-width:0}
+    .app{
+      width:100%!important;
+      max-width:820px!important;
+      overflow-x:hidden!important;
     }
-  }
 
-  return selected;
-}
+    /* Long English labels must never determine the page width. */
+    #topRankingSection [style*="white-space:nowrap"],
+    #marketInfoLinks [style*="white-space:nowrap"]{
+      white-space:normal!important;
+      overflow-wrap:anywhere!important;
+    }
 
-function convertRows(rows,market){
-  if(!Array.isArray(rows)) return [];
+    .rankcard,.sectionbox,.formcard,.table,
+    .marketrow,.termrow,.actionrow,.formgrid,.managegrid{
+      width:100%;
+      max-width:100%!important;
+      min-width:0!important;
+    }
 
-  const mapped=classifyRows(rows).map(item => [
-    String(item.x.code || ""),
-    String(item.x.name || ""),
-    Math.round(Number(item.x.score) || 0),
-    item.category,
-    String(item.x.trend_theme || "")
-  ]);
+    .trow{
+      grid-template-columns:30px 52px minmax(0,1fr) 44px 32px 26px!important;
+      gap:3px!important;
+      padding-left:4px!important;
+      padding-right:4px!important;
+      font-size:10px!important;
+    }
+    .trow>*{min-width:0!important}
+    .sname{
+      min-width:0!important;
+      max-width:100%!important;
+      white-space:nowrap!important;
+      overflow:hidden!important;
+      text-overflow:ellipsis!important;
+    }
+    .score{font-size:14px!important}
 
-  if(market==="japan"){
-    const selected=diversifyJapanRows(mapped);
+    #marketInfoLinks > div[style*="grid-template-columns:repeat(4,1fr)"]{
+      grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    }
+    #marketInfoLinks a,
+    #marketInfoLinks button{
+      min-width:0!important;
+      max-width:100%!important;
+      white-space:normal!important;
+      overflow-wrap:anywhere!important;
+    }
 
-    return selected.sort(
-      (a,b)=>Number(b[2])-Number(a[2])
-    );
-  }
+    .marketbtn,.termbtn,.maincta,.managebtn,.action,.allbtn,.navbtn{
+      min-width:0!important;
+      max-width:100%!important;
+      overflow-wrap:anywhere!important;
+    }
 
-  return mapped;
-}
-
-function rankColor(category){
-  if(category==="安定上昇") return "#0b73d9";
-  if(category==="成長株") return "#d9a400";
-  return "#c90035";
-}
-
-function enforceJapanBankCap(selected,pool,limit){
-  if(state.market!=="japan") return selected;
-
-  const out=selected.slice();
-  let bankCount=out.filter(isBankRow).length;
-
-  if(bankCount<=limit) return out;
-
-  const replacements=pool.filter(
-    x=>!isBankRow(x) && !out.some(y=>y[0]===x[0])
-  );
-
-  for(let i=out.length-1;i>=0 && bankCount>limit;i--){
-    if(!isBankRow(out[i])) continue;
-    const replacement=replacements.shift();
-    if(!replacement) break;
-    out[i]=replacement;
-    bankCount--;
-  }
-
-  return out;
-}
-
-function balancedTop10(arr){
-  const top20=arr.slice(0,20);
-  const selected=top20.slice(0,10);
-
-  const targetCategory=
-    state.market==="japan" ? "成長株" :
-    state.market==="usa" ? "安定上昇" : null;
-
-  if(targetCategory){
-    const minimum=3;
-    let current=selected.filter(x=>x[3]===targetCategory).length;
-
-    if(current<minimum){
-      const candidates=top20.slice(10).filter(
-        x=>x[3]===targetCategory && !selected.some(y=>y[0]===x[0])
-      );
-
-      for(const cand of candidates){
-        if(current>=minimum) break;
-
-        let swap=-1;
-        for(let i=selected.length-1;i>=0;i--){
-          if(selected[i][3]!==targetCategory){
-            swap=i;
-            break;
-          }
-        }
-
-        if(swap<0) break;
-        selected[swap]=cand;
-        current++;
+    @media(max-width:520px){
+      .app{
+        padding-left:8px!important;
+        padding-right:8px!important;
+      }
+      .header{
+        padding-left:52px!important;
+        padding-right:70px!important;
+      }
+      .logo{
+        font-size:21px!important;
+        white-space:nowrap!important;
+      }
+      .kicker{font-size:10px!important}
+      .marketbtn{font-size:13px!important}
+      .termbtn{font-size:11px!important}
+      .termbtn small{font-size:7px!important}
+      .rankhead{
+        align-items:flex-start!important;
+        gap:5px!important;
+      }
+      .rankhead h2{
+        min-width:0!important;
+        font-size:15px!important;
+        line-height:1.25!important;
+      }
+      .allbtn{
+        flex:0 0 auto!important;
+        padding:6px 7px!important;
+        font-size:8px!important;
+      }
+      .bottomnav .inner{
+        grid-template-columns:repeat(5,minmax(0,1fr))!important;
+      }
+      .navbtn{
+        padding-left:0!important;
+        padding-right:0!important;
+        font-size:7px!important;
+        overflow:hidden!important;
       }
     }
-  }
-
-  const capped=enforceJapanBankCap(selected,top20,3);
-
-  return capped.sort(
-    (a,b)=>Number(b[2])-Number(a[2])
-  );
+  `;
+  document.head.appendChild(style);
 }
 
-function decorateRanking(){
-  try{
-    const arr=DATA[state.market][state.term];
-    if(!Array.isArray(arr)) return;
+installEnglishIPhoneLayoutFix();
 
-    const shown=state.showAll ? arr.slice(0,20) : arr.slice(0,10);
-    const rows=document.querySelectorAll(
-      "#rankingTable .trow:not(.thead)"
-    );
-
-    rows.forEach((row,i)=>{
-      const item=shown[i];
-      if(!item) return;
-
-      const nameCell=row.querySelector(".sname");
-      const rankCell=row.querySelector(".rank");
-
-      if(!nameCell || !rankCell) return;
-
-      nameCell.textContent=item[1];
-      nameCell.style.whiteSpace="nowrap";
-      nameCell.style.overflow="hidden";
-      nameCell.style.textOverflow="ellipsis";
-      nameCell.style.lineHeight="normal";
-
-      rankCell.style.width="30px";
-      rankCell.style.height="30px";
-      rankCell.style.margin="0 auto";
-      rankCell.style.display="flex";
-      rankCell.style.alignItems="center";
-      rankCell.style.justifyContent="center";
-      rankCell.style.borderRadius="4px";
-      rankCell.style.background=rankColor(item[3] || "上昇期待");
-      rankCell.style.color="#fff";
-      rankCell.style.fontWeight="1000";
-      rankCell.style.lineHeight="1";
-    });
-
-  }catch(e){
-    console.log("classification display failed:",e);
-  }
-}
-
-function installRankingDecorator(){
-  if(typeof window.renderRanking!=="function") return;
-  if(window.renderRanking.__threeClassPatched) return;
-
-  const original=window.renderRanking;
-
-  const patched=function(){
-    const result=original.apply(this,arguments);
-    setTimeout(decorateRanking,0);
-    return result;
-  };
-
-  patched.__threeClassPatched=true;
-  window.renderRanking=patched;
-}
-
-async function updateDynamicRanking(){
-  try{
-    const r=await fetch(
-      REMOTE_DATA+"?t="+Date.now(),
-      {cache:"no-store"}
-    );
-
-    if(!r.ok){
-      throw new Error("HTTP "+r.status);
-    }
-
-    const j=await r.json();
-
-    if(!j || !j.japan || !j.usa){
-      throw new Error("ranking data invalid");
-    }
-
-    DATA.japan.short=convertRows(j.japan.short,"japan");
-    DATA.japan.mid=convertRows(j.japan.medium,"japan");
-    DATA.japan.long=convertRows(j.japan.long,"japan");
-
-    DATA.usa.short=convertRows(j.usa.short,"usa");
-    DATA.usa.mid=convertRows(j.usa.medium,"usa");
-    DATA.usa.long=convertRows(j.usa.long,"usa");
-
-    installRankingDecorator();
-
-    if(typeof renderRanking==="function"){
-      renderRanking();
-    }
-
-    setTimeout(decorateRanking,0);
-
-  }catch(e){
-    console.log("dynamic ranking update failed:",e);
-  }
-}
-
-if(document.readyState==="loading"){
-  document.addEventListener(
-    "DOMContentLoaded",
-    updateDynamicRanking
-  );
-}else{
-  updateDynamicRanking();
-}
+/* Keep the existing ranking function. main and english-version currently use
+   the same dynamic_rank.js blob, so loading the published copy preserves it. */
+const original=document.createElement("script");
+original.src="https://shu39a-lang.github.io/10x-stock-project/dynamic_rank.js?v=62";
+original.async=false;
+original.onerror=function(){
+  console.warn("Published dynamic ranking script could not be loaded.");
+};
+document.head.appendChild(original);
 
 })();
-

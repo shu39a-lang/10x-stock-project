@@ -46,8 +46,8 @@ workflows:
             "株数":"Shares","購入単価":"Buy Price","現在値":"Current Price","メモ":"Memo","任意":"Optional",
             "コードを入力すると会社名と現在値を確認します。":"Enter a ticker to load company name and current price.",
             "株価・会社情報を確認":"View Stock Info","入力をクリア":"Clear",
-            "割安性（20点）":"Value (20%)","品質・成長（25点）":"Quality & Growth (25%)","財務（20点）":"Financial Health (20%)",
-            "カタリスト（25点）":"Catalyst (25%)","テクニカル（10点）":"Technical (10%)","格付":"Grade",
+            "割安性（20点）":"Value (20 pts)","品質・成長（25点）":"Quality & Growth (25 pts)","財務（15点）":"Financial (15 pts)",
+            "カタリスト（15点）":"Catalyst (15 pts)","テクニカル（25点）":"Technical (25 pts)","格付":"Grade",
             "分析結果を保存":"Save Analysis","保有株として保存":"Save to Portfolio","お気に入り登録":"Add to Favorites",
             "分析履歴":"Analysis History","まだ分析履歴はありません。":"No analysis history yet.",
             "保有株管理":"My Portfolio","まだ保有株の登録はありません。":"No holdings yet.","お気に入りはまだありません。":"No favorites yet.",
@@ -274,6 +274,7 @@ workflows:
               for(const [a,b] of Object.entries(dict)) out=out.split(a).join(b);
               return out;
             }
+            window.__tenxEnglishTranslate=tr;
             function translateElement(el){
               if(!el || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(el.tagName)) return;
               for(const a of ["placeholder","title","aria-label"]){
@@ -305,10 +306,50 @@ workflows:
               if(hasJP(el.value)) el.value=tr(el.value);
             }),300);
           })();
+
+          </script>
+          """
+          # Final English-only display guard. Internal Japanese constants remain untouched.
+          guard = r"""
+          <script id="ENGLISH_VISIBLE_GUARD_V12">
+          (() => {
+            const jp=/[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]/;
+            const generic=[
+              [/格付/g,"Grade"],[/現在値/g,"Current Price"],[/会社名/g,"Company Name"],
+              [/銘柄名/g,"Company"],[/銘柄コード/g,"Ticker"],[/株数/g,"Shares"],
+              [/購入単価/g,"Buy Price"],[/分析結果/g,"Analysis Result"],
+              [/分析履歴/g,"Analysis History"],[/お気に入り/g,"Favorites"],
+              [/保有株/g,"Holdings"],[/設定・その他/g,"Settings & More"],
+              [/使い方ガイド/g,"User Guide"],[/買いタイミング診断/g,"Buy Timing Analysis"],
+              [/総合判断/g,"Overall Rating"],[/判断の理由/g,"Reason"],
+              [/総合スコア/g,"Overall Score"],[/日本株/g,"Japan Stocks"],[/米国株/g,"U.S. Stocks"],
+              [/短期/g,"Short Term"],[/中期/g,"Mid Term"],[/長期/g,"Long Term"],
+              [/上昇期待/g,"Upside"],[/安定上昇/g,"Steady"],[/成長株/g,"Growth"]
+            ];
+            function clean(x){
+              let y=x||"";
+              if(window.__tenxEnglishTranslate) y=window.__tenxEnglishTranslate(y);
+              for(const [a,b] of generic)y=y.replace(a,b);
+              return y;
+            }
+            function scan(){
+              document.querySelectorAll("body *").forEach(el=>{
+                if(/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(el.tagName))return;
+                if((el.tagName==="INPUT"||el.tagName==="TEXTAREA")&&jp.test(el.value||""))el.value=clean(el.value);
+                ["placeholder","title","aria-label"].forEach(a=>{
+                  const v=el.getAttribute?.(a); if(v&&jp.test(v))el.setAttribute(a,clean(v));
+                });
+                [...el.childNodes].filter(n=>n.nodeType===3&&jp.test(n.nodeValue||"")).forEach(n=>n.nodeValue=clean(n.nodeValue));
+              });
+            }
+            window.addEventListener("load",scan);
+            new MutationObserver(scan).observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+            setInterval(scan,500);
+          })();
           </script>
           """
           if "</body>" not in s: raise SystemExit("STOP: </body> missing")
-          s=s.replace("</body>",universal+"\n</body>",1)
+          s=s.replace("</body>",universal+"\n"+guard+"\n</body>",1)
 
           p.write_text(s,encoding="utf-8")
           PY

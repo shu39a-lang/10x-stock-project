@@ -40,6 +40,44 @@ workflows:
           s=p.read_text(encoding="utf-8")
           s=s.replace('<html lang="ja">','<html lang="en">',1)
 
+          # Direct English source-text conversion for the English build only.
+          direct_ui = {
+            "銘柄を確認・入力して分析":"Check & Analyze a Stock","市場":"Market","銘柄コード":"Ticker","会社名":"Company Name",
+            "株数":"Shares","購入単価":"Buy Price","現在値":"Current Price","メモ":"Memo","任意":"Optional",
+            "コードを入力すると会社名と現在値を確認します。":"Enter a ticker to load company name and current price.",
+            "株価・会社情報を確認":"View Stock Info","入力をクリア":"Clear",
+            "割安性（20点）":"Value (20%)","品質・成長（25点）":"Quality & Growth (25%)","財務（20点）":"Financial Health (20%)",
+            "カタリスト（25点）":"Catalyst (25%)","テクニカル（10点）":"Technical (10%)","格付":"Grade",
+            "分析結果を保存":"Save Analysis","保有株として保存":"Save to Portfolio","お気に入り登録":"Add to Favorites",
+            "分析履歴":"Analysis History","まだ分析履歴はありません。":"No analysis history yet.",
+            "保有株管理":"My Portfolio","まだ保有株の登録はありません。":"No holdings yet.","お気に入りはまだありません。":"No favorites yet.",
+            "設定・その他":"Settings & More","バックアップを保存":"Save Backup","バックアップから復元":"Restore from Backup",
+            "分析履歴を消去":"Clear Analysis History","全保存データを消去":"Delete All Data","ホームへ戻る":"Back to Home",
+            "10X STOCK ZEROの分析について":"About 10X STOCK ZERO","主な5つの分析項目":"Five Key Analysis Factors",
+            "企業の質・成長性 25%":"Quality & Growth 25%","テクニカル分析 25%":"Technical Analysis 25%",
+            "割安性 20%":"Valuation 20%","財務安全性 15%":"Financial Health 15%","成長材料 15%":"Growth Potential 15%",
+            "法務・サポート":"Legal & Support","プライバシーポリシー":"Privacy Policy","利用規約":"Terms of Use","サポート":"Support",
+            "使い方ガイド":"User Guide","1. 市場と期間を選ぶ":"1. Select a Market and Term","2. TOP10を見る":"2. View the TOP10 Ranking",
+            "3. TOP10の更新時間":"3. Check Update Times","順位":"Rank","コード":"Ticker","銘柄名":"Company","スコア":"Score",
+            "日本株":"Japan Stocks","米国株":"U.S. Stocks","短期":"Short Term","中期":"Mid Term","長期":"Long Term",
+            "上昇期待":"Upside Potential","安定上昇":"Steady Growth","成長株":"Growth Stock",
+            "買いタイミング診断":"Buy Timing Analysis","診断する":"Analyze","総合判断":"Overall Rating","判断の理由":"Reason",
+            "総合スコア":"Overall Score","総合":"Overall","テクニカル":"Technical","トレンド":"Trend","様子見":"Wait","慎重":"Caution",
+            "トヨタ自動車":"Toyota Motor","出光興産":"Idemitsu Kosan","ＥＮＥＯＳホールディングス":"ENEOS Holdings",
+            "伊藤忠商事":"Itochu","三井物産":"Mitsui & Co.","住友商事":"Sumitomo Corporation","丸紅":"Marubeni","富士通":"Fujitsu",
+            "カプコン":"Capcom","商船三井":"Mitsui O.S.K. Lines","ヌー・ホールディングス":"Nu Holdings","シェル":"Shell",
+            "シェブロン":"Chevron","クラウドストライク・ホールディングス":"CrowdStrike Holdings","メドトロニック":"Medtronic",
+            "台湾積体電路製造（TSMC）":"Taiwan Semiconductor (TSMC)","ペトロブラス":"Petrobras","エクソンモービル":"Exxon Mobil",
+            "コノコフィリップス":"ConocoPhillips",
+            "ホーム画面で「Japan Stocks」または「U.S. Stocks」を選び、投資期間を選択します。":"On the Home screen, choose Japan Stocks or U.S. Stocks, then select an investment term.",
+            "選択した市場と期間に合わせて、TOP10が切り替わります。":"The TOP10 ranking changes according to the selected market and term.",
+            "TOP10には、銘柄コード・銘柄名・総合スコア・格付が表示されます。":"TOP10 shows the ticker, company name, overall score, and grade.",
+            "順位左側の色は、銘柄の特徴を示しています。":"The color beside each rank indicates the stock's characteristics.",
+            "データは、原則として日本時間の次の時刻に更新されます。":"Data is generally updated at the following times (Japan time)."
+          }
+          for old,new in sorted(direct_ui.items(), key=lambda kv: len(kv[0]), reverse=True):
+              s=s.replace(old,new)
+
           # Convert all user-facing market links from Japanese destinations to English destinations.
           url_map={
             "https://finance.yahoo.co.jp/stocks/ranking/up?market=all":"https://www.tradingview.com/markets/stocks-japan/market-movers-gainers/",

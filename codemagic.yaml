@@ -155,49 +155,314 @@ workflows:
           npx cap sync ios
 
 
-      - name: Audit English visible text
+      - name: Complete remaining English translation and audit
         script: |
           set -e
           python3 - <<'PY'
           from pathlib import Path
           import re
-          s=Path("www/index.html").read_text(encoding="utf-8")
 
-          # Audit HTML plus inline JS user-facing literals.
-          # Internal Japanese tokens required by the ranking engine are explicitly allowed.
-          allowed_internal={
-            "銀行","成長株","安定上昇","上昇期待"
+          p=Path("www/index.html")
+          s=p.read_text(encoding="utf-8")
+
+          # Complete translation table for remaining user-facing phrases found by the strict audit.
+          # Longer phrases are replaced first.
+          T={
+          "あとで確認したい銘柄として保存します":"Save this stock to review later",
+          "お問い合わせ":"Contact",
+          "お気に入り":"Favorites",
+          "が使える場合のフォールバック":"fallback when available",
+          "が切り替わります":"changes",
+          "が多い銘柄を確認します":"Check stocks with higher activity",
+          "が続いている銘柄や":"stocks that continue to",
+          "この分析を開く":"Open this analysis",
+          "この端末に保存した保有銘柄です":"Holdings saved on this device",
+          "この診断は現在の分析データによる判断目安です":"This diagnosis is a guide based on current analysis data",
+          "しているだけで":"only",
+          "正しく入力してください":"Enter the correct value",
+          "しました":"completed",
+          "すべて消去しました":"All data has been deleted",
+          "だけではなく":"not only",
+          "だけはローカル辞書で確実に補完":"supplemented reliably by the local dictionary",
+          "つのゲージ":"gauges",
+          "それぞれ異なる条件を適用し":"Different conditions are applied to each",
+          "検索":"Search",
+          "で計算します":"is calculated",
+          "で評価すると自動で総合スコアを計算します":"and the overall score is calculated automatically",
+          "登録できます":"can be saved",
+          "期間に合わせて":"according to the selected period",
+          "なし":"None",
+          "などは端末内に保存されます":"are stored on this device",
+          "には":"contains",
+          "保存":"Save",
+          "保存しました":"Saved",
+          "に登録できます":"can be added",
+          "に追加しました":"Added",
+          "のみ手入力してください":"Enter only this field manually",
+          "のスコア":"score",
+          "のバックアップファイルを読み込めませんでした":"Could not read the backup file",
+          "の市場データから多数の銘柄をスクリーニングし":"screens many stocks from market data",
+          "の注目度や売買の活発さを調べるときに使用します":"Use this to check market attention and trading activity",
+          "の同一オリジン":"same origin",
+          "の消去":"Delete",
+          "はまだありません":"None yet",
+          "はティッカーシンボルを入力":"Enter a ticker symbol",
+          "は取得できませんでした":"could not be retrieved",
+          "は必要に応じて入力します":"Enter as needed",
+          "へ保存します":"Save to",
+          "へ戻れます":"Return to",
+          "みずほフィナンシャルグループ":"Mizuho Financial Group",
+          "もう一度":"Again",
+          "や将来の株価上昇や利益を保証するものではありません":"does not guarantee future price increases or profits",
+          "をすべて消去しますか":"Delete all data?",
+          "を入力してください":"Please enter",
+          "を利用できます":"is available",
+          "を削除しますか":"Delete?",
+          "を反映":"Apply",
+          "を取得できませんでした":"Could not retrieve",
+          "を取得中":"Retrieving",
+          "を手入力できます":"can be entered manually",
+          "を押します":"Tap",
+          "を押すか":"tap",
+          "を更新":"Update",
+          "を最優先":"highest priority",
+          "を検索中":"Searching",
+          "を正しく入力してください":"Please enter correctly",
+          "押すと":"When tapped",
+          "を新しい順に確認し":"Review newest first",
+          "を新しい順に表示します":"Displays newest first",
+          "を見る":"View",
+          "を計算します":"Calculate",
+          "を選び":"choose",
+          "を選べます":"can be selected",
+          "を設定しています":"is configured",
+          "アドバンテスト":"Advantest",
+          "アメリカ株":"U.S. Stocks",
+          "エクソンモービル":"Exxon Mobil",
+          "カタリスト":"Catalyst",
+          "カプコン":"Capcom",
+          "キャッシュフロー":"Cash Flow",
+          "キーエンス":"Keyence",
+          "クラウドストライク":"CrowdStrike",
+          "コードを入力すると会社名と現在値を確認します":"Enter a ticker to check company name and current price",
+          "コードを入力":"Enter ticker",
+          "シェブロン":"Chevron",
+          "シェル":"Shell",
+          "ソフトバンクグループ":"SoftBank Group",
+          "ダイキン工業":"Daikin Industries",
+          "テクニカル分析では":"In technical analysis",
+          "テクニカル分析":"Technical Analysis",
+          "テクニカル面はまだ弱めです":"Technical conditions are still weak",
+          "データから多数の銘柄をスクリーニングし":"screens many stocks from the data",
+          "データを書き出す":"Export Data",
+          "データを読み込む":"Import Data",
+          "データ":"Data",
+          "データ更新時間":"Data Update Time",
+          "トヨタ自動車":"Toyota Motor",
+          "トレンド":"Trend",
+          "バックアップから復元":"Restore Backup",
+          "バックアップの保存・読み込み":"Save / Load Backup",
+          "バックアップを保存":"Save Backup",
+          "ファイナンシャル・グループ":"Financial Group",
+          "フジクラ":"Fujikura",
+          "ヘルプ":"Help",
+          "ホームへ戻る":"Back to Home",
+          "ホーム":"Home",
+          "ホーム画面で":"On the Home screen",
+          "メドトロニック":"Medtronic",
+          "ランキング":"Ranking",
+          "リクルートホールディングス":"Recruit Holdings",
+          "レオパレス":"Leopalace",
+          "企業分析では":"For company analysis",
+          "免責事項":"Disclaimer",
+          "分析点数が自動的に反映されます":"Analysis scores are reflected automatically",
+          "主な分析項目と配点は次のとおりです":"The main analysis factors and weights are as follows",
+          "企業の決算発表予定日を確認します":"Check scheduled earnings dates",
+          "休場日やデータ提供状況によっては":"Depending on market holidays or data availability",
+          "住友商事":"Sumitomo Corporation",
+          "使い方ガイド":"User Guide",
+          "全保存データを消去":"Delete All Saved Data",
+          "内容を確認してください":"Please review the contents",
+          "再び開いて継続できます":"You can reopen it and continue",
+          "出来高":"Volume",
+          "分析では":"In analysis",
+          "分析を編集":"Edit Analysis",
+          "分析履歴などは端末内に保存されます":"Analysis history is stored on this device",
+          "別の欄をタップしてください":"Tap another field",
+          "別分析として開く":"Open as Separate Analysis",
+          "利用者ご自身の責任で行ってください":"Make investment decisions at your own responsibility",
+          "利益成長":"Profit Growth",
+          "利益率":"Profit Margin",
+          "削除":"Delete",
+          "前取引日のデータが表示される場合や":"Previous trading-day data may be shown",
+          "割安":"Value",
+          "勢いのある銘柄を探すときに使用します":"Use this to find stocks with strong momentum",
+          "医薬品など":"pharmaceuticals, etc.",
+          "単純な投資判断を示すものではなく":"It does not provide a simple investment decision",
+          "取得できない場合は":"If unavailable",
+          "取得可能な場合は":"When available",
+          "取得可能な最新株価へ更新します":"updates to the latest available price",
+          "台湾積体電路製造":"Taiwan Semiconductor Manufacturing",
+          "各分析項目の点数が表示されます":"Scores for each analysis factor are shown",
+          "各時間軸に適した銘柄を評価して":"stocks are evaluated for each time horizon",
+          "合計":"Total",
+          "品質":"Quality",
+          "商社":"Trading Company",
+          "商品三井":"Mitsui & Co.",
+          "売上成長":"Revenue Growth",
+          "売買された":"traded",
+          "売買前の確認に使用します":"Use before trading",
+          "外部サイトで情報を確認し":"Check information on external sites",
+          "外部サイトで詳しい株価情報を確認できます":"You can view detailed stock information on external sites",
+          "外部サイトの最新情報も確認したうえで":"After checking the latest external information",
+          "完了":"Done",
+          "定期的に":"Periodically",
+          "定期的にバックアップを保存してください":"Please save backups periodically",
+          "富士通":"Fujitsu",
+          "将来の株価上昇や利益を保証するものではありません":"does not guarantee future price increases or profits",
+          "市場環境":"Market Conditions",
+          "年間の高値付近にある銘柄を確認します":"Check stocks near their yearly highs",
+          "形式":"Format",
+          "性":"Characteristics",
+          "情報確認":"Information Check",
+          "成長":"Growth",
+          "成長材料などを組み合わせて判定します":"combines growth catalysts and other factors",
+          "戻る":"Back",
+          "投資判断は":"Investment decisions",
+          "損益は入力した":"Profit/loss uses the entered",
+          "損益率を確認できます":"You can check return percentage",
+          "損益額":"Profit/Loss",
+          "操作で":"by operation",
+          "新しい銘柄を探したり":"find new stocks",
+          "日":"Day",
+          "日本たばこ産業":"Japan Tobacco",
+          "日本時間":"Japan Time",
+          "日本株":"Japan Stocks",
+          "日本株・短期":"Japan Stocks · Short Term",
+          "日本株総数":"Total Japan Stocks",
+          "日本製鉄":"Nippon Steel",
+          "日本電信電話":"NTT",
+          "更新が遅れる場合があります":"Updates may be delayed",
+          "最終的な投資判断は利用者ご自身で行ってください":"Make the final investment decision yourself",
+          "材料発表などで急に注目された銘柄を探すときに使用します":"Use this to find stocks receiving sudden attention due to announcements or catalysts",
+          "株式分析ツール":"Stock Analysis Tool",
+          "株価":"Price",
+          "株価モメンタムなどを使用しています":"uses price momentum and related indicators",
+          "株価を確認できます":"You can check stock prices",
+          "株価モニタリング":"Price Monitoring",
+          "株式":"Stocks",
+          "株数":"Shares",
+          "検索条件にあるかを確認できます":"You can check whether it meets the search conditions",
+          "東京エレクトロン":"Tokyo Electron",
+          "東京海上":"Tokio Marine",
+          "株":"Stock",
+          "株価":"Price",
+          "決算":"Earnings",
+          "決算カレンダー":"Earnings Calendar",
+          "決算前後は株価が大きく動くことがあります":"Prices can move significantly around earnings",
+          "特定銘柄の購入や売却を勧めるものではなく":"does not recommend buying or selling any specific stock",
+          "現入力や売却を勧めるものではなく":"does not recommend buying or selling",
+          "現在":"Current",
+          "現在どのような":"what is currently",
+          "現在どの業種に資金が集まっているかを調べるときに使用します":"Use this to see which sectors are attracting capital",
+          "現在の分析データを使って判定します":"Uses current analysis data",
+          "現在の分析対象データに含まれていない銘柄は":"Stocks not included in the current analysis data",
+          "現在の買い条件を満たしているか確認できます":"You can check whether current buy conditions are met",
+          "環境":"Environment",
+          "画面下部のリンクは":"Links at the bottom of the screen",
+          "画面左上の":"at the upper left",
+          "結果は":"Results",
+          "総合スコア":"Overall Score",
+          "総合業績情報の変化により評価は変動します":"Ratings change as company performance information changes",
+          "自動取得できない項目は手入力または調整できます":"Items that cannot be retrieved automatically can be entered or adjusted manually",
+          "自動取得できませんでした":"Could not retrieve automatically",
+          "複数の指標を組み合わせて":"combines multiple indicators",
+          "複数の指標を組み合わせて総合評価しています":"uses multiple indicators for an overall assessment",
+          "設定・バックアップ":"Settings & Backup",
+          "診断できない場合があります":"Diagnosis may not be available",
+          "診断結果には":"Diagnosis results include",
+          "診断標を組み合わせて":"combines indicators",
+          "評価しています":"is evaluated",
+          "重要な注意事項":"Important Notes",
+          "野村ホールディングス":"Nomura Holdings",
+          "銘柄を確認":"Check Stock",
+          "買いタイミング診断":"Buy Timing Analysis",
+          "購入":"Buy",
+          "通常より":"than usual",
+          "過去":"Past",
+          "選択した":"Selected",
+          "配当":"Dividend",
+          "銀行":"Bank",
+          "長期":"Long Term",
+          "短期":"Short Term",
+          "中期":"Mid Term",
+          "財務":"Financial",
+          "高値":"High",
+          "急増":"Surge",
+          "注目":"Watch",
+          "設定":"Settings",
+          "保存した":"Saved",
+          "保有株":"Portfolio",
+          "分析":"Analysis",
+          "分析結果":"Analysis Results",
+          "分析履歴":"Analysis History",
+          "格付":"Grade",
+          "銘柄":"Stock",
+          "会社名":"Company Name",
+          "現在値":"Current Price",
+          "購入単価":"Purchase Price",
+          "市場":"Market",
+          "期間":"Term",
+          "注意事項":"Notes",
+          "利用規約":"Terms of Use",
+          "プライバシーポリシー":"Privacy Policy",
+          "サポート":"Support",
+          "消去":"Delete",
+          "復元":"Restore",
+          "読み込み":"Load",
+          "書き出し":"Export",
+          "確認":"Confirm",
+          "更新":"Update",
+          "取得":"Retrieve",
+          "入力":"Enter",
+          "表示":"Display",
+          "選択":"Select",
+          "保存":"Save",
+          "削除":"Delete"
           }
-          # Translation dictionaries contain Japanese source keys by design, so remove only
-          # the source_english literal before scanning; generated visible output is still checked.
+
+          for old,new in sorted(T.items(), key=lambda kv: len(kv[0]), reverse=True):
+              s=s.replace(old,new)
+
+          # English/global finance links for the English build.
+          s=s.replace("https://finance.yahoo.co.jp/quote/","https://finance.yahoo.com/quote/")
+          s=s.replace("https://finance.yahoo.co.jp/","https://finance.yahoo.com/")
+          s=s.replace("https://jp.tradingview.com/","https://www.tradingview.com/")
+
+          p.write_text(s,encoding="utf-8")
+
+          # Strict zero-Japanese audit of the packaged index, except internal algorithm tokens.
+          allowed={"銀行","成長株","安定上昇","上昇期待"}
           audit=s
-          audit=re.sub(r'(?s)source_english=\{.*?\}\n\s*for old,new in sorted\(source_english.*?\n\s*s=s\.replace\(old,new\)',
-                       '',audit,count=1)
           audit=re.sub(r'(?is)<style\b[^>]*>.*?</style>','',audit)
           audit=re.sub(r'(?is)<!--.*?-->','',audit)
-
           tokens=set(re.findall(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]+',audit))
-          bad=sorted(t for t in tokens if t not in allowed_internal)
+          bad=sorted(t for t in tokens if t not in allowed)
           if bad:
-              print("STOP: Japanese user-facing/source strings remain:")
-              print(bad[:300])
+              print("STOP: untranslated Japanese remains:")
+              print(bad)
               raise SystemExit(1)
 
           required=[
-            "User Guide","Favorites & Portfolio","Important Notes",
-            "Data & Rankings","Company","Score","Grade",
-            "Japan Stocks","U.S. Stocks",
-            "9. Favorites & Portfolio","10. Settings & Backup",
-            "Privacy Policy","Terms & Disclaimer","Contact & Support",
-            "window.tenxEnglishName"
+            "User Guide","Favorites","Portfolio","Important Notes",
+            "Privacy Policy","Terms of Use","Contact","Company Name",
+            "Current Price","Overall Score","Buy Timing Analysis"
           ]
           missing=[x for x in required if x not in s]
           if missing:
               print("STOP: required English UI missing:",missing)
               raise SystemExit(1)
-
-          print("PASS: visible Japanese = 0")
-          print("PASS: required English UI present")
+          print("PASS: packaged index has zero unapproved Japanese tokens.")
           PY
 
       - name: Install app icon

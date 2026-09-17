@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-17 21:14 JST",
+  "updated_at": "2026-09-17 21:27 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -9884,7 +9884,7 @@
         "name": "RF（米国上場企業）",
         "code": "RF",
         "price": 28.47,
-        "valuation": 60.7,
+        "valuation": 60.9,
         "quality": 58.6,
         "financial": 51.4,
         "technical": 39.6,
@@ -10384,7 +10384,7 @@
         "name": "ENPH（米国上場企業）",
         "code": "ENPH",
         "price": 35.56,
-        "valuation": 55.0,
+        "valuation": 55.3,
         "quality": 47.4,
         "financial": 60.4,
         "technical": 45.0,

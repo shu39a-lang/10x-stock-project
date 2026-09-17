@@ -234,6 +234,82 @@ workflows:
           </script>
           """
           s=s.replace("</head>",layer+"\n</head>",1)
+
+          universal = r"""
+          <script id="ENGLISH_VISIBLE_TEXT_V10">
+          (() => {
+            const dict = {
+              "現在値":"Current Price","会社名・現在値を検索中…":"Searching company name and current price…",
+              "コードを入力すると会社名と現在値を確認します。":"Enter a ticker to load company name and current price.",
+              "自動取得できませんでした。会社名と現在値を手入力できます。":"Automatic lookup failed. You can enter the company name and current price manually.",
+              "有力":"Strong","注目":"Watch","銀行":"Banking","商社":"Trading Companies","金融・証券":"Financials",
+              "AI・データセンター":"AI & Data Centers","その他":"Other","電線・電力インフラ":"Power & Infrastructure",
+              "レオパレス２１":"Leopalace21","伊藤忠商事":"Itochu","豊和工業":"Howa Machinery","住友商事":"Sumitomo Corporation",
+              "カプコン":"Capcom","日立製作所":"Hitachi","ＮＴＴ":"NTT","丸紅":"Marubeni","商船三井":"Mitsui O.S.K. Lines",
+              "富士通":"Fujitsu","三菱重工業":"Mitsubishi Heavy Industries","東京海上HD":"Tokio Marine Holdings",
+              "日本たばこ産業":"Japan Tobacco","三菱UFJフィナンシャル・グループ":"Mitsubishi UFJ Financial Group",
+              "日本製鉄":"Nippon Steel","野村ホールディングス":"Nomura Holdings","ＳＯＭＰＯホールディングス":"SOMPO Holdings",
+              "武田薬品工業":"Takeda Pharmaceutical","みずほフィナンシャルグループ":"Mizuho Financial Group","ニデック":"Nidec",
+              "出光興産":"Idemitsu Kosan","ＥＮＥＯＳホールディングス":"ENEOS Holdings","三井物産":"Mitsui & Co.",
+              "三菱商事":"Mitsubishi Corporation","トヨタ自動車":"Toyota Motor","ソニーグループ":"Sony Group",
+              "任天堂":"Nintendo","キーエンス":"Keyence","信越化学工業":"Shin-Etsu Chemical","ダイキン工業":"Daikin Industries",
+              "アドバンテスト":"Advantest","東京エレクトロン":"Tokyo Electron","フジクラ":"Fujikura",
+              "ソフトバンクグループ":"SoftBank Group","ヌー・ホールディングス":"Nu Holdings","シェル":"Shell",
+              "シェブロン":"Chevron","デル・テクノロジーズ":"Dell Technologies","ペトロブラス":"Petrobras",
+              "エクソンモービル":"Exxon Mobil","コノコフィリップス":"ConocoPhillips"
+            };
+            const phrases = [
+              [" ｜ 現在値 "," | Current Price "],
+              [" を確認しました。現在値は取得できませんでした。"," confirmed. Current price could not be retrieved."],
+              ["TOP10や分析画面で登録した銘柄を一覧で確認できます。気になる銘柄を継続して確認するときに使用します。","View stocks saved from the TOP10 or Analysis screen and continue monitoring stocks of interest."],
+              ["Holdingsの株数、購入単価、現在値、損益額、損益率を確認できます。「現在値を反映」を押すと、取得可能な最新株価へ更新します。取得できない場合は現在値を手入力できます。","View shares, purchase price, current price, profit/loss, and return for your holdings. Tap Update Current Price to load the latest available price. If unavailable, enter it manually."],
+              ["Holdings、Favorites、Analysis Historyなどは端末内に保存されます。機種変更や再インストールに備え、定期的にバックアップを保存してください。","Holdings, Favorites, and Analysis History are stored on this device. Save backups regularly in case you change devices or reinstall the app."],
+              ["10X STOCK ZEROのスコア、買いタイミング診断は、株式分析を補助するための判断目安です。特定銘柄の購入や売却を勧めるものではなく、将来の株価上昇や利益を保証するものではありません。","10X STOCK ZERO scores and Buy Timing Analysis are reference tools for stock analysis. They do not recommend buying or selling any specific stock and do not guarantee future price increases or profits."],
+              ["市場環境、決算、ニュース、為替などによって評価や株価は変動します。最終的な投資判断は、外部サイトの最新情報も確認したうえで、利用者ご自身の責任で行ってください。","Scores and prices may change with market conditions, earnings, news, exchange rates, and other factors. Make investment decisions using your own judgment after checking current external information."]
+            ];
+            const hasJP=s=>/[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]/.test(s||"");
+            function tr(s){
+              let out=s||"";
+              for(const [a,b] of phrases) out=out.split(a).join(b);
+              for(const [a,b] of Object.entries(dict)) out=out.split(a).join(b);
+              return out;
+            }
+            function translateElement(el){
+              if(!el || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(el.tagName)) return;
+              for(const a of ["placeholder","title","aria-label"]){
+                const v=el.getAttribute?.(a); if(v&&hasJP(v)) el.setAttribute(a,tr(v));
+              }
+              if((el.tagName==="INPUT"||el.tagName==="TEXTAREA")&&hasJP(el.value)) el.value=tr(el.value);
+            }
+            function walk(root){
+              if(root.nodeType===3){ if(hasJP(root.nodeValue)) root.nodeValue=tr(root.nodeValue); return; }
+              if(root.nodeType!==1) return;
+              translateElement(root);
+              const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); let n;
+              while(n=w.nextNode()){
+                const p=n.parentElement;
+                if(p&&!/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(p.tagName)&&hasJP(n.nodeValue)) n.nodeValue=tr(n.nodeValue);
+              }
+              root.querySelectorAll("input,textarea,button,option,[title],[aria-label]").forEach(translateElement);
+            }
+            function run(){ walk(document.body); }
+            if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",run); else run();
+            new MutationObserver(ms=>ms.forEach(m=>{
+              if(m.type==="characterData"){
+                const p=m.target.parentElement;
+                if(p&&!/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(p.tagName)&&hasJP(m.target.nodeValue)) m.target.nodeValue=tr(m.target.nodeValue);
+              }
+              m.addedNodes.forEach(walk);
+            })).observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+            setInterval(()=>document.querySelectorAll("input,textarea").forEach(el=>{
+              if(hasJP(el.value)) el.value=tr(el.value);
+            }),300);
+          })();
+          </script>
+          """
+          if "</body>" not in s: raise SystemExit("STOP: </body> missing")
+          s=s.replace("</body>",universal+"\n</body>",1)
+
           p.write_text(s,encoding="utf-8")
           PY
 

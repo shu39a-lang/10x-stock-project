@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-17 20:46 JST",
+  "updated_at": "2026-09-17 21:14 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -8294,7 +8294,7 @@
         "name": "NKE（米国上場企業）",
         "code": "NKE",
         "price": 35.78,
-        "valuation": 61.6,
+        "valuation": 61.7,
         "quality": 64.1,
         "financial": 56.5,
         "technical": 28.9,
@@ -8324,7 +8324,7 @@
         "name": "ニューモント",
         "code": "NEM",
         "price": 121.76,
-        "valuation": 58.2,
+        "valuation": 58.3,
         "quality": 71.1,
         "financial": 62.3,
         "technical": 47.7,
@@ -9111,7 +9111,7 @@
         "catalyst": 65.5
       },
       {
-        "name": "Apple",
+        "name": "HP (企業)",
         "code": "CTVA",
         "price": 81.01,
         "valuation": 52.8,
@@ -9294,7 +9294,7 @@
         "name": "CARR（米国上場企業）",
         "code": "CARR",
         "price": 54.26,
-        "valuation": 52.6,
+        "valuation": 52.8,
         "quality": 48.9,
         "financial": 51.0,
         "technical": 34.9,
@@ -9954,7 +9954,7 @@
         "name": "ONON（米国上場企業）",
         "code": "ONON",
         "price": 27.15,
-        "valuation": 60.6,
+        "valuation": 60.5,
         "quality": 60.9,
         "financial": 62.3,
         "technical": 37.9,

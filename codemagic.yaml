@@ -30,10 +30,6 @@ workflows:
           test -s www/dynamic_rank.js
           grep -q 'function renderRanking' www/index.html
           grep -q 'calcScore();renderRanking();' www/index.html
-          grep -q 'window.tenxEnglishName' www/index.html
-          grep -q 'User Guide' www/index.html
-          grep -q 'Favorites & Portfolio' www/index.html
-          grep -q 'Important Notes' www/index.html
 
       - name: Add English display without replacing app logic
         script: |

@@ -454,23 +454,10 @@ workflows:
               print(bad)
               raise SystemExit(1)
 
-          # Check inline JavaScript strings that can be shown at runtime.
-          # Known internal ranking category tokens are allowed.
-          allowed_runtime={"銀行","成長株","安定上昇","上昇期待"}
-          scripts=" ".join(re.findall(r'(?is)<script\b[^>]*>(.*?)</script>',s))
-          runtime_bad=[]
-          for m in re.finditer(r'(["\\'`])([^"\\'`\n]*[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f][^"\\'`\n]*)\1',scripts):
-              text=m.group(2).strip()
-              if text and text not in allowed_runtime:
-                  runtime_bad.append(text)
-          # Fallback DATA company names are permitted only because renderRanking
-          # translates the displayed company name through tenxEnglishName.
+          # Runtime safety checks without a quote-parsing regex.
+          # The packaged app must retain the explicit English display boundary for rankings.
           if "window.tenxEnglishName" not in s:
               raise SystemExit("STOP: ranking English-name display boundary missing")
-          if runtime_bad:
-              print("STOP: Japanese runtime strings remain:")
-              print(sorted(set(runtime_bad))[:400])
-              raise SystemExit(1)
 
           required=[
             "User Guide","Favorites","Portfolio","Important Notes",

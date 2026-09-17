@@ -499,6 +499,22 @@ workflows:
           "丸紅":"Marubeni",
           "企業":"Company"
           })
+          T.update({
+          "が":" ",
+          "し":" ",
+          "した":" ",
+          "で":" ",
+          "と":" ",
+          "の":" ",
+          "の動きを":" movement ",
+          "は":" ",
+          "や":" and ",
+          "やは":" and ",
+          "を":" ",
+          "外部サイトを":" external site ",
+          "当":" current ",
+          "翌印を":" mark "
+          })
           for old,new in sorted(T.items(), key=lambda kv: len(kv[0]), reverse=True):
               s=s.replace(old,new)
 

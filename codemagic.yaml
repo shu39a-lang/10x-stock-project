@@ -123,7 +123,12 @@ workflows:
               ["伊藤忠商事","Itochu"],["ＫＤＤＩ","KDDI"],["KDDI","KDDI"],["ＩＮＰＥＸ","INPEX"],["INPEX","INPEX"],
               ["三井物産","Mitsui & Co."],["デル・テクノロジーズ","Dell Technologies"],["S&P トロント総合指数","S&P/TSX Composite"],
               ["ハスキー・エナジー","Husky Energy"],["ペトロブラス","Petrobras"],["エクソンモービル","Exxon Mobil"],
-              ["コノコフィリップス","ConocoPhillips"],["台湾積体電路製造（TSMC）","Taiwan Semiconductor (TSMC)"]
+              ["コノコフィリップス","ConocoPhillips"],["台湾積体電路製造（TSMC）","Taiwan Semiconductor (TSMC)"],
+              ["ヌー・ホールディングス","Nu Holdings"],["シェル","Shell"],["シェブロン","Chevron"],["クラウドストライク・ホールディングス","CrowdStrike Holdings"],["メドトロニック","Medtronic"],
+              ["レオパレス２１","Leopalace21"],["レオパレス21","Leopalace21"],["豊和工業","Howa Machinery"],["住友商事","Sumitomo Corporation"],["カプコン","Capcom"],["丸紅","Marubeni"],["商船三井","Mitsui O.S.K. Lines"],["富士通","Fujitsu"],
+              ["この端末に保存した保有銘柄です。損益は入力した現在値で計算します。","Manage your holdings saved on this device."],
+              ["まだ保有株の登録はありません。","No holdings yet."],["お気に入りはまだありません。","No favorites yet."],
+              ["保有株から登録した銘柄です。","Stocks you have added to Favorites."],["やHoldingsから登録した銘柄です。","Stocks you have added to Favorites."]
             ]);
             const phrase = [
               ["◎ 選択中：","◎ Selected: "],
@@ -139,7 +144,23 @@ workflows:
               ["財務評価には確認余地があります。","Financial metrics require further review."],
               ["10X STOCK ZEROは、Japan Stocks・U.S. Stocksの市場データから多数の銘柄をスクリーニングし、流動性を考慮したうえで、複数の指標を組み合わせて総合評価しています。","10X STOCK ZERO screens many stocks using Japan and U.S. market data, considers liquidity, and combines multiple indicators to produce an overall evaluation."],
               ["テクニカル分析では、20日・50日・200日移動平均、RSI、MACD、出来高、株価モメンタムなどを使用しています。財務・企業分析では、PER、PBR、PSR、売上成長、利益成長、ROE、利益率、キャッシュフロー、負債水準などを参考にしています。","Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI, MACD, volume, and price momentum. Financial and company analysis references PER, PBR, PSR, revenue growth, profit growth, ROE, profit margin, cash flow, and debt levels."],
-              ["Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、各期間別に適した銘柄を評価してTOP10を選定しています。","Different criteria are applied to Short Term, Mid Term, and Long Term, and TOP10 stocks are selected for each period."]
+              ["Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、各期間別に適した銘柄を評価してTOP10を選定しています。","Different criteria are applied to Short Term, Mid Term, and Long Term, and TOP10 stocks are selected for each period."],
+              ["企業の質・成長性も高く評価されています。","Quality and growth are also rated highly."],
+              ["1. 市場と期間を選ぶ","1. Select a Market and Term"],
+              ["ホーム画面で「Japan Stocks」または「U.S. Stocks」を選び、投資期間を選択します。","Choose either Japan Stocks or U.S. Stocks on the Home screen, then select the investment term."],
+              ["Short Term：6か月以内","Short Term: Up to 6 months"],["Mid Term：6か月〜1年","Mid Term: 6–12 months"],["Long Term：1年以上","Long Term: 1+ year"],
+              ["選択した市場と期間に合わせて、TOP10が切り替わります。","The TOP10 ranking changes according to the selected market and term."],
+              ["2. TOP10を見る","2. View the TOP10 Ranking"],
+              ["TOP10には、銘柄コード・銘柄名・総合スコア・格付が表示されます。","TOP10 shows the ticker, company name, overall score, and grade."],
+              ["「11〜20位を見る」を押すと20位まで表示でき、「TOP10に戻る」を押すと元に戻ります。","Tap View 11–20 to show ranks 11–20, and Back to TOP10 to return."],
+              ["順位左側の色は、銘柄の特徴を示しています。","Rank colors indicate the stock’s characteristics."],
+              ["赤：Upside Potential","Red: Upside Potential"],["青：Steady Growth","Blue: Steady Growth"],["黄：Growth Stock","Yellow: Growth Stock"],
+              ["この色分けは銘柄の特徴を表すもので、売買を直接指示するものではありません。","These colors describe stock characteristics and do not directly indicate a buy or sell action."],
+              ["星印を押すと「Favorites」に登録できます。","Tap the star to add a stock to Favorites."],
+              ["銘柄コードまたは銘柄名を押すと、外部サイトで詳しい株価情報を確認できます。","Tap a ticker or company name to view detailed stock information on an external site."],
+              ["3. TOP10の更新時間","3. Check Update Times"],
+              ["データは、原則として日本時間の次の時刻に更新されます。","Data is generally updated at the following times (Japan time)."],
+              ["U.S. Stocks：午前6時30分頃","U.S. Stocks: Around 6:30 AM"],["Japan Stocks：午後4時頃","Japan Stocks: Around 4:00 PM"]
             ];
             function translate(raw){
               let lead=(raw.match(/^\s*/)||[""])[0], tail=(raw.match(/\s*$/)||[""])[0], x=raw.trim();
@@ -150,7 +171,7 @@ workflows:
                  .replace(/短期/g,"Short Term").replace(/中期/g,"Mid Term").replace(/長期/g,"Long Term")
                  .replace(/上昇期待/g,"Upside Potential").replace(/安定上昇/g,"Steady Growth").replace(/成長株/g,"Growth Stock")
                  .replace(/設定・その他/g,"Settings & More").replace(/銘柄分析/g,"Stock Analysis").replace(/分析履歴/g,"Analysis History")
-                 .replace(/保有株/g,"Holdings").replace(/お気に入り/g,"Favorites").replace(/使い方ガイド/g,"User Guide");
+                 .replace(/保有株管理/g,"My Portfolio").replace(/保有株/g,"Holdings").replace(/お気に入り/g,"Favorites").replace(/使い方ガイド/g,"User Guide").replace(/まだHoldingsの登録はありません。/g,"No holdings yet.").replace(/Favoritesはまだありません。/g,"No favorites yet.");
               return lead+x+tail;
             }
             function walk(root=document.body){

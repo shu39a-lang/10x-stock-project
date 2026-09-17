@@ -109,7 +109,21 @@ workflows:
               ["コードを入力すると会社名と現在値を確認します。","Enter a ticker to check the company name and current price."],
               ["注目・急増・高値","Popular Tools"],["管理・設定","Management & Settings"],["保有株管理","Holdings"],["保有銘柄の管理","Manage Holdings"],
               ["設定","Settings"],["各種設定","App Settings"],["登録銘柄一覧","Saved Stocks"],["過去の分析結果","View past results"],
-              ["銘柄コード・銘柄名で検索","Search by Ticker or Name"]
+              ["銘柄コード・銘柄名で検索","Search by Ticker or Name"],
+              ["すぐ使う","Quick Access"],["銘柄分析","Stock Analysis"],["データ・","Data & Rankings"],
+              ["保存・管理","Portfolio & Management"],["分析履歴","Analysis History"],["ヘルプ","Help"],
+              ["使い方ガイド","User Guide"],["設定・その他","Settings & More"],
+              ["バックアップを保存","Save Backup"],["バックアップから復元","Restore from Backup"],
+              ["分析履歴を消去","Clear Analysis History"],["全保存データを消去","Delete All Data"],["ホームへ戻る","Back to Home"],
+              ["10X STOCK ZEROの分析について","About 10X STOCK ZERO"],["主な5つの分析項目","Five Key Analysis Factors"],
+              ["企業の質・成長性 25%","Quality & Growth 25%"],["テクニカル分析 25%","Technical Analysis 25%"],
+              ["割安性 20%","Valuation 20%"],["財務安全性 15%","Financial Health 15%"],["成長材料 15%","Growth Potential 15%"],
+              ["最終完成版","Final Complete"],
+              ["出光興産","Idemitsu Kosan"],["ＥＮＥＯＳホールディングス","ENEOS Holdings"],["ENEOSホールディングス","ENEOS Holdings"],
+              ["伊藤忠商事","Itochu"],["ＫＤＤＩ","KDDI"],["KDDI","KDDI"],["ＩＮＰＥＸ","INPEX"],["INPEX","INPEX"],
+              ["三井物産","Mitsui & Co."],["デル・テクノロジーズ","Dell Technologies"],["S&P トロント総合指数","S&P/TSX Composite"],
+              ["ハスキー・エナジー","Husky Energy"],["ペトロブラス","Petrobras"],["エクソンモービル","Exxon Mobil"],
+              ["コノコフィリップス","ConocoPhillips"],["台湾積体電路製造（TSMC）","Taiwan Semiconductor (TSMC)"]
             ]);
             const phrase = [
               ["◎ 選択中：","◎ Selected: "],
@@ -122,7 +136,10 @@ workflows:
               ["※この診断は現在の分析データによる判断目安です。将来の株価上昇や利益を保証するものではありません。","* Based on current data. Not investment advice or a guarantee of future performance."],
               ["総合スコアは慎重に確認したい水準です。","Overall score is at a moderate level."],
               ["テクニカル面はまだ弱めです。","Technical indicators are still weak."],
-              ["財務評価には確認余地があります。","Financial metrics require further review."]
+              ["財務評価には確認余地があります。","Financial metrics require further review."],
+              ["10X STOCK ZEROは、Japan Stocks・U.S. Stocksの市場データから多数の銘柄をスクリーニングし、流動性を考慮したうえで、複数の指標を組み合わせて総合評価しています。","10X STOCK ZERO screens many stocks using Japan and U.S. market data, considers liquidity, and combines multiple indicators to produce an overall evaluation."],
+              ["テクニカル分析では、20日・50日・200日移動平均、RSI、MACD、出来高、株価モメンタムなどを使用しています。財務・企業分析では、PER、PBR、PSR、売上成長、利益成長、ROE、利益率、キャッシュフロー、負債水準などを参考にしています。","Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI, MACD, volume, and price momentum. Financial and company analysis references PER, PBR, PSR, revenue growth, profit growth, ROE, profit margin, cash flow, and debt levels."],
+              ["Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、各期間別に適した銘柄を評価してTOP10を選定しています。","Different criteria are applied to Short Term, Mid Term, and Long Term, and TOP10 stocks are selected for each period."]
             ];
             function translate(raw){
               let lead=(raw.match(/^\s*/)||[""])[0], tail=(raw.match(/\s*$/)||[""])[0], x=raw.trim();
@@ -131,7 +148,9 @@ workflows:
               for(const [a,b] of phrase)x=x.split(a).join(b);
               x=x.replace(/日本株/g,"Japan Stocks").replace(/米国株/g,"U.S. Stocks")
                  .replace(/短期/g,"Short Term").replace(/中期/g,"Mid Term").replace(/長期/g,"Long Term")
-                 .replace(/上昇期待/g,"Upside Potential").replace(/安定上昇/g,"Steady Growth").replace(/成長株/g,"Growth Stock");
+                 .replace(/上昇期待/g,"Upside Potential").replace(/安定上昇/g,"Steady Growth").replace(/成長株/g,"Growth Stock")
+                 .replace(/設定・その他/g,"Settings & More").replace(/銘柄分析/g,"Stock Analysis").replace(/分析履歴/g,"Analysis History")
+                 .replace(/保有株/g,"Holdings").replace(/お気に入り/g,"Favorites").replace(/使い方ガイド/g,"User Guide");
               return lead+x+tail;
             }
             function walk(root=document.body){

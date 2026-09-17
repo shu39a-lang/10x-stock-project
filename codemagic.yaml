@@ -441,16 +441,35 @@ workflows:
 
           p.write_text(s,encoding="utf-8")
 
-          # Strict zero-Japanese audit of the packaged index, except internal algorithm tokens.
-          allowed={"銀行","成長株","安定上昇","上昇期待"}
-          audit=s
-          audit=re.sub(r'(?is)<style\b[^>]*>.*?</style>','',audit)
-          audit=re.sub(r'(?is)<!--.*?-->','',audit)
-          tokens=set(re.findall(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]+',audit))
-          bad=sorted(t for t in tokens if t not in allowed)
+          # Audit the actual user-visible HTML only.
+          # Translation source dictionaries, comments and internal engine tokens are not displayed.
+          visible=re.sub(r'(?is)<script\b[^>]*>.*?</script>','',s)
+          visible=re.sub(r'(?is)<style\b[^>]*>.*?</style>','',visible)
+          visible=re.sub(r'(?is)<!--.*?-->','',visible)
+          visible=re.sub(r'<[^>]+>',' ',visible)
+          visible=re.sub(r'\s+',' ',visible)
+          bad=sorted(set(re.findall(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]+',visible)))
           if bad:
-              print("STOP: untranslated Japanese remains:")
+              print("STOP: untranslated VISIBLE Japanese remains:")
               print(bad)
+              raise SystemExit(1)
+
+          # Check inline JavaScript strings that can be shown at runtime.
+          # Known internal ranking category tokens are allowed.
+          allowed_runtime={"銀行","成長株","安定上昇","上昇期待"}
+          scripts=" ".join(re.findall(r'(?is)<script\b[^>]*>(.*?)</script>',s))
+          runtime_bad=[]
+          for m in re.finditer(r'(["\\'`])([^"\\'`\n]*[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f][^"\\'`\n]*)\1',scripts):
+              text=m.group(2).strip()
+              if text and text not in allowed_runtime:
+                  runtime_bad.append(text)
+          # Fallback DATA company names are permitted only because renderRanking
+          # translates the displayed company name through tenxEnglishName.
+          if "window.tenxEnglishName" not in s:
+              raise SystemExit("STOP: ranking English-name display boundary missing")
+          if runtime_bad:
+              print("STOP: Japanese runtime strings remain:")
+              print(sorted(set(runtime_bad))[:400])
               raise SystemExit(1)
 
           required=[

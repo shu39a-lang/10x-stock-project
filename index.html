@@ -1,101 +1,116 @@
-<!-- ENGLISH_DIRECT_UI_FIX_START -->
+<!-- TENX_ENGLISH_VISIBLE_TEXT_FIX_START -->
 <script>
-(()=>{
-"use strict";
+(() => {
+  const exact = new Map([
+    ["すぐ使う","Quick Access"],["保存・管理","Save & Manage"],["ヘルプ","Help"],
+    ["⌂ ホーム","⌂ Home"],["📊 買いタイミング診断","📊 Buy Timing Analysis"],
+    ["▥ 銘柄分析","▥ Stock Analysis"],["🏆 TOP10ランキング","🏆 TOP10 Rankings"],
+    ["🔗 データ・ランキング","🔗 Data & Rankings"],["▣ 保有株","▣ Portfolio"],
+    ["☆ お気に入り","☆ Favorites"],["↶ 分析履歴","↶ Analysis History"],
+    ["⚙ 設定・その他","⚙ Settings & More"],["？ 使い方ガイド","? User Guide"],
+    ["使い方ガイド","User Guide"],["株式分析ツール","Stock Analysis Tool"],
+    ["日本株","Japan Stocks"],["米国株","U.S. Stocks"],["短期","Short Term"],
+    ["〜6か月","Up to 6 months"],["中期","Mid Term"],["6か月〜1年","6–12 months"],
+    ["長期","Long Term"],["1年以上","1+ year"],["全て見る 〉","View 11–20"],
+    ["値上がり","Top Gainers"],["値下がり","Top Losers"],["出来高","Volume"],
+    ["急増","Surge"],["決算カレンダー","Earnings Calendar"],["52週高値","52-Week High"],
+    ["セクター動向","Sector Trends"],["スクリーナー","Screener"],["個別銘柄検索","Stock Search"],
+    ["過去の分析結果","Past Analysis Results"],["お気に入り","Favorites"],["保有株管理","Portfolio"],
+    ["設定","Settings"],["会社名","Company Name"],["株数","Shares"],["購入単価","Buy Price"],
+    ["現在値","Current Price"],["メモ","Memo"],["任意","Optional"],["入力をクリア","Clear"],
+    ["分析結果を保存","Save Analysis"],["保有株として保存","Save to Portfolio"],
+    ["お気に入りに保存","Save to Favorites"],["ホームへ戻る","Back to Home"],
+    ["データを書き出す","Save Backup"],["データを読み込む","Restore Backup"],
+    ["分析履歴を消去","Clear Analysis History"],["全保存データを消去","Delete All Data"],
+    ["プライバシーポリシー","Privacy Policy"],["利用規約・免責事項","Terms of Use"],
+    ["お問い合わせ・サポート","Contact & Support"],["ホーム","Home"],["分析結果","Analysis"],
+    ["保有株","Portfolio"],["設定・その他","Settings & More"],
+    ["割安性（20点）","Value (20 pts)"],["品質・成長（25点）","Quality & Growth (25 pts)"],
+    ["財務（15点）","Financial (15 pts)"],["テクニカル（25点）","Technical (25 pts)"],
+    ["カタリスト（15点）","Catalyst (15 pts)"],["総合スコア","Overall Score"]
+  ]);
 
-/* Direct English UI fixes. No MutationObserver translation layer. */
-const $=s=>document.querySelector(s);
+  const phrases = [
+    ["📊 10X STOCK ZEROの分析について","📊 About 10X STOCK ZERO"],
+    ["📄 法務・サポート","📄 Legal & Support"],
+    ["10X STOCK ZEROは、日本株・米国株の市場データから多数の銘柄をスクリーニングし、","10X STOCK ZERO screens a large number of Japan and U.S. stocks from market data,"],
+    ["流動性を考慮したうえで、複数の指標を組み合わせて総合評価しています。","considers liquidity, and combines multiple indicators for an overall assessment."],
+    ["主な5つの分析項目","Five Key Analysis Factors"],
+    ["・企業の質・成長性 25%","• Quality & Growth 25%"],["・テクニカル分析 25%","• Technical Analysis 25%"],
+    ["・割安性 20%","• Valuation 20%"],["・財務安全性 15%","• Financial Health 15%"],["・成長材料 15%","• Growth Potential 15%"],
+    ["テクニカル分析では、20日・50日・200日移動平均、RSI、MACD、","Technical analysis uses 20-day, 50-day and 200-day moving averages, RSI and MACD,"],
+    ["出来高、株価モメンタムなどを使用しています。","as well as volume and price momentum."],
+    ["財務・企業分析では、PER、PBR、PSR、売上成長、利益成長、","Financial and company analysis considers PER, PBR, PSR, revenue growth and profit growth,"],
+    ["ROE、利益率、キャッシュフロー、負債水準などを参考にしています。","ROE, profit margin, cash flow and debt levels."],
+    ["短期・中期・長期ではそれぞれ異なる条件を適用し、","Short, Mid and Long Term use different conditions,"],
+    ["各時間軸に適した銘柄を評価してTOP10を選定しています。","evaluating stocks suited to each time horizon to select the TOP10."],
+    ["※ スコアやランキングは将来の株価上昇や利益を保証するものではありません。","Scores and rankings do not guarantee future price increases or profits."],
+    ["市場環境や企業情報の変化により評価は変動します。","Ratings may change with market conditions and company information."],
+    ["最終的な投資判断は利用者ご自身で行ってください。","Make final investment decisions based on your own judgment."],
+    ["買いタイミング診断","Buy Timing Analysis"],["気になる銘柄コードを入力して、現在の買い条件を確認","Enter a ticker to check current buy conditions"],
+    ["診断する","Analyze"],["現在の分析データを使って判定します。","Uses the current analysis data."],
+    ["🟥 赤：上昇期待","🟥 Upside"],["🟦 青：安定上昇","🟦 Steady"],["🟨 黄：成長株","🟨 Growth"],
+    ["コードを入力すると会社名と現在値を確認します。","Enter a ticker to look up the company name and current price."],
+    ["会社名・現在値を取得中…","Looking up company name and current price…"],
+    ["現在値を取得できませんでした。もう一度コード欄から移動してください。","Current price could not be retrieved. Leave the ticker field and try again."],
+    ["銘柄を確認できませんでした。","Stock could not be found."],
+    ["を確認しました。現在値のみ手入力してください。"," was found. Please enter the current price manually."],
+    [" ｜ 現在値 "," | Current Price "]
+  ];
 
-const textById={
-  lookupStatus:"Enter a ticker/code to look up the company name and current price."
-};
-for(const [id,value] of Object.entries(textById)){
-  const el=document.getElementById(id);
-  if(el)el.textContent=value;
-}
+  const guide = [
+    ["1. 市場と期間を選ぶ","1. Select a Market and Term"],
+    ["2. TOP10ランキングを見る","2. View the TOP10"],
+    ["3. TOP10の更新時間","3. Check Update Times"],
+    ["4. 買いタイミング診断","4. Buy Timing Analysis"],
+    ["5. 銘柄を詳しく分析する","5. Analyze a Stock in Detail"],
+    ["6. 分析結果を保存する","6. Save Analysis Results"],
+    ["7. データ・ランキングのリンク","7. Data & Ranking Links"],
+    ["8. 注目・急増・高値のリンク","8. Watch, Surge & High Links"],
+    ["9. お気に入りと保有株管理","9. Favorites & Portfolio"],
+    ["10. 設定・バックアップ","10. Settings & Backup"],
+    ["重要な注意事項","Important Notice"],
+    ["・米国株：午前6時30分頃","• U.S. Stocks: Around 06:30"],
+    ["・日本株：午後4時頃","• Japan Stocks: Around 16:00"],
+    ["・短期：6か月以内","• Short Term: Up to 6 months"],
+    ["・中期：6か月〜1年","• Mid Term: 6–12 months"],
+    ["・長期：1年以上","• Long Term: 1+ year"],
+    ["・赤：上昇期待","• Red: Upside Potential"],["・青：安定上昇","• Blue: Steady Growth"],["・黄：成長株","• Yellow: Growth Stock"]
+  ];
 
-/* English-only history/portfolio rendering labels */
-const oldRenderPortfolio=window.renderPortfolio;
-const oldRenderFavorites=window.renderFavorites;
-const oldRenderHistory=window.renderHistory;
+  const all = [...phrases, ...guide].sort((a,b)=>b[0].length-a[0].length);
 
-/* English external stock information */
-window.stockUrl=function(m,c){
-  const code=String(c||"").trim().toUpperCase().replace(/\.T$/i,"");
-  return m==="japan"
-    ?"https://www.tradingview.com/symbols/TSE-"+encodeURIComponent(code)+"/"
-    :"https://www.tradingview.com/symbols/"+encodeURIComponent(code)+"/";
-};
-
-/* English direct company-name lookup for the custom-stock input */
-async function yahooEnglishName(market,code){
-  const symbol=market==="japan"?code+".T":code;
-  const url="https://query2.finance.yahoo.com/v1/finance/search?q="+
-    encodeURIComponent(symbol)+
-    "&quotesCount=6&newsCount=0&lang=en-US&region=US&_="+Date.now();
-  try{
-    let data=null;
-    const http=window.Capacitor?.Plugins?.CapacitorHttp;
-    if(http?.get){
-      const r=await http.get({url,headers:{
-        "Accept":"application/json",
-        "Accept-Language":"en-US,en;q=0.9"
-      }});
-      data=typeof r.data==="string"?JSON.parse(r.data):r.data;
-    }else{
-      const r=await fetch(url,{cache:"no-store",headers:{
-        "Accept-Language":"en-US,en;q=0.9"
-      }});
-      if(!r.ok)throw new Error("HTTP "+r.status);
-      data=await r.json();
+  function translateText(text) {
+    let t = text;
+    if (exact.has(t.trim())) {
+      const lead=t.match(/^\s*/)[0], tail=t.match(/\s*$/)[0];
+      return lead + exact.get(t.trim()) + tail;
     }
-    const wanted=symbol.toUpperCase();
-    const q=(data?.quotes||[]).find(x=>String(x?.symbol||"").toUpperCase()===wanted)
-      ||(data?.quotes||[])[0];
-    return String(q?.longname||q?.shortname||"").trim();
-  }catch(e){return""}
-}
-
-const priorCustom=window.autofillCustomStock;
-window.autofillCustomStock=async function(){
-  const market=$("#customMarket")?.value||"japan";
-  const codeEl=$("#customCode");
-  const code=String(codeEl?.value||"").trim().toUpperCase().replace(/\.T$/i,"");
-  const st=$("#customLookup");
-  if(!code){
-    if(st)st.textContent="Enter a ticker/code to look up the company name and current price.";
-    return null;
+    for (const [jp,en] of all) t=t.split(jp).join(en);
+    return t;
   }
-  if(codeEl)codeEl.value=code;
-  if(st)st.textContent="Loading company name and current price…";
 
-  let q=null;
-  try{ if(typeof priorCustom==="function")q=await priorCustom(); }catch(e){}
-
-  const enName=await yahooEnglishName(market,code);
-  if(enName&&$("#customName")){
-    $("#customName").value=enName;
-    $("#customName").readOnly=true;
-  }
-  if(st){
-    const p=Number($("#customNow")?.value);
-    if(enName&&Number.isFinite(p)&&p>0){
-      st.className="lookupstatus ok";
-      st.textContent="✓ "+enName+" | Current Price "+
-        (market==="japan"?"¥":"$")+p.toLocaleString("en-US",{
-          minimumFractionDigits:market==="usa"?2:0,
-          maximumFractionDigits:2
-        });
-    }else if(enName){
-      st.className="lookupstatus warn";
-      st.textContent="✓ "+enName+" confirmed. Enter the current price manually.";
-    }else{
-      st.className="lookupstatus warn";
-      st.textContent="Stock information could not be retrieved.";
+  function translate(root=document.body) {
+    const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const nodes=[]; while(w.nextNode()) nodes.push(w.currentNode);
+    for(const n of nodes){
+      const p=n.parentElement;
+      if(!p || /^(SCRIPT|STYLE|TEXTAREA|OPTION)$/.test(p.tagName)) continue;
+      const v=translateText(n.nodeValue);
+      if(v!==n.nodeValue) n.nodeValue=v;
     }
+    document.documentElement.lang="en";
   }
-  return q;
-};
+
+  translate();
+  new MutationObserver(ms=>{
+    for(const m of ms) for(const n of m.addedNodes){
+      if(n.nodeType===1) translate(n);
+      else if(n.nodeType===3 && n.parentElement && !/^(SCRIPT|STYLE|TEXTAREA|OPTION)$/.test(n.parentElement.tagName)){
+        const v=translateText(n.nodeValue); if(v!==n.nodeValue)n.nodeValue=v;
+      }
+    }
+  }).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
-<!-- ENGLISH_DIRECT_UI_FIX_END -->
+<!-- TENX_ENGLISH_VISIBLE_TEXT_FIX_END -->

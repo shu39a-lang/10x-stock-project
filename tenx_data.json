@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18 19:10 JST",
+  "updated_at": "2026-09-18 19:23 JST",
   "engine_version": "4.0-500-universe",
   "scoring": {
     "valuation": 20,
@@ -17,8 +17,8 @@
       "liquidity_selected": 488,
       "fundamental_analyzed": 488,
       "short_candidates": 124,
-      "medium_candidates": 154,
-      "long_candidates": 258
+      "medium_candidates": 153,
+      "long_candidates": 257
     },
     "usa": {
       "source": "yahoo_screener",
@@ -48,7 +48,7 @@
         "catalyst": 57.8,
         "trend_theme": "AI・データセンター",
         "trend_score": 88.0,
-        "market_heat": 89.0,
+        "market_heat": 88.8,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -71,7 +71,7 @@
         "catalyst": 59.8,
         "trend_theme": "AI・データセンター",
         "trend_score": 88.0,
-        "market_heat": 81.2,
+        "market_heat": 81.1,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -94,7 +94,7 @@
         "catalyst": 55.7,
         "trend_theme": "商社",
         "trend_score": 78.7,
-        "market_heat": 81.4,
+        "market_heat": 81.3,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -116,8 +116,8 @@
         "technical": 68.4,
         "catalyst": 71.8,
         "trend_theme": "その他",
-        "trend_score": 47.8,
-        "market_heat": 85.6,
+        "trend_score": 47.9,
+        "market_heat": 85.5,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -139,8 +139,8 @@
         "technical": 63.8,
         "catalyst": 73.3,
         "trend_theme": "その他",
-        "trend_score": 47.8,
-        "market_heat": 87.7,
+        "trend_score": 47.9,
+        "market_heat": 87.6,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -163,7 +163,7 @@
         "catalyst": 67.2,
         "trend_theme": "商社",
         "trend_score": 78.7,
-        "market_heat": 83.2,
+        "market_heat": 83.1,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -177,7 +177,7 @@
         "code": "8725",
         "price": 5217.0,
         "change_pct": -0.82,
-        "score": 68.2,
+        "score": 68.1,
         "signal": "有力",
         "valuation": 67.2,
         "quality": 60.9,
@@ -186,7 +186,7 @@
         "catalyst": 67.7,
         "trend_theme": "金融・証券",
         "trend_score": 74.7,
-        "market_heat": 86.3,
+        "market_heat": 86.1,
         "grades": {
           "valuation": "C",
           "quality": "D",
@@ -200,7 +200,7 @@
         "code": "8601",
         "price": 1845.5,
         "change_pct": 0.85,
-        "score": 67.8,
+        "score": 67.7,
         "signal": "有力",
         "valuation": 73.7,
         "quality": 69.7,
@@ -209,7 +209,7 @@
         "catalyst": 86.5,
         "trend_theme": "金融・証券",
         "trend_score": 74.7,
-        "market_heat": 84.4,
+        "market_heat": 84.3,
         "grades": {
           "valuation": "A",
           "quality": "B",
@@ -223,7 +223,7 @@
         "code": "8053",
         "price": 1796.0,
         "change_pct": -2.63,
-        "score": 67.8,
+        "score": 67.7,
         "signal": "有力",
         "valuation": 58.9,
         "quality": 59.8,
@@ -232,7 +232,7 @@
         "catalyst": 59.4,
         "trend_theme": "商社",
         "trend_score": 78.7,
-        "market_heat": 79.1,
+        "market_heat": 78.9,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -246,7 +246,7 @@
         "code": "6752",
         "price": 4287.0,
         "change_pct": 0.59,
-        "score": 66.6,
+        "score": 66.5,
         "signal": "有力",
         "valuation": 54.6,
         "quality": 56.1,
@@ -254,8 +254,8 @@
         "technical": 55.5,
         "catalyst": 72.7,
         "trend_theme": "その他",
-        "trend_score": 47.8,
-        "market_heat": 86.4,
+        "trend_score": 47.9,
+        "market_heat": 86.2,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -269,7 +269,7 @@
         "code": "9432",
         "price": 177.3,
         "change_pct": -1.5,
-        "score": 66.4,
+        "score": 66.3,
         "signal": "有力",
         "valuation": 56.2,
         "quality": 62.9,
@@ -278,7 +278,7 @@
         "catalyst": 57.6,
         "trend_theme": "AI・データセンター",
         "trend_score": 88.0,
-        "market_heat": 74.4,
+        "market_heat": 74.3,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -292,7 +292,7 @@
         "code": "8316",
         "price": 6830.0,
         "change_pct": -0.7,
-        "score": 66.0,
+        "score": 66.2,
         "signal": "有力",
         "valuation": 69.9,
         "quality": 66.0,
@@ -300,8 +300,8 @@
         "technical": 52.0,
         "catalyst": 72.6,
         "trend_theme": "銀行",
-        "trend_score": 75.5,
-        "market_heat": 84.8,
+        "trend_score": 78.5,
+        "market_heat": 84.6,
         "grades": {
           "valuation": "B",
           "quality": "C",
@@ -323,8 +323,8 @@
         "technical": 47.6,
         "catalyst": 59.4,
         "trend_theme": "その他",
-        "trend_score": 47.8,
-        "market_heat": 82.9,
+        "trend_score": 47.9,
+        "market_heat": 82.8,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -347,7 +347,7 @@
         "catalyst": 32.0,
         "trend_theme": "AI・データセンター",
         "trend_score": 88.0,
-        "market_heat": 70.7,
+        "market_heat": 70.6,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -361,7 +361,7 @@
         "code": "8306",
         "price": 3620.0,
         "change_pct": -0.88,
-        "score": 64.2,
+        "score": 64.5,
         "signal": "注目",
         "valuation": 67.4,
         "quality": 67.9,
@@ -369,7 +369,7 @@
         "technical": 52.1,
         "catalyst": 77.3,
         "trend_theme": "銀行",
-        "trend_score": 75.5,
+        "trend_score": 78.5,
         "market_heat": 80.8,
         "grades": {
           "valuation": "C",
@@ -392,8 +392,8 @@
         "technical": 63.0,
         "catalyst": 49.5,
         "trend_theme": "その他",
-        "trend_score": 47.8,
-        "market_heat": 82.4,
+        "trend_score": 47.9,
+        "market_heat": 82.3,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -416,7 +416,7 @@
         "catalyst": 60.3,
         "trend_theme": "半導体",
         "trend_score": 20.0,
-        "market_heat": 89.2,
+        "market_heat": 89.0,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -439,7 +439,7 @@
         "catalyst": 70.4,
         "trend_theme": "電線・電力インフラ",
         "trend_score": 35.8,
-        "market_heat": 77.1,
+        "market_heat": 76.9,
         "grades": {
           "valuation": "D",
           "quality": "C",
@@ -462,7 +462,7 @@
         "catalyst": 86.0,
         "trend_theme": "半導体",
         "trend_score": 20.0,
-        "market_heat": 68.3,
+        "market_heat": 68.2,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -501,7 +501,7 @@
         "code": "9697",
         "price": 4387.0,
         "change_pct": -1.02,
-        "score": 72.6,
+        "score": 72.5,
         "signal": "有力",
         "valuation": 46.8,
         "quality": 71.0,
@@ -509,8 +509,8 @@
         "technical": 59.5,
         "catalyst": 85.3,
         "trend_theme": "AI・データセンター",
-        "trend_score": 84.5,
-        "market_heat": 68.3,
+        "trend_score": 83.7,
+        "market_heat": 68.2,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -532,8 +532,8 @@
         "technical": 65.4,
         "catalyst": 72.9,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 78.2,
+        "trend_score": 50.3,
+        "market_heat": 78.1,
         "grades": {
           "valuation": "A",
           "quality": "D",
@@ -547,7 +547,7 @@
         "code": "8750",
         "price": 1913.5,
         "change_pct": -0.91,
-        "score": 71.2,
+        "score": 71.1,
         "signal": "有力",
         "valuation": 66.0,
         "quality": 64.6,
@@ -555,8 +555,8 @@
         "technical": 65.9,
         "catalyst": 81.1,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 73.9,
+        "trend_score": 50.3,
+        "market_heat": 73.8,
         "grades": {
           "valuation": "C",
           "quality": "D",
@@ -578,7 +578,7 @@
         "technical": 72.5,
         "catalyst": 72.5,
         "trend_theme": "その他",
-        "trend_score": 50.6,
+        "trend_score": 50.3,
         "market_heat": 69.9,
         "grades": {
           "valuation": "D",
@@ -593,7 +593,7 @@
         "code": "6701",
         "price": 4812.0,
         "change_pct": -1.72,
-        "score": 71.0,
+        "score": 70.9,
         "signal": "有力",
         "valuation": 60.5,
         "quality": 66.5,
@@ -601,8 +601,8 @@
         "technical": 57.2,
         "catalyst": 76.5,
         "trend_theme": "AI・データセンター",
-        "trend_score": 84.5,
-        "market_heat": 61.9,
+        "trend_score": 83.7,
+        "market_heat": 61.8,
         "grades": {
           "valuation": "D",
           "quality": "C",
@@ -616,7 +616,7 @@
         "code": "5076",
         "price": 2908.5,
         "change_pct": 1.54,
-        "score": 70.5,
+        "score": 70.4,
         "signal": "有力",
         "valuation": 62.5,
         "quality": 71.4,
@@ -624,8 +624,8 @@
         "technical": 66.5,
         "catalyst": 88.1,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 66.7,
+        "trend_score": 50.3,
+        "market_heat": 66.6,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -647,8 +647,8 @@
         "technical": 54.4,
         "catalyst": 78.1,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 61.3,
+        "trend_score": 50.3,
+        "market_heat": 61.2,
         "grades": {
           "valuation": "C",
           "quality": "B",
@@ -662,7 +662,7 @@
         "code": "6501",
         "price": 5524.0,
         "change_pct": 0.89,
-        "score": 70.1,
+        "score": 70.0,
         "signal": "有力",
         "valuation": 57.7,
         "quality": 54.6,
@@ -670,8 +670,8 @@
         "technical": 63.2,
         "catalyst": 57.8,
         "trend_theme": "AI・データセンター",
-        "trend_score": 84.5,
-        "market_heat": 89.0,
+        "trend_score": 83.7,
+        "market_heat": 88.8,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -693,8 +693,8 @@
         "technical": 64.2,
         "catalyst": 59.8,
         "trend_theme": "AI・データセンター",
-        "trend_score": 84.5,
-        "market_heat": 81.2,
+        "trend_score": 83.7,
+        "market_heat": 81.1,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -716,8 +716,8 @@
         "technical": 68.4,
         "catalyst": 71.8,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 85.6,
+        "trend_score": 50.3,
+        "market_heat": 85.5,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -739,8 +739,8 @@
         "technical": 71.0,
         "catalyst": 79.6,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 72.2,
+        "trend_score": 50.3,
+        "market_heat": 72.1,
         "grades": {
           "valuation": "D",
           "quality": "C",
@@ -762,7 +762,7 @@
         "technical": 54.4,
         "catalyst": 80.3,
         "trend_theme": "その他",
-        "trend_score": 50.6,
+        "trend_score": 50.3,
         "market_heat": 75.6,
         "grades": {
           "valuation": "D",
@@ -785,8 +785,8 @@
         "technical": 56.1,
         "catalyst": 86.5,
         "trend_theme": "金融・証券",
-        "trend_score": 76.5,
-        "market_heat": 84.4,
+        "trend_score": 75.8,
+        "market_heat": 84.3,
         "grades": {
           "valuation": "A",
           "quality": "B",
@@ -808,8 +808,8 @@
         "technical": 54.3,
         "catalyst": 77.6,
         "trend_theme": "商社",
-        "trend_score": 59.3,
-        "market_heat": 71.0,
+        "trend_score": 58.8,
+        "market_heat": 70.8,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -823,7 +823,7 @@
         "code": "8001",
         "price": 2306.5,
         "change_pct": -2.68,
-        "score": 66.5,
+        "score": 66.6,
         "signal": "有力",
         "valuation": 59.9,
         "quality": 55.8,
@@ -831,8 +831,8 @@
         "technical": 65.7,
         "catalyst": 55.7,
         "trend_theme": "商社",
-        "trend_score": 59.3,
-        "market_heat": 81.4,
+        "trend_score": 58.8,
+        "market_heat": 81.3,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -842,34 +842,11 @@
         }
       },
       {
-        "name": "日本たばこ産業",
-        "code": "2914",
-        "price": 6886.0,
-        "change_pct": -0.43,
-        "score": 66.4,
-        "signal": "有力",
-        "valuation": 59.0,
-        "quality": 66.4,
-        "financial": 58.8,
-        "technical": 54.3,
-        "catalyst": 72.3,
-        "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 74.7,
-        "grades": {
-          "valuation": "D",
-          "quality": "C",
-          "financial": "D",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
         "name": "三菱UFJフィナンシャル・グループ",
         "code": "8306",
         "price": 3620.0,
         "change_pct": -0.88,
-        "score": 66.2,
+        "score": 66.4,
         "signal": "有力",
         "valuation": 67.4,
         "quality": 67.9,
@@ -877,10 +854,33 @@
         "technical": 52.1,
         "catalyst": 77.3,
         "trend_theme": "銀行",
-        "trend_score": 85.8,
+        "trend_score": 86.9,
         "market_heat": 80.8,
         "grades": {
           "valuation": "C",
+          "quality": "C",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
+        "name": "日本たばこ産業",
+        "code": "2914",
+        "price": 6886.0,
+        "change_pct": -0.43,
+        "score": 66.1,
+        "signal": "有力",
+        "valuation": 59.0,
+        "quality": 66.4,
+        "financial": 58.8,
+        "technical": 54.3,
+        "catalyst": 72.3,
+        "trend_theme": "その他",
+        "trend_score": 50.3,
+        "market_heat": 74.5,
+        "grades": {
+          "valuation": "D",
           "quality": "C",
           "financial": "D",
           "technical": "D",
@@ -892,16 +892,16 @@
         "code": "9432",
         "price": 177.3,
         "change_pct": -1.5,
-        "score": 65.1,
-        "signal": "有力",
+        "score": 65.0,
+        "signal": "注目",
         "valuation": 56.2,
         "quality": 62.9,
         "financial": 36.8,
         "technical": 60.0,
         "catalyst": 57.6,
         "trend_theme": "AI・データセンター",
-        "trend_score": 84.5,
-        "market_heat": 74.4,
+        "trend_score": 83.7,
+        "market_heat": 74.3,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -915,7 +915,7 @@
         "code": "6752",
         "price": 4287.0,
         "change_pct": 0.59,
-        "score": 64.8,
+        "score": 64.9,
         "signal": "注目",
         "valuation": 54.6,
         "quality": 56.1,
@@ -923,8 +923,8 @@
         "technical": 55.5,
         "catalyst": 72.7,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 86.4,
+        "trend_score": 50.3,
+        "market_heat": 86.2,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -938,7 +938,7 @@
         "code": "9434",
         "price": 248.1,
         "change_pct": -1.39,
-        "score": 60.6,
+        "score": 60.5,
         "signal": "注目",
         "valuation": 54.2,
         "quality": 61.6,
@@ -946,8 +946,8 @@
         "technical": 63.0,
         "catalyst": 55.2,
         "trend_theme": "その他",
-        "trend_score": 50.6,
-        "market_heat": 74.8,
+        "trend_score": 50.3,
+        "market_heat": 74.7,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -963,7 +963,7 @@
         "code": "6871",
         "price": 13390.0,
         "change_pct": 6.1,
-        "score": 75.4,
+        "score": 75.3,
         "signal": "有力",
         "valuation": 51.3,
         "quality": 75.2,
@@ -971,8 +971,8 @@
         "technical": 61.2,
         "catalyst": 86.0,
         "trend_theme": "半導体",
-        "trend_score": 80.2,
-        "market_heat": 68.3,
+        "trend_score": 80.0,
+        "market_heat": 68.2,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -994,8 +994,8 @@
         "technical": 65.4,
         "catalyst": 72.9,
         "trend_theme": "その他",
-        "trend_score": 32.1,
-        "market_heat": 78.2,
+        "trend_score": 31.9,
+        "market_heat": 78.1,
         "grades": {
           "valuation": "A",
           "quality": "D",
@@ -1017,8 +1017,8 @@
         "technical": 65.9,
         "catalyst": 81.1,
         "trend_theme": "その他",
-        "trend_score": 32.1,
-        "market_heat": 73.9,
+        "trend_score": 31.9,
+        "market_heat": 73.8,
         "grades": {
           "valuation": "C",
           "quality": "D",
@@ -1040,8 +1040,8 @@
         "technical": 67.4,
         "catalyst": 76.6,
         "trend_theme": "半導体",
-        "trend_score": 80.2,
-        "market_heat": 85.0,
+        "trend_score": 80.0,
+        "market_heat": 84.9,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1063,8 +1063,8 @@
         "technical": 65.0,
         "catalyst": 83.7,
         "trend_theme": "半導体",
-        "trend_score": 80.2,
-        "market_heat": 84.6,
+        "trend_score": 80.0,
+        "market_heat": 84.5,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1086,7 +1086,7 @@
         "technical": 64.0,
         "catalyst": 85.4,
         "trend_theme": "その他",
-        "trend_score": 32.1,
+        "trend_score": 31.9,
         "market_heat": 76.9,
         "grades": {
           "valuation": "D",
@@ -1109,8 +1109,8 @@
         "technical": 63.8,
         "catalyst": 73.3,
         "trend_theme": "その他",
-        "trend_score": 32.1,
-        "market_heat": 87.7,
+        "trend_score": 31.9,
+        "market_heat": 87.6,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1132,8 +1132,8 @@
         "technical": 68.4,
         "catalyst": 71.8,
         "trend_theme": "その他",
-        "trend_score": 32.1,
-        "market_heat": 85.6,
+        "trend_score": 31.9,
+        "market_heat": 85.5,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1155,8 +1155,8 @@
         "technical": 47.7,
         "catalyst": 83.5,
         "trend_theme": "半導体",
-        "trend_score": 80.2,
-        "market_heat": 85.1,
+        "trend_score": 80.0,
+        "market_heat": 85.0,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -1178,8 +1178,8 @@
         "technical": 55.9,
         "catalyst": 60.3,
         "trend_theme": "半導体",
-        "trend_score": 80.2,
-        "market_heat": 89.2,
+        "trend_score": 80.0,
+        "market_heat": 89.0,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1201,8 +1201,8 @@
         "technical": 54.3,
         "catalyst": 77.6,
         "trend_theme": "商社",
-        "trend_score": 41.3,
-        "market_heat": 71.0,
+        "trend_score": 41.4,
+        "market_heat": 70.8,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1225,7 +1225,7 @@
         "catalyst": 85.3,
         "trend_theme": "AI・データセンター",
         "trend_score": 46.3,
-        "market_heat": 68.3,
+        "market_heat": 68.2,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -1247,8 +1247,8 @@
         "technical": 56.1,
         "catalyst": 86.5,
         "trend_theme": "金融・証券",
-        "trend_score": 67.6,
-        "market_heat": 84.4,
+        "trend_score": 67.5,
+        "market_heat": 84.3,
         "grades": {
           "valuation": "A",
           "quality": "B",
@@ -1262,7 +1262,7 @@
         "code": "8058",
         "price": 4947.0,
         "change_pct": -0.64,
-        "score": 65.7,
+        "score": 65.6,
         "signal": "有力",
         "valuation": 59.4,
         "quality": 62.6,
@@ -1270,8 +1270,8 @@
         "technical": 53.5,
         "catalyst": 76.4,
         "trend_theme": "商社",
-        "trend_score": 41.3,
-        "market_heat": 76.5,
+        "trend_score": 41.4,
+        "market_heat": 76.4,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1317,7 +1317,7 @@
         "catalyst": 59.8,
         "trend_theme": "AI・データセンター",
         "trend_score": 46.3,
-        "market_heat": 81.2,
+        "market_heat": 81.1,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1340,7 +1340,7 @@
         "catalyst": 57.8,
         "trend_theme": "AI・データセンター",
         "trend_score": 46.3,
-        "market_heat": 89.0,
+        "market_heat": 88.8,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1377,7 +1377,7 @@
         "code": "6504",
         "price": 13075.0,
         "change_pct": 1.51,
-        "score": 58.6,
+        "score": 58.5,
         "signal": "注目",
         "valuation": 62.5,
         "quality": 64.2,
@@ -1386,7 +1386,7 @@
         "catalyst": 74.2,
         "trend_theme": "電線・電力インフラ",
         "trend_score": 20.0,
-        "market_heat": 48.8,
+        "market_heat": 48.7,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -1569,6 +1569,16 @@
         "financial": 62.7,
         "technical": 64.0,
         "catalyst": 76.5
+      },
+      {
+        "name": "トヨタ自動車",
+        "code": "7203",
+        "price": 3025.0,
+        "valuation": 58.8,
+        "quality": 55.6,
+        "financial": 42.0,
+        "technical": 43.7,
+        "catalyst": 74.1
       },
       {
         "name": "みずほフィナンシャルグループ",
@@ -1939,16 +1949,6 @@
         "financial": 48.4,
         "technical": 63.0,
         "catalyst": 49.5
-      },
-      {
-        "name": "りそなホールディングス",
-        "code": "8308",
-        "price": 2451.5,
-        "valuation": 68.2,
-        "quality": 60.9,
-        "financial": 62.9,
-        "technical": 51.9,
-        "catalyst": 63.2
       },
       {
         "name": "日本郵船",
@@ -2895,8 +2895,8 @@
         "code": "1928",
         "price": 3350.0,
         "valuation": 60.1,
-        "quality": 48.2,
-        "financial": 41.3,
+        "quality": 42.4,
+        "financial": 46.3,
         "technical": 47.8,
         "catalyst": 46.6
       },
@@ -7514,7 +7514,7 @@
         "name": "エヌビディア",
         "code": "NVDA",
         "price": 219.34,
-        "valuation": 31.5,
+        "valuation": 31.3,
         "quality": 83.7,
         "financial": 61.8,
         "technical": 48.6,
@@ -7674,7 +7674,7 @@
         "name": "オラクル",
         "code": "ORCL",
         "price": 150.59,
-        "valuation": 46.1,
+        "valuation": 45.8,
         "quality": 68.9,
         "financial": 39.2,
         "technical": 46.1,
@@ -7874,7 +7874,7 @@
         "name": "ネットフリックス",
         "code": "NFLX",
         "price": 75.31,
-        "valuation": 45.3,
+        "valuation": 45.4,
         "quality": 73.5,
         "financial": 58.3,
         "technical": 38.5,
@@ -7954,7 +7954,7 @@
         "name": "COHR（米国上場企業）",
         "code": "COHR",
         "price": 295.98,
-        "valuation": 39.6,
+        "valuation": 39.4,
         "quality": 55.9,
         "financial": 60.1,
         "technical": 59.6,
@@ -8274,7 +8274,7 @@
         "name": "ペプシコ",
         "code": "PEP",
         "price": 133.66,
-        "valuation": 52.3,
+        "valuation": 52.4,
         "quality": 71.7,
         "financial": 40.8,
         "technical": 37.4,
@@ -8304,7 +8304,7 @@
         "name": "ヌー・ホールディングス",
         "code": "NU",
         "price": 13.84,
-        "valuation": 53.5,
+        "valuation": 53.4,
         "quality": 78.1,
         "financial": 47.7,
         "technical": 39.7,
@@ -8424,7 +8424,7 @@
         "name": "AT&T",
         "code": "T",
         "price": 25.39,
-        "valuation": 57.6,
+        "valuation": 57.7,
         "quality": 61.1,
         "financial": 40.8,
         "technical": 47.4,
@@ -8664,7 +8664,7 @@
         "name": "CMCSA（米国上場企業）",
         "code": "CMCSA",
         "price": 22.91,
-        "valuation": 58.4,
+        "valuation": 58.5,
         "quality": 49.9,
         "financial": 42.5,
         "technical": 33.9,
@@ -9124,7 +9124,7 @@
         "name": "コルゲート・パーモリーブ",
         "code": "CL",
         "price": 87.73,
-        "valuation": 40.3,
+        "valuation": 40.2,
         "quality": 62.5,
         "financial": 39.2,
         "technical": 43.0,
@@ -9154,7 +9154,7 @@
         "name": "KMI（米国上場企業）",
         "code": "KMI",
         "price": 31.31,
-        "valuation": 54.4,
+        "valuation": 54.3,
         "quality": 61.6,
         "financial": 47.1,
         "technical": 46.6,
@@ -9424,7 +9424,7 @@
         "name": "CPRT（米国上場企業）",
         "code": "CPRT",
         "price": 29.66,
-        "valuation": 58.5,
+        "valuation": 58.7,
         "quality": 57.0,
         "financial": 65.8,
         "technical": 35.6,
@@ -9504,7 +9504,7 @@
         "name": "KEY（米国上場企業）",
         "code": "KEY",
         "price": 20.95,
-        "valuation": 57.3,
+        "valuation": 57.2,
         "quality": 62.4,
         "financial": 45.8,
         "technical": 40.5,
@@ -9574,7 +9574,7 @@
         "name": "HDB（米国上場企業）",
         "code": "HDB",
         "price": 22.66,
-        "valuation": 46.1,
+        "valuation": 46.0,
         "quality": 63.6,
         "financial": 36.0,
         "technical": 45.6,
@@ -9854,7 +9854,7 @@
         "name": "AMKR（米国上場企業）",
         "code": "AMKR",
         "price": 47.95,
-        "valuation": 61.8,
+        "valuation": 61.6,
         "quality": 62.2,
         "financial": 58.4,
         "technical": 46.1,
@@ -12374,7 +12374,7 @@
         },
         {
           "theme": "銀行",
-          "score": 75.5
+          "score": 78.5
         },
         {
           "theme": "金融・証券",
@@ -12382,7 +12382,7 @@
         },
         {
           "theme": "その他",
-          "score": 47.8
+          "score": 47.9
         },
         {
           "theme": "電線・電力インフラ",
@@ -12396,23 +12396,23 @@
       "medium": [
         {
           "theme": "銀行",
-          "score": 85.8
+          "score": 86.9
         },
         {
           "theme": "AI・データセンター",
-          "score": 84.5
+          "score": 83.7
         },
         {
           "theme": "金融・証券",
-          "score": 76.5
+          "score": 75.8
         },
         {
           "theme": "商社",
-          "score": 59.3
+          "score": 58.8
         },
         {
           "theme": "その他",
-          "score": 50.6
+          "score": 50.3
         },
         {
           "theme": "半導体",
@@ -12430,11 +12430,11 @@
         },
         {
           "theme": "半導体",
-          "score": 80.2
+          "score": 80.0
         },
         {
           "theme": "金融・証券",
-          "score": 67.6
+          "score": 67.5
         },
         {
           "theme": "AI・データセンター",
@@ -12442,11 +12442,11 @@
         },
         {
           "theme": "商社",
-          "score": 41.3
+          "score": 41.4
         },
         {
           "theme": "その他",
-          "score": 32.1
+          "score": 31.9
         },
         {
           "theme": "電線・電力インフラ",

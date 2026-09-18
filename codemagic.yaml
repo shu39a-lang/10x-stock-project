@@ -14,6 +14,175 @@ workflows:
       node: latest
 
     scripts:
+      - name: Build English source safely
+        script: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+
+          # Remove only the old broad runtime localization layer.
+          s = re.sub(
+              r'\n<script>\n/\* ENGLISH_LOCALIZATION_LAYER \*/.*?</script>\n',
+              '\n',
+              s,
+              flags=re.S
+          )
+
+          exact = {
+              "Selected：":"Selected:",
+              "日本株":"Japan Stocks",
+              "米国株":"U.S. Stocks",
+              "短期":"Short Term",
+              "中期":"Mid Term",
+              "長期":"Long Term",
+              "順位":"Rank",
+              "コード":"Code",
+              "銘柄名":"Company",
+              "会社名":"Company Name",
+              "銘柄コード":"Ticker / Code",
+              "現在値":"Current Price",
+              "総合判断":"Overall Rating",
+              "買いタイミング診断":"Buy Timing Analysis",
+              "診断する":"Analyze",
+              "判定理由":"Reasons",
+              "強い買い":"Strong Buy",
+              "買い":"Buy",
+              "慎重":"Caution",
+              "様子見":"Wait",
+              "情報確認":"View Info",
+              "現在値を反映":"Apply Current Price",
+              "現在値を更新":"Update Current Price",
+              "分析をEdit":"Edit Analysis",
+              "別分析として開く":"Open as New Analysis",
+              "この分析を開く":"Open this Analysis",
+              "Save Analysisしました":"Analysis saved",
+              "Save to Favoritesしました":"Saved to Favorites",
+              "Save to Portfolioしました":"Saved to Portfolio",
+              "Favoritesに追加しました":"Added to Favorites",
+              "Favoritesはまだありません。":"No favorites yet.",
+              "Analysis Historyはまだありません。":"No analysis history yet.",
+              "まだPortfolioの登録はありません。":"No portfolio holdings yet.",
+              "Notesなし":"No notes",
+              "データなし":"No data",
+              "該当データがありません":"No matching data",
+              "先にTicker / Codeを入力してください":"Enter a Ticker / Code first.",
+              "Ticker / CodeとCompany Nameを入力してください":"Enter a Ticker / Code and Company Name.",
+              "Company Name・Current Priceを検索中…":"Loading Company Name and Current Price…",
+              "Current Priceを正しく入力してください":"Enter a valid Current Price.",
+              "このPortfolioをDeleteしますか？":"Delete this portfolio holding?",
+              "銘柄を確認できませんでした。":"Stock could not be confirmed.",
+              "入力後に「完了」を押すか、別の欄をタップしてください。":"After entering the value, tap Done or tap another field.",
+              "を確認しました。Current Priceのみ手入力してください。":" confirmed. Enter Current Price manually.",
+              "を確認しました。現在値は取得できませんでした。":" confirmed. Current Price could not be retrieved.",
+              "自動取得できませんでした。Company NameとCurrent Priceを手入力できます。":"Automatic retrieval failed. You can enter Company Name and Current Price manually.",
+              "コードを入力すると会社名と現在値を確認します。":"Enter a ticker to load Company Name and Current Price.",
+              "会社名・現在値を検索中…":"Loading Company Name and Current Price…",
+              "10X STOCK ZEROの分析について":"About 10X STOCK ZERO Analysis",
+              "10X STOCK ZEROは、Japan Stocks・U.S. StocksのMarketデータから多数の銘柄をスクリーニングし、":"10X STOCK ZERO screens a large number of stocks using Japan and U.S. market data,",
+              "流動性を考慮したうえで、複数の指標を組み合わせて総合評価しています。":"then combines multiple indicators while considering liquidity to produce an overall evaluation.",
+              "主な5つの分析項目":"Five Key Analysis Factors",
+              "・企業の質・成長性 25%":"• Quality & Growth 25%",
+              "・Technical分析 25%":"• Technical Analysis 25%",
+              "・Valuation 20%":"• Value 20%",
+              "・Financials安全性 15%":"• Financial Health 15%",
+              "・成長材料 15%":"• Catalysts 15%",
+              "Technical分析では、20日・50日・200日移動平均、RSI、MACD、":"Technical analysis uses 20-, 50-, and 200-day moving averages, RSI, MACD,",
+              "Volume、株価モメンタムなどを使用しています。":"volume, price momentum, and other indicators.",
+              "Financials・企業分析では、PER、PBR、PSR、売上成長、利益成長、":"Fundamental analysis considers P/E, P/B, P/S, revenue growth, earnings growth,",
+              "ROE、利益率、キャッシュフロー、負債水準などを参考にしています。":"ROE, margins, cash flow, debt levels, and related measures.",
+              "Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、":"Different conditions are applied to Short Term, Mid Term, and Long Term analysis,",
+              "各時間軸に適した銘柄を評価してTOP10を選定しています。":"and the TOP10 is selected by evaluating stocks for each time horizon.",
+              "※ ScoreやRankingは将来の株価上昇や利益を保証するものではありません。":"Scores and rankings do not guarantee future price increases or profits.",
+              "Market環境や企業情報の変化により評価は変動します。":"Evaluations may change as market conditions and company information change.",
+              "最終的な投資判断は利用者ご自身で行ってください。":"Make final investment decisions at your own discretion.",
+              "星印":"Star",
+              "翌印":"Next",
+          }
+
+          for a,b in sorted(exact.items(), key=lambda kv: len(kv[0]), reverse=True):
+              s = s.replace(a,b)
+
+          companies = {
+              "アドバンテスト":"Advantest","東京エレクトロン":"Tokyo Electron",
+              "三菱重工業":"Mitsubishi Heavy Industries","フジクラ":"Fujikura",
+              "ソフトバンクG":"SoftBank Group","ソフトバンクグループ":"SoftBank Group",
+              "日立製作所":"Hitachi","トヨタ自動車":"Toyota Motor",
+              "三菱UFJ FG":"Mitsubishi UFJ Financial Group","信越化学工業":"Shin-Etsu Chemical",
+              "ダイキン工業":"Daikin Industries","三菱商事":"Mitsubishi Corporation",
+              "東京海上HD":"Tokio Marine Holdings","任天堂":"Nintendo",
+              "キーエンス":"Keyence","レーザーテック":"Lasertec",
+              "ディスコ":"DISCO","リクルート":"Recruit Holdings",
+              "ソニー":"Sony Group","富士通":"Fujitsu","NEC":"NEC",
+              "村田製作所":"Murata Manufacturing","オムロン":"OMRON",
+              "ルネサス":"Renesas Electronics","ファーストリテイリング":"Fast Retailing",
+              "メタ":"Meta Platforms","アップル":"Apple","マイクロソフト":"Microsoft",
+              "アマゾン":"Amazon","エヌビディア":"NVIDIA","テスラ":"Tesla",
+          }
+          for a,b in sorted(companies.items(), key=lambda kv: len(kv[0]), reverse=True):
+              s = s.replace(a,b)
+
+          p.write_text(s, encoding="utf-8")
+
+          # Exact replacements in standalone UI JS files only.
+          files = {
+              "stock_lookup_fix.js": {
+                  "✓ \"+name+\" ｜ 現在値 ":"✓ \"+name+\" | Current Price ",
+                  "✓ \"+name+\" を確認しました。現在値は取得できませんでした。":"✓ \"+name+\" confirmed. Current Price could not be retrieved.",
+                  "自動取得できませんでした。会社名と現在値を手入力できます。":"Automatic retrieval failed. You can enter Company Name and Current Price manually.",
+                  "コードを入力すると会社名と現在値を確認します。":"Enter a ticker to load Company Name and Current Price.",
+                  "会社名・現在値を検索中…":"Loading Company Name and Current Price…",
+              },
+              "auto_score.js": {
+                  "バックアップを保存":"Save Backup",
+                  "バックアップから復元":"Restore Backup",
+                  "現在値を反映":"Apply Current Price",
+                  "現在値を取得中…":"Loading Current Price…",
+                  "市場データの自動取得は行いません":"Market data is not retrieved automatically",
+                  "10X STOCK ZERO バックアップ":"10X STOCK ZERO Backup",
+              },
+              "quick_buy_check.js": {
+                  "買いタイミング診断":"Buy Timing Analysis",
+                  "総合判定":"Overall Rating",
+                  "判定理由":"Reasons",
+                  "強い買い":"Strong Buy",
+                  "買い":"Buy",
+                  "慎重":"Caution",
+                  "様子見":"Wait",
+                  "短期":"Short Term",
+                  "中期":"Mid Term",
+                  "長期":"Long Term",
+              }
+          }
+
+          for fn, mp in files.items():
+              q = Path(fn)
+              if q.exists():
+                  z = q.read_text(encoding="utf-8")
+                  for a,b in sorted(mp.items(), key=lambda kv: len(kv[0]), reverse=True):
+                      z = z.replace(a,b)
+                  q.write_text(z, encoding="utf-8")
+
+          # Audit visible source for remaining Japanese in the user-facing files.
+          audit_files = ["index.html","stock_lookup_fix.js","auto_score.js","quick_buy_check.js","dynamic_rank.js"]
+          bad = []
+          for fn in audit_files:
+              q = Path(fn)
+              if q.exists():
+                  txt = q.read_text(encoding="utf-8")
+                  for i,line in enumerate(txt.splitlines(),1):
+                      if re.search(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]', line):
+                          if not any(tag in line for tag in ["//","/*","*/","<!--","-->"]):
+                              bad.append(f"{fn}:{i}:{line.strip()}")
+          if bad:
+              print("VISIBLE JAPANESE REMAINS")
+              print("\n".join(bad[:80]))
+              raise SystemExit(1)
+          print("English source audit passed")
+          PY
+
       - name: Prepare web app
         script: |
           mkdir -p www

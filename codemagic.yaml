@@ -142,6 +142,12 @@ workflows:
                   "現在値を取得中…":"Loading Current Price…",
                   "市場データの自動取得は行いません":"Market data is not retrieved automatically",
                   "10X STOCK ZERO バックアップ":"10X STOCK ZERO Backup",
+                  "日本株スクリーナー":"Japan Stock Screener",
+                  "日本語で銘柄を絞り込み":"Filter Japanese stocks",
+                  "米国株スクリーナー":"U.S. Stock Screener",
+                  "保有株の現在値は取得可能な市場データから更新します。取得できない場合は手入力できます。特定銘柄の売買を推奨するものではありません。":"Current prices for holdings are updated from available market data. If unavailable, enter them manually. This does not recommend buying or selling any specific stock.",
+                  "最新株価を取得できませんでした。通信状態を確認してもう一度押すか、現在値を手入力してください。":"Could not retrieve the latest price. Check your connection and try again, or enter Current Price manually.",
+                  "バックアップを保存できませんでした。もう一度お試しください。":"Could not save the backup. Please try again.",
               },
               "quick_buy_check.js": {
                   "買いタイミング診断":"Buy Timing Analysis",
@@ -154,6 +160,43 @@ workflows:
                   "短期":"Short Term",
                   "中期":"Mid Term",
                   "長期":"Long Term",
+                  "データ・ランキング":"Data & Rankings",
+                  "注目・急増・高値":"Watchlist, Surges & Highs",
+                  "分析・検索":"Analysis & Search",
+                  "値上がり":"Top Gainers",
+                  "値下がり":"Top Losers",
+                  "出来高\\nランキング":"Volume\\nRanking",
+                  "出来高\\n急増":"Volume\\nSurge",
+                  "決算カレンダー":"Earnings Calendar",
+                  "52週高値":"52-Week High",
+                  "セクター動向":"Sector Trends",
+                  "スクリーナー":"Screener",
+                  "TOP10 データ更新時間":"TOP10 Data Update Time",
+                  "日本時間":"JST",
+                  "気になる銘柄コードを入力して、現在の買い条件を確認":"Enter a ticker to check current buy conditions",
+                  "現在の分析データを使って判定します。":"Uses current analysis data for the evaluation.",
+                  "総合":"Overall",
+                  "テクニカル":"Technical",
+                  "トレンド":"Trend",
+                  "総合スコア":"Overall Score",
+                  "品質・成長":"Quality & Growth",
+                  "財務":"Financial",
+                  "割安性":"Value",
+                  "カタリスト":"Catalyst",
+                  "銘柄コードを入力してください。":"Enter a ticker.",
+                  "分析しています…":"Analyzing…",
+                  "現在の分析対象データでは見つかりませんでした。":"Not found in the current analysis data.",
+                  "診断結果を表示しました。":"Analysis result displayed.",
+                  "分析データを読み込めませんでした。":"Could not load analysis data.",
+                  "総合スコアが高い水準です。":"The overall score is high.",
+                  "総合スコアは買いを検討できる水準です。":"The overall score is at a level where buying may be considered.",
+                  "総合スコアは慎重に確認したい水準です。":"The overall score calls for careful review.",
+                  "総合スコアは様子を見たい水準です。":"The overall score suggests waiting.",
+                  "テクニカル面の勢いは良好です。":"Technical momentum is favorable.",
+                  "テクニカル面はまだ弱めです。":"Technical momentum is still weak.",
+                  "企業の質・成長性も高く評価されています。":"Quality and growth are also rated highly.",
+                  "財務評価には確認余地があります。":"The financial assessment needs further review.",
+                  "※この診断は現在の分析データによる判断目安です。将来の株価上昇や利益を保証するものではありません。":"This analysis is a reference based on current data and does not guarantee future price increases or profits.",
               }
           }
 
@@ -172,10 +215,12 @@ workflows:
               q = Path(fn)
               if q.exists():
                   txt = q.read_text(encoding="utf-8")
+                  txt = re.sub(r'/\\*.*?\\*/', '', txt, flags=re.S)
+                  txt = re.sub(r'//[^\\n]*', '', txt)
+                  txt = re.sub(r'<!--.*?-->', '', txt, flags=re.S)
                   for i,line in enumerate(txt.splitlines(),1):
                       if re.search(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]', line):
-                          if not any(tag in line for tag in ["//","/*","*/","<!--","-->"]):
-                              bad.append(f"{fn}:{i}:{line.strip()}")
+                          bad.append(f"{fn}:{i}:{line.strip()}")
           if bad:
               print("VISIBLE JAPANESE REMAINS")
               print("\n".join(bad[:80]))

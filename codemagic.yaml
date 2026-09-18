@@ -534,6 +534,7 @@ workflows:
           # Audit the actual packaged file, not an earlier in-memory snapshot.
           s=p.read_text(encoding="utf-8")
           # Final exact cleanup on the file that will actually be packaged.
+          s=s.replace("星印","star mark")
           s=s.replace("翌印","Next").replace("翌 mark","Next").replace("next mark","Next")
           p.write_text(s,encoding="utf-8")
           s=p.read_text(encoding="utf-8")

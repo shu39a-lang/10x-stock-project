@@ -565,6 +565,40 @@ workflows:
           "企業":"Company"
           })
           T.update({"・":" / ","翌印":"Next"})
+          # Targeted English fixes verified from the latest TestFlight screens.
+          T.update({
+          "Home画面で「Japan Stocks」または「U.S. Stocks」を選び、投資期間を選択します。":"On the Home screen, select Japan Stocks or U.S. Stocks, then choose an investment term.",
+          "6か月以内":"Up to 6 months",
+          "選択したMarketと期間に合わせて、TOP10が切り替わります。":"The TOP10 changes according to the selected market and term.",
+          "TOP10を見る":"View the TOP10",
+          "買いタイミング診断":"Buy Timing Analysis",
+          "気になる銘柄コードを入力して、現在の買い条件を確認":"Enter a ticker to check the current buy conditions.",
+          "診断する":"Analyze",
+          "現在の分析データを使って判定します。":"Uses the current analysis data.",
+          "バックアップを保存":"Save Backup",
+          "バックアップから復元":"Restore Backup",
+          "10X STOCK ZEROは、Japan Stocks・U.S. StocksのMarketデータから多数の銘柄をスクリーニングし、流動性を考慮したうえで、複数の指標を組み合わせてOverall評価しています。":"10X STOCK ZERO screens a large number of Japan and U.S. stocks, considers liquidity, and combines multiple indicators for an overall assessment.",
+          "Technical分析では、20日・50日・200日移動平均、RSI、MACD、Volume、株価モメンタムなどを使用しています。":"Technical analysis uses the 20-day, 50-day and 200-day moving averages, RSI, MACD, volume and price momentum.",
+          "Financial・企業分析では、PER、PBR、PSR、売上成長、利益成長、ROE、利益率、キャッシュフロー、負債水準などを参考にしています。":"Financial and company analysis considers PER, PBR, PSR, revenue growth, profit growth, ROE, profit margin, cash flow and debt levels.",
+          "Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、各時間軸に適した銘柄を評価してTOP10を選定しています。":"Short, Mid and Long Term use different conditions to evaluate stocks suited to each time horizon and select the TOP10.",
+          "日立製作所":"Hitachi",
+          "伊藤忠商事":"ITOCHU Corporation",
+          "ニデック":"Nidec",
+          "京セラ":"Kyocera",
+          "丸紅":"Marubeni",
+          "ＭＳ＆ＡＤインシュアランスグループホールディングス":"MS&AD Insurance Group Holdings",
+          "MS＆ADインシュアランスグループホールディングス":"MS&AD Insurance Group Holdings",
+          "大和証券グループ本社":"Daiwa Securities Group",
+          "住友商事":"Sumitomo Corporation",
+          "パナソニック ホールディングス":"Panasonic Holdings",
+          "パナソニックホールディングス":"Panasonic Holdings",
+          "ヌー・ホールディングス":"Nu Holdings",
+          "デル・テクノロジーズ":"Dell Technologies",
+          "台湾積体電路製造":"Taiwan Semiconductor Manufacturing",
+          "ハスキー・エナジー":"Husky Energy",
+          "ペトロブラス":"Petrobras",
+          "カナディアン・ナチュラル・リソーシズ":"Canadian Natural Resources"
+          })
           for old,new in sorted(T.items(), key=lambda kv: len(kv[0]), reverse=True):
               s=s.replace(old,new)
           s=s.replace("翌印","Next").replace("next mark","Next").replace("翌 mark","Next")

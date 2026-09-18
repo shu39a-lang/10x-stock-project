@@ -515,16 +515,20 @@ workflows:
           "当":" current ",
           "翌印を":" mark "
           })
-          T.update({"・":" / ","翌印":"next mark"})
+          T.update({"・":" / ","翌印":"Next"})
           for old,new in sorted(T.items(), key=lambda kv: len(kv[0]), reverse=True):
               s=s.replace(old,new)
-          s=s.replace("翌印","Next")
+          s=s.replace("翌印","Next").replace("next mark","Next").replace("翌 mark","Next")
 
           # English/global finance links for the English build.
           s=s.replace("https://finance.yahoo.co.jp/quote/","https://finance.yahoo.com/quote/")
           s=s.replace("https://finance.yahoo.co.jp/","https://finance.yahoo.com/")
           s=s.replace("https://jp.tradingview.com/","https://www.tradingview.com/")
 
+          p.write_text(s,encoding="utf-8")
+
+          # Final cleanup immediately before audit.
+          s=s.replace("翌印","Next").replace("翌 mark","Next").replace("next mark","Next")
           p.write_text(s,encoding="utf-8")
 
           # Audit the actual user-visible HTML only.

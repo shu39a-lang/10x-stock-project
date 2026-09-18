@@ -515,6 +515,7 @@ workflows:
           "当":" current ",
           "翌印を":" mark "
           })
+          T.update({"・":" / ","翌印":"next mark"})
           for old,new in sorted(T.items(), key=lambda kv: len(kv[0]), reverse=True):
               s=s.replace(old,new)
 

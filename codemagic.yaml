@@ -2,10 +2,8 @@ workflows:
   ios-workflow:
     name: 10X STOCK ZERO English iOS
     max_build_duration: 60
-
     integrations:
       app_store_connect: codemagic7
-
     environment:
       ios_signing:
         distribution_type: app_store
@@ -14,60 +12,143 @@ workflows:
       node: latest
 
     scripts:
-      - name: Prepare complete English web app
+      - name: Copy proven working app
         script: |
           set -e
-
-          cp -f index.html /tmp/english_patch.html
-
-          # Fetch main into an explicit remote-tracking ref so git show can read it reliably.
-          git fetch origin main:refs/remotes/origin/main
-
-          git show refs/remotes/origin/main:index.html > /tmp/main_index.html
-          git show refs/remotes/origin/main:dynamic_rank.js > /tmp/main_dynamic_rank.js
-          git show refs/remotes/origin/main:quick_buy_check.js > /tmp/main_quick_buy_check.js
-          git show refs/remotes/origin/main:auto_score.js > /tmp/main_auto_score.js
-          git show refs/remotes/origin/main:stock_lookup_fix.js > /tmp/main_stock_lookup_fix.js
-
-          python3 - <<'PY'
-          from pathlib import Path
-
-          main = Path("/tmp/main_index.html").read_text(encoding="utf-8")
-          patch = Path("/tmp/english_patch.html").read_text(encoding="utf-8")
-
-          main = main.replace('<html lang="ja">', '<html lang="en">', 1)
-          main = main.replace(
-              '"https://shu39a-lang.github.io/10x-stock-project/"',
-              '"https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/english-version/"'
-          )
-          main = main.replace("https://jp.tradingview.com/", "https://www.tradingview.com/")
-
-          if "</body>" not in main:
-              raise SystemExit("main index.html is incomplete")
-
-          complete = main.replace("</body>", patch + "\n</body>", 1)
-          Path("index.html").write_text(complete, encoding="utf-8")
-          PY
-
-          cp -f /tmp/main_dynamic_rank.js dynamic_rank.js
-          cp -f /tmp/main_quick_buy_check.js quick_buy_check.js
-          cp -f /tmp/main_auto_score.js auto_score.js
-          cp -f /tmp/main_stock_lookup_fix.js stock_lookup_fix.js
-
-          test -s index.html
-          grep -q '<!doctype html>' index.html
-          grep -q '10X STOCK ZERO' index.html
-          grep -q 'dynamic_rank.js' index.html
-          grep -q 'quick_buy_check.js' index.html
-
           rm -rf www
           mkdir -p www
-          cp -f index.html www/index.html
-          cp -f *.html www/ 2>/dev/null || true
-          cp -f *.json www/ 2>/dev/null || true
-          cp -f *.js www/ 2>/dev/null || true
-          cp -f *.webmanifest www/ 2>/dev/null || true
-          cp -f *.png www/ 2>/dev/null || true
+          BASE="https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/main"
+          for f in index.html dynamic_rank.js quick_buy_check.js auto_score.js stock_lookup_fix.js tenx_data.json tenx_history.json live_quotes.json manifest.webmanifest sw.js icon-192.png icon-512.png apple-touch-icon.png 10X_STOCK_ZERO_AppIcon_1024.png; do
+            curl -fL --retry 3 "$BASE/$f" -o "www/$f" || true
+          done
+          cp -f privacy.html terms.html support.html www/
+          test -s www/index.html
+          test -s www/dynamic_rank.js
+          test -s www/quick_buy_check.js
+          test -s www/auto_score.js
+          test -s www/stock_lookup_fix.js
+
+      - name: Preserve lookup engine and use packaged data
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('www/stock_lookup_fix.js')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('const ROOT="https://shu39a-lang.github.io/10x-stock-project/";','const ROOT="./";')
+          s=s.replace('  let direct=null;\n\n  const livePrice=Number(live?.price);\n  const basePrice=Number(base?.price);','  let direct=await yahooDirect(market,code);\n\n  const livePrice=Number(live?.price);\n  const basePrice=Number(base?.price);',1)
+          old='''  if(market==="japan"){
+    // 日本株は日本語データを最優先。
+    name=tenxName||liveName||baseName||directName||code;
+  }else{
+    // 米国株も日本語名を優先。
+    // tenx_data / live_quotes / 既存処理の順で日本語名を採用。
+    const candidates=[tenxName,liveName,baseName];
+    name=candidates.find(n=>n&&!isUsEnglishFallback(n,code))||"";
+
+    // 日本語名が見つからない場合のみ、既存表示を維持。
+    if(!name){
+      name=tenxName||liveName||baseName||directName||code;
+    }
+  }'''
+          new='''  // English build: use English market metadata name first.
+  // Existing price priority is unchanged.
+  name=directName||tenxName||liveName||baseName||code;'''
+          if old in s:
+              s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Translate dynamic messages safely
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          maps={
+            'quick_buy_check.js':{
+              '買いタイミング診断':'Buy Timing Analysis','データ・ランキング':'Data & Rankings','注目・急増・高値':'Watch, Surge & Highs','分析・検索':'Analysis & Search',
+              '値上がり':'Top Gainers','値下がり':'Top Losers','出来高 ランキング':'Volume Ranking','出来高 急増':'Volume Surge','決算カレンダー':'Earnings Calendar','52週高値':'52-Week Highs','セクター動向':'Sector Trends','スクリーナー':'Screener',
+              'TOP10 データ更新時間（日本時間）':'TOP10 Data Update Time (JST)','TOP10 データ更新時間':'TOP10 Data Update Time',
+              '気になる銘柄コードを入力して、現在の買い条件を確認':'Enter a ticker to check current buy conditions','診断する':'Analyze','現在の分析データを使って判定します。':'Uses current analysis data.',
+              '様子見':'Wait','慎重':'Caution','強い買い':'Strong Buy','買い':'Buy','総合判断':'Overall Rating','判断の理由':'Reasons','総合':'Overall','テクニカル':'Technical','トレンド':'Trend','総合スコア':'Overall Score','品質・成長':'Quality & Growth','財務':'Financial','割安性':'Value','カタリスト':'Catalyst',
+              '総合スコアが高い水準です。':'The overall score is high.','総合スコアは買いを検討できる水準です。':'The overall score is at a level worth reviewing.','総合スコアは慎重に確認したい水準です。':'The overall score calls for caution.','総合スコアは様子を見たい水準です。':'The overall score suggests waiting.',
+              'テクニカル面の勢いは良好です。':'Technical momentum is positive.','テクニカル面はまだ弱めです。':'Technical indicators are still weak.','企業の質・成長性も高く評価されています。':'Quality and growth are rated highly.','財務評価には確認余地があります。':'Financial metrics require further review.',
+              '日本株':'Japan Stocks','米国株':'U.S. Stocks','円':'JPY','銘柄コードを入力してください。':'Enter a ticker.','分析しています…':'Analyzing…','現在の分析対象データでは見つかりませんでした。':'Not found in the current analysis data.','診断結果を表示しました。':'Analysis complete.','分析データを読み込めませんでした。':'Could not load analysis data.',
+              '※この診断は現在の分析データによる判断目安です。将来の株価上昇や利益を保証するものではありません。':'* Based on current analysis data. This does not guarantee future price increases or profits.'
+            },
+            'stock_lookup_fix.js':{
+              ' ｜ 現在値 ':' | Current Price ',' を確認しました。現在値は取得できませんでした。':' found. Current price could not be retrieved.','自動取得できませんでした。会社名と現在値を手入力できます。':'Automatic retrieval failed. Enter the company name and current price manually.','コードを入力すると会社名と現在値を確認します。':'Enter a ticker to check the company name and current price.','会社名・現在値を検索中…':'Loading company name and current price…'
+            },
+            'auto_score.js':{
+              '現在値を反映':'Update Current Price','バックアップを保存':'Save Backup','バックアップから復元':'Restore Backup','日本株スクリーナー':'Japan Stock Screener','日本語で銘柄を絞り込み':'Filter Japan stocks','米国株スクリーナー':'U.S. Stock Screener','市場データの自動取得は行いません':'Market data is not retrieved automatically','現在値を取得中…':'Updating current price…','10X STOCK ZERO バックアップ':'10X STOCK ZERO Backup','バックアップを保存できませんでした。もう一度お試しください。':'Could not save the backup. Please try again.'
+            }
+          }
+          for fn,m in maps.items():
+              p=Path('www')/fn
+              s=p.read_text(encoding='utf-8')
+              for a,b in sorted(m.items(),key=lambda kv:len(kv[0]),reverse=True): s=s.replace(a,b)
+              p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Convert every visible page to English
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path('www/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('<html lang="ja">','<html lang="en">',1)
+          s=s.replace('"https://shu39a-lang.github.io/10x-stock-project/"','"./"')
+          for a,b in {
+            'https://finance.yahoo.co.jp/stocks/ranking/up?market=all':'https://www.tradingview.com/markets/stocks-japan/market-movers-gainers/',
+            'https://finance.yahoo.co.jp/stocks/us/ranking/up':'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/',
+            'https://finance.yahoo.co.jp/stocks/ranking/down?market=all':'https://www.tradingview.com/markets/stocks-japan/market-movers-losers/',
+            'https://finance.yahoo.co.jp/stocks/us/ranking/down':'https://www.tradingview.com/markets/stocks-usa/market-movers-losers/',
+            'https://finance.yahoo.co.jp/stocks/ranking/volume?market=all&term=daily':'https://www.tradingview.com/markets/stocks-japan/market-movers-active/',
+            'https://finance.yahoo.co.jp/stocks/us/ranking/volume':'https://www.tradingview.com/markets/stocks-usa/market-movers-active/',
+            'https://jp.tradingview.com/':'https://www.tradingview.com/'
+          }.items(): s=s.replace(a,b)
+
+          T={
+            'すぐ使う':'Quick Access','保存・管理':'Save & Manage','ヘルプ':'Help','⌂ ホーム':'⌂ Home','📊 買いタイミング診断':'📊 Buy Timing Analysis','▥ 銘柄分析':'▥ Stock Analysis','🏆 TOP10ランキング':'🏆 TOP10 Rankings','🔗 データ・ランキング':'🔗 Data & Rankings','▣ 保有株':'▣ Portfolio','☆ お気に入り':'☆ Favorites','↶ 分析履歴':'↶ Analysis History','⚙ 設定・その他':'⚙ Settings & More','？ 使い方ガイド':'? User Guide',
+            '使い方ガイド':'User Guide','株式分析ツール':'Stock Analysis Tool','日本株':'Japan Stocks','米国株':'U.S. Stocks','短期':'Short Term','中期':'Mid Term','長期':'Long Term','〜6か月':'Up to 6 months','6か月〜1年':'6–12 months','1年以上':'1+ year','◎ 選択中：':'◎ Selected: ','全て見る 〉':'View All 〉','11〜20位を見る':'View 11–20','TOP10に戻る':'Back to TOP10','順位':'Rank','コード':'Ticker','銘柄名':'Company','スコア':'Score','格付':'Grade',
+            '🟥 赤：上昇期待　　🟦 青：安定上昇　　🟨 黄：成長株':'🟥 Upside   🟦 Steady   🟨 Growth','🕒 TOP10 データ更新時間（日本時間）':'🕒 TOP10 Data Update Time (JST)','06:30頃':'Around 06:30','16:00頃':'Around 16:00','（アメリカ株）':'(U.S. Stocks)','（日本株）':'(Japan Stocks)','📊 データ・ランキング':'📊 Data & Rankings','値上がり':'Top Gainers','値下がり':'Top Losers','出来高':'Volume','急増':'Surge','決算カレンダー':'Earnings Calendar','52週高値':'52-Week Highs','セクター動向':'Sector Trends','スクリーナー':'Screener','🔥 注目・急増・高値':'🔥 Watch, Surge & Highs','📋 分析・検索':'📋 Analysis & Search','個別銘柄検索':'Stock Search','銘柄コード・銘柄名で検索':'Search by ticker or company','過去の分析結果':'Past Analysis Results','⚙️ 管理・設定':'⚙️ Management & Settings','登録銘柄一覧':'Saved Stocks','保有銘柄の管理':'Manage Holdings','各種設定':'App Settings',
+            '銘柄を確認・入力して分析':'Check & Analyze a Stock','新規銘柄・保有株を5項目で分析':'Analyze stocks using 5 factors','市場':'Market','銘柄コード':'Ticker','会社名':'Company Name','株数':'Shares','購入単価':'Buy Price','現在値':'Current Price','メモ':'Memo','任意':'Optional','株価・会社情報を確認':'View Stock Info','入力をクリア':'Clear','割安性（20点）':'Value (20 pts)','品質・成長（25点）':'Quality & Growth (25 pts)','財務（15点）':'Financial (15 pts)','テクニカル（25点）':'Technical (25 pts)','カタリスト（15点）':'Catalyst (15 pts)','総合スコア':'Overall Score','分析結果を保存':'Save Analysis','保有株として保存':'Save to Portfolio','お気に入りに保存':'Save to Favorites','ホームへ戻る':'Back to Home','💼 保有株管理':'💼 Portfolio','設定・その他':'Settings & More','データを書き出す':'Export Data','データを読み込む':'Import Data','分析履歴を消去':'Clear Analysis History','全保存データを消去':'Delete All Saved Data','📊 10X STOCK ZEROの分析について':'📊 About 10X STOCK ZERO','主な5つの分析項目':'Five Key Analysis Factors','企業の質・成長性 25%':'Quality & Growth 25%','テクニカル分析 25%':'Technical Analysis 25%','割安性 20%':'Valuation 20%','財務安全性 15%':'Financial Health 15%','成長材料 15%':'Growth Potential 15%','📄 法務・サポート':'📄 Legal & Support','プライバシーポリシー':'Privacy Policy','利用規約・免責事項':'Terms of Use & Disclaimer','お問い合わせ・サポート':'Contact & Support','ホーム':'Home','分析結果':'Analysis','保有株':'Portfolio','お気に入り':'Favorites',
+            '1. 市場と期間を選ぶ':'1. Select a Market and Term','2. TOP10ランキングを見る':'2. View the TOP10 Ranking','3. TOP10の更新時間':'3. Check Update Times','4. 買いタイミング診断':'4. Buy Timing Analysis','5. 銘柄を詳しく分析する':'5. Analyze a Stock in Detail','6. 分析結果を保存する':'6. Save Analysis Results','7. データ・ランキングのリンク':'7. Data & Ranking Links','8. 注目・急増・高値のリンク':'8. Watch, Surge & High Links','9. お気に入りと保有株管理':'9. Favorites & Portfolio','10. 設定・バックアップ':'10. Settings & Backup','重要な注意事項':'Important Notes',
+            'ホーム画面で「日本株」または「米国株」を選び、投資期間を選択します。':'On the Home screen, choose Japan Stocks or U.S. Stocks, then select the investment term.','・短期：6か月以内':'• Short Term: Up to 6 months','・中期：6か月〜1年':'• Mid Term: 6–12 months','・長期：1年以上':'• Long Term: 1+ year','選択した市場と期間に合わせて、TOP10ランキングが切り替わります。':'The TOP10 ranking changes according to the selected market and term.','TOP10には、銘柄コード・銘柄名・総合スコア・格付が表示されます。「11〜20位を見る」を押すと20位まで表示でき、「TOP10に戻る」を押すと元に戻ります。':'TOP10 shows ticker, company name, overall score, and grade. Tap View 11–20 to show ranks 11–20, and Back to TOP10 to return.','順位左側の色は、銘柄の特徴を示しています。':'The color beside each rank indicates the stock characteristics.','・赤：上昇期待':'• Red: Upside Potential','・青：安定上昇':'• Blue: Steady Growth','・黄：成長株':'• Yellow: Growth Stock','ランキングデータは、原則として日本時間の次の時刻に更新されます。':'Ranking data is generally updated at the following Japan Standard Time (JST) times.','・米国株：午前6時30分頃':'• U.S. Stocks: Around 6:30 AM','・日本株：午後4時頃':'• Japan Stocks: Around 4:00 PM','主な分析項目と配点は次のとおりです。':'The main analysis factors and weights are:','・割安性：20点':'• Value: 20 pts','・品質・成長：25点':'• Quality & Growth: 25 pts','・財務：15点':'• Financial: 15 pts','・テクニカル：25点':'• Technical: 25 pts','・カタリスト：15点':'• Catalyst: 15 pts'
+          }
+          for a,b in sorted(T.items(),key=lambda kv:len(kv[0]),reverse=True): s=s.replace(a,b)
+
+          old='function stockUrl(m,c){return m==="japan"?"https://finance.yahoo.co.jp/quote/"+encodeURIComponent(c)+".T":"https://finance.yahoo.co.jp/quote/"+encodeURIComponent(c)}'
+          new='function stockUrl(m,c){return m==="japan"?"https://www.tradingview.com/symbols/TSE-"+encodeURIComponent(c)+"/":"https://www.tradingview.com/symbols/"+encodeURIComponent(c)+"/"}'
+          if old in s: s=s.replace(old,new,1)
+
+          runtime=dict(T)
+          runtime.update({'診断結果を表示しました。':'Analysis complete.','会社名・現在値を取得中…':'Loading company name and current price…','会社名・現在値を検索中…':'Loading company name and current price…','コードを入力すると会社名と現在値を確認します。':'Enter a ticker to check the company name and current price.','現在値を取得できませんでした。もう一度コード欄から移動してください。':'Current price could not be retrieved. Leave the ticker field and try again.','銘柄を確認できませんでした。':'Stock could not be found.','現在値のみ手入力してください。':'Please enter the current price manually.','総合判断':'Overall Rating','判断の理由':'Reasons','様子見':'Wait','慎重':'Caution','強い買い':'Strong Buy','買い':'Buy','テクニカル':'Technical','トレンド':'Trend'})
+          script='''<script id="tenx-complete-english-ui">(()=>{const M=__MAP__;const K=Object.keys(M).sort((a,b)=>b.length-a.length);function c(t){let o=String(t??'');for(const k of K)if(o.includes(k))o=o.split(k).join(M[k]);return o}function a(root=document){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n=[];while(w.nextNode())n.push(w.currentNode);for(const x of n){const p=x.parentElement;if(!p||/^(SCRIPT|STYLE)$/.test(p.tagName))continue;const v=c(x.nodeValue);if(v!==x.nodeValue)x.nodeValue=v}for(const e of (root.querySelectorAll?root.querySelectorAll('input,textarea,option,button,[placeholder],[title],[aria-label]'):[])){if(e.placeholder)e.placeholder=c(e.placeholder);if(e.title)e.title=c(e.title);if(e.getAttribute('aria-label'))e.setAttribute('aria-label',c(e.getAttribute('aria-label')));if(e.tagName==='OPTION')e.textContent=c(e.textContent)}for(const id of ['nameInput','customName']){const e=document.getElementById(id);if(e&&e.value){const v=c(e.value);if(v!==e.value)e.value=v}}}a(document);new MutationObserver(()=>a(document)).observe(document.documentElement,{childList:true,subtree:true,characterData:true});setInterval(()=>a(document),700)})();</script>'''.replace('__MAP__',json.dumps(runtime,ensure_ascii=False))
+          s=s.replace('</body>',script+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Verify complete app and lookup engine
+        script: |
+          set -e
+          grep -q '<!doctype html>' www/index.html
+          grep -q 'function renderRanking' www/index.html
+          grep -q 'calcScore();renderRanking();' www/index.html
+          grep -q 'User Guide' www/index.html
+          grep -q 'Company Name' www/index.html
+          grep -q 'Buy Timing Analysis' www/index.html
+          grep -q 'window.zeroLookupStock' www/stock_lookup_fix.js
+          grep -q 'CapacitorHttp' www/stock_lookup_fix.js
+          grep -q 'yahooDirect' www/stock_lookup_fix.js
+          grep -q 'live_quotes.json' www/stock_lookup_fix.js
+          node --check www/dynamic_rank.js
+          node --check www/quick_buy_check.js
+          node --check www/auto_score.js
+          node --check www/stock_lookup_fix.js
+          echo 'PASS: complete app, English UI layer, English links, and stock lookup engine verified.'
 
       - name: Create Capacitor project
         script: |
@@ -76,30 +157,19 @@ workflows:
           npm install @capacitor/core @capacitor/cli @capacitor/ios
           npx cap init "10X STOCK ZERO" "com.shu39a.tenxstockenglish" --web-dir=www --skip-appid-validation
           npx cap add ios
-          printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
+          cat > capacitor.config.json <<'JSON'
+          {"appId":"com.shu39a.tenxstockenglish","appName":"10X STOCK ZERO","webDir":"www","plugins":{"CapacitorHttp":{"enabled":true}}}
+          JSON
           npx cap sync ios
 
-      - name: Install finalized app icon
+      - name: Install app icon
         script: |
           set -e
           ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
           cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
-          cat > "$ICONSET/Contents.json" <<'EOF'
-          {
-            "images" : [
-              {
-                "filename" : "AppIcon-512@2x.png",
-                "idiom" : "universal",
-                "platform" : "ios",
-                "size" : "1024x1024"
-              }
-            ],
-            "info" : {
-              "author" : "xcode",
-              "version" : 1
-            }
-          }
-          EOF
+          cat > "$ICONSET/Contents.json" <<'EOF2'
+          {"images":[{"filename":"AppIcon-512@2x.png","idiom":"universal","platform":"ios","size":"1024x1024"}],"info":{"author":"xcode","version":1}}
+          EOF2
 
       - name: Set up code signing
         script: |
@@ -115,7 +185,7 @@ workflows:
       - name: Build IPA
         script: |
           cd ios/App
-          xcode-project build-ipa             --project "App.xcodeproj"             --scheme "App"
+          xcode-project build-ipa --project "App.xcodeproj" --scheme "App"
 
     artifacts:
       - ios/App/build/ios/ipa/*.ipa

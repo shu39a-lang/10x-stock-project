@@ -882,8 +882,16 @@ workflows:
               z=z.replace(a,b)
           q.write_text(z,encoding="utf-8")
                               # Final layout-only fix: do not change app logic or data
+                                        
+          
+
           p=Path("www/index.html")
           x=p.read_text(encoding="utf-8")
+          # Analysis market buttons only: shorten labels so they fit cleanly.
+          x=x.replace('<span style="font-size:17px">🇯🇵</span> Japan Stocks</button>',
+                      '<span style="font-size:17px">🇯🇵</span> Japan</button>',1)
+                      x=x.replace('<span style="font-size:17px">🇺🇸</span> U.S. Stocks</button>',
+                      '<span style="font-size:17px">🇺🇸</span> U.S.</button>',1)
           layout_css = '''<style id="tenx-english-layout-fix">
           #analysisMarketJapan,#analysisMarketUs{
             min-width:0!important;

@@ -1,4 +1,4 @@
-name: Update stock candidates
+name: Update English app and stock data
 
 on:
   workflow_dispatch:
@@ -14,6 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: english-version
+          fetch-depth: 0
+
+      - name: Prepare current working Japanese source
+        run: |
+          set -e
+          git fetch origin main
+          rm -rf main_source
+          mkdir -p main_source
+          for f in index.html dynamic_rank.js quick_buy_check.js auto_score.js stock_lookup_fix.js; do
+            git show origin/main:"$f" > "main_source/$f"
+          done
 
       - uses: actions/setup-python@v5
         with:
@@ -21,35 +34,19 @@ jobs:
           cache: pip
 
       - run: pip install -r requirements.txt
-
+      - run: python build_english.py
       - run: python update_data.py
       - run: python fix_japanese_names.py
       - run: python fix_us_japanese_names.py
       - run: python trend_diversity.py
+      - run: python english_names.py
 
-      - name: Commit updated data
+      - name: Commit complete English app
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          cp tenx_data.json /tmp/tenx_data.json
-          cp tenx_history.json /tmp/tenx_history.json
-
-          git fetch origin main
-          git reset --hard origin/main
-
-          cp /tmp/tenx_data.json tenx_data.json
-          cp /tmp/tenx_history.json tenx_history.json
-
-          git add tenx_data.json tenx_history.json
+          git add index.html dynamic_rank.js quick_buy_check.js auto_score.js stock_lookup_fix.js tenx_data.json tenx_history.json
           git diff --cached --quiet && exit 0
-
-          git commit -m "Auto update stock candidates"
-
-          for i in 1 2 3; do
-            git push && exit 0
-            git fetch origin main
-            git rebase origin/main
-          done
-
-          exit 1
+          git commit -m "Build complete English app and update data"
+          git push origin HEAD:english-version

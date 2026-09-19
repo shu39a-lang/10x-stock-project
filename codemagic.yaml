@@ -412,9 +412,10 @@ workflows:
           # Safety guard: never replace a working ranking with an empty/incomplete update.
           old_update = '    DATA.japan.short=convertRows(j.japan.short,"japan");\n    DATA.japan.mid=convertRows(j.japan.medium,"japan");\n    DATA.japan.long=convertRows(j.japan.long,"japan");\n\n    DATA.usa.short=convertRows(j.usa.short,"usa");\n    DATA.usa.mid=convertRows(j.usa.medium,"usa");\n    DATA.usa.long=convertRows(j.usa.long,"usa");'
           new_update = '    function applyIfValid(market,term,rows){\n      const converted=convertRows(rows,market);\n      if(Array.isArray(converted) && converted.length>=10){\n        DATA[market][term]=converted;\n      }else{\n        console.log("ranking update skipped:",market,term,"rows=",converted.length);\n      }\n    }\n\n    applyIfValid("japan","short",j.japan.short);\n    applyIfValid("japan","mid",j.japan.medium);\n    applyIfValid("japan","long",j.japan.long);\n\n    applyIfValid("usa","short",j.usa.short);\n    applyIfValid("usa","mid",j.usa.medium);\n    applyIfValid("usa","long",j.usa.long);'
-          if old_update not in s:
+          if old_update in s:
+              s=s.replace(old_update,new_update,1)
+          elif 'function applyIfValid(market,term,rows)' not in s:
               raise SystemExit("STOP: ranking update block not found")
-          s=s.replace(old_update,new_update,1)
 
           old='String(item.x.name || ""),'
           new='String(item.x.name_en || item.x.name || ""),'

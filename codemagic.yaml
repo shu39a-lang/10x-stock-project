@@ -60,9 +60,10 @@ workflows:
           cd ios/App
           xcode-project use-profiles
 
-      - name: Set build number
+      - name: Set version and build number
         script: |
           cd ios/App
+          agvtool new-marketing-version 1.2
           agvtool new-version -all "$BUILD_NUMBER"
 
       - name: Build IPA

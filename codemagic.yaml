@@ -881,7 +881,30 @@ workflows:
           }.items():
               z=z.replace(a,b)
           q.write_text(z,encoding="utf-8")
-          PY
+                    # Final layout-only fix: do not change app logic or data
+          p=Path("www/index.html")
+          x=p.read_text(encoding="utf-8")
+          layout_css = '''<style id="tenx-english-layout-fix">
+#analysisMarketJapan,#analysisMarketUs{
+  min-width:0!important;
+  font-size:10px!important;
+  padding:4px 1px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  line-height:1!important;
+}
+#analysisMarketJapan span,#analysisMarketUs span{
+  font-size:14px!important;
+}
+#rankingTitle{
+  padding-left:30px!important;
+  text-indent:-30px!important;
+  line-height:1.25!important;
+}
+</style>'''
+          x=x.replace("</head>",layout_css+"\n</head>",1)
+          p.write_text(x,encoding="utf-8")
+PY
 
       - name: Final verification before building
         script: |

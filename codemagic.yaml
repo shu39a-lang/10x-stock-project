@@ -14,9 +14,56 @@ workflows:
       node: latest
 
     scripts:
-      - name: Prepare English web app
+      - name: Prepare complete English web app
         script: |
           set -e
+
+          # Keep the English patch that currently exists on english-version.
+          cp -f index.html /tmp/english_patch.html
+
+          # Get the complete, working app source from main.
+          git fetch origin main
+          git show origin/main:index.html > /tmp/main_index.html
+          git show origin/main:dynamic_rank.js > /tmp/main_dynamic_rank.js
+          git show origin/main:quick_buy_check.js > /tmp/main_quick_buy_check.js
+          git show origin/main:auto_score.js > /tmp/main_auto_score.js
+          git show origin/main:stock_lookup_fix.js > /tmp/main_stock_lookup_fix.js
+
+          # Build a complete index.html by inserting the existing English patch
+          # immediately before </body> of the working main app.
+          python3 - <<'PY'
+          from pathlib import Path
+
+          main = Path("/tmp/main_index.html").read_text(encoding="utf-8")
+          patch = Path("/tmp/english_patch.html").read_text(encoding="utf-8")
+
+          main = main.replace('<html lang="ja">', '<html lang="en">', 1)
+          main = main.replace(
+              '"https://shu39a-lang.github.io/10x-stock-project/"',
+              '"https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/english-version/"'
+          )
+          main = main.replace("https://jp.tradingview.com/", "https://www.tradingview.com/")
+
+          if "</body>" not in main:
+              raise SystemExit("main index.html is incomplete")
+
+          complete = main.replace("</body>", patch + "\n</body>", 1)
+          Path("index.html").write_text(complete, encoding="utf-8")
+          PY
+
+          # Keep the proven working JS logic from main for this recovery build.
+          cp -f /tmp/main_dynamic_rank.js dynamic_rank.js
+          cp -f /tmp/main_quick_buy_check.js quick_buy_check.js
+          cp -f /tmp/main_auto_score.js auto_score.js
+          cp -f /tmp/main_stock_lookup_fix.js stock_lookup_fix.js
+
+          # Basic completeness checks.
+          test -s index.html
+          grep -q '<!doctype html>' index.html
+          grep -q '10X STOCK ZERO' index.html
+          grep -q 'dynamic_rank.js' index.html
+          grep -q 'quick_buy_check.js' index.html
+
           rm -rf www
           mkdir -p www
           cp -f index.html www/index.html
@@ -25,11 +72,6 @@ workflows:
           cp -f *.js www/ 2>/dev/null || true
           cp -f *.webmanifest www/ 2>/dev/null || true
           cp -f *.png www/ 2>/dev/null || true
-          test -s www/index.html
-          test -s www/dynamic_rank.js
-          test -s www/quick_buy_check.js
-          test -s www/auto_score.js
-          test -s www/stock_lookup_fix.js
 
       - name: Create Capacitor project
         script: |
@@ -77,7 +119,9 @@ workflows:
       - name: Build IPA
         script: |
           cd ios/App
-          xcode-project build-ipa --project "App.xcodeproj" --scheme "App"
+          xcode-project build-ipa \
+            --project "App.xcodeproj" \
+            --scheme "App"
 
     artifacts:
       - ios/App/build/ios/ipa/*.ipa

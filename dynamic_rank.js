@@ -290,13 +290,22 @@ async function updateDynamicRanking(){
       throw new Error("ranking data invalid");
     }
 
-    DATA.japan.short=convertRows(j.japan.short,"japan");
-    DATA.japan.mid=convertRows(j.japan.medium,"japan");
-    DATA.japan.long=convertRows(j.japan.long,"japan");
+    function applyIfValid(market,term,rows){
+      const converted=convertRows(rows,market);
+      if(Array.isArray(converted) && converted.length>=10){
+        DATA[market][term]=converted;
+      }else{
+        console.log("ranking update skipped:",market,term,"rows=",converted.length);
+      }
+    }
 
-    DATA.usa.short=convertRows(j.usa.short,"usa");
-    DATA.usa.mid=convertRows(j.usa.medium,"usa");
-    DATA.usa.long=convertRows(j.usa.long,"usa");
+    applyIfValid("japan","short",j.japan.short);
+    applyIfValid("japan","mid",j.japan.medium);
+    applyIfValid("japan","long",j.japan.long);
+
+    applyIfValid("usa","short",j.usa.short);
+    applyIfValid("usa","mid",j.usa.medium);
+    applyIfValid("usa","long",j.usa.long);
 
     installRankingDecorator();
 
@@ -321,4 +330,3 @@ if(document.readyState==="loading"){
 }
 
 })();
-

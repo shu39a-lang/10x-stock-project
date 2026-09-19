@@ -879,6 +879,28 @@ workflows:
               z=z.replace(a,b)
           q.write_text(z,encoding="utf-8")
 
+          # Final ranking-grade and remaining Settings text fix.
+          p=Path("www/index.html")
+          x=p.read_text(encoding="utf-8")
+
+          # A one-letter stock ticker (such as C) must never overwrite the grade function.
+          x,n_grade=re.subn(
+              r'function grade\(s\)\{return .*?\}',
+              'function grade(s){return s>=71?"A":s>=68?"B":s>=65?"C":"D"}',
+              x,
+              count=1
+          )
+          if n_grade != 1:
+              raise SystemExit("STOP: grade function not found")
+
+          # Remove the last Japanese subtitle in Settings & More.
+          x=x.replace(
+              "10X STOCK ZERO 最終完成版 v1.0",
+              "10X STOCK ZERO Final Version v1.0"
+          )
+
+          p.write_text(x,encoding="utf-8")
+
           # Final layout-only fix: labels and TOP10 heading alignment.
           p=Path("www/index.html")
           x=p.read_text(encoding="utf-8")
@@ -938,6 +960,11 @@ workflows:
               raise SystemExit("STOP: Japanese stable-icon label still present")
 
           idx=Path("www/index.html").read_text(encoding="utf-8")
+          if 'function grade(s){return s>=71?"A":s>=68?"B":s>=65?"C":"D"}' not in idx:
+              raise SystemExit("STOP: ranking grade function is not intact")
+          if "10X STOCK ZERO 最終完成版 v1.0" in idx:
+              raise SystemExit("STOP: Japanese Settings subtitle still present")
+
           for bad in [
               "Top Gainers<br>ランキング",
               "Top Losers<br>ランキング",

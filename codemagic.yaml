@@ -832,6 +832,57 @@ workflows:
           p.write_text(x,encoding="utf-8")
           PY
 
+      - name: Final mixed-language cleanup only
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path("www/index.html")
+          x=p.read_text(encoding="utf-8")
+
+          exact={
+              "Top Gainers<br>ランキング":"Top Gainers",
+              "Top Losers<br>ランキング":"Top Losers",
+              "Volume<br>ランキング":"Volume Ranking",
+              "出来高<br>ランキング":"Volume Ranking",
+              "Portfolio管理":"Portfolio",
+              "割安 ${v.valuation}｜品質/成長 ${v.quality}｜財務 ${v.financial}｜テクニカル ${v.technical}｜カタリスト ${v.catalyst}":
+                "Value ${v.valuation} | Quality & Growth ${v.quality} | Financial ${v.financial} | Technical ${v.technical} | Catalyst ${v.catalyst}",
+              'toLocaleString("ja-JP")':'toLocaleString("en-US")'
+          }
+          for a,b in exact.items():
+              x=x.replace(a,b)
+
+          about_pattern=re.compile(
+              r'(<div class="sectionbox" style="margin-top:14px">\s*'
+              r'<div class="sectiontitle">📊 About 10X STOCK ZERO</div>).*?'
+              r'(?=<div class="sectionbox" style="margin-top:14px">\s*'
+              r'<div class="sectiontitle">📄 Legal & Support</div>)',
+              re.S
+          )
+          ABOUT_HTML = '<div class="sectionbox" style="margin-top:14px">\n  <div class="sectiontitle">📊 About 10X STOCK ZERO</div>\n\n  <div class="note" style="font-size:11px;line-height:1.75;color:#d7e0ea">\n    10X STOCK ZERO screens a large number of Japan and U.S. stocks, considers liquidity, and combines multiple indicators for an overall assessment.\n    <br><br>\n\n    <b style="color:#ffc73d">Five Key Analysis Factors</b><br>\n    • Quality & Growth 25%<br>\n    • Technical Analysis 25%<br>\n    • Valuation 20%<br>\n    • Financial Health 15%<br>\n    • Growth Potential 15%\n    <br><br>\n\n    Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI, MACD, volume, and price momentum. Financial and company analysis considers PER, PBR, PSR, revenue growth, profit growth, ROE, profit margin, cash flow, and debt levels.\n    <br><br>\n\n    Different criteria are applied to Short Term, Mid Term, and Long Term, and TOP10 stocks are selected for each time horizon.\n    <br><br>\n\n    <span style="color:#93a2b5">\n      Scores and rankings do not guarantee future price increases or profits. Ratings may change with market conditions and company information. Make final investment decisions based on your own judgment.\n    </span>\n  </div>\n</div>\n\n'
+          x,n=about_pattern.subn(ABOUT_HTML,x,count=1)
+          if n!=1:
+              raise SystemExit("STOP: About section was not found for final cleanup")
+
+          p.write_text(x,encoding="utf-8")
+
+          q=Path("www/quick_buy_check.js")
+          z=q.read_text(encoding="utf-8")
+          for a,b in {
+              "Top Gainers Ranking":"Top Gainers",
+              "Top Losers Ranking":"Top Losers",
+              "Volume Ranking Ranking":"Volume Ranking",
+              "Top Gainersランキング":"Top Gainers",
+              "Top Losersランキング":"Top Losers",
+              "Volumeランキング":"Volume Ranking"
+          }.items():
+              z=z.replace(a,b)
+          q.write_text(z,encoding="utf-8")
+          PY
+
       - name: Final verification before building
         script: |
           set -e
@@ -852,6 +903,17 @@ workflows:
               raise SystemExit("STOP: Buy Timing English-name map missing")
           if 'icon("chart",22)+" データ・ランキング"' in quick:
               raise SystemExit("STOP: Japanese stable-icon label still present")
+
+          idx=Path("www/index.html").read_text(encoding="utf-8")
+          for bad in [
+              "Top Gainers<br>ランキング",
+              "Top Losers<br>ランキング",
+              "Volume<br>ランキング",
+              "割安 ${v.valuation}｜品質/成長",
+              "10X STOCK ZEROは、Japan Stocks"
+          ]:
+              if bad in idx:
+                  raise SystemExit("STOP: final mixed-language text still present: "+bad)
 
           # Full app must still be present.
           required=[

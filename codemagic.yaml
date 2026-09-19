@@ -247,8 +247,7 @@ workflows:
             "利用規約・免責事項":"Terms of Use & Disclaimer",
             "お問い合わせ・サポート":"Contact & Support",
             "ホーム":"Home",
-            "分析結果":"Analysis",
-            "保有株":"Portfolio",
+            "分析結果":"Analysis",            "保有株":"Portfolio",
             "お気に入り":"Favorites",
 
             "1. 市場と期間を選ぶ":"1. Select a Market and Term",
@@ -497,8 +496,7 @@ workflows:
             'st.textContent="✓ "+name+" ｜ 現在値 "+':
               'st.textContent="✓ "+name+" | Current Price "+',
             'st.textContent="✓ "+name+" を確認しました。現在値は取得できませんでした。";':
-              'st.textContent="✓ "+name+" found. Current price is unavailable.";',
-            'st.textContent="自動取得できませんでした。会社名と現在値を手入力できます。";':
+              'st.textContent="✓ "+name+" found. Current price is unavailable.";',            'st.textContent="自動取得できませんでした。会社名と現在値を手入力できます。";':
               'st.textContent="Automatic retrieval failed. Enter the company name and current price manually.";',
             'st.textContent="コードを入力すると会社名と現在値を確認します。";':
               'st.textContent="Enter a ticker to check the company name and current price.";',
@@ -747,8 +745,7 @@ workflows:
               "PBR-A":"Petrobras",
               "CVE":"Cenovus Energy",
               "FSM":"Fortuna Mining",
-              "7203":"Toyota Motor",
-              "6501":"Hitachi",
+              "7203":"Toyota Motor",              "6501":"Hitachi",
               "8001":"ITOCHU Corporation",
               "6594":"Nidec",
               "6971":"Kyocera",
@@ -881,39 +878,43 @@ workflows:
           }.items():
               z=z.replace(a,b)
           q.write_text(z,encoding="utf-8")
-                              # Final layout-only fix: do not change app logic or data
-                                        
-          
 
+          # Final layout-only fix: labels and TOP10 heading alignment.
           p=Path("www/index.html")
           x=p.read_text(encoding="utf-8")
-          # Analysis market buttons only: shorten labels so they fit cleanly.
-          x=x.replace('<span style="font-size:17px">🇯🇵</span> Japan Stocks</button>',
-                      '<span style="font-size:17px">🇯🇵</span> Japan</button>',1)
-                      x=x.replace('<span style="font-size:17px">🇺🇸</span> U.S. Stocks</button>',
-                      '<span style="font-size:17px">🇺🇸</span> U.S.</button>',1)
-          layout_css = '''<style id="tenx-english-layout-fix">
+
+          x=x.replace(
+              '<span style="font-size:17px">🇯🇵</span> Japan Stocks</button>',
+              '<span style="font-size:17px">🇯🇵</span> Japan</button>',
+              1
+          )
+          x=x.replace(
+              '<span style="font-size:17px">🇺🇸</span> U.S. Stocks</button>',
+              '<span style="font-size:17px">🇺🇸</span> U.S.</button>',
+              1
+          )
+
+          layout_css = """<style id="tenx-english-layout-fix">
           #analysisMarketJapan,#analysisMarketUs{
             min-width:0!important;
-            font-size:10px!important;
-            padding:4px 1px!important;
+            font-size:14px!important;
+            padding:4px 3px!important;
             white-space:nowrap!important;
             overflow:hidden!important;
             line-height:1!important;
           }
           #analysisMarketJapan span,#analysisMarketUs span{
-            font-size:14px!important;
+            font-size:17px!important;
           }
           #rankingTitle{
             padding-left:30px!important;
             text-indent:-30px!important;
             line-height:1.25!important;
           }
-          </style>'''
+          </style>"""
           x=x.replace("</head>",layout_css+"\n</head>",1)
           p.write_text(x,encoding="utf-8")
           PY
-
 
       - name: Final verification before building
         script: |

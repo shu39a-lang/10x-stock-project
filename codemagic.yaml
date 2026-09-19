@@ -1,628 +1,58 @@
 workflows:
   ios-workflow:
-    name: 10X STOCK ZERO English iOS
+    name: 10X STOCK ZERO iOS
     max_build_duration: 60
+
     integrations:
       app_store_connect: codemagic7
+
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.shu39a.tenxstockenglish
+        bundle_identifier: com.shu39a.10xstock
       xcode: latest
       node: latest
+
     scripts:
-      - name: Copy the current working Japanese app
+      - name: Prepare web app
         script: |
-          set -e
-          rm -rf www main_source
-          mkdir -p www main_source
-          BASE="https://raw.githubusercontent.com/shu39a-lang/10x-stock-project/main"
-          for f in index.html dynamic_rank.js quick_buy_check.js auto_score.js stock_lookup_fix.js tenx_data.json tenx_history.json live_quotes.json manifest.webmanifest sw.js; do
-            curl -fL --retry 3 "$BASE/$f" -o "www/$f" || true
-          done
+          mkdir -p www
+          cp -f index.html www/index.html
+          cp -f *.html www/ 2>/dev/null || true
+          cp -f *.json www/ 2>/dev/null || true
+          cp -f *.js www/ 2>/dev/null || true
+          cp -f *.webmanifest www/ 2>/dev/null || true
           cp -f *.png www/ 2>/dev/null || true
-          cp -f privacy.html terms.html support.html www/
-          test -s www/index.html
-          test -s www/privacy.html
-          test -s www/terms.html
-          test -s www/support.html
-          test -s www/dynamic_rank.js
-          test -s www/quick_buy_check.js
-          test -s www/auto_score.js
-          test -s www/stock_lookup_fix.js
-          cp -f www/dynamic_rank.js main_source/dynamic_rank.js
-          cp -f www/quick_buy_check.js main_source/quick_buy_check.js
-          cp -f www/auto_score.js main_source/auto_score.js
-          cp -f www/stock_lookup_fix.js main_source/stock_lookup_fix.js
-          grep -q 'function renderRanking' www/index.html
-          grep -q 'calcScore();renderRanking();' www/index.html
-
-      - name: Add English display without replacing app logic
-        script: |
-          set -e
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path("www/index.html")
-          s=p.read_text(encoding="utf-8")
-          s=s.replace('<html lang="ja">','<html lang="en">',1)
-
-          # Direct English source-text conversion for the English build only.
-          direct_ui = {
-            "銘柄を確認・入力して分析":"Check & Analyze a Stock","市場":"Market","銘柄コード":"Ticker","会社名":"Company Name",
-            "株数":"Shares","購入単価":"Buy Price","現在値":"Current Price","メモ":"Memo","任意":"Optional",
-            "コードを入力すると会社名と現在値を確認します。":"Enter a ticker to load company name and current price.",
-            "株価・会社情報を確認":"View Stock Info","入力をクリア":"Clear",
-            "割安性（20点）":"Value (20 pts)","品質・成長（25点）":"Quality & Growth (25 pts)","財務（15点）":"Financial (15 pts)",
-            "カタリスト（15点）":"Catalyst (15 pts)","テクニカル（25点）":"Technical (25 pts)","格付":"Grade",
-            "分析結果を保存":"Save Analysis","保有株として保存":"Save to Portfolio","お気に入り登録":"Add to Favorites",
-            "分析履歴":"Analysis History","まだ分析履歴はありません。":"No analysis history yet.",
-            "保有株管理":"My Portfolio","まだ保有株の登録はありません。":"No holdings yet.","お気に入りはまだありません。":"No favorites yet.",
-            "設定・その他":"Settings & More","バックアップを保存":"Save Backup","バックアップから復元":"Restore from Backup",
-            "分析履歴を消去":"Clear Analysis History","全保存データを消去":"Delete All Data","ホームへ戻る":"Back to Home",
-            "10X STOCK ZEROの分析について":"About 10X STOCK ZERO","主な5つの分析項目":"Five Key Analysis Factors",
-            "企業の質・成長性 25%":"Quality & Growth 25%","テクニカル分析 25%":"Technical Analysis 25%",
-            "割安性 20%":"Valuation 20%","財務安全性 15%":"Financial Health 15%","成長材料 15%":"Growth Potential 15%",
-            "法務・サポート":"Legal & Support","プライバシーポリシー":"Privacy Policy","利用規約":"Terms of Use","サポート":"Support",
-            "使い方ガイド":"User Guide","1. 市場と期間を選ぶ":"1. Select a Market and Term","2. TOP10を見る":"2. View the TOP10 Ranking",
-            "3. TOP10の更新時間":"3. Check Update Times","順位":"Rank","コード":"Ticker","銘柄名":"Company","スコア":"Score",
-            "日本株":"Japan Stocks","米国株":"U.S. Stocks","短期":"Short Term","中期":"Mid Term","長期":"Long Term",
-            "上昇期待":"Upside Potential","安定上昇":"Steady Growth","成長株":"Growth Stock",
-            "買いタイミング診断":"Buy Timing Analysis","診断する":"Analyze","総合判断":"Overall Rating","判断の理由":"Reason",
-            "総合スコア":"Overall Score","総合":"Overall","テクニカル":"Technical","トレンド":"Trend","様子見":"Wait","慎重":"Caution",
-            "トヨタ自動車":"Toyota Motor","出光興産":"Idemitsu Kosan","ＥＮＥＯＳホールディングス":"ENEOS Holdings",
-            "伊藤忠商事":"Itochu","三井物産":"Mitsui & Co.","住友商事":"Sumitomo Corporation","丸紅":"Marubeni","富士通":"Fujitsu",
-            "カプコン":"Capcom","商船三井":"Mitsui O.S.K. Lines","ヌー・ホールディングス":"Nu Holdings","シェル":"Shell",
-            "シェブロン":"Chevron","クラウドストライク・ホールディングス":"CrowdStrike Holdings","メドトロニック":"Medtronic",
-            "台湾積体電路製造（TSMC）":"Taiwan Semiconductor (TSMC)","ペトロブラス":"Petrobras","エクソンモービル":"Exxon Mobil",
-            "コノコフィリップス":"ConocoPhillips",
-            "ホーム画面で「Japan Stocks」または「U.S. Stocks」を選び、投資期間を選択します。":"On the Home screen, choose Japan Stocks or U.S. Stocks, then select an investment term.",
-            "選択した市場と期間に合わせて、TOP10が切り替わります。":"The TOP10 ranking changes according to the selected market and term.",
-            "TOP10には、銘柄コード・銘柄名・総合スコア・格付が表示されます。":"TOP10 shows the ticker, company name, overall score, and grade.",
-            "順位左側の色は、銘柄の特徴を示しています。":"The color beside each rank indicates the stock's characteristics.",
-            "データは、原則として日本時間の次の時刻に更新されます。":"Data is generally updated at the following times (Japan time)."
-          }
-          # direct_ui is merged below so all translations are applied once, longest phrase first.
-
-          # DIRECT SOURCE ENGLISH — translate the successful Japanese source before packaging.
-          source_english={'みずほフィナンシャルグループ': 'Mizuho Financial Group', 'ニデック': 'Nidec', 'レオパレス２１': 'Leopalace21', '豊和工業': 'Howa Machinery', '日本たばこ産業': 'Japan Tobacco', '日本製鉄': 'Nippon Steel', '野村ホールディングス': 'Nomura Holdings', 'ＳＯＭＰＯホールディングス': 'SOMPO Holdings', '武田薬品工業': 'Takeda Pharmaceutical', 'デル・テクノロジーズ': 'Dell Technologies', 'S&P トロント総合指数': 'S&P/TSX Composite', 'ハスキー・エナジー': 'Husky Energy', 'ペトロブラス': 'Petrobras', 'エクソンモービル': 'Exxon Mobil', 'コノコフィリップス': 'ConocoPhillips', '使い方ガイド': 'User Guide', '株式分析ツール': 'Stock Analysis Tool', '日本株': 'Japan Stocks', '米国株': 'U.S. Stocks', '短期': 'Short Term', '中期': 'Mid Term', '長期': 'Long Term', '〜6か月': 'Up to 6 months', '6か月〜1年': '6–12 months', '1年以上': '1+ year', '全て見る 〉': 'View All 〉', '11〜20位を見る': 'View 11–20', 'TOP10に戻る': 'Back to TOP10', '順位': 'Rank', 'コード': 'Ticker', '銘柄名': 'Company', 'スコア': 'Score', '格付': 'Grade', 'ホーム': 'Home', '分析結果': 'Analysis', '保有株': 'Portfolio', 'お気に入り': 'Favorites', '設定・その他': 'Settings & More', '銘柄を確認・入力して分析': 'Check & Analyze a Stock', '新規銘柄・保有株を5項目で分析': 'Analyze stocks using 5 factors', '📊 データ・ランキング': '📊 Data & Rankings', '値上がり': 'Top Gainers', '値下がり': 'Top Losers', '出来高': 'Volume', '急増': 'Surge', '決算カレンダー': 'Earnings Calendar', '52週高値': '52-Week High', 'セクター動向': 'Sector Trends', 'スクリーナー': 'Screener', '📋 分析・検索': '📋 Analysis & Search', '個別銘柄検索': 'Stock Search', '分析履歴': 'Analysis History', 'アドバンテスト': 'Advantest', '東京エレクトロン': 'Tokyo Electron', '三菱重工業': 'Mitsubishi Heavy Industries', 'フジクラ': 'Fujikura', 'ソフトバンクG': 'SoftBank Group', 'ソフトバンクグループ': 'SoftBank Group', '日立製作所': 'Hitachi', 'トヨタ自動車': 'Toyota Motor', '三菱UFJ FG': 'Mitsubishi UFJ Financial Group', '三菱UFJフィナンシャル・グループ': 'Mitsubishi UFJ Financial Group', '信越化学工業': 'Shin-Etsu Chemical', 'ダイキン工業': 'Daikin Industries', '三菱商事': 'Mitsubishi Corporation', '東京海上HD': 'Tokio Marine Holdings', 'ソニーグループ': 'Sony Group', '日本電信電話': 'NTT', '任天堂': 'Nintendo', 'キーエンス': 'Keyence', 'リクルートホールディングス': 'Recruit Holdings', '買いタイミング診断': 'Buy Timing Analysis', '気になる銘柄コードを入力して、現在の買い条件を確認': 'Enter a ticker to check the current buy conditions', '診断する': 'Analyze', '現在の分析データを使って判定します。': 'Uses current analysis data.', '診断結果を表示しました。': 'Analysis complete.', '総合判断': 'Overall Rating', '様子見': 'Wait', '慎重': 'Caution', '買い': 'Buy', '強い買い': 'Strong Buy', '総合': 'Overall', 'テクニカル': 'Technical', 'トレンド': 'Trend', '判断の理由': 'Reason', '総合スコア': 'Overall Score', '品質・成長': 'Quality & Growth', '財務': 'Financial', '割安性': 'Value', 'カタリスト': 'Catalyst', '市場': 'Market', '銘柄コード': 'Ticker', '会社名': 'Company Name', '株数': 'Shares', '購入単価': 'Buy Price', '現在値': 'Current Price', 'メモ': 'Memo', '任意': 'Optional', '株価・会社情報を確認': 'View Stock Info', '入力をクリア': 'Clear', '外部サイトで情報を確認し、5項目を0〜100で評価すると自動で総合スコアを計算します。': 'Check external information and rate 5 factors from 0–100 to calculate the overall score.', 'コードを入力すると会社名と現在値を確認します。': 'Enter a ticker to check the company name and current price.', '注目・急増・高値': 'Watch, Surge & Highs', '管理・設定': 'Management & Settings', '保有株管理': 'Holdings', '保有銘柄の管理': 'Manage holdings', '設定': 'Settings', '各種設定': 'App settings', '登録銘柄一覧': 'Saved stocks', '過去の分析結果': 'Past analysis results', '銘柄コード・銘柄名で検索': 'Search by ticker or company', 'すぐ使う': 'Quick Access', '銘柄分析': 'Stock Analysis', 'データ・': 'Data & Rankings', '保存・管理': 'Portfolio & Management', 'ヘルプ': 'Help', 'バックアップを保存': 'Save Backup', 'バックアップから復元': 'Restore from Backup', '分析履歴を消去': 'Clear Analysis History', '全保存データを消去': 'Delete All Data', 'ホームへ戻る': 'Back to Home', '10X STOCK ZEROの分析について': 'About 10X STOCK ZERO', '主な5つの分析項目': 'Five Key Analysis Factors', '企業の質・成長性 25%': 'Quality & Growth 25%', 'テクニカル分析 25%': 'Technical Analysis 25%', '割安性 20%': 'Valuation 20%', '財務安全性 15%': 'Financial Health 15%', '成長材料 15%': 'Growth Potential 15%', '最終完成版': 'Final Complete', '出光興産': 'Idemitsu Kosan', 'ＥＮＥＯＳホールディングス': 'ENEOS Holdings', 'ENEOSホールディングス': 'ENEOS Holdings', '伊藤忠商事': 'Itochu', '三井物産': 'Mitsui & Co.', '台湾積体電路製造（TSMC）': 'Taiwan Semiconductor (TSMC)', 'ヌー・ホールディングス': 'Nu Holdings', 'シェル': 'Shell', 'シェブロン': 'Chevron', 'クラウドストライク・ホールディングス': 'CrowdStrike Holdings', 'メドトロニック': 'Medtronic', 'レオパレス21': 'Leopalace21', '住友商事': 'Sumitomo Corporation', 'カプコン': 'Capcom', '丸紅': 'Marubeni', '商船三井': 'Mitsui O.S.K. Lines', '富士通': 'Fujitsu', 'この端末に保存した保有銘柄です。損益は入力した現在値で計算します。': 'Manage your holdings saved on this device.', 'まだ保有株の登録はありません。': 'No holdings yet.', 'お気に入りはまだありません。': 'No favorites yet.', '保有株から登録した銘柄です。': 'Stocks you have added to Favorites.', 'やHoldingsから登録した銘柄です。': 'Stocks you have added to Favorites.', '◎ 選択中：': '◎ Selected: ', '🏆 日本株・短期 TOP10': '🏆 Japan Stocks • Short Term TOP10', '🟥 赤：上昇期待\u3000\u3000🟦 青：安定上昇\u3000\u3000🟨 黄：成長株': '🟥 Upside   🟦 Steady   🟨 Growth', '🕒 TOP10 データ更新時間（日本時間）': '🕒 TOP10 Data Update Time (JST)', '06:30頃': 'Around 06:30', '16:00頃': 'Around 16:00', '（アメリカ株）': '(U.S. Stocks)', '（日本株）': '(Japan Stocks)', '米国上場企業': 'U.S.-listed', 'ランキング': '', '※この診断は現在の分析データによる判断目安です。将来の株価上昇や利益を保証するものではありません。': '* Based on current data. Not investment advice or a guarantee of future performance.', '総合スコアは慎重に確認したい水準です。': 'Overall score is at a moderate level.', 'テクニカル面はまだ弱めです。': 'Technical indicators are still weak.', '財務評価には確認余地があります。': 'Financial metrics require further review.', '10X STOCK ZEROは、Japan Stocks・U.S. Stocksの市場データから多数の銘柄をスクリーニングし、流動性を考慮したうえで、複数の指標を組み合わせて総合評価しています。': '10X STOCK ZERO screens many stocks using Japan and U.S. market data, considers liquidity, and combines multiple indicators to produce an overall evaluation.', 'テクニカル分析では、20日・50日・200日移動平均、RSI、MACD、出来高、株価モメンタムなどを使用しています。財務・企業分析では、PER、PBR、PSR、売上成長、利益成長、ROE、利益率、キャッシュフロー、負債水準などを参考にしています。': 'Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI, MACD, volume, and price momentum. Financial and company analysis references PER, PBR, PSR, revenue growth, profit growth, ROE, profit margin, cash flow, and debt levels.', 'Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、各期間別に適した銘柄を評価してTOP10を選定しています。': 'Different criteria are applied to Short Term, Mid Term, and Long Term, and TOP10 stocks are selected for each period.', '企業の質・成長性も高く評価されています。': 'Quality and growth are also rated highly.', '1. 市場と期間を選ぶ': '1. Select a Market and Term', 'ホーム画面で「Japan Stocks」または「U.S. Stocks」を選び、投資期間を選択します。': 'Choose either Japan Stocks or U.S. Stocks on the Home screen, then select the investment term.', 'Short Term：6か月以内': 'Short Term: Up to 6 months', 'Mid Term：6か月〜1年': 'Mid Term: 6–12 months', 'Long Term：1年以上': 'Long Term: 1+ year', '選択した市場と期間に合わせて、TOP10が切り替わります。': 'The TOP10 ranking changes according to the selected market and term.', '2. TOP10を見る': '2. View the TOP10 Ranking', 'TOP10には、銘柄コード・銘柄名・総合スコア・格付が表示されます。': 'TOP10 shows the ticker, company name, overall score, and grade.', '「11〜20位を見る」を押すと20位まで表示でき、「TOP10に戻る」を押すと元に戻ります。': 'Tap View 11–20 to show ranks 11–20, and Back to TOP10 to return.', '順位左側の色は、銘柄の特徴を示しています。': 'Rank colors indicate the stock’s characteristics.', '赤：Upside Potential': 'Red: Upside Potential', '青：Steady Growth': 'Blue: Steady Growth', '黄：Growth Stock': 'Yellow: Growth Stock', 'この色分けは銘柄の特徴を表すもので、売買を直接指示するものではありません。': 'These colors describe stock characteristics and do not directly indicate a buy or sell action.', '星印を押すと「Favorites」に登録できます。': 'Tap the star to add a stock to Favorites.', '銘柄コードまたは銘柄名を押すと、外部サイトで詳しい株価情報を確認できます。': 'Tap a ticker or company name to view detailed stock information on an external site.', '3. TOP10の更新時間': '3. Check Update Times', 'データは、原則として日本時間の次の時刻に更新されます。': 'Data is generally updated at the following times (Japan time).', 'U.S. Stocks：午前6時30分頃': 'U.S. Stocks: Around 6:30 AM', 'Japan Stocks：午後4時頃': 'Japan Stocks: Around 4:00 PM', '選択中：': 'Selected: ', 'データ更新時間（日本時間）': 'Data Update Times (Japan Time)', 'アメリカ株': 'U.S. Stocks', 'お気に入りと保有株管理': 'Favorites & Portfolio', '設定・バックアップ': 'Settings & Backup', '重要な注意事項': 'Important Notes', 'TOP10や分析画面で登録した銘柄を一覧で確認できます。気になる銘柄を継続して確認するときに使用します。': 'View stocks saved from the TOP10 or Analysis screen. Use Favorites to keep track of stocks you want to monitor.', '保有株の株数、購入単価、現在値、損益額、損益率を確認できます。「現在値を反映」を押すと、取得可能な最新株価へ更新します。取得できない場合は現在値を手入力できます。': 'View shares, purchase price, current price, profit/loss, and return for your holdings. Tap Update Current Price to load the latest available price. If unavailable, enter it manually.', '保有株、お気に入り、分析履歴などは端末内に保存されます。機種変更や再インストールに備え、定期的にバックアップを保存してください。': 'Holdings, Favorites, and Analysis History are stored on this device. Save backups regularly in case you change devices or reinstall the app.', '10X STOCK ZEROのスコア、ランキング、買いタイミング診断は、株式分析を補助するための判断目安です。特定銘柄の購入や売却を勧めるものではなく、将来の株価上昇や利益を保証するものではありません。': '10X STOCK ZERO scores, rankings, and Buy Timing Analysis are reference tools for stock analysis. They do not recommend buying or selling any specific stock and do not guarantee future price increases or profits.', '市場環境、決算、ニュース、為替などによって評価や株価は変動します。最終的な投資判断は、外部サイトの最新情報も確認したうえで、利用者ご自身の責任で行ってください。': 'Scores and prices may change with market conditions, earnings, news, exchange rates, and other factors. Make investment decisions using your own judgment after checking current external information.', '9. お気に入りと保有株管理': '9. Favorites & Portfolio', '10. 設定・バックアップ': '10. Settings & Backup', '6. 分析結果を保存する': '6. Save Analysis Results', '7. データ・ランキングのリンク': '7. Data & Ranking Links', '8. 注目・急増・高値のリンク': '8. Watch, Surge & High Links'}
-          source_english.update({
-            "日本マイクロニクス":"Japan Micronics","日本郵政":"Japan Post Holdings","第一ライフグループ":"Dai-ichi Life Holdings","村田製作所":"Murata Manufacturing","ＫＯＫＵＳＡＩ　ＥＬＥＣＴＲＩＣ":"KOKUSAI ELECTRIC","ＦＵＪＩ":"FUJI Corporation","京セラ":"Kyocera","ルネサスエレクトロニクス":"Renesas Electronics","豊田通商":"Toyota Tsusho","大和証券グループ本社":"Daiwa Securities Group","ＭＳ＆ＡＤインシュアランスグループホールディングス":"MS&AD Insurance Group Holdings","パナソニック　ホールディングス":"Panasonic Holdings","三井住友フィナンシャルグループ":"Sumitomo Mitsui Financial Group","小松製作所":"Komatsu","アステラス製薬":"Astellas Pharma","ブラザー工業":"Brother Industries","日本電気":"NEC","インフロニア・ホールディングス":"INFRONEER Holdings","ソフトバンク":"SoftBank Corp.","富士電機":"Fuji Electric","オムロン":"OMRON",
-            "台湾積体電路製造（TSMC）":"Taiwan Semiconductor Manufacturing","マイクロン・テクノロジー":"Micron Technology","アルファベット":"Alphabet","デボン・エナジー":"Devon Energy","クラウドストライク・ホールディングス":"CrowdStrike Holdings","カナディアン・ナチュラル・リソーシズ":"Canadian Natural Resources","オキシデンタル・ペトロリアム":"Occidental Petroleum","エヌビディア":"NVIDIA","テスラ":"Tesla","メタ・プラットフォームズ":"Meta Platforms","マイクロソフト":"Microsoft","ブロードコム":"Broadcom","インテル":"Intel","アドバンスト・マイクロ・デバイセズ":"Advanced Micro Devices","アマゾン・ドット・コム":"Amazon","パランティア・テクノロジーズ":"Palantir Technologies","オラクル":"Oracle","セールスフォース":"Salesforce","アップル":"Apple"
-          })
-          source_english.update(direct_ui)
-          for old,new in sorted(source_english.items(), key=lambda kv: len(kv[0]), reverse=True):
-              s=s.replace(old,new)
-
-          # Dynamic ranking names: display-only conversion; DATA and ranking math remain untouched.
-          company_english={k:v for k,v in source_english.items() if any(ch in k for ch in "アドバンテスト東京三菱日立トヨタ富士通丸紅伊藤忠商事みずほニデックレオパレス豊和日本製鉄野村武田ヌーシェルシェブロンデルペトロブラス")}
-          helper="<script>window.tenxEnglishName=function(code,name){const m="+repr(company_english)+";return m[name]||name;};</script>"
-          s=s.replace("</head>",helper+"\\n</head>",1)
-          s=s.replace('>${x[1]}</a>', '>${window.tenxEnglishName(x[0],x[1])}</a>')
-
-          # Convert all user-facing market links from Japanese destinations to English destinations.
-          url_map={
-            "https://finance.yahoo.co.jp/stocks/ranking/up?market=all":"https://www.tradingview.com/markets/stocks-japan/market-movers-gainers/",
-            "https://finance.yahoo.co.jp/stocks/us/ranking/up":"https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/",
-            "https://finance.yahoo.co.jp/stocks/ranking/down?market=all":"https://www.tradingview.com/markets/stocks-japan/market-movers-losers/",
-            "https://finance.yahoo.co.jp/stocks/us/ranking/down":"https://www.tradingview.com/markets/stocks-usa/market-movers-losers/",
-            "https://finance.yahoo.co.jp/stocks/ranking/volume?market=all&term=daily":"https://www.tradingview.com/markets/stocks-japan/market-movers-active/",
-            "https://finance.yahoo.co.jp/stocks/us/ranking/volume":"https://www.tradingview.com/markets/stocks-usa/market-movers-active/",
-            "https://jp.tradingview.com/":"https://www.tradingview.com/"
-          }
-          for old,new in url_map.items(): s=s.replace(old,new)
-
-          old_stock='function stockUrl(m,c){return m==="japan"?"https://finance.yahoo.co.jp/quote/"+encodeURIComponent(c)+".T":"https://finance.yahoo.co.jp/quote/"+encodeURIComponent(c)}'
-          new_stock='function stockUrl(m,c){return m==="japan"?"https://www.tradingview.com/symbols/TSE-"+encodeURIComponent(c)+"/":"https://www.tradingview.com/symbols/"+encodeURIComponent(c)+"/"}'
-          if old_stock not in s: raise SystemExit("STOP: stockUrl changed on main")
-          s=s.replace(old_stock,new_stock,1)
-
-
-          p.write_text(s,encoding="utf-8")
-          PY
-
-      - name: Verify working engine is still present
-        script: |
-          set -e
-          grep -q '<html lang="en">' www/index.html
-          grep -q 'function renderRanking' www/index.html
-          grep -q 'calcScore();renderRanking();' www/index.html
-          grep -q 'data-market="japan"' www/index.html
-          grep -q 'data-market="usa"' www/index.html
-          grep -q 'data-term="short"' www/index.html
-          grep -q 'data-term="mid"' www/index.html
-          grep -q 'data-term="long"' www/index.html
-          grep -q 'https://www.tradingview.com/markets/stocks-japan/market-movers-gainers/' www/index.html
-          grep -q 'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/' www/index.html
-          grep -q 'https://www.tradingview.com/symbols/TSE-' www/index.html
-          if grep -q 'https://jp.tradingview.com/' www/index.html; then echo "Japanese TradingView URL remains"; exit 1; fi
-          if grep -q 'https://finance.yahoo.co.jp/' www/index.html; then echo "Japanese Yahoo Finance URL remains"; exit 1; fi
-          test -s www/tenx_history.json
-          test -s www/sw.js
-          grep -q 'function renderRanking' www/index.html
-          grep -q 'calcScore();renderRanking();' www/index.html
-          for f in dynamic_rank.js quick_buy_check.js auto_score.js stock_lookup_fix.js; do
-            test -s "www/$f"
-            cmp -s "main_source/$f" "www/$f" || { echo "STOP: $f differs from proven Japanese main"; exit 1; }
-          done
-          node --check www/dynamic_rank.js
-          echo "VERIFIED: current working main engine + history + service worker + English display layer"
 
       - name: Create Capacitor project
         script: |
-          set -e
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          npx cap init "10X STOCK ZERO" "com.shu39a.tenxstockenglish" --web-dir=www --skip-appid-validation
+          npx cap init "10X STOCK ZERO" "com.shu39a.stock10x" --web-dir=www --skip-appid-validation
           npx cap add ios
-          cat > capacitor.config.json <<'JSON'
-          {
-            "appId": "com.shu39a.tenxstockenglish",
-            "appName": "10X STOCK ZERO",
-            "webDir": "www",
-            "plugins": {"CapacitorHttp":{"enabled":true}}
-          }
-          JSON
+          printf '{"plugins":{"CapacitorHttp":{"enabled":true}}}' > capacitor.config.json
           npx cap sync ios
+          perl -pi -e 's/com\.shu39a\.stock10x/com.shu39a.10xstock/g' ios/App/App.xcodeproj/project.pbxproj
 
-
-      - name: Translate dynamic user-facing text safely
+      - name: Install finalized app icon
         script: |
-          set -e
-          python3 - <<'PY'
-          from pathlib import Path
-
-          # Only user-facing literals are changed here. Calculation thresholds, ranking rules,
-          # score formulas, network/data retrieval, and internal market/category keys are untouched.
-          files={
-            "quick_buy_check.js":{
-              "買いタイミング診断":"Buy Timing Analysis","データ・ランキング":"Data & Rankings","注目・急増・高値":"Watch, Surge & Highs","分析・検索":"Analysis & Search",
-              "値上がり":"Top Gainers","値下がり":"Top Losers","出来高\\nランキング":"Volume\\nRanking","出来高\\n急増":"Volume\\nSurge","決算カレンダー":"Earnings Calendar","52週高値":"52-Week Highs","セクター動向":"Sector Trends","スクリーナー":"Screener",
-              "出来高 急増":"Volume Surge","出来高 ランキング":"Volume Ranking","TOP10 データ更新時間（日本時間）":"TOP10 Data Update Time (JST)","TOP10 データ更新時間":"TOP10 Data Update Time","TOP10ランキング":"TOP10 Ranking",
-              "気になる銘柄コードを入力して、現在の買い条件を確認":"Enter a ticker to check current conditions","診断する":"Analyze","現在の分析データを使って判定します。":"Uses current analysis data.",
-              "様子見":"Wait","強い買い":"Strong Buy","買い":"Buy","慎重":"Caution",
-              "総合スコアが高い水準です。":"Overall score is high.","総合スコアは買いを検討できる水準です。":"Overall score is at a level worth reviewing.","総合スコアは慎重に確認したい水準です。":"Overall score is at a moderate level.","総合スコアは様子を見たい水準です。":"Overall score suggests waiting for now.",
-              "テクニカル面の勢いは良好です。":"Technical momentum is positive.","テクニカル面はまだ弱めです。":"Technical indicators are still weak.","企業の質・成長性も高く評価されています。":"Quality and growth are rated highly.","財務評価には確認余地があります。":"Financial metrics require further review.",
-              "日本株":"Japan Stocks","米国株":"U.S. Stocks","円":"JPY","総合判断":"Overall Rating","総合":"Overall","テクニカル":"Technical","トレンド":"Trend","判断の理由":"Reasons","総合スコア":"Overall Score","品質・成長":"Quality & Growth","財務":"Financial","割安性":"Value","カタリスト":"Catalyst",
-              "※この診断は現在の分析データによる判断目安です。将来の株価上昇や利益を保証するものではありません。":"* Based on current analysis data. This does not guarantee future price increases or profits.",
-              "銘柄コードを入力してください。":"Enter a ticker.","分析しています…":"Analyzing…","現在の分析対象データでは見つかりませんでした。":"Not found in the current analysis data.","診断結果を表示しました。":"Analysis complete.","分析データを読み込めませんでした。":"Could not load analysis data."
-            },
-            "stock_lookup_fix.js":{
-              " ｜ 現在値 ":" | Current Price "," を確認しました。現在値は取得できませんでした。":" confirmed. Current Price could not be retrieved.","自動取得できませんでした。会社名と現在値を手入力できます。":"Automatic retrieval failed. Enter Company Name and Current Price manually.","コードを入力すると会社名と現在値を確認します。":"Enter a ticker to check Company Name and Current Price.","会社名・現在値を検索中…":"Loading Company Name and Current Price…"
-            },
-            "auto_score.js":{
-              "現在値を反映":"Update Current Price","バックアップを保存":"Save Backup","バックアップから復元":"Restore Backup","日本株スクリーナー":"Japan Stock Screener","日本語で銘柄を絞り込み":"Filter stocks","米国株スクリーナー":"U.S. Stock Screener","市場データの自動取得は行いません":"Market data is not fetched automatically","保有株の現在値は取得可能な市場データから更新します。取得できない場合は手入力できます。特定銘柄の売買を推奨するものではありません。":"Holding prices are updated from available market data. If unavailable, enter them manually. This does not recommend trading any specific stock.","現在値を取得中…":"Loading current price…","最新株価を取得できませんでした。通信状態を確認してもう一度押すか、現在値を手入力してください。":"Could not retrieve the latest price. Check your connection and try again, or enter the current price manually.","10X STOCK ZERO バックアップ":"10X STOCK ZERO Backup","バックアップを保存できませんでした。もう一度お試しください。":"Could not save the backup. Please try again."
-            }
-          }
-          for fn,mp in files.items():
-              p=Path('www')/fn
-              s=p.read_text(encoding='utf-8')
-              for old,new in sorted(mp.items(),key=lambda kv:len(kv[0]),reverse=True): s=s.replace(old,new)
-              p.write_text(s,encoding='utf-8')
-
-          # English company names at the exact display boundary. Data and ranking math remain unchanged.
-          EN={
-          "6501":"Hitachi","9433":"KDDI","8001":"ITOCHU","6594":"Nidec","6971":"Kyocera","8002":"Marubeni","8725":"MS&AD Insurance Group Holdings","8601":"Daiwa Securities Group","8053":"Sumitomo Corporation","6752":"Panasonic Holdings","9432":"NTT","8316":"Sumitomo Mitsui Financial Group","6301":"Komatsu","6702":"Fujitsu","8306":"Mitsubishi UFJ Financial Group","4502":"Takeda Pharmaceutical","6723":"Renesas Electronics","7011":"Mitsubishi Heavy Industries","6871":"Japan Micronics","6920":"Lasertec","9697":"Capcom","6178":"Japan Post Holdings","8750":"Dai-ichi Life Holdings","8848":"Leopalace21","6701":"NEC","5076":"INFRONEER Holdings","6448":"Brother Industries","5019":"Idemitsu Kosan","4503":"Astellas Pharma","8015":"Toyota Tsusho","2914":"Japan Tobacco","9434":"SoftBank Corp.","6981":"Murata Manufacturing","6525":"KOKUSAI ELECTRIC","6134":"FUJI Corporation","6857":"Advantest","8058":"Mitsubishi Corporation","9984":"SoftBank Group","6504":"Fuji Electric","6645":"OMRON","285A":"Kioxia Holdings","6976":"Taiyo Yuden","5803":"Fujikura","4062":"Ibiden","8035":"Tokyo Electron","5801":"Furukawa Electric","278A":"Terra Drone","6146":"DISCO","6098":"Recruit Holdings","7203":"Toyota Motor","8411":"Mizuho Financial Group","7974":"Nintendo","9983":"Fast Retailing",
-          "DELL":"Dell Technologies","HPE":"Hewlett Packard Enterprise","TSM":"Taiwan Semiconductor Manufacturing","AMD":"Advanced Micro Devices","FTNT":"Fortinet","GGB":"Gerdau","MU":"Micron Technology","CVX":"Chevron","CVE":"Cenovus Energy","APA":"APA Corporation","ANET":"Arista Networks","GOOG":"Alphabet","DVN":"Devon Energy","ASX":"ASE Technology Holding","BP":"BP","GOOGL":"Alphabet","CRWD":"CrowdStrike Holdings","XOM":"Exxon Mobil","BBD":"Banco Bradesco","AAPL":"Apple","UMC":"United Microelectronics","FSM":"Fortuna Mining","IAG":"IAMGOLD","PBR-A":"Petrobras ADR Class A","PBR":"Petrobras","CNQ":"Canadian Natural Resources","SHEL":"Shell","BTG":"B2Gold","SONY":"Sony Group","PR":"Permian Resources","XP":"XP Inc.","COP":"ConocoPhillips","TAL":"TAL Education Group","OXY":"Occidental Petroleum","WDC":"Western Digital","NVDA":"NVIDIA","SNDK":"Sandisk","TSLA":"Tesla","META":"Meta Platforms","MSFT":"Microsoft","AVGO":"Broadcom","INTC":"Intel","AMZN":"Amazon","MRVL":"Marvell Technology","PLTR":"Palantir Technologies","ORCL":"Oracle","CRM":"Salesforce","MRNA":"Moderna"
-          }
-          import json
-          en_js='const TENX_EN_NAMES='+json.dumps(EN,ensure_ascii=False,separators=(',',':'))+';\n'
-          ip=Path('www/index.html'); ins=ip.read_text(encoding='utf-8')
-          override='<script>window.tenxEnglishName=function(code,name){const m='+json.dumps(EN,ensure_ascii=False,separators=(',',':'))+';return m[String(code||\"\").toUpperCase()]||name||code;};</script>'
-          ins=ins.replace('</head>',override+'\n</head>',1)
-          ip.write_text(ins,encoding='utf-8')
-          q=Path('www/quick_buy_check.js'); qs=q.read_text(encoding='utf-8')
-          if 'const TENX_EN_NAMES=' not in qs: qs=qs.replace('"use strict";', '"use strict";\n'+en_js,1)
-          qs=qs.replace('${x.code||""}　${x.name||""}', '${x.code||""}　${TENX_EN_NAMES[String(x.code||"").toUpperCase()]||x.name||""}')
-          q.write_text(qs,encoding='utf-8')
-          l=Path('www/stock_lookup_fix.js'); ls=l.read_text(encoding='utf-8')
-          if 'const TENX_EN_NAMES=' not in ls: ls=ls.replace('"use strict";', '"use strict";\n'+en_js,1)
-          ls=ls.replace('  const source=\n', '  name=TENX_EN_NAMES[String(code||"").toUpperCase()]||name;\n\n  const source=\n',1)
-          l.write_text(ls,encoding='utf-8')
-          PY
-
-      - name: Complete remaining English display text
-        script: |
-          set -e
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          p=Path("www/index.html")
-          s=p.read_text(encoding="utf-8")
-
-          # Complete translation table for remaining user-facing phrases found by the strict audit.
-          # Longer phrases are replaced first.
-          T={
-          "あとで確認したい銘柄として保存します":"Save this stock to review later",
-          "お問い合わせ":"Contact",
-          "お気に入り":"Favorites",
-          "が使える場合のフォールバック":"fallback when available",
-          "が切り替わります":"changes",
-          "が多い銘柄を確認します":"Check stocks with higher activity",
-          "が続いている銘柄や":"stocks that continue to",
-          "この分析を開く":"Open this analysis",
-          "この端末に保存した保有銘柄です":"Holdings saved on this device",
-          "この診断は現在の分析データによる判断目安です":"This diagnosis is a guide based on current analysis data",
-          "しているだけで":"only",
-          "正しく入力してください":"Enter the correct value",
-          "しました":"completed",
-          "すべて消去しました":"All data has been deleted",
-          "だけではなく":"not only",
-          "だけはローカル辞書で確実に補完":"supplemented reliably by the local dictionary",
-          "つのゲージ":"gauges",
-          "それぞれ異なる条件を適用し":"Different conditions are applied to each",
-          "検索":"Search",
-          "で計算します":"is calculated",
-          "で評価すると自動で総合スコアを計算します":"and the overall score is calculated automatically",
-          "登録できます":"can be saved",
-          "期間に合わせて":"according to the selected period",
-          "なし":"None",
-          "などは端末内に保存されます":"are stored on this device",
-          "には":"contains",
-          "保存":"Save",
-          "保存しました":"Saved",
-          "に登録できます":"can be added",
-          "に追加しました":"Added",
-          "のみ手入力してください":"Enter only this field manually",
-          "のスコア":"score",
-          "のバックアップファイルを読み込めませんでした":"Could not read the backup file",
-          "の市場データから多数の銘柄をスクリーニングし":"screens many stocks from market data",
-          "の注目度や売買の活発さを調べるときに使用します":"Use this to check market attention and trading activity",
-          "の同一オリジン":"same origin",
-          "の消去":"Delete",
-          "はまだありません":"None yet",
-          "はティッカーシンボルを入力":"Enter a ticker symbol",
-          "は取得できませんでした":"could not be retrieved",
-          "は必要に応じて入力します":"Enter as needed",
-          "へ保存します":"Save to",
-          "へ戻れます":"Return to",
-          "みずほフィナンシャルグループ":"Mizuho Financial Group",
-          "もう一度":"Again",
-          "や将来の株価上昇や利益を保証するものではありません":"does not guarantee future price increases or profits",
-          "をすべて消去しますか":"Delete all data?",
-          "を入力してください":"Please enter",
-          "を利用できます":"is available",
-          "を削除しますか":"Delete?",
-          "を反映":"Apply",
-          "を取得できませんでした":"Could not retrieve",
-          "を取得中":"Retrieving",
-          "を手入力できます":"can be entered manually",
-          "を押します":"Tap",
-          "を押すか":"tap",
-          "を更新":"Update",
-          "を最優先":"highest priority",
-          "を検索中":"Searching",
-          "を正しく入力してください":"Please enter correctly",
-          "押すと":"When tapped",
-          "を新しい順に確認し":"Review newest first",
-          "を新しい順に表示します":"Displays newest first",
-          "を見る":"View",
-          "を計算します":"Calculate",
-          "を選び":"choose",
-          "を選べます":"can be selected",
-          "を設定しています":"is configured",
-          "アドバンテスト":"Advantest",
-          "アメリカ株":"U.S. Stocks",
-          "エクソンモービル":"Exxon Mobil",
-          "カタリスト":"Catalyst",
-          "カプコン":"Capcom",
-          "キャッシュフロー":"Cash Flow",
-          "キーエンス":"Keyence",
-          "クラウドストライク":"CrowdStrike",
-          "コードを入力すると会社名と現在値を確認します":"Enter a ticker to check company name and current price",
-          "コードを入力":"Enter ticker",
-          "シェブロン":"Chevron",
-          "シェル":"Shell",
-          "ソフトバンクグループ":"SoftBank Group",
-          "ダイキン工業":"Daikin Industries",
-          "テクニカル分析では":"In technical analysis",
-          "テクニカル分析":"Technical Analysis",
-          "テクニカル面はまだ弱めです":"Technical conditions are still weak",
-          "データから多数の銘柄をスクリーニングし":"screens many stocks from the data",
-          "データを書き出す":"Export Data",
-          "データを読み込む":"Import Data",
-          "データ":"Data",
-          "データ更新時間":"Data Update Time",
-          "トヨタ自動車":"Toyota Motor",
-          "トレンド":"Trend",
-          "バックアップから復元":"Restore Backup",
-          "バックアップの保存・読み込み":"Save / Load Backup",
-          "バックアップを保存":"Save Backup",
-          "ファイナンシャル・グループ":"Financial Group",
-          "フジクラ":"Fujikura",
-          "ヘルプ":"Help",
-          "ホームへ戻る":"Back to Home",
-          "ホーム":"Home",
-          "ホーム画面で":"On the Home screen",
-          "メドトロニック":"Medtronic",
-          "ランキング":"Ranking",
-          "リクルートホールディングス":"Recruit Holdings",
-          "レオパレス":"Leopalace",
-          "企業分析では":"For company analysis",
-          "免責事項":"Disclaimer",
-          "分析点数が自動的に反映されます":"Analysis scores are reflected automatically",
-          "主な分析項目と配点は次のとおりです":"The main analysis factors and weights are as follows",
-          "企業の決算発表予定日を確認します":"Check scheduled earnings dates",
-          "休場日やデータ提供状況によっては":"Depending on market holidays or data availability",
-          "住友商事":"Sumitomo Corporation",
-          "使い方ガイド":"User Guide",
-          "全保存データを消去":"Delete All Saved Data",
-          "内容を確認してください":"Please review the contents",
-          "再び開いて継続できます":"You can reopen it and continue",
-          "出来高":"Volume",
-          "分析では":"In analysis",
-          "分析を編集":"Edit Analysis",
-          "分析履歴などは端末内に保存されます":"Analysis history is stored on this device",
-          "別の欄をタップしてください":"Tap another field",
-          "別分析として開く":"Open as Separate Analysis",
-          "利用者ご自身の責任で行ってください":"Make investment decisions at your own responsibility",
-          "利益成長":"Profit Growth",
-          "利益率":"Profit Margin",
-          "削除":"Delete",
-          "前取引日のデータが表示される場合や":"Previous trading-day data may be shown",
-          "割安":"Value",
-          "勢いのある銘柄を探すときに使用します":"Use this to find stocks with strong momentum",
-          "医薬品など":"pharmaceuticals, etc.",
-          "単純な投資判断を示すものではなく":"It does not provide a simple investment decision",
-          "取得できない場合は":"If unavailable",
-          "取得可能な場合は":"When available",
-          "取得可能な最新株価へ更新します":"updates to the latest available price",
-          "台湾積体電路製造":"Taiwan Semiconductor Manufacturing",
-          "各分析項目の点数が表示されます":"Scores for each analysis factor are shown",
-          "各時間軸に適した銘柄を評価して":"stocks are evaluated for each time horizon",
-          "合計":"Total",
-          "品質":"Quality",
-          "商社":"Trading Company",
-          "商品三井":"Mitsui & Co.",
-          "売上成長":"Revenue Growth",
-          "売買された":"traded",
-          "売買前の確認に使用します":"Use before trading",
-          "外部サイトで情報を確認し":"Check information on external sites",
-          "外部サイトで詳しい株価情報を確認できます":"You can view detailed stock information on external sites",
-          "外部サイトの最新情報も確認したうえで":"After checking the latest external information",
-          "完了":"Done",
-          "定期的に":"Periodically",
-          "定期的にバックアップを保存してください":"Please save backups periodically",
-          "富士通":"Fujitsu",
-          "将来の株価上昇や利益を保証するものではありません":"does not guarantee future price increases or profits",
-          "市場環境":"Market Conditions",
-          "年間の高値付近にある銘柄を確認します":"Check stocks near their yearly highs",
-          "形式":"Format",
-          "性":"Characteristics",
-          "情報確認":"Information Check",
-          "成長":"Growth",
-          "成長材料などを組み合わせて判定します":"combines growth catalysts and other factors",
-          "戻る":"Back",
-          "投資判断は":"Investment decisions",
-          "損益は入力した":"Profit/loss uses the entered",
-          "損益率を確認できます":"You can check return percentage",
-          "損益額":"Profit/Loss",
-          "操作で":"by operation",
-          "新しい銘柄を探したり":"find new stocks",
-          "日":"Day",
-          "日本たばこ産業":"Japan Tobacco",
-          "日本時間":"Japan Time",
-          "日本株":"Japan Stocks",
-          "日本株・短期":"Japan Stocks · Short Term",
-          "日本株総数":"Total Japan Stocks",
-          "日本製鉄":"Nippon Steel",
-          "日本電信電話":"NTT",
-          "更新が遅れる場合があります":"Updates may be delayed",
-          "最終的な投資判断は利用者ご自身で行ってください":"Make the final investment decision yourself",
-          "材料発表などで急に注目された銘柄を探すときに使用します":"Use this to find stocks receiving sudden attention due to announcements or catalysts",
-          "株式分析ツール":"Stock Analysis Tool",
-          "株価":"Price",
-          "株価モメンタムなどを使用しています":"uses price momentum and related indicators",
-          "株価を確認できます":"You can check stock prices",
-          "株価モニタリング":"Price Monitoring",
-          "株式":"Stocks",
-          "株数":"Shares",
-          "検索条件にあるかを確認できます":"You can check whether it meets the search conditions",
-          "東京エレクトロン":"Tokyo Electron",
-          "東京海上":"Tokio Marine",
-          "株":"Stock",
-          "株価":"Price",
-          "決算":"Earnings",
-          "決算カレンダー":"Earnings Calendar",
-          "決算前後は株価が大きく動くことがあります":"Prices can move significantly around earnings",
-          "特定銘柄の購入や売却を勧めるものではなく":"does not recommend buying or selling any specific stock",
-          "現入力や売却を勧めるものではなく":"does not recommend buying or selling",
-          "現在":"Current",
-          "現在どのような":"what is currently",
-          "現在どの業種に資金が集まっているかを調べるときに使用します":"Use this to see which sectors are attracting capital",
-          "現在の分析データを使って判定します":"Uses current analysis data",
-          "現在の分析対象データに含まれていない銘柄は":"Stocks not included in the current analysis data",
-          "現在の買い条件を満たしているか確認できます":"You can check whether current buy conditions are met",
-          "環境":"Environment",
-          "画面下部のリンクは":"Links at the bottom of the screen",
-          "画面左上の":"at the upper left",
-          "結果は":"Results",
-          "総合スコア":"Overall Score",
-          "総合業績情報の変化により評価は変動します":"Ratings change as company performance information changes",
-          "自動取得できない項目は手入力または調整できます":"Items that cannot be retrieved automatically can be entered or adjusted manually",
-          "自動取得できませんでした":"Could not retrieve automatically",
-          "複数の指標を組み合わせて":"combines multiple indicators",
-          "複数の指標を組み合わせて総合評価しています":"uses multiple indicators for an overall assessment",
-          "設定・バックアップ":"Settings & Backup",
-          "診断できない場合があります":"Diagnosis may not be available",
-          "診断結果には":"Diagnosis results include",
-          "診断標を組み合わせて":"combines indicators",
-          "評価しています":"is evaluated",
-          "重要な注意事項":"Important Notes",
-          "野村ホールディングス":"Nomura Holdings",
-          "銘柄を確認":"Check Stock",
-          "買いタイミング診断":"Buy Timing Analysis",
-          "購入":"Buy",
-          "通常より":"than usual",
-          "過去":"Past",
-          "選択した":"Selected",
-          "配当":"Dividend",
-          "銀行":"Bank",
-          "長期":"Long Term",
-          "短期":"Short Term",
-          "中期":"Mid Term",
-          "財務":"Financial",
-          "高値":"High",
-          "急増":"Surge",
-          "注目":"Watch",
-          "設定":"Settings",
-          "保存した":"Saved",
-          "保有株":"Portfolio",
-          "分析":"Analysis",
-          "分析結果":"Analysis Results",
-          "分析履歴":"Analysis History",
-          "格付":"Grade",
-          "銘柄":"Stock",
-          "会社名":"Company Name",
-          "現在値":"Current Price",
-          "購入単価":"Purchase Price",
-          "市場":"Market",
-          "期間":"Term",
-          "注意事項":"Notes",
-          "利用規約":"Terms of Use",
-          "プライバシーポリシー":"Privacy Policy",
-          "サポート":"Support",
-          "消去":"Delete",
-          "復元":"Restore",
-          "読み込み":"Load",
-          "書き出し":"Export",
-          "確認":"Confirm",
-          "更新":"Update",
-          "取得":"Retrieve",
-          "入力":"Enter",
-          "表示":"Display",
-          "選択":"Select",
-          "保存":"Save",
-          "削除":"Delete"
-          }
-
-          T.update({
-          "が大きく動くことがあるため":"because prices may move significantly",
-          "したあとは":"afterward",
-          "したりするために使用します":"is used for this purpose",
-          "している":"is",
-          "してください":"please",
-          "します":"does",
-          "する":"do",
-          "それぞれ":"each",
-          "では":"in",
-          "できます":"can",
-          "できませんでした":"could not",
-          "で評価すると自動で":"automatically when evaluated",
-          "などを":"and others",
-          "に":"in",
-          "のリンク":"link",
-          "の上昇率が高い":"with a high rate of increase",
-          "の下落率が大きい":"with a large rate of decline",
-          "の動きを確認します":"check the movement",
-          "は変動します":"may change",
-          "または":"or",
-          "やはり":"and",
-          "や企業情報の変化により評価は変動します":"ratings may change with changes in company information",
-          "を探すときに使用します":"is used when searching",
-          "を絞り込むときに使用します":"is used to narrow results",
-          "を考慮したうえで":"after considering",
-          "を補助するための判断目安です":"is a reference to support your judgment",
-          "を詳しく":"in detail",
-          "を調べるときに使用します":"is used when checking",
-          "を選定しています":"are selected",
-          "ニュース":"News",
-          "上昇":"Gainers",
-          "下落理由や反発の可能性":"reasons for declines and possible rebounds",
-          "企業の":"company",
-          "伊藤忠商事":"ITOCHU Corporation",
-          "例":"Example",
-          "値動き":"price movement",
-          "全":"all",
-          "全体から":"from the entire market",
-          "再び開いて編集できます":"can be reopened and edited",
-          "前後は":"around this period",
-          "半導体":"Semiconductors",
-          "原則として":"as a rule",
-          "後で":"later",
-          "時とは限らないため":"because timing may vary",
-          "最終的な":"final",
-          "条件にあるかを":"whether it meets the conditions",
-          "桁の":"digit",
-          "業種ごとの強弱を":"sector strength",
-          "業種などの条件で":"by sector and other conditions",
-          "機種変更や再インストールに備え":"for device changes or reinstallation",
-          "段階です":"stage",
-          "気になる":"interested",
-          "流動":"liquidity",
-          "点":"points",
-          "点で":"points",
-          "為替などによって評価や":"ratings may vary due to exchange rates and other factors",
-          "画面が開きます":"the screen opens",
-          "移動平均":"Moving Average",
-          "負債水準などを参考にしています":"debt levels and other factors are considered",
-          "項目を":"items",
-          "三井物産":"Mitsui & Co.",
-          "三菱":"Mitsubishi",
-          "三菱商事":"Mitsubishi Corporation",
-          "三菱重工業":"Mitsubishi Heavy Industries",
-          "丸紅":"Marubeni",
-          "企業":"Company"
-          })
-          T.update({"・":" / ","翌印":"Next"})
-          for old,new in sorted(T.items(), key=lambda kv: len(kv[0]), reverse=True):
-              s=s.replace(old,new)
-          s=s.replace("翌印","Next").replace("next mark","Next").replace("翌 mark","Next")
-
-          # English/global finance links for the English build.
-          s=s.replace("https://finance.yahoo.co.jp/quote/","https://finance.yahoo.com/quote/")
-          s=s.replace("https://finance.yahoo.co.jp/","https://finance.yahoo.com/")
-          s=s.replace("https://jp.tradingview.com/","https://www.tradingview.com/")
-
-          p.write_text(s,encoding="utf-8")
-
-          # Final cleanup immediately before audit.
-          s=s.replace("翌印","Next").replace("翌 mark","Next").replace("next mark","Next")
-          p.write_text(s,encoding="utf-8")
-
-          # Audit the actual packaged file, not an earlier in-memory snapshot.
-          s=p.read_text(encoding="utf-8")
-          # Final exact cleanup on the file that will actually be packaged.
-          s=s.replace("星印","star mark")
-          s=s.replace("翌印","Next").replace("翌 mark","Next").replace("next mark","Next")
-          p.write_text(s,encoding="utf-8")
-          s=p.read_text(encoding="utf-8")
-
-          # Audit the actual user-visible HTML only.
-          # Translation source dictionaries, comments and internal engine tokens are not displayed.
-          visible=re.sub(r'(?is)<script\b[^>]*>.*?</script>','',s)
-          visible=re.sub(r'(?is)<style\b[^>]*>.*?</style>','',visible)
-          visible=re.sub(r'(?is)<!--.*?-->','',visible)
-          visible=re.sub(r'<[^>]+>',' ',visible)
-          visible=re.sub(r'\s+',' ',visible)
-          bad=sorted(set(re.findall(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]+',visible)))
-          if bad:
-              print("NOTICE: visible Japanese tokens still detected:", bad)
-
-          # Runtime safety checks without a quote-parsing regex.
-          # The packaged app must retain the explicit English display boundary for rankings.
-          if "window.tenxEnglishName" not in s:
-              raise SystemExit("STOP: ranking English-name display boundary missing")
-
-          required=[
-            "User Guide","Favorites","Portfolio","Important Notes",
-            "Privacy Policy","Terms of Use","Contact","Company Name",
-            "Current Price","Overall Score","Buy Timing Analysis"
-          ]
-          missing=[x for x in required if x not in s]
-          if missing:
-              print("STOP: required English UI missing:",missing)
-              raise SystemExit(1)
-          print("PASS: English display conversion completed without changing calculation logic.")
-          PY
-
-      - name: Install app icon
-        script: |
-          set -e
           ICONSET="ios/App/App/Assets.xcassets/AppIcon.appiconset"
           cp -f 10X_STOCK_ZERO_AppIcon_1024.png "$ICONSET/AppIcon-512@2x.png"
           cat > "$ICONSET/Contents.json" <<'EOF'
-          {"images":[{"filename":"AppIcon-512@2x.png","idiom":"universal","platform":"ios","size":"1024x1024"}],"info":{"author":"xcode","version":1}}
+          {
+            "images" : [
+              {
+                "filename" : "AppIcon-512@2x.png",
+                "idiom" : "universal",
+                "platform" : "ios",
+                "size" : "1024x1024"
+              }
+            ],
+            "info" : {
+              "author" : "xcode",
+              "version" : 1
+            }
+          }
           EOF
 
       - name: Set up code signing
@@ -633,16 +63,19 @@ workflows:
       - name: Set build number
         script: |
           cd ios/App
-          agvtool new-marketing-version 1.0
           agvtool new-version -all "$BUILD_NUMBER"
 
       - name: Build IPA
         script: |
           cd ios/App
-          xcode-project build-ipa --project "App.xcodeproj" --scheme "App"
+          xcode-project build-ipa \
+            --project "App.xcodeproj" \
+            --scheme "App"
+
     artifacts:
       - ios/App/build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
+
     publishing:
       app_store_connect:
         auth: integration

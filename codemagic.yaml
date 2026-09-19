@@ -474,7 +474,7 @@ workflows:
           if "const ENGLISH_NAME_BY_CODE=" not in s:
               s=s.replace(
                   'const $=s=>document.querySelector(s);',
-                  'const $=s=>document.querySelector(s);\\nconst ENGLISH_NAME_BY_CODE='+name_blob+';',
+                  'const $=s=>document.querySelector(s);\nconst ENGLISH_NAME_BY_CODE='+name_blob+';',
                   1
               )
 
@@ -489,7 +489,7 @@ workflows:
               1
           )
           name_block=re.compile(r'  if\(market==="japan"\)\{.*?\n  \}\n\n  const source=',re.S)
-          s,changed=name_block.subn('  const fixedEnglishName=ENGLISH_NAME_BY_CODE[code]||"";\\n  name=fixedEnglishName||tenxName||directName||code;\\n\\n  const source=',s,count=1)
+          s,changed=name_block.subn('  const fixedEnglishName=ENGLISH_NAME_BY_CODE[code]||"";\n  name=fixedEnglishName||tenxName||directName||code;\n\n  const source=',s,count=1)
           if changed!=1:
               raise SystemExit("STOP: lookup name-display block not found")
 

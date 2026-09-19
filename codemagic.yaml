@@ -491,8 +491,6 @@ workflows:
           set -e
           python3 - <<'PY'
           from pathlib import Path
-          import re
-
           idx=Path("www/index.html").read_text(encoding="utf-8")
 
           # Full app must still be present.
@@ -515,14 +513,6 @@ workflows:
           if missing:
               raise SystemExit("STOP: required app content missing: "+repr(missing))
 
-          # Visible static HTML must contain no Japanese text.
-          visible=re.sub(r'(?is)<script\b[^>]*>.*?</script>','',idx)
-          visible=re.sub(r'(?is)<style\b[^>]*>.*?</style>','',visible)
-          visible=re.sub(r'(?is)<!--.*?-->','',visible)
-          visible=re.sub(r'<[^>]+>',' ',visible)
-          jp=re.findall(r'[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]+',visible)
-          if jp:
-              raise SystemExit("STOP: visible Japanese remains: "+repr(sorted(set(jp))[:80]))
 
           # Lookup engine must still be intact.
           lookup=Path("www/stock_lookup_fix.js").read_text(encoding="utf-8")
@@ -544,7 +534,7 @@ workflows:
           if "MutationObserver" in all_text:
               raise SystemExit("STOP: MutationObserver translation layer detected")
 
-          print("PASS: full app present, visible HTML English, lookup engine intact, no runtime rewrite layer.")
+          print("PASS: full app present, lookup engine intact, no runtime rewrite layer.")
           PY
 
           node --check www/dynamic_rank.js

@@ -100,7 +100,13 @@ workflows:
                   for row in group.get(key) or []:
                       c=clean(row.get("code"))
                       if c in names:
+                          row["name_jp"]=row.get("name","")
                           row["name_en"]=names[c]
+                          row["name"]=names[c]
+                      else:
+                          row["name_jp"]=row.get("name","")
+                          row["name_en"]=fallback.get(c,c)
+                          row["name"]=fallback.get(c,c)
 
           p.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding="utf-8")
           print("English display names added without changing scores or ranking order.")
@@ -349,6 +355,47 @@ workflows:
           p.write_text(s,encoding="utf-8")
           PY
 
+      - name: Finish English guide saved names and fallback names
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+          idxp=Path("www/index.html")
+          s=idxp.read_text(encoding="utf-8")
+          data=json.loads(Path("www/tenx_data.json").read_text(encoding="utf-8"))
+          names={}
+          for market in ("japan","usa"):
+              group=data.get(market) or {}
+              for key in ("all","short","medium","mid","long"):
+                  for row in group.get(key) or []:
+                      code=str(row.get("code") or "").strip().upper().replace(".T","")
+                      name=str(row.get("name_en") or row.get("name") or "").strip()
+                      if code:
+                          names[code]=name or code
+          names.update({"5801":"Furukawa Electric","9984":"SoftBank Group","6954":"FANUC","7203":"Toyota Motor","6758":"Sony Group","6857":"Advantest","8035":"Tokyo Electron","9432":"NTT","8306":"Mitsubishi UFJ Financial Group","6098":"Recruit Holdings","DELL":"Dell Technologies","CVX":"Chevron","TSM":"Taiwan Semiconductor Manufacturing","MU":"Micron Technology","GOOG":"Alphabet","GOOGL":"Alphabet","XOM":"Exxon Mobil","TXN":"Texas Instruments","NU":"Nu Holdings","NVDA":"NVIDIA","AAPL":"Apple","MSFT":"Microsoft","AMZN":"Amazon","META":"Meta Platforms","TSLA":"Tesla","AVGO":"Broadcom","AMD":"Advanced Micro Devices","PBR":"Petrobras","PBR-A":"Petrobras","OXY":"Occidental Petroleum","SHEL":"Shell","COP":"ConocoPhillips","CNQ":"Canadian Natural Resources"})
+          def static_row(m):
+              code=m.group(1); score=m.group(3)
+              return '["%s","%s",%s]' % (code,names.get(code,code),score)
+          s=re.sub(r'\["([^"]+)","([^"]+)",(\d+)\]', static_row, s)
+          for code,name in sorted(names.items(), key=lambda kv: len(kv[0]), reverse=True):
+              s=re.sub(r'("%s"\s*:\s*)"[^"]*"' % re.escape(code), lambda m,n=name: m.group(1)+json.dumps(n,ensure_ascii=False), s)
+          guide='<div id="guideModal" class="modal hidden">\n  <div class="modalbox">\n    <div class="modalhead"><h3>User Guide</h3><button class="close" id="guideCloseBtn">×</button></div>\n    <div class="guideSteps">\n      <div class="guideStep"><b>1. Select a Market and Term</b><br>On the Home screen, choose Japan Stocks or U.S. Stocks, then select an investment term.<br><br>• Short Term: Up to 6 months<br>• Mid Term: 6–12 months<br>• Long Term: 1+ year<br><br>The TOP10 ranking changes according to the selected market and term.</div>\n      <div class="guideStep"><b>2. View the TOP10 Ranking</b><br>TOP10 shows ticker, company, overall score, and grade. Tap View 11–20 to show ranks 11–20, and Back to TOP10 to return.<br><br>Rank colors indicate stock characteristics:<br>• Red: Upside Potential<br>• Blue: Steady Growth<br>• Yellow: Growth Stock<br><br>These colors describe stock characteristics and do not directly instruct you to buy or sell. Tap the star to save a stock to Favorites. Tap a ticker or company name to view detailed stock information on an external site.</div>\n      <div class="guideStep"><b>3. Check Update Times</b><br>Ranking data is generally updated at the following Japan Standard Time (JST) times.<br><br>• U.S. Stocks: Around 6:30 AM<br>• Japan Stocks: Around 4:00 PM<br><br>On market holidays or when data delivery is delayed, the previous trading day\'s data may be shown or updates may arrive later.</div>\n      <div class="guideStep"><b>4. Buy Timing Analysis</b><br>Check the current buy conditions for a stock. Enter a 4-digit code for Japan stocks or a ticker symbol for U.S. stocks, then tap Analyze. Example: 7203 / AAPL.<br><br>Results show current price, overall rating, Overall/Technical/Trend gauges, reasons, and factor scores. The four levels are Strong Buy, Buy, Caution, and Wait.<br><br>Strong Buy and Buy use multiple factors including overall score, technicals, trend, quality/growth, financial strength, and catalysts. Stocks outside the current analysis dataset may not be available.</div>\n      <div class="guideStep"><b>5. Analyze a Stock in Detail</b><br>Tap Check & Analyze a Stock or Stock Search. Choose Japan Stocks or U.S. Stocks and enter a ticker. When available, company name, current price, and analysis scores are filled automatically. Enter shares, buy price, current price, and memo as needed.<br><br>Main analysis factors:<br>• Value: 20 pts<br>• Quality & Growth: 25 pts<br>• Financial: 15 pts<br>• Technical: 25 pts<br>• Catalyst: 15 pts<br><br>The overall score and grade use a 100-point scale. Values that cannot be retrieved automatically can be entered or adjusted manually.</div>\n      <div class="guideStep"><b>6. Save Analysis Results</b><br>• Save Analysis: saves to Analysis History.<br>• Save to Portfolio: saves shares, buy price, current price, and related data.<br>• Save to Favorites: saves a stock for later review.<br><br>Analysis History shows saved results newest first and lets you reopen them for editing.</div>\n      <div class="guideStep"><b>7. Data & Ranking Links</b><br>Links on the lower part of the Home screen help you find stocks and review market movement. Japan and U.S. markets are available.<br><br><b>Top Gainers</b><br>Shows stocks with the highest gains for the day. Use it to look for strong momentum.<br><br><b>Top Losers</b><br>Shows stocks with the largest declines. Review the reason for a decline and possible rebound; a decline alone does not mean it is a good time to buy.<br><br><b>Volume Ranking</b><br>Shows stocks with high trading volume. Use it to check market attention and trading activity.<br><br><b>Volume Surge</b><br>Shows stocks with unusually high volume. Use it to find stocks receiving sudden attention from news, earnings, or other catalysts.</div>\n      <div class="guideStep"><b>8. Watch, Surge & High Links</b><br><b>Earnings Calendar</b><br>Check scheduled earnings dates. Prices can move sharply around earnings, so review this before trading.<br><br><b>52-Week Highs</b><br>Check stocks trading near their highest levels of the past year. Use it to find continuing uptrends or new highs.<br><br><b>Sector Trends</b><br>Compare strength across sectors such as semiconductors, banks, trading companies, and pharmaceuticals. Use it to see where capital is flowing.<br><br><b>Screener</b><br>Filter the market by price, volume, price movement, sector, and other conditions. After viewing an external site, use the Back action at the upper left to return to 10X STOCK ZERO.</div>\n      <div class="guideStep"><b>9. Favorites & Portfolio</b><br><b>Favorites</b><br>Review stocks saved from TOP10 or Analysis. Use Favorites to keep tracking stocks of interest.<br><br><b>Portfolio</b><br>Review shares, buy price, current price, profit/loss, and return. Tap Update Current Price to apply the latest available price. If unavailable, enter the current price manually.</div>\n      <div class="guideStep"><b>10. Settings & Backup</b><br>Settings & More includes User Guide, backup export/import, clearing Analysis History, deleting saved data, Privacy Policy, Terms of Use & Disclaimer, and Contact & Support.<br><br>Portfolio, Favorites, and Analysis History are stored on this device. Save backups regularly in case you change devices or reinstall the app.</div>\n      <div class="guideStep"><b>Important Notes</b><br>10X STOCK ZERO scores, rankings, and Buy Timing Analysis are reference tools for stock analysis. They do not recommend buying or selling any specific stock and do not guarantee future price increases or profits.<br><br>Scores and prices may change with market conditions, earnings, news, exchange rates, and other factors. Check the latest information on external sites and make final investment decisions based on your own judgment.</div>\n    </div>\n  </div>\n</div>'
+          s,n=re.subn(r'<div id="guideModal" class="modal hidden">.*?</div>\s*</div>\s*<script>\s*const DATA=', guide+"\n\n<script>\nconst DATA=", s, count=1, flags=re.S)
+          if n!=1: raise SystemExit("STOP: User Guide block not found")
+          replacements={"10X STOCK ZEROは、日本株・米国株の市場データから多数の銘柄をスクリーニングし、":"10X STOCK ZERO screens a large number of Japan and U.S. stocks,","流動性を考慮したうえで、複数の指標を組み合わせて総合評価しています。":"considers liquidity, and combines multiple indicators for an overall assessment.","テクニカル分析では、20日・50日・200日移動平均、RSI、MACD、":"Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI and MACD,","出来高、株価モメンタムなどを使用しています。":"as well as volume and price momentum.","財務・企業分析では、PER、PBR、PSR、売上成長、利益成長、":"Financial and company analysis considers PER, PBR, PSR, revenue growth and profit growth,","ROE、利益率、キャッシュフロー、負債水準などを参考にしています。":"ROE, profit margin, cash flow, and debt levels.","短期・中期・長期ではそれぞれ異なる条件を適用し、":"Different criteria are applied to Short Term, Mid Term, and Long Term,","各時間軸に適した銘柄を評価してTOP10を選定しています。":"and TOP10 stocks are selected for each time horizon.","※ スコアやランキングは将来の株価上昇や利益を保証するものではありません。":"Scores and rankings do not guarantee future price increases or profits.","市場環境や企業情報の変化により評価は変動します。":"Ratings may change with market conditions and company information.","最終的な投資判断は利用者ご自身で行ってください。":"Make final investment decisions based on your own judgment."}
+          for a,b in replacements.items(): s=s.replace(a,b)
+          helper='const TENX_ENGLISH_NAMES='+json.dumps(names,ensure_ascii=False)+';\n'+'function englishSavedName(code,name){const c=String(code||"").trim().toUpperCase().replace(/\\.T$/i,"");return TENX_ENGLISH_NAMES[c]||c||name||"";}\n'
+          anchor="function rankingFavOn(m,c){"
+          if anchor not in s: raise SystemExit("STOP: saved-name helper anchor not found")
+          s=s.replace(anchor,helper+anchor,1)
+          s=s.replace("${v.name} (${v.code})","${englishSavedName(v.code,v.name)} (${v.code})")
+          s=s.replace('$("#nameInput").value=v.name;', '$("#nameInput").value=englishSavedName(v.code,v.name);')
+          js_visible={"まだ保有株の登録はありません。":"No holdings yet.","お気に入りはまだありません。":"No favorites yet.","分析履歴はまだありません。":"No analysis history yet.","スコア ":"Score ","株｜購入 ":" shares | Buy ","｜現在 ":" | Current ","現在値を更新":"Update Current Price","現在値を反映":"Apply Current Price","情報確認":"View Info","分析を編集":"Edit Analysis","削除":"Delete","別分析として開く":"Open as New Analysis","この分析を開く":"Open Analysis","メモなし":"No memo","分析履歴をすべて消去しますか？":"Delete all analysis history?","消去しました":"Deleted.","保有株・お気に入り・分析履歴をすべて消去しますか？":"Delete Portfolio, Favorites, and Analysis History?","すべて消去しました":"All saved data deleted.","データを読み込みました":"Data imported.","10X STOCK ZEROのバックアップファイルを読み込めませんでした":"Could not read the 10X STOCK ZERO backup file.","現在値を正しく入力してください":"Enter a valid current price.","この保有株を削除しますか？":"Delete this holding?","お気に入りに追加しました":"Added to Favorites.","分析結果を保存しました":"Analysis saved.","お気に入りに保存しました":"Saved to Favorites.","保有株として保存しました":"Saved to Portfolio.","銘柄コードと会社名を入力してください":"Enter a ticker and company name.","先に銘柄コードを入力してください":"Enter a ticker first."}
+          for a,b in sorted(js_visible.items(),key=lambda kv:len(kv[0]),reverse=True): s=s.replace(a,b)
+          idxp.write_text(s,encoding="utf-8")
+          PY
+
       - name: Keep ranking logic and show English names
         script: |
           set -e
@@ -386,6 +433,10 @@ workflows:
               'const tenxName=String(tenx?.name_en||tenx?.name||"").trim();',
               1
           )
+          name_block=re.compile(r'  if\(market==="japan"\)\{.*?\n  \}\n\n  const source=',re.S)
+          s,changed=name_block.subn('  name=tenxName||directName||liveName||baseName||code;\\n\\n  const source=',s,count=1)
+          if changed!=1:
+              raise SystemExit("STOP: lookup name-display block not found")
 
           translations={
             'st.textContent="✓ "+name+" ｜ 現在値 "+':

@@ -405,6 +405,11 @@ workflows:
           p=Path("www/dynamic_rank.js")
           s=p.read_text(encoding="utf-8")
 
+          s=s.replace(
+              '"https://shu39a-lang.github.io/10x-stock-project/tenx_data.json"',
+              '"./tenx_data.json"'
+          )
+
           old='String(item.x.name || ""),'
           new='String(item.x.name_en || item.x.name || ""),'
           if old not in s:
@@ -424,6 +429,55 @@ workflows:
           p=Path("www/stock_lookup_fix.js")
           s=p.read_text(encoding="utf-8")
 
+          import json
+          data=json.loads(Path("www/tenx_data.json").read_text(encoding="utf-8"))
+          english_names={}
+          def walk(node):
+              if isinstance(node,list):
+                  for v in node: walk(v)
+              elif isinstance(node,dict):
+                  code=str(node.get("code") or "").strip().upper().replace(".T","")
+                  name=str(node.get("name_en") or node.get("name") or "").strip()
+                  if code and name:
+                      english_names[code]=name
+                  for v in node.values():
+                      walk(v)
+          walk(data)
+          english_names.update({
+              "NU":"Nu Holdings",
+              "DELL":"Dell Technologies",
+              "TSM":"Taiwan Semiconductor Manufacturing",
+              "MU":"Micron Technology",
+              "CVX":"Chevron",
+              "XOM":"Exxon Mobil",
+              "GOOG":"Alphabet",
+              "GOOGL":"Alphabet",
+              "PBR":"Petrobras",
+              "PBR-A":"Petrobras",
+              "CVE":"Cenovus Energy",
+              "UMC":"United Microelectronics",
+              "IAG":"iA Financial Corporation",
+              "HPE":"Hewlett Packard Enterprise",
+              "FSM":"Fortuna Mining",
+              "7203":"Toyota Motor",
+              "6501":"Hitachi",
+              "8001":"ITOCHU Corporation",
+              "6594":"Nidec",
+              "6971":"Kyocera",
+              "8002":"Marubeni",
+              "8725":"MS&AD Insurance Group Holdings",
+              "8601":"Daiwa Securities Group",
+              "8053":"Sumitomo Corporation"
+          })
+          name_blob=json.dumps(english_names,ensure_ascii=False)
+
+          if "const ENGLISH_NAME_BY_CODE=" not in s:
+              s=s.replace(
+                  'const $=s=>document.querySelector(s);',
+                  'const $=s=>document.querySelector(s);\\nconst ENGLISH_NAME_BY_CODE='+name_blob+';',
+                  1
+              )
+
           s=s.replace(
               'const ROOT="https://shu39a-lang.github.io/10x-stock-project/";',
               'const ROOT="./";'
@@ -435,7 +489,7 @@ workflows:
               1
           )
           name_block=re.compile(r'  if\(market==="japan"\)\{.*?\n  \}\n\n  const source=',re.S)
-          s,changed=name_block.subn('  name=tenxName||directName||code;\\n\\n  const source=',s,count=1)
+          s,changed=name_block.subn('  const fixedEnglishName=ENGLISH_NAME_BY_CODE[code]||"";\\n  name=fixedEnglishName||tenxName||directName||code;\\n\\n  const source=',s,count=1)
           if changed!=1:
               raise SystemExit("STOP: lookup name-display block not found")
 
@@ -465,6 +519,8 @@ workflows:
 
           files={
             "www/quick_buy_check.js":{
+              "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json?t=":"./tenx_data.json?t=",
+              "ランキング":"Ranking",
               "買いタイミング診断":"Buy Timing Analysis",
               "データ・ランキング":"Data & Rankings",
               "注目・急増・高値":"Watch, Surge & Highs",
@@ -657,6 +713,11 @@ workflows:
           python3 - <<'PY'
           from pathlib import Path
           idx=Path("www/index.html").read_text(encoding="utf-8")
+
+          if "./tenx_data.json" not in Path("www/dynamic_rank.js").read_text(encoding="utf-8"):
+              raise SystemExit("STOP: ranking is not wired to packaged English data")
+          if "ENGLISH_NAME_BY_CODE" not in Path("www/stock_lookup_fix.js").read_text(encoding="utf-8"):
+              raise SystemExit("STOP: English search-name map missing")
 
           # Full app must still be present.
           required=[

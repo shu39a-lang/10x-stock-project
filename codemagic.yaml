@@ -419,6 +419,7 @@ workflows:
           set -e
           python3 - <<'PY'
           from pathlib import Path
+          import re
 
           p=Path("www/stock_lookup_fix.js")
           s=p.read_text(encoding="utf-8")

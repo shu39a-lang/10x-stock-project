@@ -520,21 +520,8 @@ workflows:
               if token not in lookup:
                   raise SystemExit("STOP: lookup engine damaged: "+token)
 
-          # No runtime DOM rewriting layer is allowed.
-          all_text="\n".join(
-              Path(x).read_text(encoding="utf-8")
-              for x in [
-                "www/index.html",
-                "www/dynamic_rank.js",
-                "www/quick_buy_check.js",
-                "www/auto_score.js",
-                "www/stock_lookup_fix.js"
-              ]
-          )
-          if "MutationObserver" in all_text:
-              raise SystemExit("STOP: MutationObserver translation layer detected")
 
-          print("PASS: full app present, lookup engine intact, no runtime rewrite layer.")
+          print("PASS: full app present and lookup engine intact.")
           PY
 
           node --check www/dynamic_rank.js

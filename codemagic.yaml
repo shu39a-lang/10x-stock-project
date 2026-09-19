@@ -707,6 +707,131 @@ workflows:
           p.write_text(x,encoding="utf-8")
           PY
 
+      - name: Enforce final English display names
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          data=json.loads(Path("www/tenx_data.json").read_text(encoding="utf-8"))
+          names={}
+          def walk(node):
+              if isinstance(node,list):
+                  for v in node: walk(v)
+              elif isinstance(node,dict):
+                  code=str(node.get("code") or "").strip().upper().replace(".T","")
+                  name=str(node.get("name_en") or node.get("name") or "").strip()
+                  if code and name:
+                      names[code]=name
+                  for v in node.values():
+                      walk(v)
+          walk(data)
+
+          names.update({
+              "NU":"Nu Holdings",
+              "DELL":"Dell Technologies",
+              "CVX":"Chevron",
+              "TSM":"Taiwan Semiconductor Manufacturing",
+              "HPE":"Hewlett Packard Enterprise",
+              "XP":"XP Inc.",
+              "FTNT":"Fortinet",
+              "MU":"Micron Technology",
+              "ASX":"ASE Technology Holding",
+              "GOOG":"Alphabet",
+              "GOOGL":"Alphabet",
+              "XOM":"Exxon Mobil",
+              "UMC":"United Microelectronics",
+              "IAG":"iA Financial Corporation",
+              "PBR":"Petrobras",
+              "PBR-A":"Petrobras",
+              "CVE":"Cenovus Energy",
+              "FSM":"Fortuna Mining",
+              "7203":"Toyota Motor",
+              "6501":"Hitachi",
+              "8001":"ITOCHU Corporation",
+              "6594":"Nidec",
+              "6971":"Kyocera",
+              "8002":"Marubeni",
+              "8725":"MS&AD Insurance Group Holdings",
+              "8601":"Daiwa Securities Group",
+              "8053":"Sumitomo Corporation"
+          })
+          blob=json.dumps(names,ensure_ascii=False)
+
+          # Ranking: force display by ticker/code, regardless of the name stored in source data.
+          p=Path("www/dynamic_rank.js")
+          x=p.read_text(encoding="utf-8")
+          if "const ENGLISH_RANK_NAME_BY_CODE=" not in x:
+              x=x.replace(
+                  '"use strict";',
+                  '"use strict";\nconst ENGLISH_RANK_NAME_BY_CODE='+blob+';',
+                  1
+              )
+          x=x.replace(
+              'String(item.x.name_en || item.x.name || ""),',
+              'String(ENGLISH_RANK_NAME_BY_CODE[String(item.x.code||"").toUpperCase().replace(/\\.T$/,"")] || item.x.name_en || item.x.name || item.x.code || ""),'
+          )
+          x=x.replace(
+              'String(item.x.name || ""),',
+              'String(ENGLISH_RANK_NAME_BY_CODE[String(item.x.code||"").toUpperCase().replace(/\\.T$/,"")] || item.x.name_en || item.x.name || item.x.code || ""),'
+          )
+          p.write_text(x,encoding="utf-8")
+
+          # Buy Timing: force the displayed company name by code too.
+          p=Path("www/quick_buy_check.js")
+          x=p.read_text(encoding="utf-8")
+          if "const ENGLISH_BUY_NAME_BY_CODE=" not in x:
+              x=x.replace(
+                  '"use strict";',
+                  '"use strict";\nconst ENGLISH_BUY_NAME_BY_CODE='+blob+';',
+                  1
+              )
+          x=x.replace(
+              '${x.code||""}　${x.name||""}',
+              '${x.code||""}　${ENGLISH_BUY_NAME_BY_CODE[String(x.code||"").toUpperCase().replace(/\\.T$/,"")]||x.name_en||x.name||x.code||""}'
+          )
+
+          # Stable-icon patch was re-inserting Japanese strings after the rest of the page had been translated.
+          icon_replacements={
+              'icon("chart",23)+" 買いタイミング診断"':'icon("chart",23)+" Buy Timing Analysis"',
+              'icon("chart",22)+" データ・ランキング"':'icon("chart",22)+" Data & Rankings"',
+              'icon("flame",22)+" 注目・急増・高値"':'icon("flame",22)+" Watch, Surge & Highs"',
+              'icon("clipboard",22)+" 分析・検索"':'icon("clipboard",22)+" Analysis & Search"',
+              'icon("clock",17)+" TOP10 データ更新時間（日本時間）"':'icon("clock",17)+" TOP10 Data Update Time (JST)"',
+              'icon("chart",18)+" 買いタイミング診断"':'icon("chart",18)+" Buy Timing Analysis"',
+              'icon("trophy",18)+" TOP10ランキング"':'icon("trophy",18)+" TOP10 Rankings"',
+              'icon("chart",18)+" データ・ランキング"':'icon("chart",18)+" Data & Rankings"'
+          }
+          for a,b in icon_replacements.items():
+              x=x.replace(a,b)
+
+          p.write_text(x,encoding="utf-8")
+
+          # Final static/hybrid text cleanup seen in the latest TestFlight screenshots.
+          p=Path("www/index.html")
+          x=p.read_text(encoding="utf-8")
+
+          hybrids={
+              "Top Gainersランキング":"Top Gainers",
+              "Top Losersランキング":"Top Losers",
+              "Volumeランキング":"Volume Ranking",
+              "Portfolio管理":"Portfolio",
+              "10X STOCK ZEROは、Japan Stocks・U.S. StocksのMarketデータから多数の銘柄をスクリーニングし、considers liquidity, and combines multiple indicators for an overall assessment.":
+                "10X STOCK ZERO screens a large number of Japan and U.S. stocks, considers liquidity, and combines multiple indicators for an overall assessment.",
+              "Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI and MACD, Volume、株価モメンタムなどを使用しています。 Financial and company analysis considers PER, PBR, PSR, revenue growth and profit growth, ROE, profit margin, cash flow, and debt levels.":
+                "Technical analysis uses 20-day, 50-day, and 200-day moving averages, RSI, MACD, volume, and price momentum. Financial and company analysis considers PER, PBR, PSR, revenue growth, profit growth, ROE, profit margin, cash flow, and debt levels.",
+              "Short Term・Mid Term・Long Termではそれぞれ異なる条件を適用し、 and TOP10 stocks are selected for each time horizon.":
+                "Different criteria are applied to Short Term, Mid Term, and Long Term, and TOP10 stocks are selected for each time horizon.",
+              "※ Scoreやランキングは将来の株価上昇や利益を保証するものではありません。 Market環境や企業情報の変化により評価は変動します。 Make final investment decisions based on your own judgment.":
+                "Scores and rankings do not guarantee future price increases or profits. Ratings may change with market conditions and company information. Make final investment decisions based on your own judgment."
+          }
+          for a,b in hybrids.items():
+              x=x.replace(a,b)
+
+          p.write_text(x,encoding="utf-8")
+          PY
+
       - name: Final verification before building
         script: |
           set -e
@@ -718,6 +843,15 @@ workflows:
               raise SystemExit("STOP: ranking is not wired to packaged English data")
           if "ENGLISH_NAME_BY_CODE" not in Path("www/stock_lookup_fix.js").read_text(encoding="utf-8"):
               raise SystemExit("STOP: English search-name map missing")
+
+          dyn=Path("www/dynamic_rank.js").read_text(encoding="utf-8")
+          quick=Path("www/quick_buy_check.js").read_text(encoding="utf-8")
+          if "ENGLISH_RANK_NAME_BY_CODE" not in dyn:
+              raise SystemExit("STOP: final ranking English-name map missing")
+          if "ENGLISH_BUY_NAME_BY_CODE" not in quick:
+              raise SystemExit("STOP: Buy Timing English-name map missing")
+          if 'icon("chart",22)+" データ・ランキング"' in quick:
+              raise SystemExit("STOP: Japanese stable-icon label still present")
 
           # Full app must still be present.
           required=[

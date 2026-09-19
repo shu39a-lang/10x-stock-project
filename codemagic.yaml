@@ -18,19 +18,17 @@ workflows:
         script: |
           set -e
 
-          # Keep the English patch that currently exists on english-version.
           cp -f index.html /tmp/english_patch.html
 
-          # Get the complete, working app source from main.
-          git fetch origin main
-          git show origin/main:index.html > /tmp/main_index.html
-          git show origin/main:dynamic_rank.js > /tmp/main_dynamic_rank.js
-          git show origin/main:quick_buy_check.js > /tmp/main_quick_buy_check.js
-          git show origin/main:auto_score.js > /tmp/main_auto_score.js
-          git show origin/main:stock_lookup_fix.js > /tmp/main_stock_lookup_fix.js
+          # Fetch main into an explicit remote-tracking ref so git show can read it reliably.
+          git fetch origin main:refs/remotes/origin/main
 
-          # Build a complete index.html by inserting the existing English patch
-          # immediately before </body> of the working main app.
+          git show refs/remotes/origin/main:index.html > /tmp/main_index.html
+          git show refs/remotes/origin/main:dynamic_rank.js > /tmp/main_dynamic_rank.js
+          git show refs/remotes/origin/main:quick_buy_check.js > /tmp/main_quick_buy_check.js
+          git show refs/remotes/origin/main:auto_score.js > /tmp/main_auto_score.js
+          git show refs/remotes/origin/main:stock_lookup_fix.js > /tmp/main_stock_lookup_fix.js
+
           python3 - <<'PY'
           from pathlib import Path
 
@@ -51,13 +49,11 @@ workflows:
           Path("index.html").write_text(complete, encoding="utf-8")
           PY
 
-          # Keep the proven working JS logic from main for this recovery build.
           cp -f /tmp/main_dynamic_rank.js dynamic_rank.js
           cp -f /tmp/main_quick_buy_check.js quick_buy_check.js
           cp -f /tmp/main_auto_score.js auto_score.js
           cp -f /tmp/main_stock_lookup_fix.js stock_lookup_fix.js
 
-          # Basic completeness checks.
           test -s index.html
           grep -q '<!doctype html>' index.html
           grep -q '10X STOCK ZERO' index.html
@@ -119,9 +115,7 @@ workflows:
       - name: Build IPA
         script: |
           cd ios/App
-          xcode-project build-ipa \
-            --project "App.xcodeproj" \
-            --scheme "App"
+          xcode-project build-ipa             --project "App.xcodeproj"             --scheme "App"
 
     artifacts:
       - ios/App/build/ios/ipa/*.ipa

@@ -181,8 +181,8 @@ workflows:
             "🕒 TOP10 データ更新時間（日本時間）":"🕒 TOP10 Data Update Time (JST)",
             "06:30頃":"Around 06:30",
             "16:00頃":"Around 16:00",
-            "（アメリカ株）":"(U.S. Stocks)",
-            "（日本株）":"(Japan Stocks)",
+            "（アメリカ株）":"(U.S.)",
+            "（日本株）":"(Japan)",
             "📊 データ・ランキング":"📊 Data & Rankings",
             "値上がり":"Top Gainers",
             "値下がり":"Top Losers",
@@ -517,6 +517,35 @@ workflows:
           p.write_text(s,encoding="utf-8")
           PY
 
+      - name: Route stock lookup events through English lookup
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p=Path("www/index.html")
+          s=p.read_text(encoding="utf-8")
+
+          pairs=[
+            ('$("#codeInput").addEventListener("change",zeroLookupStock);',
+             '$("#codeInput").addEventListener("change",()=>window.zeroLookupStock());'),
+            ('$("#codeInput").addEventListener("blur",zeroLookupStock);',
+             '$("#codeInput").addEventListener("blur",()=>window.zeroLookupStock());'),
+            ('$("#codeInput").addEventListener("keyup",e=>{if(e.key==="Enter")zeroLookupStock()});',
+             '$("#codeInput").addEventListener("keyup",e=>{if(e.key==="Enter")window.zeroLookupStock()});'),
+            ('if($("#codeInput").value.trim())zeroLookupStock();',
+             'if($("#codeInput").value.trim())window.zeroLookupStock();'),
+            ('await zeroLookupStock();',
+             'await window.zeroLookupStock();')
+          ]
+          for old,new in pairs:
+              if old not in s:
+                  raise SystemExit("STOP: lookup event source not found: "+old)
+              s=s.replace(old,new,1)
+
+          p.write_text(s,encoding="utf-8")
+          PY
+
       - name: Translate buy timing and score messages
         script: |
           set -e
@@ -617,8 +646,8 @@ workflows:
             "TOP10 データ更新時間（日本時間）":"TOP10 Data Update Time (JST)",
             "06:30頃":"Around 06:30",
             "16:00頃":"Around 16:00",
-            "（アメリカ株）":"(U.S. Stocks)",
-            "（日本株）":"(Japan Stocks)",
+            "（アメリカ株）":"(U.S.)",
+            "（日本株）":"(Japan)",
             "データ・ランキング":"Data & Rankings",
             "値上がりランキング":"Top Gainers",
             "値下がりランキング":"Top Losers",
@@ -974,6 +1003,20 @@ workflows:
               raise SystemExit("STOP: ranking grade function is not intact")
           if "10X STOCK ZERO 最終完成版 v1.0" in idx:
               raise SystemExit("STOP: Japanese Settings subtitle still present")
+
+          if "(U.S. Stocks)" in idx or "(Japan Stocks)" in idx:
+              raise SystemExit("STOP: long update-time market labels still present")
+          if "(U.S.)" not in idx or "(Japan)" not in idx:
+              raise SystemExit("STOP: short update-time market labels missing")
+
+          for old_handler in [
+              '$("#codeInput").addEventListener("change",zeroLookupStock);',
+              '$("#codeInput").addEventListener("blur",zeroLookupStock);',
+              'if(e.key==="Enter")zeroLookupStock()',
+              'await zeroLookupStock();'
+          ]:
+              if old_handler in idx:
+                  raise SystemExit("STOP: original Japanese lookup event still bound: "+old_handler)
 
           for bad in [
               "Top Gainers<br>ランキング",

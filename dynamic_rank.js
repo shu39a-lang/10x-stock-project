@@ -6,6 +6,33 @@
 const REMOTE_DATA =
   "https://shu39a-lang.github.io/10x-stock-project/tenx_data.json";
 
+
+const rankingStatus={};
+function rankingKey(market,term){return market+":"+term;}
+function updateRankingStatus(){
+  const arr=DATA[state.market][state.term];
+  const status=rankingStatus[rankingKey(state.market,state.term)];
+  const en=document.documentElement.lang==="en";
+  const table=document.getElementById("rankingTable");
+  if(!table) return;
+  let note=document.getElementById("tenxRankingStatus");
+  if(!note){
+    note=document.createElement("div");
+    note.id="tenxRankingStatus";
+    note.style.cssText="padding:12px;color:#d7e0ea;font-size:12px;line-height:1.6";
+    table.insertAdjacentElement("afterend",note);
+  }
+  let message="";
+  if(!status) message=en?"Loading ranking data…":"ランキングを取得中…";
+  else if(status.error) message=en?"Could not refresh ranking data. Retrying…":"ランキングを更新できませんでした。再取得中…";
+  else if(arr.length===0) message=en?"No stocks currently meet the screening criteria.":"現在の条件に該当する候補はありません。";
+  else if(arr.length<10) message=en?"Stocks meeting the criteria: "+arr.length:"条件に該当する候補："+arr.length+"件";
+  if(status && status.updatedAt) message+=(message?" ｜ ":"")+(en?"Data updated: ":"データ更新：")+status.updatedAt;
+  note.textContent=message;
+  const button=document.getElementById("allBtn");
+  if(button) button.hidden=arr.length<=10;
+}
+
 const JP_BANK_CODES = new Set([
   "7180","7182","7327","7337","7342","7380","7381","7389",
   "8304","8306","8308","8309","8316","8331","8334","8336",
@@ -216,6 +243,7 @@ function balancedTop10(arr){
 
 function decorateRanking(){
   try{
+    updateRankingStatus();
     const arr=DATA[state.market][state.term];
     if(!Array.isArray(arr)) return;
 
@@ -265,7 +293,7 @@ function installRankingDecorator(){
 
   const patched=function(){
     const result=original.apply(this,arguments);
-    setTimeout(decorateRanking,0);
+    decorateRanking();
     return result;
   };
 
@@ -291,12 +319,15 @@ async function updateDynamicRanking(){
     }
 
     function applyIfValid(market,term,rows){
-      const converted=convertRows(rows,market);
-      if(Array.isArray(converted) && converted.length>=10){
-        DATA[market][term]=converted;
-      }else{
-        console.log("ranking update skipped:",market,term,"rows=",converted.length);
+      const key=rankingKey(market,term);
+      if(!Array.isArray(rows) || rows.some(x=>!x || !String(x.code||"").trim() || !Number.isFinite(Number(x.score)))){
+        rankingStatus[key]={...(rankingStatus[key]||{}),error:true};
+        return;
       }
+      // Zero or fewer than ten qualifying stocks is a valid screening result.
+      // Never leave the demonstration ranking visible in its place.
+      DATA[market][term]=convertRows(rows,market);
+      rankingStatus[key]={updatedAt:String(j.updated_at||""),error:false};
     }
 
     applyIfValid("japan","short",j.japan.short);
@@ -317,8 +348,26 @@ async function updateDynamicRanking(){
 
   }catch(e){
     console.log("dynamic ranking update failed:",e);
+    for(const market of ["japan","usa"]){
+      for(const term of ["short","mid","long"]){
+        const key=rankingKey(market,term);
+        rankingStatus[key]={...(rankingStatus[key]||{}),error:true};
+      }
+    }
+    decorateRanking();
   }
 }
+
+// Clear bundled demonstration scores before any asynchronous request.
+for(const market of ["japan","usa"]){
+  for(const term of ["short","mid","long"]) DATA[market][term]=[];
+}
+installRankingDecorator();
+if(typeof renderRanking==="function") renderRanking();
+setInterval(updateDynamicRanking,60000);
+document.addEventListener("visibilitychange",function(){
+  if(!document.hidden) updateDynamicRanking();
+});
 
 if(document.readyState==="loading"){
   document.addEventListener(
@@ -330,3 +379,4 @@ if(document.readyState==="loading"){
 }
 
 })();
+

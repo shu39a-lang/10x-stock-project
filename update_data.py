@@ -2,6 +2,7 @@ import json, time, re, io
 from urllib.parse import urljoin
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
@@ -250,7 +251,27 @@ def info_scores(symbol):
         "catalyst":round(clamp(catalyst,8,92),1)
     }
 
-def analyze_frame(symbol,name,d):
+def completed_daily_bars(d, symbol, now=None):
+    """Exclude the still-forming daily candle, including its partial volume.
+
+    Daily Yahoo indexes are session labels, not candle completion timestamps.
+    Use each exchange's local date and a conservative one-hour close buffer.
+    Holidays and weekends need no fabricated bars: only downloaded dates exist.
+    """
+    if d is None or d.empty:
+        return d
+    now = now or datetime.now(timezone.utc)
+    zone = ZoneInfo("Asia/Tokyo" if symbol.endswith(".T") else "America/New_York")
+    local = now.astimezone(zone)
+    close_hour, close_minute = (16, 30) if symbol.endswith(".T") else (17, 0)
+    today_complete = (local.hour, local.minute) >= (close_hour, close_minute)
+    cutoff = local.date() if today_complete else local.date() - timedelta(days=1)
+    labels = pd.DatetimeIndex(d.index).date
+    return d.loc[labels <= cutoff].copy()
+
+
+def analyze_frame(symbol,name,d,now=None):
+    d=completed_daily_bars(d,symbol,now)
     if d is None or len(d)<210:
         return None
     if isinstance(d.columns,pd.MultiIndex):
@@ -308,6 +329,10 @@ def analyze_frame(symbol,name,d):
 
     return {
         "symbol":symbol,
+        "reference_date":str(pd.Timestamp(c.index[-1]).date()),
+        "volume":float(v.iloc[-1]),
+        "traded_value":float(last*v.iloc[-1]),
+        "vol5_ratio":float(v.tail(5).mean()/max(vol20,1)),
         "name":name,
         "code":symbol.replace(".T",""),
         "price":round(last,2),
@@ -441,6 +466,17 @@ def rank(market):
 
     all_rows=download_market(universe)
     history_ok=len(all_rows)
+    # Acquisition failures must fail the job, leaving the published data intact.
+    minimum=max(1, int(len(universe)*0.80))
+    if history_ok < minimum:
+        raise RuntimeError(f"{market}: only {history_ok}/{len(universe)} usable histories; refusing to publish")
+    dates=[x["reference_date"] for x in all_rows]
+    reference=max(set(dates), key=dates.count)
+    all_rows=[x for x in all_rows if x["reference_date"]==reference]
+    if len(all_rows) < minimum:
+        raise RuntimeError(f"{market}: inconsistent session dates; refusing to publish")
+    if (datetime.now(JST).date()-datetime.fromisoformat(reference).date()).days > 7:
+        raise RuntimeError(f"{market}: stale history ({reference}); refusing to publish")
 
     rows=sorted(
         all_rows,
@@ -480,22 +516,16 @@ def rank(market):
             key=lambda z:z["score"],
             reverse=True
         )[:20]
+    # Retain the analyzed session snapshot. The JP trend pass must not fetch
+    # a second (possibly incomplete or failed) set of daily candles.
     out["all"]=[
-        {
-            "name":x["name"],
-            "code":x["code"],
-            "price":x["price"],
-            "valuation":fundamentals[x["symbol"]]["valuation"],
-            "quality":fundamentals[x["symbol"]]["quality"],
-            "financial":fundamentals[x["symbol"]]["financial"],
-            "technical":x["technical"],
-            "catalyst":fundamentals[x["symbol"]]["catalyst"]
-        }
-        for x in rows
-        if x["symbol"] in fundamentals
+        {**x, **fundamentals[x["symbol"]]}
+        for x in rows if x["symbol"] in fundamentals
     ]
     stats={
         "source":source,
+        "reference_date":reference,
+        "completed_session_only":True,
         "screen_target":SCREEN_TARGET,
         "screened":len(universe),
         "history_ok":history_ok,
@@ -508,29 +538,23 @@ def rank(market):
 
     return out,stats
 
-now=datetime.now(JST)
-japan,japan_stats=rank("japan")
-usa,usa_stats=rank("usa")
+def main():
+    japan,japan_stats=rank("japan")
+    usa,usa_stats=rank("usa")
+    data={
+        "updated_at":datetime.now(JST).strftime("%Y-%m-%d %H:%M JST"),
+        "engine_version":"4.1-completed-session",
+        "scoring":{
+            "valuation":20,"quality_growth":25,"financial_safety":15,
+            "technical":25,"catalyst":15
+        },
+        "universe_stats":{"japan":japan_stats,"usa":usa_stats},
+        "japan":japan,"usa":usa
+    }
+    pending=R/"tenx_data.pending.json"
+    pending.write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False),encoding="utf-8")
+    pending.replace(R/"tenx_data.json")
 
-data={
-    "updated_at":now.strftime("%Y-%m-%d %H:%M JST"),
-    "engine_version":"4.0-500-universe",
-    "scoring":{
-        "valuation":20,
-        "quality_growth":25,
-        "financial_safety":15,
-        "technical":25,
-        "catalyst":15
-    },
-    "universe_stats":{
-        "japan":japan_stats,
-        "usa":usa_stats
-    },
-    "japan":japan,
-    "usa":usa
-}
 
-(R/"tenx_data.json").write_text(
-    json.dumps(data,ensure_ascii=False,indent=2),
-    encoding="utf-8"
-)
+if __name__=="__main__":
+    main()

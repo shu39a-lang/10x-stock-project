@@ -804,9 +804,17 @@ def main():
         if x.get("code")
     ]
 
-    prices = download_prices(
-        codes
-    )
+    required=("price","change_pct","ma20","ma50","ma200","ret20",
+              "ret60","ret120","ret200","volume","traded_value",
+              "vol_ratio","vol5_ratio","rsi","drawdown","reference_date")
+    prices={str(row["code"]): {key:row[key] for key in required}
+            for row in all_rows if all(key in row for key in required)}
+    if len(prices)!=len(all_rows):
+        raise RuntimeError("JP completed-session snapshot missing; refusing a second download")
+    reference=data["universe_stats"]["japan"]["reference_date"]
+    if any(p["reference_date"]!=reference for p in prices.values()):
+        raise RuntimeError("JP session mismatch; refusing to publish")
+
 
     market_heat = build_market_heat(
         prices
@@ -1091,7 +1099,7 @@ def main():
     data["japan"] = out
 
     data["trend_engine"] = {
-        "version":"2.3-guaranteed-top20",
+        "version":"2.4-completed-session",
         "description":"市場熱量 + 出来高上位枠 + 相対スコア補正 + 業種分散 + TOP20保証",
         "theme_weights":{
             "short":10,

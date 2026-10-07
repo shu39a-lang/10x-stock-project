@@ -1064,6 +1064,21 @@ workflows:
           node --check www/auto_score.js
           node --check www/stock_lookup_fix.js
 
+      - name: Read shared published quotes in English app
+        script: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("www/stock_lookup_fix.js")
+          s=p.read_text(encoding="utf-8")
+          old='  const r=await fetch(ROOT+name+"?t="+Date.now(),{cache:"no-store"});'
+          new='  if(name==="live_quotes.json"){\n    try{\n      const remote=await fetch("https://shu39a-lang.github.io/10x-stock-project/live_quotes.json?t="+Date.now(),{cache:"no-store"});\n      if(!remote.ok)throw new Error("live quotes HTTP "+remote.status);\n      const data=await remote.json();\n      if(!data || (!data.japan && !data.usa))throw new Error("Invalid live quotes");\n      return data;\n    }catch(e){console.warn("Live quotes unavailable; using packaged cache",e);}\n  }\n  const r=await fetch(ROOT+name+"?t="+Date.now(),{cache:"no-store"});'
+          if s.count(old)!=1:
+              raise SystemExit("STOP: English lookup source changed; refusing an unchecked patch")
+          p.write_text(s.replace(old,new,1),encoding="utf-8")
+          PY
+          node --check www/stock_lookup_fix.js
+
       - name: Create Capacitor project
         script: |
           set -e

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17 13:08 JST",
+  "updated_at": "2026-11-17 13:35 JST",
   "engine_version": "4.1-completed-session",
   "scoring": {
     "valuation": 20,
@@ -29,8 +29,8 @@
       "screen_target": 500,
       "screened": 500,
       "history_ok": 484,
-      "liquidity_selected": 482,
-      "fundamental_analyzed": 482,
+      "liquidity_selected": 483,
+      "fundamental_analyzed": 483,
       "short_candidates": 47,
       "medium_candidates": 80,
       "long_candidates": 92
@@ -39,34 +39,11 @@
   "japan": {
     "short": [
       {
-        "name": "アシックス",
-        "code": "7936",
-        "price": 4502.0,
-        "change_pct": 7.7,
-        "score": 74.9,
-        "signal": "有力",
-        "valuation": 53.1,
-        "quality": 65.2,
-        "financial": 61.4,
-        "technical": 47.6,
-        "catalyst": 58.5,
-        "trend_theme": "その他",
-        "trend_score": 77.6,
-        "market_heat": 98.1,
-        "grades": {
-          "valuation": "D",
-          "quality": "C",
-          "financial": "D",
-          "technical": "D",
-          "catalyst": "D"
-        }
-      },
-      {
         "name": "大林組",
         "code": "1802",
         "price": 3453.0,
         "change_pct": 1.98,
-        "score": 74.9,
+        "score": 75.0,
         "signal": "有力",
         "valuation": 65.8,
         "quality": 56.5,
@@ -74,7 +51,7 @@
         "technical": 65.5,
         "catalyst": 53.0,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 88.8,
         "grades": {
           "valuation": "C",
@@ -85,19 +62,42 @@
         }
       },
       {
+        "name": "アシックス",
+        "code": "7936",
+        "price": 4502.0,
+        "change_pct": 7.7,
+        "score": 74.9,
+        "signal": "有力",
+        "valuation": 53.0,
+        "quality": 65.2,
+        "financial": 61.3,
+        "technical": 47.6,
+        "catalyst": 58.5,
+        "trend_theme": "その他",
+        "trend_score": 78.2,
+        "market_heat": 98.1,
+        "grades": {
+          "valuation": "D",
+          "quality": "C",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "D"
+        }
+      },
+      {
         "name": "かんぽ生命保険",
         "code": "7181",
         "price": 1897.0,
         "change_pct": 6.1,
-        "score": 74.1,
+        "score": 74.2,
         "signal": "有力",
-        "valuation": 75.3,
+        "valuation": 75.4,
         "quality": 44.1,
         "financial": 68.8,
         "technical": 69.3,
         "catalyst": 44.4,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 88.0,
         "grades": {
           "valuation": "A",
@@ -120,7 +120,7 @@
         "technical": 68.4,
         "catalyst": 68.4,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 82.9,
         "grades": {
           "valuation": "D",
@@ -138,12 +138,12 @@
         "score": 73.2,
         "signal": "有力",
         "valuation": 60.0,
-        "quality": 60.8,
+        "quality": 60.7,
         "financial": 50.9,
         "technical": 67.6,
         "catalyst": 67.4,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 87.6,
         "grades": {
           "valuation": "D",
@@ -158,7 +158,7 @@
         "code": "7532",
         "price": 834.0,
         "change_pct": 2.41,
-        "score": 71.2,
+        "score": 71.3,
         "signal": "有力",
         "valuation": 60.2,
         "quality": 54.8,
@@ -166,7 +166,7 @@
         "technical": 62.5,
         "catalyst": 53.4,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 86.7,
         "grades": {
           "valuation": "D",
@@ -181,15 +181,15 @@
         "code": "3563",
         "price": 6395.0,
         "change_pct": 5.09,
-        "score": 70.9,
+        "score": 71.0,
         "signal": "有力",
-        "valuation": 44.2,
+        "valuation": 44.3,
         "quality": 57.0,
         "financial": 47.5,
         "technical": 70.9,
         "catalyst": 50.0,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 89.4,
         "grades": {
           "valuation": "D",
@@ -212,7 +212,7 @@
         "technical": 64.5,
         "catalyst": 77.7,
         "trend_theme": "商社",
-        "trend_score": 87.6,
+        "trend_score": 87.4,
         "market_heat": 75.1,
         "grades": {
           "valuation": "D",
@@ -235,7 +235,7 @@
         "technical": 66.7,
         "catalyst": 50.0,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 82.0,
         "grades": {
           "valuation": "D",
@@ -252,13 +252,13 @@
         "change_pct": 2.54,
         "score": 68.2,
         "signal": "有力",
-        "valuation": 57.6,
+        "valuation": 57.5,
         "quality": 55.3,
         "financial": 61.0,
         "technical": 56.7,
         "catalyst": 55.3,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 84.3,
         "grades": {
           "valuation": "D",
@@ -273,15 +273,15 @@
         "code": "8411",
         "price": 8243.0,
         "change_pct": 2.78,
-        "score": 67.8,
+        "score": 68.0,
         "signal": "有力",
-        "valuation": 72.5,
+        "valuation": 72.6,
         "quality": 64.7,
         "financial": 64.0,
         "technical": 61.9,
         "catalyst": 66.0,
         "trend_theme": "銀行",
-        "trend_score": 65.5,
+        "trend_score": 67.1,
         "market_heat": 94.2,
         "grades": {
           "valuation": "A",
@@ -296,7 +296,7 @@
         "code": "4755",
         "price": 649.8,
         "change_pct": 2.01,
-        "score": 67.6,
+        "score": 67.7,
         "signal": "有力",
         "valuation": 61.0,
         "quality": 37.7,
@@ -304,7 +304,7 @@
         "technical": 53.4,
         "catalyst": 54.2,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 92.3,
         "grades": {
           "valuation": "D",
@@ -319,7 +319,7 @@
         "code": "6178",
         "price": 2433.0,
         "change_pct": 1.84,
-        "score": 67.2,
+        "score": 67.3,
         "signal": "有力",
         "valuation": 76.7,
         "quality": 47.5,
@@ -327,7 +327,7 @@
         "technical": 61.2,
         "catalyst": 50.0,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 80.9,
         "grades": {
           "valuation": "A",
@@ -342,15 +342,15 @@
         "code": "7182",
         "price": 3177.0,
         "change_pct": 1.18,
-        "score": 66.8,
+        "score": 67.0,
         "signal": "有力",
-        "valuation": 70.2,
+        "valuation": 70.3,
         "quality": 67.8,
         "financial": 64.0,
         "technical": 60.5,
         "catalyst": 76.8,
         "trend_theme": "銀行",
-        "trend_score": 65.5,
+        "trend_score": 67.1,
         "market_heat": 88.8,
         "grades": {
           "valuation": "B",
@@ -373,7 +373,7 @@
         "technical": 62.6,
         "catalyst": 67.0,
         "trend_theme": "商社",
-        "trend_score": 87.6,
+        "trend_score": 87.4,
         "market_heat": 73.5,
         "grades": {
           "valuation": "D",
@@ -388,7 +388,7 @@
         "code": "8309",
         "price": 1786.5,
         "change_pct": 0.0,
-        "score": 65.7,
+        "score": 65.9,
         "signal": "有力",
         "valuation": 68.0,
         "quality": 66.3,
@@ -396,7 +396,7 @@
         "technical": 64.7,
         "catalyst": 74.9,
         "trend_theme": "銀行",
-        "trend_score": 65.5,
+        "trend_score": 67.1,
         "market_heat": 85.5,
         "grades": {
           "valuation": "B",
@@ -419,7 +419,7 @@
         "technical": 60.0,
         "catalyst": 40.7,
         "trend_theme": "その他",
-        "trend_score": 77.6,
+        "trend_score": 78.2,
         "market_heat": 81.0,
         "grades": {
           "valuation": "C",
@@ -434,15 +434,15 @@
         "code": "9433",
         "price": 2958.5,
         "change_pct": 3.81,
-        "score": 63.3,
+        "score": 63.7,
         "signal": "注目",
-        "valuation": 58.7,
+        "valuation": 58.8,
         "quality": 59.3,
-        "financial": 49.2,
+        "financial": 49.1,
         "technical": 60.1,
         "catalyst": 48.5,
         "trend_theme": "AI・データセンター",
-        "trend_score": 39.4,
+        "trend_score": 43.1,
         "market_heat": 85.8,
         "grades": {
           "valuation": "D",
@@ -457,7 +457,7 @@
         "code": "8306",
         "price": 3415.0,
         "change_pct": -1.73,
-        "score": 63.1,
+        "score": 63.2,
         "signal": "注目",
         "valuation": 70.0,
         "quality": 61.7,
@@ -465,7 +465,7 @@
         "technical": 58.5,
         "catalyst": 63.0,
         "trend_theme": "銀行",
-        "trend_score": 65.5,
+        "trend_score": 67.1,
         "market_heat": 87.2,
         "grades": {
           "valuation": "B",
@@ -480,15 +480,15 @@
         "code": "9432",
         "price": 168.6,
         "change_pct": 0.12,
-        "score": 58.6,
+        "score": 59.0,
         "signal": "注目",
         "valuation": 55.7,
         "quality": 53.6,
-        "financial": 35.4,
+        "financial": 35.5,
         "technical": 47.0,
         "catalyst": 40.0,
         "trend_theme": "AI・データセンター",
-        "trend_score": 39.4,
+        "trend_score": 43.1,
         "market_heat": 86.4,
         "grades": {
           "valuation": "D",
@@ -505,7 +505,7 @@
         "code": "4503",
         "price": 2744.0,
         "change_pct": 1.67,
-        "score": 75.0,
+        "score": 75.1,
         "signal": "有力",
         "valuation": 62.9,
         "quality": 70.3,
@@ -513,7 +513,7 @@
         "technical": 68.4,
         "catalyst": 68.4,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 82.9,
         "grades": {
           "valuation": "D",
@@ -536,7 +536,7 @@
         "technical": 62.7,
         "catalyst": 70.6,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 80.0,
         "grades": {
           "valuation": "B",
@@ -553,13 +553,13 @@
         "change_pct": -0.76,
         "score": 72.3,
         "signal": "有力",
-        "valuation": 61.3,
+        "valuation": 61.4,
         "quality": 63.2,
         "financial": 61.2,
         "technical": 67.7,
         "catalyst": 65.2,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 79.2,
         "grades": {
           "valuation": "D",
@@ -576,13 +576,13 @@
         "change_pct": 2.41,
         "score": 72.2,
         "signal": "有力",
-        "valuation": 57.0,
+        "valuation": 57.1,
         "quality": 61.7,
         "financial": 51.9,
         "technical": 74.1,
         "catalyst": 65.1,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 70.4,
         "grades": {
           "valuation": "D",
@@ -597,15 +597,15 @@
         "code": "2502",
         "price": 1844.0,
         "change_pct": 2.16,
-        "score": 71.0,
+        "score": 71.1,
         "signal": "有力",
         "valuation": 60.0,
-        "quality": 60.8,
+        "quality": 60.7,
         "financial": 50.9,
         "technical": 67.6,
         "catalyst": 67.4,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 87.6,
         "grades": {
           "valuation": "D",
@@ -628,7 +628,7 @@
         "technical": 64.5,
         "catalyst": 77.7,
         "trend_theme": "商社",
-        "trend_score": 82.4,
+        "trend_score": 82.5,
         "market_heat": 75.1,
         "grades": {
           "valuation": "D",
@@ -645,13 +645,13 @@
         "change_pct": 9.66,
         "score": 70.5,
         "signal": "有力",
-        "valuation": 47.2,
+        "valuation": 46.3,
         "quality": 69.0,
         "financial": 58.3,
         "technical": 72.3,
         "catalyst": 72.6,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 78.7,
         "grades": {
           "valuation": "D",
@@ -666,15 +666,15 @@
         "code": "7181",
         "price": 1897.0,
         "change_pct": 6.1,
-        "score": 70.3,
+        "score": 70.4,
         "signal": "有力",
-        "valuation": 75.3,
+        "valuation": 75.4,
         "quality": 44.1,
         "financial": 68.8,
         "technical": 69.3,
         "catalyst": 44.4,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 88.0,
         "grades": {
           "valuation": "A",
@@ -697,7 +697,7 @@
         "technical": 65.5,
         "catalyst": 53.0,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 88.8,
         "grades": {
           "valuation": "C",
@@ -720,7 +720,7 @@
         "technical": 62.6,
         "catalyst": 67.0,
         "trend_theme": "商社",
-        "trend_score": 82.4,
+        "trend_score": 82.5,
         "market_heat": 73.5,
         "grades": {
           "valuation": "D",
@@ -728,6 +728,29 @@
           "financial": "D",
           "technical": "D",
           "catalyst": "C"
+        }
+      },
+      {
+        "name": "カプコン",
+        "code": "9697",
+        "price": 4572.0,
+        "change_pct": 1.33,
+        "score": 67.1,
+        "signal": "有力",
+        "valuation": 48.9,
+        "quality": 75.1,
+        "financial": 56.6,
+        "technical": 64.5,
+        "catalyst": 77.3,
+        "trend_theme": "AI・データセンター",
+        "trend_score": 55.1,
+        "market_heat": 55.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "A",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
         }
       },
       {
@@ -743,7 +766,7 @@
         "technical": 66.7,
         "catalyst": 50.0,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 82.0,
         "grades": {
           "valuation": "D",
@@ -751,29 +774,6 @@
           "financial": "D",
           "technical": "C",
           "catalyst": "D"
-        }
-      },
-      {
-        "name": "カプコン",
-        "code": "9697",
-        "price": 4572.0,
-        "change_pct": 1.33,
-        "score": 67.0,
-        "signal": "有力",
-        "valuation": 49.1,
-        "quality": 75.1,
-        "financial": 56.6,
-        "technical": 64.5,
-        "catalyst": 77.3,
-        "trend_theme": "AI・データセンター",
-        "trend_score": 53.2,
-        "market_heat": 55.1,
-        "grades": {
-          "valuation": "D",
-          "quality": "A",
-          "financial": "D",
-          "technical": "D",
-          "catalyst": "A"
         }
       },
       {
@@ -800,42 +800,19 @@
         }
       },
       {
-        "name": "日本製鉄",
-        "code": "5401",
-        "price": 695.1,
-        "change_pct": -0.42,
-        "score": 64.8,
-        "signal": "注目",
-        "valuation": 57.6,
-        "quality": 53.2,
-        "financial": 42.7,
-        "technical": 62.3,
-        "catalyst": 76.2,
-        "trend_theme": "その他",
-        "trend_score": 79.4,
-        "market_heat": 75.0,
-        "grades": {
-          "valuation": "D",
-          "quality": "D",
-          "financial": "D",
-          "technical": "D",
-          "catalyst": "A"
-        }
-      },
-      {
         "name": "ＦＯＯＤ　＆　ＬＩＦＥ　ＣＯＭＰＡＮＩＥＳ",
         "code": "3563",
         "price": 6395.0,
         "change_pct": 5.09,
-        "score": 64.8,
-        "signal": "注目",
-        "valuation": 44.2,
+        "score": 65.0,
+        "signal": "有力",
+        "valuation": 44.3,
         "quality": 57.0,
         "financial": 47.5,
         "technical": 70.9,
         "catalyst": 50.0,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 89.4,
         "grades": {
           "valuation": "D",
@@ -846,19 +823,42 @@
         }
       },
       {
+        "name": "日本製鉄",
+        "code": "5401",
+        "price": 695.1,
+        "change_pct": -0.42,
+        "score": 64.6,
+        "signal": "注目",
+        "valuation": 57.6,
+        "quality": 53.2,
+        "financial": 42.7,
+        "technical": 62.3,
+        "catalyst": 76.2,
+        "trend_theme": "その他",
+        "trend_score": 79.9,
+        "market_heat": 75.0,
+        "grades": {
+          "valuation": "D",
+          "quality": "D",
+          "financial": "D",
+          "technical": "D",
+          "catalyst": "A"
+        }
+      },
+      {
         "name": "オービック",
         "code": "4684",
         "price": 6273.0,
         "change_pct": 1.1,
-        "score": 61.8,
+        "score": 61.9,
         "signal": "注目",
-        "valuation": 42.5,
+        "valuation": 42.4,
         "quality": 70.0,
         "financial": 56.5,
         "technical": 60.8,
         "catalyst": 65.7,
         "trend_theme": "AI・データセンター",
-        "trend_score": 53.2,
+        "trend_score": 55.1,
         "market_heat": 50.5,
         "grades": {
           "valuation": "D",
@@ -873,7 +873,7 @@
         "code": "9434",
         "price": 242.8,
         "change_pct": 1.12,
-        "score": 61.7,
+        "score": 61.8,
         "signal": "注目",
         "valuation": 55.1,
         "quality": 63.0,
@@ -881,7 +881,7 @@
         "technical": 58.8,
         "catalyst": 57.9,
         "trend_theme": "その他",
-        "trend_score": 79.4,
+        "trend_score": 79.9,
         "market_heat": 79.3,
         "grades": {
           "valuation": "D",
@@ -896,15 +896,15 @@
         "code": "9433",
         "price": 2958.5,
         "change_pct": 3.81,
-        "score": 59.8,
+        "score": 59.9,
         "signal": "注目",
-        "valuation": 58.7,
+        "valuation": 58.8,
         "quality": 59.3,
-        "financial": 49.2,
+        "financial": 49.1,
         "technical": 60.1,
         "catalyst": 48.5,
         "trend_theme": "AI・データセンター",
-        "trend_score": 53.2,
+        "trend_score": 55.1,
         "market_heat": 85.8,
         "grades": {
           "valuation": "D",
@@ -942,7 +942,7 @@
         "code": "4307",
         "price": 6126.0,
         "change_pct": 1.9,
-        "score": 56.9,
+        "score": 57.1,
         "signal": "注目",
         "valuation": 38.0,
         "quality": 56.7,
@@ -950,8 +950,8 @@
         "technical": 54.4,
         "catalyst": 60.1,
         "trend_theme": "AI・データセンター",
-        "trend_score": 53.2,
-        "market_heat": 58.5,
+        "trend_score": 55.1,
+        "market_heat": 58.4,
         "grades": {
           "valuation": "D",
           "quality": "D",
@@ -967,7 +967,7 @@
         "code": "4503",
         "price": 2744.0,
         "change_pct": 1.67,
-        "score": 73.9,
+        "score": 73.8,
         "signal": "有力",
         "valuation": 62.9,
         "quality": 70.3,
@@ -975,7 +975,7 @@
         "technical": 68.4,
         "catalyst": 68.4,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 82.9,
         "grades": {
           "valuation": "D",
@@ -990,15 +990,15 @@
         "code": "7747",
         "price": 4179.0,
         "change_pct": 9.66,
-        "score": 72.9,
+        "score": 72.8,
         "signal": "有力",
-        "valuation": 47.2,
+        "valuation": 46.3,
         "quality": 69.0,
         "financial": 58.3,
         "technical": 72.3,
         "catalyst": 72.6,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 78.7,
         "grades": {
           "valuation": "D",
@@ -1021,7 +1021,7 @@
         "technical": 67.2,
         "catalyst": 67.9,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 69.4,
         "grades": {
           "valuation": "D",
@@ -1038,13 +1038,13 @@
         "change_pct": 2.41,
         "score": 71.5,
         "signal": "有力",
-        "valuation": 57.0,
+        "valuation": 57.1,
         "quality": 61.7,
         "financial": 51.9,
         "technical": 74.1,
         "catalyst": 65.1,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 70.4,
         "grades": {
           "valuation": "D",
@@ -1067,7 +1067,7 @@
         "technical": 58.3,
         "catalyst": 78.6,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 71.5,
         "grades": {
           "valuation": "D",
@@ -1090,7 +1090,7 @@
         "technical": 64.5,
         "catalyst": 77.7,
         "trend_theme": "商社",
-        "trend_score": 63.8,
+        "trend_score": 63.4,
         "market_heat": 75.1,
         "grades": {
           "valuation": "D",
@@ -1113,7 +1113,7 @@
         "technical": 72.8,
         "catalyst": 60.7,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 89.4,
         "grades": {
           "valuation": "D",
@@ -1130,13 +1130,13 @@
         "change_pct": -0.76,
         "score": 70.5,
         "signal": "有力",
-        "valuation": 61.3,
+        "valuation": 61.4,
         "quality": 63.2,
         "financial": 61.2,
         "technical": 67.7,
         "catalyst": 65.2,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 79.2,
         "grades": {
           "valuation": "D",
@@ -1151,16 +1151,16 @@
         "code": "9697",
         "price": 4572.0,
         "change_pct": 1.33,
-        "score": 69.7,
+        "score": 69.5,
         "signal": "有力",
-        "valuation": 49.1,
+        "valuation": 48.9,
         "quality": 75.1,
         "financial": 56.6,
         "technical": 64.5,
         "catalyst": 77.3,
         "trend_theme": "AI・データセンター",
-        "trend_score": 51.4,
-        "market_heat": 55.1,
+        "trend_score": 50.6,
+        "market_heat": 55.0,
         "grades": {
           "valuation": "D",
           "quality": "A",
@@ -1174,15 +1174,15 @@
         "code": "2502",
         "price": 1844.0,
         "change_pct": 2.16,
-        "score": 68.3,
+        "score": 68.2,
         "signal": "有力",
         "valuation": 60.0,
-        "quality": 60.8,
+        "quality": 60.7,
         "financial": 50.9,
         "technical": 67.6,
         "catalyst": 67.4,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 87.6,
         "grades": {
           "valuation": "D",
@@ -1205,7 +1205,7 @@
         "technical": 66.7,
         "catalyst": 50.0,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 82.0,
         "grades": {
           "valuation": "D",
@@ -1220,15 +1220,15 @@
         "code": "7181",
         "price": 1897.0,
         "change_pct": 6.1,
-        "score": 66.2,
+        "score": 66.4,
         "signal": "有力",
-        "valuation": 75.3,
+        "valuation": 75.4,
         "quality": 44.1,
         "financial": 68.8,
         "technical": 69.3,
         "catalyst": 44.4,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 88.0,
         "grades": {
           "valuation": "A",
@@ -1251,7 +1251,7 @@
         "technical": 62.6,
         "catalyst": 67.0,
         "trend_theme": "商社",
-        "trend_score": 63.8,
+        "trend_score": 63.4,
         "market_heat": 73.5,
         "grades": {
           "valuation": "D",
@@ -1268,7 +1268,7 @@
         "change_pct": 2.78,
         "score": 64.3,
         "signal": "注目",
-        "valuation": 72.5,
+        "valuation": 72.6,
         "quality": 64.7,
         "financial": 64.0,
         "technical": 61.9,
@@ -1291,13 +1291,13 @@
         "change_pct": 1.1,
         "score": 61.3,
         "signal": "注目",
-        "valuation": 42.5,
+        "valuation": 42.4,
         "quality": 70.0,
         "financial": 56.5,
         "technical": 60.8,
         "catalyst": 65.7,
         "trend_theme": "AI・データセンター",
-        "trend_score": 51.4,
+        "trend_score": 50.6,
         "market_heat": 50.5,
         "grades": {
           "valuation": "D",
@@ -1312,15 +1312,15 @@
         "code": "7936",
         "price": 4502.0,
         "change_pct": 7.7,
-        "score": 60.8,
+        "score": 60.7,
         "signal": "注目",
-        "valuation": 53.1,
+        "valuation": 53.0,
         "quality": 65.2,
-        "financial": 61.4,
+        "financial": 61.3,
         "technical": 47.6,
         "catalyst": 58.5,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 98.1,
         "grades": {
           "valuation": "D",
@@ -1335,7 +1335,7 @@
         "code": "9434",
         "price": 242.8,
         "change_pct": 1.12,
-        "score": 58.4,
+        "score": 58.5,
         "signal": "注目",
         "valuation": 55.1,
         "quality": 63.0,
@@ -1343,7 +1343,7 @@
         "technical": 58.8,
         "catalyst": 57.9,
         "trend_theme": "その他",
-        "trend_score": 67.2,
+        "trend_score": 67.0,
         "market_heat": 79.3,
         "grades": {
           "valuation": "D",
@@ -1383,13 +1383,13 @@
         "change_pct": 3.81,
         "score": 57.5,
         "signal": "注目",
-        "valuation": 58.7,
+        "valuation": 58.8,
         "quality": 59.3,
-        "financial": 49.2,
+        "financial": 49.1,
         "technical": 60.1,
         "catalyst": 48.5,
         "trend_theme": "AI・データセンター",
-        "trend_score": 51.4,
+        "trend_score": 50.6,
         "market_heat": 85.8,
         "grades": {
           "valuation": "D",
@@ -1408,11 +1408,11 @@
         "signal": "注目",
         "valuation": 55.7,
         "quality": 53.6,
-        "financial": 35.4,
+        "financial": 35.5,
         "technical": 47.0,
         "catalyst": 40.0,
         "trend_theme": "AI・データセンター",
-        "trend_score": 51.4,
+        "trend_score": 50.6,
         "market_heat": 86.4,
         "grades": {
           "valuation": "D",
@@ -1448,7 +1448,7 @@
         "high60": 19843.333984375,
         "technical": 22.5,
         "risk": 19.8,
-        "valuation": 65.2,
+        "valuation": 65.4,
         "quality": 90.0,
         "financial": 61.9,
         "catalyst": 92.0
@@ -1477,7 +1477,7 @@
         "high60": 41850.0,
         "technical": 35.7,
         "risk": 50.7,
-        "valuation": 32.1,
+        "valuation": 32.3,
         "quality": 82.9,
         "financial": 62.5,
         "catalyst": 90.1
@@ -1506,8 +1506,8 @@
         "high60": 11460.0,
         "technical": 24.8,
         "risk": 22.4,
-        "valuation": 53.1,
-        "quality": 53.4,
+        "valuation": 53.2,
+        "quality": 53.5,
         "financial": 59.9,
         "catalyst": 56.6
       },
@@ -1535,7 +1535,7 @@
         "high60": 6810.0,
         "technical": 24.8,
         "risk": 29.1,
-        "valuation": 54.1,
+        "valuation": 54.3,
         "quality": 51.7,
         "financial": 25.5,
         "catalyst": 56.0
@@ -1564,7 +1564,7 @@
         "high60": 48560.0,
         "technical": 29.8,
         "risk": 41.4,
-        "valuation": 32.9,
+        "valuation": 33.2,
         "quality": 50.2,
         "financial": 55.8,
         "catalyst": 25.1
@@ -1593,7 +1593,7 @@
         "high60": 12805.0,
         "technical": 43.0,
         "risk": 39.3,
-        "valuation": 40.1,
+        "valuation": 41.1,
         "quality": 77.6,
         "financial": 55.6,
         "catalyst": 84.5
@@ -1622,9 +1622,9 @@
         "high60": 12400.0,
         "technical": 28.9,
         "risk": 31.2,
-        "valuation": 48.8,
+        "valuation": 49.2,
         "quality": 72.9,
-        "financial": 62.5,
+        "financial": 62.6,
         "catalyst": 84.6
       },
       {
@@ -1651,7 +1651,7 @@
         "high60": 8829.0,
         "technical": 26.8,
         "risk": 29.3,
-        "valuation": 55.8,
+        "valuation": 55.9,
         "quality": 63.3,
         "financial": 63.9,
         "catalyst": 69.4
@@ -1680,9 +1680,9 @@
         "high60": 5902.0,
         "technical": 20.9,
         "risk": 25.9,
-        "valuation": 57.5,
+        "valuation": 57.7,
         "quality": 78.4,
-        "financial": 62.4,
+        "financial": 62.5,
         "catalyst": 88.0
       },
       {
@@ -1738,8 +1738,8 @@
         "high60": 65500.0,
         "technical": 33.1,
         "risk": 34.2,
-        "valuation": 44.3,
-        "quality": 76.6,
+        "valuation": 44.5,
+        "quality": 76.7,
         "financial": 56.4,
         "catalyst": 78.1
       },
@@ -1767,7 +1767,7 @@
         "high60": 83740.0,
         "technical": 65.3,
         "risk": 60.2,
-        "valuation": 41.7,
+        "valuation": 41.8,
         "quality": 65.0,
         "financial": 62.4,
         "catalyst": 65.7
@@ -1797,7 +1797,7 @@
         "technical": 63.8,
         "risk": 53.5,
         "valuation": 59.2,
-        "quality": 45.2,
+        "quality": 45.3,
         "financial": 43.1,
         "catalyst": 48.8
       },
@@ -1883,7 +1883,7 @@
         "high60": 4353.0,
         "technical": 67.7,
         "risk": 51.8,
-        "valuation": 61.3,
+        "valuation": 61.4,
         "quality": 63.2,
         "financial": 61.2,
         "catalyst": 65.2
@@ -1914,7 +1914,7 @@
         "risk": 24.8,
         "valuation": 62.0,
         "quality": 67.2,
-        "financial": 53.9,
+        "financial": 53.8,
         "catalyst": 77.7
       },
       {
@@ -1970,7 +1970,7 @@
         "high60": 8857.0,
         "technical": 61.9,
         "risk": 60.0,
-        "valuation": 72.5,
+        "valuation": 72.6,
         "quality": 64.7,
         "financial": 64.0,
         "catalyst": 66.0
@@ -1999,7 +1999,7 @@
         "high60": 9103.0,
         "technical": 62.7,
         "risk": 33.2,
-        "valuation": 59.2,
+        "valuation": 59.1,
         "quality": 46.5,
         "financial": 58.6,
         "catalyst": 32.8
@@ -2115,7 +2115,7 @@
         "high60": 10485.0,
         "technical": 29.7,
         "risk": 30.0,
-        "valuation": 52.3,
+        "valuation": 52.5,
         "quality": 71.6,
         "financial": 62.0,
         "catalyst": 80.8
@@ -2144,7 +2144,7 @@
         "high60": 2535.5,
         "technical": 20.3,
         "risk": 28.8,
-        "valuation": 63.8,
+        "valuation": 63.9,
         "quality": 64.3,
         "financial": 59.0,
         "catalyst": 72.9
@@ -2202,9 +2202,9 @@
         "high60": 18075.0,
         "technical": 51.1,
         "risk": 40.8,
-        "valuation": 52.0,
+        "valuation": 52.2,
         "quality": 52.7,
-        "financial": 45.7,
+        "financial": 45.6,
         "catalyst": 50.0
       },
       {
@@ -2260,7 +2260,7 @@
         "high60": 4769.0,
         "technical": 30.2,
         "risk": 48.0,
-        "valuation": 62.1,
+        "valuation": 62.4,
         "quality": 57.9,
         "financial": 58.5,
         "catalyst": 73.5
@@ -2289,7 +2289,7 @@
         "high60": 3995.0,
         "technical": 42.4,
         "risk": 35.9,
-        "valuation": 62.7,
+        "valuation": 62.8,
         "quality": 80.2,
         "financial": 58.2,
         "catalyst": 81.7
@@ -2318,9 +2318,9 @@
         "high60": 6285.0,
         "technical": 33.8,
         "risk": 48.8,
-        "valuation": 58.5,
+        "valuation": 58.6,
         "quality": 67.5,
-        "financial": 58.1,
+        "financial": 58.2,
         "catalyst": 72.0
       },
       {
@@ -2434,7 +2434,7 @@
         "high60": 6031.0,
         "technical": 44.9,
         "risk": 53.9,
-        "valuation": 64.0,
+        "valuation": 64.2,
         "quality": 63.4,
         "financial": 63.6,
         "catalyst": 75.9
@@ -2463,7 +2463,7 @@
         "high60": 6321.0,
         "technical": 39.7,
         "risk": 53.5,
-        "valuation": 61.5,
+        "valuation": 61.6,
         "quality": 63.9,
         "financial": 64.8,
         "catalyst": 65.3
@@ -2494,7 +2494,7 @@
         "risk": 68.8,
         "valuation": 55.7,
         "quality": 53.6,
-        "financial": 35.4,
+        "financial": 35.5,
         "catalyst": 40.0
       },
       {
@@ -2521,7 +2521,7 @@
         "high60": 26505.0,
         "technical": 35.1,
         "risk": 59.1,
-        "valuation": 46.9,
+        "valuation": 47.0,
         "quality": 70.2,
         "financial": 63.8,
         "catalyst": 66.5
@@ -2637,7 +2637,7 @@
         "high60": 16545.0,
         "technical": 22.9,
         "risk": 29.5,
-        "valuation": 63.6,
+        "valuation": 63.7,
         "quality": 70.5,
         "financial": 65.2,
         "catalyst": 81.8
@@ -2726,7 +2726,7 @@
         "risk": 25.4,
         "valuation": 58.2,
         "quality": 47.6,
-        "financial": 51.0,
+        "financial": 51.1,
         "catalyst": 57.0
       },
       {
@@ -2753,9 +2753,9 @@
         "high60": 5167.0,
         "technical": 47.6,
         "risk": 60.1,
-        "valuation": 53.1,
+        "valuation": 53.0,
         "quality": 65.2,
-        "financial": 61.4,
+        "financial": 61.3,
         "catalyst": 58.5
       },
       {
@@ -2782,9 +2782,9 @@
         "high60": 3109.0,
         "technical": 60.1,
         "risk": 71.0,
-        "valuation": 58.7,
+        "valuation": 58.8,
         "quality": 59.3,
-        "financial": 49.2,
+        "financial": 49.1,
         "catalyst": 48.5
       },
       {
@@ -2811,7 +2811,7 @@
         "high60": 23600.0,
         "technical": 61.7,
         "risk": 62.3,
-        "valuation": 61.8,
+        "valuation": 61.9,
         "quality": 60.9,
         "financial": 59.7,
         "catalyst": 66.2
@@ -2898,7 +2898,7 @@
         "high60": 12765.0,
         "technical": 68.7,
         "risk": 31.4,
-        "valuation": 31.7,
+        "valuation": 31.5,
         "quality": 76.6,
         "financial": 62.7,
         "catalyst": 79.3
@@ -2927,7 +2927,7 @@
         "high60": 7829.0,
         "technical": 37.0,
         "risk": 58.9,
-        "valuation": 62.2,
+        "valuation": 62.3,
         "quality": 58.8,
         "financial": 55.7,
         "catalyst": 62.5
@@ -2985,7 +2985,7 @@
         "high60": 2860.0,
         "technical": 23.1,
         "risk": 35.5,
-        "valuation": 59.7,
+        "valuation": 59.8,
         "quality": 43.0,
         "financial": 47.6,
         "catalyst": 44.6
@@ -3043,7 +3043,7 @@
         "high60": 11575.0,
         "technical": 26.0,
         "risk": 39.0,
-        "valuation": 63.1,
+        "valuation": 63.2,
         "quality": 45.5,
         "financial": 55.2,
         "catalyst": 39.8
@@ -3188,7 +3188,7 @@
         "high60": 5535.0,
         "technical": 28.8,
         "risk": 52.2,
-        "valuation": 55.6,
+        "valuation": 55.7,
         "quality": 66.4,
         "financial": 56.7,
         "catalyst": 75.0
@@ -3333,7 +3333,7 @@
         "high60": 4112.0,
         "technical": 40.9,
         "risk": 51.0,
-        "valuation": 62.1,
+        "valuation": 62.2,
         "quality": 60.8,
         "financial": 50.3,
         "catalyst": 67.2
@@ -3420,7 +3420,7 @@
         "high60": 12170.0,
         "technical": 32.9,
         "risk": 37.3,
-        "valuation": 64.3,
+        "valuation": 64.4,
         "quality": 67.1,
         "financial": 52.2,
         "catalyst": 91.9
@@ -3478,7 +3478,7 @@
         "high60": 7066.0,
         "technical": 74.1,
         "risk": 49.3,
-        "valuation": 57.0,
+        "valuation": 57.1,
         "quality": 61.7,
         "financial": 51.9,
         "catalyst": 65.1
@@ -3594,7 +3594,7 @@
         "high60": 3502.0,
         "technical": 60.5,
         "risk": 63.2,
-        "valuation": 70.2,
+        "valuation": 70.3,
         "quality": 67.8,
         "financial": 64.0,
         "catalyst": 76.8
@@ -3681,7 +3681,7 @@
         "high60": 3864.0,
         "technical": 31.1,
         "risk": 56.6,
-        "valuation": 62.7,
+        "valuation": 62.8,
         "quality": 46.6,
         "financial": 62.9,
         "catalyst": 43.0
@@ -3768,7 +3768,7 @@
         "high60": 6395.0,
         "technical": 70.9,
         "risk": 57.5,
-        "valuation": 44.2,
+        "valuation": 44.3,
         "quality": 57.0,
         "financial": 47.5,
         "catalyst": 50.0
@@ -3797,9 +3797,9 @@
         "high60": 17330.0,
         "technical": 31.9,
         "risk": 36.6,
-        "valuation": 60.8,
+        "valuation": 58.7,
         "quality": 76.2,
-        "financial": 58.5,
+        "financial": 58.6,
         "catalyst": 90.6
       },
       {
@@ -4000,7 +4000,7 @@
         "high60": 3675.0,
         "technical": 26.9,
         "risk": 27.1,
-        "valuation": 62.5,
+        "valuation": 62.6,
         "quality": 71.4,
         "financial": 60.8,
         "catalyst": 76.9
@@ -4087,7 +4087,7 @@
         "high60": 5171.0,
         "technical": 28.0,
         "risk": 33.3,
-        "valuation": 60.4,
+        "valuation": 60.5,
         "quality": 54.8,
         "financial": 59.9,
         "catalyst": 62.1
@@ -4145,7 +4145,7 @@
         "high60": 2627.5,
         "technical": 56.7,
         "risk": 47.2,
-        "valuation": 57.6,
+        "valuation": 57.5,
         "quality": 55.3,
         "financial": 61.0,
         "catalyst": 55.3
@@ -4203,7 +4203,7 @@
         "high60": 6423.0,
         "technical": 60.8,
         "risk": 51.3,
-        "valuation": 42.5,
+        "valuation": 42.4,
         "quality": 70.0,
         "financial": 56.5,
         "catalyst": 65.7
@@ -4232,7 +4232,7 @@
         "high60": 1675.0,
         "technical": 60.1,
         "risk": 63.2,
-        "valuation": 75.8,
+        "valuation": 75.9,
         "quality": 60.1,
         "financial": 50.0,
         "catalyst": 62.9
@@ -4261,7 +4261,7 @@
         "high60": 4587.0,
         "technical": 64.5,
         "risk": 42.9,
-        "valuation": 49.1,
+        "valuation": 48.9,
         "quality": 75.1,
         "financial": 56.6,
         "catalyst": 77.3
@@ -4290,7 +4290,7 @@
         "high60": 1422.0,
         "technical": 58.6,
         "risk": 28.8,
-        "valuation": 51.6,
+        "valuation": 51.2,
         "quality": 42.8,
         "financial": 38.3,
         "catalyst": 55.0
@@ -4350,7 +4350,7 @@
         "risk": 60.6,
         "valuation": 62.5,
         "quality": 62.9,
-        "financial": 50.3,
+        "financial": 50.2,
         "catalyst": 67.4
       },
       {
@@ -4377,7 +4377,7 @@
         "high60": 575.0999755859375,
         "technical": 35.4,
         "risk": 32.4,
-        "valuation": 58.8,
+        "valuation": 58.9,
         "quality": 33.3,
         "financial": 33.6,
         "catalyst": 31.2
@@ -4435,7 +4435,7 @@
         "high60": 13650.0,
         "technical": 24.2,
         "risk": 22.6,
-        "valuation": 55.9,
+        "valuation": 56.0,
         "quality": 61.0,
         "financial": 45.2,
         "catalyst": 87.8
@@ -4465,9 +4465,38 @@
         "technical": 37.6,
         "risk": 35.0,
         "valuation": 62.6,
-        "quality": 65.2,
+        "quality": 65.1,
         "financial": 59.2,
         "catalyst": 78.1
+      },
+      {
+        "symbol": "6504.T",
+        "reference_date": "2026-11-16",
+        "volume": 719300.0,
+        "traded_value": 7836773500.0,
+        "vol5_ratio": 0.8448898802978416,
+        "name": "富士電機",
+        "code": "6504",
+        "price": 10895.0,
+        "change_pct": -3.84,
+        "ma20": 12376.25,
+        "ma50": 13190.6,
+        "ma200": 13046.325,
+        "ret20": -23.193514275643288,
+        "ret60": -27.22110888443554,
+        "ret120": -28.930202217873447,
+        "ret200": -5.834053586862575,
+        "rsi": 32.78969957081544,
+        "vol_ratio": 0.645682508763347,
+        "avg_value20": 13704818800.0,
+        "drawdown": -38.14761215629523,
+        "high60": 15395.0,
+        "technical": 29.0,
+        "risk": 47.8,
+        "valuation": 64.7,
+        "quality": 63.7,
+        "financial": 62.6,
+        "catalyst": 67.5
       },
       {
         "symbol": "5076.T",
@@ -4609,7 +4638,7 @@
         "high60": 2947.0,
         "technical": 41.2,
         "risk": 41.1,
-        "valuation": 62.5,
+        "valuation": 62.6,
         "quality": 64.5,
         "financial": 59.7,
         "catalyst": 69.2
@@ -4639,7 +4668,7 @@
         "technical": 67.6,
         "risk": 57.5,
         "valuation": 60.0,
-        "quality": 60.8,
+        "quality": 60.7,
         "financial": 50.9,
         "catalyst": 67.4
       },
@@ -4725,7 +4754,7 @@
         "high60": 2300.0,
         "technical": 47.5,
         "risk": 32.9,
-        "valuation": 58.2,
+        "valuation": 58.3,
         "quality": 51.1,
         "financial": 63.3,
         "catalyst": 68.1
@@ -4783,7 +4812,7 @@
         "high60": 5134.0,
         "technical": 30.0,
         "risk": 40.9,
-        "valuation": 59.1,
+        "valuation": 59.2,
         "quality": 69.3,
         "financial": 63.5,
         "catalyst": 74.8
@@ -4930,7 +4959,7 @@
         "risk": 56.8,
         "valuation": 64.6,
         "quality": 59.6,
-        "financial": 57.7,
+        "financial": 57.8,
         "catalyst": 59.9
       },
       {
@@ -5015,7 +5044,7 @@
         "high60": 4205.0,
         "technical": 73.1,
         "risk": 55.4,
-        "valuation": 56.2,
+        "valuation": 56.1,
         "quality": 53.8,
         "financial": 56.8,
         "catalyst": 53.2
@@ -5133,7 +5162,7 @@
         "risk": 51.7,
         "valuation": 58.5,
         "quality": 58.2,
-        "financial": 43.3,
+        "financial": 43.2,
         "catalyst": 81.8
       },
       {
@@ -5422,7 +5451,7 @@
         "technical": 52.4,
         "risk": 46.7,
         "valuation": 65.3,
-        "quality": 70.1,
+        "quality": 70.2,
         "financial": 60.8,
         "catalyst": 75.2
       },
@@ -5450,8 +5479,8 @@
         "high60": 5946.0,
         "technical": 31.2,
         "risk": 43.5,
-        "valuation": 59.4,
-        "quality": 50.2,
+        "valuation": 59.5,
+        "quality": 50.3,
         "financial": 50.7,
         "catalyst": 53.4
       },
@@ -5597,7 +5626,7 @@
         "risk": 38.8,
         "valuation": 63.9,
         "quality": 60.9,
-        "financial": 55.0,
+        "financial": 54.9,
         "catalyst": 73.9
       },
       {
@@ -5653,7 +5682,7 @@
         "high60": 9378.0,
         "technical": 34.8,
         "risk": 41.7,
-        "valuation": 60.5,
+        "valuation": 60.6,
         "quality": 67.5,
         "financial": 58.1,
         "catalyst": 74.4
@@ -5682,7 +5711,7 @@
         "high60": 6658.0,
         "technical": 35.7,
         "risk": 36.9,
-        "valuation": 63.0,
+        "valuation": 62.9,
         "quality": 71.6,
         "financial": 61.5,
         "catalyst": 74.0
@@ -5711,7 +5740,7 @@
         "high60": 6850.0,
         "technical": 31.8,
         "risk": 51.5,
-        "valuation": 63.8,
+        "valuation": 64.0,
         "quality": 53.6,
         "financial": 59.5,
         "catalyst": 73.2
@@ -5769,9 +5798,9 @@
         "high60": 3635.0,
         "technical": 31.0,
         "risk": 34.4,
-        "valuation": 51.5,
-        "quality": 39.9,
-        "financial": 38.1,
+        "valuation": 50.7,
+        "quality": 40.0,
+        "financial": 38.2,
         "catalyst": 70.9
       },
       {
@@ -5798,7 +5827,7 @@
         "high60": 6040.0,
         "technical": 33.0,
         "risk": 32.8,
-        "valuation": 65.1,
+        "valuation": 65.2,
         "quality": 68.4,
         "financial": 57.4,
         "catalyst": 88.2
@@ -5972,7 +6001,7 @@
         "high60": 7727.0,
         "technical": 60.3,
         "risk": 57.8,
-        "valuation": 61.6,
+        "valuation": 61.5,
         "quality": 47.5,
         "financial": 50.7,
         "catalyst": 44.0
@@ -6001,8 +6030,8 @@
         "high60": 2079.0,
         "technical": 57.8,
         "risk": 28.6,
-        "valuation": 61.8,
-        "quality": 48.3,
+        "valuation": 61.9,
+        "quality": 48.4,
         "financial": 59.2,
         "catalyst": 36.1
       },
@@ -6088,7 +6117,7 @@
         "high60": 9433.0,
         "technical": 37.3,
         "risk": 52.7,
-        "valuation": 65.9,
+        "valuation": 66.1,
         "quality": 64.3,
         "financial": 66.4,
         "catalyst": 74.8
@@ -6117,7 +6146,7 @@
         "high60": 2890.0,
         "technical": 57.1,
         "risk": 64.5,
-        "valuation": 59.6,
+        "valuation": 59.7,
         "quality": 62.2,
         "financial": 48.2,
         "catalyst": 64.8
@@ -6175,7 +6204,7 @@
         "high60": 6660.0,
         "technical": 30.2,
         "risk": 35.6,
-        "valuation": 41.7,
+        "valuation": 41.9,
         "quality": 62.7,
         "financial": 61.9,
         "catalyst": 80.5
@@ -6233,7 +6262,7 @@
         "high60": 4795.0,
         "technical": 43.4,
         "risk": 53.3,
-        "valuation": 57.9,
+        "valuation": 57.8,
         "quality": 64.2,
         "financial": 32.9,
         "catalyst": 80.6
@@ -6262,7 +6291,7 @@
         "high60": 1944.0,
         "technical": 50.1,
         "risk": 54.6,
-        "valuation": 60.7,
+        "valuation": 60.5,
         "quality": 58.2,
         "financial": 57.7,
         "catalyst": 63.5
@@ -6349,7 +6378,7 @@
         "high60": 9230.0,
         "technical": 29.8,
         "risk": 32.2,
-        "valuation": 58.3,
+        "valuation": 57.7,
         "quality": 74.8,
         "financial": 57.5,
         "catalyst": 92.0
@@ -6494,7 +6523,7 @@
         "high60": 2650.0,
         "technical": 50.2,
         "risk": 37.6,
-        "valuation": 62.1,
+        "valuation": 62.4,
         "quality": 52.4,
         "financial": 62.8,
         "catalyst": 51.5
@@ -6523,7 +6552,7 @@
         "high60": 1854.0,
         "technical": 70.5,
         "risk": 45.3,
-        "valuation": 54.1,
+        "valuation": 54.0,
         "quality": 40.4,
         "financial": 63.8,
         "catalyst": 30.4
@@ -6552,7 +6581,7 @@
         "high60": 4978.0,
         "technical": 31.1,
         "risk": 43.6,
-        "valuation": 64.2,
+        "valuation": 64.1,
         "quality": 59.8,
         "financial": 47.8,
         "catalyst": 85.5
@@ -6784,7 +6813,7 @@
         "high60": 2404.0,
         "technical": 31.3,
         "risk": 21.9,
-        "valuation": 35.7,
+        "valuation": 35.8,
         "quality": 55.3,
         "financial": 42.7,
         "catalyst": 70.4
@@ -6813,7 +6842,7 @@
         "high60": 3688.0,
         "technical": 57.2,
         "risk": 62.6,
-        "valuation": 53.9,
+        "valuation": 54.0,
         "quality": 62.1,
         "financial": 39.1,
         "catalyst": 67.3
@@ -6900,7 +6929,7 @@
         "high60": 1156.0,
         "technical": 56.0,
         "risk": 25.1,
-        "valuation": 52.7,
+        "valuation": 52.6,
         "quality": 66.5,
         "financial": 56.3,
         "catalyst": 74.9
@@ -6958,7 +6987,7 @@
         "high60": 3205.0,
         "technical": 65.6,
         "risk": 35.5,
-        "valuation": 62.8,
+        "valuation": 62.7,
         "quality": 67.8,
         "financial": 68.6,
         "catalyst": 57.4
@@ -7016,7 +7045,7 @@
         "high60": 4180.0,
         "technical": 38.6,
         "risk": 35.0,
-        "valuation": 60.6,
+        "valuation": 60.9,
         "quality": 50.8,
         "financial": 53.7,
         "catalyst": 40.0
@@ -7132,7 +7161,7 @@
         "high60": 5797.0,
         "technical": 38.5,
         "risk": 41.8,
-        "valuation": 65.9,
+        "valuation": 66.0,
         "quality": 65.1,
         "financial": 64.7,
         "catalyst": 62.3
@@ -7192,7 +7221,7 @@
         "risk": 40.3,
         "valuation": 62.2,
         "quality": 45.7,
-        "financial": 60.4,
+        "financial": 60.3,
         "catalyst": 36.8
       },
       {
@@ -7219,7 +7248,7 @@
         "high60": 7265.0,
         "technical": 30.4,
         "risk": 43.5,
-        "valuation": 60.2,
+        "valuation": 60.3,
         "quality": 57.5,
         "financial": 57.6,
         "catalyst": 68.0
@@ -7248,7 +7277,7 @@
         "high60": 10810.0,
         "technical": 42.1,
         "risk": 18.6,
-        "valuation": 35.5,
+        "valuation": 35.6,
         "quality": 38.4,
         "financial": 54.0,
         "catalyst": 58.6
@@ -7364,7 +7393,7 @@
         "high60": 1157.5,
         "technical": 69.0,
         "risk": 50.6,
-        "valuation": 60.2,
+        "valuation": 60.0,
         "quality": 49.6,
         "financial": 64.8,
         "catalyst": 45.1
@@ -7567,7 +7596,7 @@
         "high60": 6050.0,
         "technical": 49.8,
         "risk": 45.3,
-        "valuation": 66.2,
+        "valuation": 66.3,
         "quality": 63.1,
         "financial": 63.9,
         "catalyst": 69.8
@@ -7625,7 +7654,7 @@
         "high60": 7370.0,
         "technical": 31.6,
         "risk": 33.6,
-        "valuation": 57.1,
+        "valuation": 57.3,
         "quality": 74.2,
         "financial": 52.5,
         "catalyst": 87.4
@@ -7654,7 +7683,7 @@
         "high60": 2543.0,
         "technical": 51.0,
         "risk": 49.1,
-        "valuation": 59.5,
+        "valuation": 59.6,
         "quality": 65.6,
         "financial": 61.5,
         "catalyst": 77.4
@@ -7713,7 +7742,7 @@
         "technical": 24.8,
         "risk": 28.9,
         "valuation": 62.1,
-        "quality": 55.4,
+        "quality": 55.5,
         "financial": 61.1,
         "catalyst": 39.1
       },
@@ -7830,7 +7859,7 @@
         "risk": 62.3,
         "valuation": 55.9,
         "quality": 45.2,
-        "financial": 58.6,
+        "financial": 58.7,
         "catalyst": 43.1
       },
       {
@@ -7915,7 +7944,7 @@
         "high60": 1387.0,
         "technical": 62.1,
         "risk": 51.8,
-        "valuation": 65.8,
+        "valuation": 65.9,
         "quality": 56.0,
         "financial": 64.8,
         "catalyst": 52.9
@@ -7974,7 +8003,7 @@
         "technical": 22.8,
         "risk": 33.6,
         "valuation": 63.9,
-        "quality": 59.4,
+        "quality": 59.5,
         "financial": 65.8,
         "catalyst": 61.5
       },
@@ -8089,7 +8118,7 @@
         "high60": 5010.0,
         "technical": 30.4,
         "risk": 47.4,
-        "valuation": 63.7,
+        "valuation": 63.8,
         "quality": 56.1,
         "financial": 62.9,
         "catalyst": 50.0
@@ -8147,9 +8176,9 @@
         "high60": 4395.0,
         "technical": 32.2,
         "risk": 28.8,
-        "valuation": 64.4,
-        "quality": 63.3,
-        "financial": 66.0,
+        "valuation": 65.0,
+        "quality": 63.4,
+        "financial": 66.1,
         "catalyst": 52.5
       },
       {
@@ -8205,7 +8234,7 @@
         "high60": 4179.0,
         "technical": 72.3,
         "risk": 61.7,
-        "valuation": 47.2,
+        "valuation": 46.3,
         "quality": 69.0,
         "financial": 58.3,
         "catalyst": 72.6
@@ -8292,8 +8321,8 @@
         "high60": 3805.0,
         "technical": 61.9,
         "risk": 55.8,
-        "valuation": 52.4,
-        "quality": 54.6,
+        "valuation": 52.3,
+        "quality": 54.5,
         "financial": 54.0,
         "catalyst": 52.8
       },
@@ -8321,7 +8350,7 @@
         "high60": 2583.5,
         "technical": 66.7,
         "risk": 50.1,
-        "valuation": 63.9,
+        "valuation": 63.8,
         "quality": 56.4,
         "financial": 60.3,
         "catalyst": 69.5
@@ -8381,7 +8410,7 @@
         "risk": 29.7,
         "valuation": 45.8,
         "quality": 54.8,
-        "financial": 61.5,
+        "financial": 61.6,
         "catalyst": 69.2
       },
       {
@@ -8437,7 +8466,7 @@
         "high60": 2331.5,
         "technical": 46.1,
         "risk": 60.3,
-        "valuation": 64.2,
+        "valuation": 64.4,
         "quality": 37.0,
         "financial": 61.4,
         "catalyst": 37.7
@@ -8611,8 +8640,8 @@
         "high60": 2452.0,
         "technical": 38.2,
         "risk": 27.8,
-        "valuation": 33.1,
-        "quality": 56.6,
+        "valuation": 33.2,
+        "quality": 56.5,
         "financial": 52.7,
         "catalyst": 65.8
       },
@@ -8669,7 +8698,7 @@
         "high60": 1897.0,
         "technical": 69.3,
         "risk": 63.6,
-        "valuation": 75.3,
+        "valuation": 75.4,
         "quality": 44.1,
         "financial": 68.8,
         "catalyst": 44.4
@@ -8698,8 +8727,8 @@
         "high60": 2671.0,
         "technical": 71.5,
         "risk": 34.8,
-        "valuation": 40.4,
-        "quality": 72.2,
+        "valuation": 40.6,
+        "quality": 72.3,
         "financial": 64.6,
         "catalyst": 72.1
       },
@@ -8843,7 +8872,7 @@
         "high60": 4093.0,
         "technical": 30.9,
         "risk": 40.6,
-        "valuation": 59.5,
+        "valuation": 59.8,
         "quality": 50.9,
         "financial": 56.0,
         "catalyst": 56.1
@@ -9076,7 +9105,7 @@
         "technical": 59.7,
         "risk": 58.8,
         "valuation": 64.6,
-        "quality": 53.2,
+        "quality": 53.1,
         "financial": 59.8,
         "catalyst": 64.4
       },
@@ -9249,7 +9278,7 @@
         "high60": 1754.0,
         "technical": 35.3,
         "risk": 30.9,
-        "valuation": 61.5,
+        "valuation": 61.6,
         "quality": 52.3,
         "financial": 58.3,
         "catalyst": 53.3
@@ -9396,7 +9425,7 @@
         "risk": 51.5,
         "valuation": 66.7,
         "quality": 67.7,
-        "financial": 63.2,
+        "financial": 63.1,
         "catalyst": 81.6
       },
       {
@@ -9481,9 +9510,9 @@
         "high60": 5080.0,
         "technical": 27.4,
         "risk": 45.7,
-        "valuation": 71.6,
+        "valuation": 71.5,
         "quality": 69.5,
-        "financial": 70.4,
+        "financial": 70.3,
         "catalyst": 65.3
       },
       {
@@ -9597,7 +9626,7 @@
         "high60": 1361.0,
         "technical": 64.3,
         "risk": 65.7,
-        "valuation": 67.3,
+        "valuation": 67.2,
         "quality": 57.9,
         "financial": 66.7,
         "catalyst": 58.3
@@ -9655,9 +9684,9 @@
         "high60": 1813.0,
         "technical": 78.8,
         "risk": 51.7,
-        "valuation": 53.0,
+        "valuation": 53.1,
         "quality": 44.0,
-        "financial": 52.5,
+        "financial": 52.4,
         "catalyst": 60.9
       },
       {
@@ -9742,7 +9771,7 @@
         "high60": 2870.5,
         "technical": 54.5,
         "risk": 62.6,
-        "valuation": 66.0,
+        "valuation": 66.1,
         "quality": 65.7,
         "financial": 55.3,
         "catalyst": 75.1
@@ -9773,7 +9802,7 @@
         "risk": 42.5,
         "valuation": 58.6,
         "quality": 53.5,
-        "financial": 39.3,
+        "financial": 39.4,
         "catalyst": 63.3
       },
       {
@@ -9829,7 +9858,7 @@
         "high60": 2866.0,
         "technical": 50.4,
         "risk": 59.4,
-        "valuation": 72.6,
+        "valuation": 72.8,
         "quality": 55.6,
         "financial": 62.1,
         "catalyst": 55.8
@@ -9858,7 +9887,7 @@
         "high60": 1911.0,
         "technical": 37.1,
         "risk": 26.7,
-        "valuation": 54.8,
+        "valuation": 54.9,
         "quality": 62.9,
         "financial": 54.3,
         "catalyst": 74.4
@@ -10032,7 +10061,7 @@
         "high60": 2796.0,
         "technical": 20.0,
         "risk": 31.4,
-        "valuation": 62.6,
+        "valuation": 62.9,
         "quality": 55.0,
         "financial": 56.2,
         "catalyst": 49.4
@@ -10148,7 +10177,7 @@
         "high60": 1281.0,
         "technical": 40.0,
         "risk": 26.9,
-        "valuation": 44.3,
+        "valuation": 44.4,
         "quality": 57.1,
         "financial": 54.4,
         "catalyst": 65.1
@@ -10235,7 +10264,7 @@
         "high60": 3005.0,
         "technical": 24.3,
         "risk": 35.2,
-        "valuation": 62.7,
+        "valuation": 62.6,
         "quality": 56.2,
         "financial": 55.5,
         "catalyst": 59.4
@@ -10264,7 +10293,7 @@
         "high60": 2844.0,
         "technical": 34.5,
         "risk": 46.5,
-        "valuation": 62.6,
+        "valuation": 62.7,
         "quality": 45.4,
         "financial": 56.0,
         "catalyst": 45.4
@@ -10323,7 +10352,7 @@
         "technical": 49.3,
         "risk": 61.0,
         "valuation": 55.4,
-        "quality": 61.7,
+        "quality": 61.8,
         "financial": 58.2,
         "catalyst": 76.9
       },
@@ -10351,7 +10380,7 @@
         "high60": 5690.0,
         "technical": 36.3,
         "risk": 19.9,
-        "valuation": 34.0,
+        "valuation": 35.1,
         "quality": 61.5,
         "financial": 58.2,
         "catalyst": 64.8
@@ -10380,9 +10409,9 @@
         "high60": 2520.0,
         "technical": 38.9,
         "risk": 62.4,
-        "valuation": 64.7,
+        "valuation": 64.6,
         "quality": 67.0,
-        "financial": 66.2,
+        "financial": 66.1,
         "catalyst": 76.2
       },
       {
@@ -10438,7 +10467,7 @@
         "high60": 1466.0,
         "technical": 67.8,
         "risk": 36.2,
-        "valuation": 55.4,
+        "valuation": 55.6,
         "quality": 68.5,
         "financial": 39.3,
         "catalyst": 69.1
@@ -10554,7 +10583,7 @@
         "high60": 3208.0,
         "technical": 50.1,
         "risk": 59.4,
-        "valuation": 58.7,
+        "valuation": 58.8,
         "quality": 65.6,
         "financial": 46.2,
         "catalyst": 68.8
@@ -10583,7 +10612,7 @@
         "high60": 3180.0,
         "technical": 34.7,
         "risk": 52.6,
-        "valuation": 59.5,
+        "valuation": 59.6,
         "quality": 59.6,
         "financial": 46.9,
         "catalyst": 66.2
@@ -10613,7 +10642,7 @@
         "technical": 54.5,
         "risk": 43.7,
         "valuation": 69.6,
-        "quality": 49.7,
+        "quality": 49.8,
         "financial": 67.6,
         "catalyst": 29.3
       },
@@ -10699,7 +10728,7 @@
         "high60": 2019.0,
         "technical": 57.8,
         "risk": 67.9,
-        "valuation": 55.4,
+        "valuation": 55.3,
         "quality": 69.8,
         "financial": 64.8,
         "catalyst": 63.3
@@ -10757,7 +10786,7 @@
         "high60": 758.0,
         "technical": 56.4,
         "risk": 25.1,
-        "valuation": 74.6,
+        "valuation": 74.7,
         "quality": 63.5,
         "financial": 74.5,
         "catalyst": 39.9
@@ -10817,7 +10846,7 @@
         "risk": 65.7,
         "valuation": 61.0,
         "quality": 48.6,
-        "financial": 56.2,
+        "financial": 56.3,
         "catalyst": 48.0
       },
       {
@@ -10902,9 +10931,9 @@
         "high60": 2380.0,
         "technical": 32.7,
         "risk": 51.2,
-        "valuation": 60.3,
+        "valuation": 60.4,
         "quality": 58.5,
-        "financial": 46.5,
+        "financial": 46.4,
         "catalyst": 68.4
       },
       {
@@ -10931,7 +10960,7 @@
         "high60": 2235.0,
         "technical": 71.4,
         "risk": 64.3,
-        "valuation": 63.3,
+        "valuation": 63.2,
         "quality": 45.1,
         "financial": 64.5,
         "catalyst": 37.3
@@ -10960,7 +10989,7 @@
         "high60": 2862.0,
         "technical": 34.1,
         "risk": 59.2,
-        "valuation": 65.0,
+        "valuation": 64.9,
         "quality": 66.6,
         "financial": 59.5,
         "catalyst": 76.8
@@ -11018,7 +11047,7 @@
         "high60": 3022.0,
         "technical": 59.6,
         "risk": 63.9,
-        "valuation": 53.0,
+        "valuation": 52.9,
         "quality": 56.2,
         "financial": 18.5,
         "catalyst": 58.3
@@ -11076,7 +11105,7 @@
         "high60": 1933.0,
         "technical": 67.7,
         "risk": 43.7,
-        "valuation": 60.4,
+        "valuation": 60.3,
         "quality": 67.7,
         "financial": 66.5,
         "catalyst": 54.7
@@ -11163,7 +11192,7 @@
         "high60": 1103.0,
         "technical": 44.5,
         "risk": 31.7,
-        "valuation": 61.7,
+        "valuation": 62.2,
         "quality": 42.5,
         "financial": 50.8,
         "catalyst": 46.7
@@ -11279,7 +11308,7 @@
         "high60": 2618.0,
         "technical": 42.2,
         "risk": 58.7,
-        "valuation": 66.9,
+        "valuation": 67.0,
         "quality": 46.3,
         "financial": 62.8,
         "catalyst": 51.4
@@ -11308,7 +11337,7 @@
         "high60": 2320.0,
         "technical": 63.3,
         "risk": 29.9,
-        "valuation": 43.2,
+        "valuation": 43.0,
         "quality": 71.9,
         "financial": 59.4,
         "catalyst": 78.6
@@ -11337,7 +11366,7 @@
         "high60": 1555.0,
         "technical": 59.1,
         "risk": 62.6,
-        "valuation": 61.3,
+        "valuation": 61.4,
         "quality": 57.0,
         "financial": 63.9,
         "catalyst": 49.8
@@ -11453,7 +11482,7 @@
         "high60": 2076.0,
         "technical": 55.1,
         "risk": 59.2,
-        "valuation": 60.2,
+        "valuation": 60.1,
         "quality": 60.2,
         "financial": 43.3,
         "catalyst": 63.5
@@ -11685,9 +11714,9 @@
         "high60": 3665.0,
         "technical": 26.9,
         "risk": 26.0,
-        "valuation": 60.1,
-        "quality": 55.9,
-        "financial": 49.1,
+        "valuation": 60.2,
+        "quality": 55.8,
+        "financial": 49.0,
         "catalyst": 76.2
       },
       {
@@ -11716,7 +11745,7 @@
         "risk": 67.5,
         "valuation": 70.3,
         "quality": 72.7,
-        "financial": 60.8,
+        "financial": 60.9,
         "catalyst": 78.8
       },
       {
@@ -11801,7 +11830,7 @@
         "high60": 1818.0,
         "technical": 41.9,
         "risk": 31.0,
-        "valuation": 42.3,
+        "valuation": 42.4,
         "quality": 50.9,
         "financial": 57.5,
         "catalyst": 50.0
@@ -11859,7 +11888,7 @@
         "high60": 1617.5,
         "technical": 62.9,
         "risk": 62.8,
-        "valuation": 61.0,
+        "valuation": 60.9,
         "quality": 58.9,
         "financial": 52.1,
         "catalyst": 64.3
@@ -11888,7 +11917,7 @@
         "high60": 3620.0,
         "technical": 21.2,
         "risk": 19.1,
-        "valuation": 47.2,
+        "valuation": 47.5,
         "quality": 49.9,
         "financial": 47.8,
         "catalyst": 55.4
@@ -11975,7 +12004,7 @@
         "high60": 1827.5,
         "technical": 60.2,
         "risk": 62.4,
-        "valuation": 67.0,
+        "valuation": 67.1,
         "quality": 48.7,
         "financial": 62.2,
         "catalyst": 43.7
@@ -12004,7 +12033,7 @@
         "high60": 1643.0,
         "technical": 65.5,
         "risk": 54.3,
-        "valuation": 52.9,
+        "valuation": 52.8,
         "quality": 50.3,
         "financial": 47.8,
         "catalyst": 57.3
@@ -12120,7 +12149,7 @@
         "high60": 2442.0,
         "technical": 23.3,
         "risk": 32.9,
-        "valuation": 65.5,
+        "valuation": 65.6,
         "quality": 64.9,
         "financial": 60.5,
         "catalyst": 69.4
@@ -12208,7 +12237,7 @@
         "technical": 25.4,
         "risk": 27.5,
         "valuation": 65.7,
-        "quality": 61.1,
+        "quality": 61.0,
         "financial": 59.5,
         "catalyst": 81.1
       },
@@ -12236,7 +12265,7 @@
         "high60": 1176.5,
         "technical": 63.9,
         "risk": 39.4,
-        "valuation": 49.8,
+        "valuation": 49.5,
         "quality": 70.8,
         "financial": 56.6,
         "catalyst": 62.5
@@ -12410,9 +12439,9 @@
         "high60": 2141.0,
         "technical": 53.7,
         "risk": 57.0,
-        "valuation": 70.5,
+        "valuation": 70.6,
         "quality": 51.7,
-        "financial": 60.3,
+        "financial": 60.4,
         "catalyst": 43.8
       },
       {
@@ -12439,7 +12468,7 @@
         "high60": 1642.0,
         "technical": 77.0,
         "risk": 27.1,
-        "valuation": 53.8,
+        "valuation": 53.9,
         "quality": 60.1,
         "financial": 61.2,
         "catalyst": 77.8
@@ -12468,7 +12497,7 @@
         "high60": 1841.0,
         "technical": 41.6,
         "risk": 47.5,
-        "valuation": 72.0,
+        "valuation": 72.2,
         "quality": 65.6,
         "financial": 62.6,
         "catalyst": 83.1
@@ -12497,7 +12526,7 @@
         "high60": 2170.0,
         "technical": 56.0,
         "risk": 52.8,
-        "valuation": 32.8,
+        "valuation": 33.0,
         "quality": 67.5,
         "financial": 58.8,
         "catalyst": 79.8
@@ -12555,9 +12584,9 @@
         "high60": 3000.0,
         "technical": 38.4,
         "risk": 19.5,
-        "valuation": 54.7,
+        "valuation": 54.8,
         "quality": 58.5,
-        "financial": 40.3,
+        "financial": 40.2,
         "catalyst": 57.7
       },
       {
@@ -12643,7 +12672,7 @@
         "technical": 38.8,
         "risk": 35.3,
         "valuation": 65.6,
-        "quality": 70.4,
+        "quality": 70.5,
         "financial": 60.7,
         "catalyst": 83.4
       },
@@ -12729,7 +12758,7 @@
         "high60": 1730.0,
         "technical": 31.9,
         "risk": 25.9,
-        "valuation": 61.0,
+        "valuation": 61.1,
         "quality": 61.7,
         "financial": 58.0,
         "catalyst": 68.2
@@ -12903,9 +12932,9 @@
         "high60": 1920.0,
         "technical": 20.9,
         "risk": 21.7,
-        "valuation": 43.8,
+        "valuation": 43.9,
         "quality": 55.1,
-        "financial": 55.3,
+        "financial": 55.4,
         "catalyst": 50.0
       },
       {
@@ -12933,7 +12962,7 @@
         "technical": 57.7,
         "risk": 59.2,
         "valuation": 60.8,
-        "quality": 59.5,
+        "quality": 59.4,
         "financial": 65.9,
         "catalyst": 42.8
       },
@@ -12961,7 +12990,7 @@
         "high60": 1042.3333740234375,
         "technical": 57.7,
         "risk": 62.7,
-        "valuation": 58.1,
+        "valuation": 58.2,
         "quality": 51.1,
         "financial": 54.8,
         "catalyst": 36.6
@@ -13019,7 +13048,7 @@
         "high60": 966.0,
         "technical": 48.3,
         "risk": 44.6,
-        "valuation": 61.6,
+        "valuation": 61.8,
         "quality": 56.6,
         "financial": 51.5,
         "catalyst": 79.0
@@ -13077,7 +13106,7 @@
         "high60": 1170.0,
         "technical": 35.0,
         "risk": 52.4,
-        "valuation": 74.4,
+        "valuation": 74.5,
         "quality": 51.7,
         "financial": 63.2,
         "catalyst": 48.7
@@ -13251,7 +13280,7 @@
         "high60": 1282.0,
         "technical": 53.1,
         "risk": 51.4,
-        "valuation": 54.6,
+        "valuation": 54.5,
         "quality": 62.6,
         "financial": 59.6,
         "catalyst": 57.6
@@ -13396,7 +13425,7 @@
         "high60": 603.0,
         "technical": 37.6,
         "risk": 18.6,
-        "valuation": 63.5,
+        "valuation": 57.9,
         "quality": 57.5,
         "financial": 57.2,
         "catalyst": 54.9
@@ -13425,9 +13454,9 @@
         "high60": 600.0,
         "technical": 39.5,
         "risk": 47.3,
-        "valuation": 68.4,
+        "valuation": 68.5,
         "quality": 45.8,
-        "financial": 60.4,
+        "financial": 60.5,
         "catalyst": 50.3
       },
       {
@@ -13483,7 +13512,7 @@
         "high60": 494.70001220703125,
         "technical": 55.0,
         "risk": 65.2,
-        "valuation": 56.5,
+        "valuation": 56.4,
         "quality": 50.7,
         "financial": 33.1,
         "catalyst": 55.0
@@ -13512,7 +13541,7 @@
         "high60": 2068.0,
         "technical": 47.2,
         "risk": 47.7,
-        "valuation": 74.2,
+        "valuation": 74.1,
         "quality": 58.1,
         "financial": 62.9,
         "catalyst": 63.5
@@ -13599,7 +13628,7 @@
         "high60": 860.0,
         "technical": 47.9,
         "risk": 50.2,
-        "valuation": 73.5,
+        "valuation": 73.4,
         "quality": 64.8,
         "financial": 60.3,
         "catalyst": 79.3
@@ -13773,7 +13802,7 @@
         "high60": 251.0,
         "technical": 48.0,
         "risk": 61.8,
-        "valuation": 63.5,
+        "valuation": 63.2,
         "quality": 60.8,
         "financial": 58.7,
         "catalyst": 66.5
@@ -13889,7 +13918,7 @@
         "high60": 1042.0,
         "technical": 28.5,
         "risk": 18.8,
-        "valuation": 53.4,
+        "valuation": 53.5,
         "quality": 36.5,
         "financial": 55.7,
         "catalyst": 50.0
@@ -13918,7 +13947,7 @@
         "high60": 545.0,
         "technical": 47.5,
         "risk": 47.8,
-        "valuation": 66.2,
+        "valuation": 66.1,
         "quality": 50.2,
         "financial": 55.6,
         "catalyst": 45.2
@@ -13976,7 +14005,7 @@
         "high60": 831.0,
         "technical": 47.0,
         "risk": 56.1,
-        "valuation": 60.3,
+        "valuation": 60.5,
         "quality": 43.3,
         "financial": 51.5,
         "catalyst": 39.2
@@ -14005,7 +14034,7 @@
         "high60": 976.0,
         "technical": 45.5,
         "risk": 37.3,
-        "valuation": 53.9,
+        "valuation": 54.0,
         "quality": 63.5,
         "financial": 34.5,
         "catalyst": 68.6
@@ -14034,8 +14063,8 @@
         "high60": 337.0,
         "technical": 42.1,
         "risk": 31.0,
-        "valuation": 55.3,
-        "quality": 31.6,
+        "valuation": 55.5,
+        "quality": 31.5,
         "financial": 47.6,
         "catalyst": 41.4
       },
@@ -14065,7 +14094,7 @@
         "risk": 23.8,
         "valuation": 52.9,
         "quality": 66.8,
-        "financial": 40.4,
+        "financial": 40.5,
         "catalyst": 83.3
       },
       {
@@ -14092,7 +14121,7 @@
         "high60": 579.0,
         "technical": 26.1,
         "risk": 18.9,
-        "valuation": 59.8,
+        "valuation": 59.9,
         "quality": 59.2,
         "financial": 57.5,
         "catalyst": 59.7
@@ -14152,7 +14181,7 @@
         "risk": 44.2,
         "valuation": 60.5,
         "quality": 60.2,
-        "financial": 46.4,
+        "financial": 46.3,
         "catalyst": 79.3
       },
       {
@@ -14179,7 +14208,7 @@
         "high60": 72.0,
         "technical": 63.1,
         "risk": 18.6,
-        "valuation": 49.0,
+        "valuation": 48.8,
         "quality": 34.5,
         "financial": 48.1,
         "catalyst": 41.7
@@ -14208,7 +14237,7 @@
         "high60": 448.0,
         "technical": 25.0,
         "risk": 28.5,
-        "valuation": 59.2,
+        "valuation": 59.3,
         "quality": 63.1,
         "financial": 57.8,
         "catalyst": 46.4
@@ -14295,7 +14324,7 @@
         "high60": 128.0,
         "technical": 26.7,
         "risk": 40.9,
-        "valuation": 61.8,
+        "valuation": 61.7,
         "quality": 49.6,
         "financial": 54.5,
         "catalyst": 55.2
@@ -14382,7 +14411,7 @@
         "high60": 1403.0,
         "technical": 40.4,
         "risk": 20.5,
-        "valuation": 62.2,
+        "valuation": 62.3,
         "quality": 45.9,
         "financial": 58.0,
         "catalyst": 47.8
@@ -14411,7 +14440,7 @@
         "high60": 111.0,
         "technical": 49.5,
         "risk": 42.7,
-        "valuation": 57.1,
+        "valuation": 57.3,
         "quality": 46.7,
         "financial": 48.1,
         "catalyst": 49.5
@@ -14556,7 +14585,7 @@
         "high60": 318.0,
         "technical": 24.8,
         "risk": 23.2,
-        "valuation": 33.4,
+        "valuation": 33.5,
         "quality": 23.6,
         "financial": 51.4,
         "catalyst": 32.6
@@ -14672,8 +14701,8 @@
         "high60": 169.0,
         "technical": 24.4,
         "risk": 21.2,
-        "valuation": 52.4,
-        "quality": 33.7,
+        "valuation": 52.3,
+        "quality": 33.8,
         "financial": 48.6,
         "catalyst": 41.8
       },
@@ -14817,9 +14846,9 @@
         "high60": 1340.0,
         "technical": 39.7,
         "risk": 33.1,
-        "valuation": 40.1,
+        "valuation": 40.3,
         "quality": 48.2,
-        "financial": 52.7,
+        "financial": 52.8,
         "catalyst": 65.3
       },
       {
@@ -14933,7 +14962,7 @@
         "high60": 185.0,
         "technical": 68.7,
         "risk": 32.4,
-        "valuation": 71.3,
+        "valuation": 71.2,
         "quality": 31.0,
         "financial": 57.8,
         "catalyst": 54.9
@@ -14962,9 +14991,9 @@
         "high60": 243.0,
         "technical": 24.8,
         "risk": 25.6,
-        "valuation": 60.2,
+        "valuation": 60.3,
         "quality": 41.5,
-        "financial": 62.4,
+        "financial": 62.5,
         "catalyst": 69.0
       },
       {
@@ -15020,8 +15049,8 @@
         "high60": 2567.0,
         "technical": 33.6,
         "risk": 20.5,
-        "valuation": 63.7,
-        "quality": 34.8,
+        "valuation": 63.8,
+        "quality": 34.7,
         "financial": 59.6,
         "catalyst": 46.8
       },
@@ -15082,35 +15111,6 @@
         "quality": 34.9,
         "financial": 61.0,
         "catalyst": 37.8
-      },
-      {
-        "symbol": "6085.T",
-        "reference_date": "2026-11-16",
-        "volume": 1200200.0,
-        "traded_value": 62410400.0,
-        "vol5_ratio": 1.4689577814173307,
-        "name": "アーキテクツ・スタジオ・ジャパン",
-        "code": "6085",
-        "price": 52.0,
-        "change_pct": -1.89,
-        "ma20": 68.15,
-        "ma50": 105.02,
-        "ma200": 218.29349987030028,
-        "ret20": -42.22222222222223,
-        "ret60": -35.0,
-        "ret120": -88.81720430107526,
-        "ret200": 26.82926829268293,
-        "rsi": 20.588235294117652,
-        "vol_ratio": 0.4995390439167324,
-        "avg_value20": 159932525.0,
-        "drawdown": -91.875,
-        "high60": 235.0,
-        "technical": 24.3,
-        "risk": 18.6,
-        "valuation": 45.8,
-        "quality": 41.7,
-        "financial": 43.2,
-        "catalyst": 50.0
       },
       {
         "symbol": "4667.T",
@@ -15223,9 +15223,9 @@
         "high60": 96.0,
         "technical": 54.2,
         "risk": 18.6,
-        "valuation": 54.4,
+        "valuation": 55.5,
         "quality": 37.3,
-        "financial": 53.2,
+        "financial": 53.4,
         "catalyst": 56.1
       },
       {
@@ -15281,9 +15281,9 @@
         "high60": 240.0,
         "technical": 30.8,
         "risk": 18.6,
-        "valuation": 53.2,
+        "valuation": 53.1,
         "quality": 40.0,
-        "financial": 29.1,
+        "financial": 29.0,
         "catalyst": 51.2
       },
       {
@@ -15370,7 +15370,7 @@
         "risk": 18.6,
         "valuation": 65.6,
         "quality": 41.3,
-        "financial": 67.6,
+        "financial": 67.7,
         "catalyst": 51.3
       },
       {
@@ -15471,7 +15471,7 @@
         "change_pct": 3.34,
         "score": 66.7,
         "signal": "有力",
-        "valuation": 60.1,
+        "valuation": 59.9,
         "quality": 61.2,
         "financial": 52.8,
         "technical": 65.2,
@@ -15993,7 +15993,7 @@
         "change_pct": -1.26,
         "score": 63.7,
         "signal": "注目",
-        "valuation": 54.9,
+        "valuation": 55.0,
         "quality": 65.4,
         "financial": 64.0,
         "technical": 58.0,
@@ -16013,7 +16013,7 @@
         "change_pct": 3.34,
         "score": 63.7,
         "signal": "注目",
-        "valuation": 60.1,
+        "valuation": 59.9,
         "quality": 61.2,
         "financial": 52.8,
         "technical": 65.2,
@@ -16093,7 +16093,7 @@
         "change_pct": -2.25,
         "score": 61.1,
         "signal": "注目",
-        "valuation": 41.6,
+        "valuation": 41.8,
         "quality": 73.2,
         "financial": 54.7,
         "technical": 62.9,
@@ -16475,7 +16475,7 @@
         "change_pct": -1.26,
         "score": 63.0,
         "signal": "注目",
-        "valuation": 54.9,
+        "valuation": 55.0,
         "quality": 65.4,
         "financial": 64.0,
         "technical": 58.0,
@@ -16555,7 +16555,7 @@
         "change_pct": -2.18,
         "score": 62.4,
         "signal": "注目",
-        "valuation": 62.2,
+        "valuation": 62.1,
         "quality": 70.3,
         "financial": 61.3,
         "technical": 43.5,
@@ -16593,9 +16593,9 @@
         "code": "LUV",
         "price": 46.44,
         "change_pct": 3.34,
-        "score": 61.9,
+        "score": 61.8,
         "signal": "注目",
-        "valuation": 60.1,
+        "valuation": 59.9,
         "quality": 61.2,
         "financial": 52.8,
         "technical": 65.2,
@@ -17129,7 +17129,7 @@
         "high60": 162.52000427246094,
         "technical": 40.5,
         "risk": 26.3,
-        "valuation": 49.6,
+        "valuation": 49.8,
         "quality": 68.2,
         "financial": 38.2,
         "catalyst": 78.0
@@ -17216,7 +17216,7 @@
         "high60": 249.8699951171875,
         "technical": 25.7,
         "risk": 27.8,
-        "valuation": 33.1,
+        "valuation": 33.5,
         "quality": 46.8,
         "financial": 47.1,
         "catalyst": 71.0
@@ -17274,7 +17274,7 @@
         "high60": 295.7799987792969,
         "technical": 37.9,
         "risk": 35.1,
-        "valuation": 21.4,
+        "valuation": 21.3,
         "quality": 66.6,
         "financial": 51.3,
         "catalyst": 70.8
@@ -17564,7 +17564,7 @@
         "high60": 129.1699981689453,
         "technical": 55.0,
         "risk": 60.9,
-        "valuation": 45.4,
+        "valuation": 45.3,
         "quality": 52.3,
         "financial": 56.2,
         "catalyst": 48.2
@@ -17593,7 +17593,7 @@
         "high60": 187.25,
         "technical": 43.5,
         "risk": 63.4,
-        "valuation": 62.2,
+        "valuation": 62.1,
         "quality": 70.3,
         "financial": 61.3,
         "catalyst": 82.1
@@ -17622,7 +17622,7 @@
         "high60": 158.9600067138672,
         "technical": 29.2,
         "risk": 26.5,
-        "valuation": 37.6,
+        "valuation": 37.8,
         "quality": 52.6,
         "financial": 57.4,
         "catalyst": 42.0
@@ -18028,7 +18028,7 @@
         "high60": 290.8299865722656,
         "technical": 30.0,
         "risk": 34.8,
-        "valuation": 41.6,
+        "valuation": 41.3,
         "quality": 78.8,
         "financial": 58.4,
         "catalyst": 87.4
@@ -18405,7 +18405,7 @@
         "high60": 156.4499969482422,
         "technical": 52.4,
         "risk": 70.1,
-        "valuation": 36.0,
+        "valuation": 36.1,
         "quality": 48.8,
         "financial": 50.8,
         "catalyst": 46.5
@@ -18985,7 +18985,7 @@
         "high60": 81.48999786376953,
         "technical": 26.0,
         "risk": 43.1,
-        "valuation": 45.7,
+        "valuation": 46.3,
         "quality": 71.8,
         "financial": 53.3,
         "catalyst": 84.8
@@ -19159,7 +19159,7 @@
         "high60": 116.66999816894531,
         "technical": 51.0,
         "risk": 45.1,
-        "valuation": 51.1,
+        "valuation": 51.2,
         "quality": 49.2,
         "financial": 55.5,
         "catalyst": 40.0
@@ -19362,7 +19362,7 @@
         "high60": 194.75,
         "technical": 29.9,
         "risk": 47.0,
-        "valuation": 30.8,
+        "valuation": 31.1,
         "quality": 76.8,
         "financial": 62.0,
         "catalyst": 72.2
@@ -19826,7 +19826,7 @@
         "high60": 103.2300033569336,
         "technical": 23.3,
         "risk": 18.6,
-        "valuation": 53.8,
+        "valuation": 54.5,
         "quality": 64.4,
         "financial": 65.0,
         "catalyst": 69.2
@@ -19855,7 +19855,7 @@
         "high60": 77.55999755859375,
         "technical": 62.9,
         "risk": 45.0,
-        "valuation": 41.6,
+        "valuation": 41.8,
         "quality": 73.2,
         "financial": 54.7,
         "catalyst": 83.9
@@ -20116,7 +20116,7 @@
         "high60": 11.130000114440918,
         "technical": 35.7,
         "risk": 32.7,
-        "valuation": 55.1,
+        "valuation": 55.8,
         "quality": 60.1,
         "financial": 62.5,
         "catalyst": 74.8
@@ -20522,7 +20522,7 @@
         "high60": 26.15999984741211,
         "technical": 30.6,
         "risk": 51.7,
-        "valuation": 57.7,
+        "valuation": 57.8,
         "quality": 78.6,
         "financial": 43.5,
         "catalyst": 70.6
@@ -20696,7 +20696,7 @@
         "high60": 64.62999725341797,
         "technical": 29.2,
         "risk": 51.9,
-        "valuation": 59.6,
+        "valuation": 59.7,
         "quality": 56.0,
         "financial": 50.9,
         "catalyst": 42.7
@@ -20899,7 +20899,7 @@
         "high60": 100.98999786376953,
         "technical": 64.1,
         "risk": 62.3,
-        "valuation": 38.8,
+        "valuation": 38.7,
         "quality": 64.0,
         "financial": 39.5,
         "catalyst": 53.3
@@ -21015,7 +21015,7 @@
         "high60": 60.880001068115234,
         "technical": 58.0,
         "risk": 47.9,
-        "valuation": 54.9,
+        "valuation": 55.0,
         "quality": 65.4,
         "financial": 64.0,
         "catalyst": 63.7
@@ -21450,7 +21450,7 @@
         "high60": 21.43000030517578,
         "technical": 25.2,
         "risk": 28.5,
-        "valuation": 60.8,
+        "valuation": 60.7,
         "quality": 73.7,
         "financial": 64.5,
         "catalyst": 75.9
@@ -21479,7 +21479,7 @@
         "high60": 73.72000122070312,
         "technical": 43.8,
         "risk": 31.5,
-        "valuation": 64.8,
+        "valuation": 64.9,
         "quality": 67.9,
         "financial": 61.4,
         "catalyst": 72.7
@@ -22697,7 +22697,7 @@
         "high60": 46.47999954223633,
         "technical": 65.2,
         "risk": 51.8,
-        "valuation": 60.1,
+        "valuation": 59.9,
         "quality": 61.2,
         "financial": 52.8,
         "catalyst": 78.9
@@ -23306,7 +23306,7 @@
         "high60": 23.530000686645508,
         "technical": 29.4,
         "risk": 50.2,
-        "valuation": 57.9,
+        "valuation": 58.0,
         "quality": 78.6,
         "financial": 43.5,
         "catalyst": 70.6
@@ -25133,7 +25133,7 @@
         "high60": 13.979999542236328,
         "technical": 31.8,
         "risk": 34.0,
-        "valuation": 60.0,
+        "valuation": 60.3,
         "quality": 59.7,
         "financial": 62.0,
         "catalyst": 54.5
@@ -25394,7 +25394,7 @@
         "high60": 41.13999938964844,
         "technical": 51.1,
         "risk": 22.4,
-        "valuation": 49.6,
+        "valuation": 49.2,
         "quality": 67.4,
         "financial": 41.8,
         "catalyst": 72.0
@@ -26293,9 +26293,9 @@
         "high60": 14.050000190734863,
         "technical": 41.5,
         "risk": 45.1,
-        "valuation": 55.0,
-        "quality": 42.9,
-        "financial": 29.6,
+        "valuation": 58.6,
+        "quality": 40.8,
+        "financial": 34.2,
         "catalyst": 31.0
       },
       {
@@ -26931,7 +26931,7 @@
         "high60": 11.710000038146973,
         "technical": 53.4,
         "risk": 24.6,
-        "valuation": 62.9,
+        "valuation": 62.6,
         "quality": 43.5,
         "financial": 52.5,
         "catalyst": 53.1
@@ -26960,7 +26960,7 @@
         "high60": 6.739999771118164,
         "technical": 39.6,
         "risk": 48.3,
-        "valuation": 55.5,
+        "valuation": 55.6,
         "quality": 41.3,
         "financial": 41.1,
         "catalyst": 38.6
@@ -28004,7 +28004,7 @@
         "high60": 5.949999809265137,
         "technical": 50.9,
         "risk": 26.3,
-        "valuation": 56.9,
+        "valuation": 57.0,
         "quality": 66.0,
         "financial": 52.1,
         "catalyst": 71.6
@@ -28970,22 +28970,22 @@
         "symbol": "KXIAY",
         "reference_date": "2026-11-16",
         "volume": 1407602.0,
-        "traded_value": 7136542.3816308975,
+        "traded_value": 7164694.39478302,
         "vol5_ratio": 0.8218620764891983,
         "name": "キオクシア",
         "code": "KXIAY",
-        "price": 5.07,
-        "change_pct": -8.32,
-        "ma20": 6.95050003528595,
-        "ma50": 9.487133235931397,
-        "ma200": 9.792934062480926,
-        "ret20": -40.771028935435474,
-        "ret60": -55.14597291823667,
-        "ret120": -60.6976719256755,
-        "ret200": 10.682597235392045,
-        "rsi": 31.849319486550996,
+        "price": 5.09,
+        "change_pct": -7.96,
+        "ma20": 6.951500034332275,
+        "ma50": 9.487533235549927,
+        "ma200": 9.793034062385559,
+        "ret20": -40.53738430989689,
+        "ret60": -54.969034130122466,
+        "ret120": -60.542633309257376,
+        "ret200": 11.119214544791344,
+        "rsi": 31.922201141004535,
         "vol_ratio": 0.2554013354752831,
-        "avg_value20": 37265996.08901093,
+        "avg_value20": 37267403.689668536,
         "drawdown": -78.46175641265306,
         "high60": 13.199999809265137,
         "technical": 20.0,
@@ -30238,8 +30238,8 @@
         "technical": 17.5,
         "risk": 18.6,
         "valuation": 55.7,
-        "quality": 39.6,
-        "financial": 43.9,
+        "quality": 39.7,
+        "financial": 44.1,
         "catalyst": 71.0
       },
       {
@@ -30440,9 +30440,9 @@
         "high60": 1.8700000047683716,
         "technical": 44.9,
         "risk": 18.6,
-        "valuation": 41.3,
-        "quality": 43.0,
-        "financial": 53.0,
+        "valuation": 41.5,
+        "quality": 42.3,
+        "financial": 53.4,
         "catalyst": 71.0
       },
       {
@@ -30620,6 +30620,35 @@
         "catalyst": 70.6
       },
       {
+        "symbol": "RITRF",
+        "reference_date": "2026-11-16",
+        "volume": 55571.0,
+        "traded_value": 173937.23635959625,
+        "vol5_ratio": 3.4356757055435065,
+        "name": "RITRF（米国上場企業）",
+        "code": "RITRF",
+        "price": 3.13,
+        "change_pct": 42.27,
+        "ma20": 4.773999989032745,
+        "ma50": 5.808500002622605,
+        "ma200": 87.2874375769496,
+        "ret20": -28.457140241350444,
+        "ret60": -84.95192197476614,
+        "ret120": -97.46456039545048,
+        "ret200": -98.57727267525412,
+        "rsi": 28.903346350928388,
+        "vol_ratio": 15.353013496152835,
+        "avg_value20": 12397.16932337284,
+        "drawdown": -99.94882434235569,
+        "high60": 28.75,
+        "technical": 30.6,
+        "risk": 18.6,
+        "valuation": 35.8,
+        "quality": 28.0,
+        "financial": 30.3,
+        "catalyst": 46.3
+      },
+      {
         "symbol": "RITRD",
         "reference_date": "2026-11-16",
         "volume": 2296.0,
@@ -30674,31 +30703,31 @@
       "short": [
         {
           "theme": "商社",
-          "score": 87.6
+          "score": 87.4
         },
         {
           "theme": "金融・証券",
-          "score": 83.3
+          "score": 83.4
         },
         {
           "theme": "その他",
-          "score": 77.6
+          "score": 78.2
         },
         {
           "theme": "銀行",
-          "score": 65.5
+          "score": 67.1
         },
         {
           "theme": "AI・データセンター",
-          "score": 39.4
-        },
-        {
-          "theme": "電線・電力インフラ",
-          "score": 27.6
+          "score": 43.1
         },
         {
           "theme": "半導体",
-          "score": 21.1
+          "score": 26.3
+        },
+        {
+          "theme": "電線・電力インフラ",
+          "score": 23.1
         }
       ],
       "medium": [
@@ -30708,27 +30737,27 @@
         },
         {
           "theme": "商社",
-          "score": 82.4
+          "score": 82.5
         },
         {
           "theme": "その他",
-          "score": 79.4
+          "score": 79.9
         },
         {
           "theme": "銀行",
-          "score": 68.4
+          "score": 69.3
         },
         {
           "theme": "AI・データセンター",
-          "score": 53.2
-        },
-        {
-          "theme": "電線・電力インフラ",
-          "score": 26.5
+          "score": 55.1
         },
         {
           "theme": "半導体",
-          "score": 22.8
+          "score": 26.3
+        },
+        {
+          "theme": "電線・電力インフラ",
+          "score": 23.0
         }
       ],
       "long": [
@@ -30742,19 +30771,19 @@
         },
         {
           "theme": "その他",
-          "score": 67.2
+          "score": 67.0
         },
         {
           "theme": "商社",
-          "score": 63.8
+          "score": 63.4
         },
         {
           "theme": "AI・データセンター",
-          "score": 51.4
+          "score": 50.6
         },
         {
           "theme": "半導体",
-          "score": 33.5
+          "score": 32.5
         },
         {
           "theme": "電線・電力インフラ",
